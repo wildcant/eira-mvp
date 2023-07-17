@@ -1,7 +1,11 @@
 <div align="center">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/48843517/254098118-61a2b0c9-757a-40ca-8869-55b086b2cbf3.png">
   <h1>Eira <br> All in one pharmacy platform.</h1>
   <br>
 </div>
+
+
+
 
 > **Warning**
 > This is a work-in-progress and not the finished product.
