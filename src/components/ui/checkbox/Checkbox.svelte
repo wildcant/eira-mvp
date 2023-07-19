@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	import { createCheckbox } from '@melt-ui/svelte';
+	import { createCheckbox, type CreateCheckboxProps } from '@melt-ui/svelte';
 	import { Check, Minus } from 'lucide-svelte';
 
-	const { root, input, isChecked, isIndeterminate } = createCheckbox({
-		checked: 'indeterminate'
-	});
+	export let checked: CreateCheckboxProps['checked'] = 'indeterminate';
+	const { root, input, isChecked, isIndeterminate } = createCheckbox({ checked });
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

@@ -1,5 +1,6 @@
 import { getContext, setContext } from 'svelte';
 
+/** Taken from radix svelte. */
 export function uniqueContext<T>() {
 	const key = Symbol();
 

@@ -1,13 +1,14 @@
 <script lang="ts">
 	import '../app.css';
-	import Avatar from '$components/avatar/Avatar.svelte';
-	import Button from '$components/button/Button.svelte';
-	import Checkbox from '$components/checkbox/Checkbox.svelte';
-	import Logo from '$components/logo/Logo.svelte';
-	import Navigation from '$components/navigation/Navigation.svelte';
-	import Popover from '$components/popover/Popover.svelte';
-	import PopoverContent from '$components/popover/PopoverContent.svelte';
-	import PopoverTrigger from '$components/popover/PopoverTrigger.svelte';
+	import Avatar from '$components/ui/avatar/Avatar.svelte';
+	import Button from '$components/ui/button/Button.svelte';
+	import Checkbox from '$components/ui/checkbox/Checkbox.svelte';
+	import Logo from '$components/ui/logo/Logo.svelte';
+	import Navigation from '$components/ui/navigation/Navigation.svelte';
+	import Popover from '$components/ui/popover/Popover.svelte';
+	import PopoverContent from '$components/ui/popover/PopoverContent.svelte';
+	import PopoverTrigger from '$components/ui/popover/PopoverTrigger.svelte';
+	import PaymentsTable from './PaymentsTable.svelte';
 </script>
 
 <main class="dark:bg-gray-950 dark:text-white flex flex-col gap-10">
@@ -32,6 +33,8 @@
 			</div>
 		</PopoverContent>
 	</Popover>
+
+	<PaymentsTable />
 
 	<slot />
 </main>
