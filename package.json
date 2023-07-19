@@ -12,25 +12,45 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"test:integration": "playwright test",
-		"test:unit": "vitest"
+		"test:unit": "vitest",
+		"generate": "kysely-codegen"
 	},
 	"devDependencies": {
+		"@melt-ui/pp": "^0.0.5",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@tailwindcss/typography": "^0.5.9",
+		"@types/better-sqlite3": "^7.6.4",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"autoprefixer": "^10.4.14",
+		"better-sqlite3": "^8.4.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
+		"kysely-codegen": "^0.10.1",
+		"postcss": "^8.4.26",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
+		"svelte-sequential-preprocessor": "^2.0.1",
+		"tailwindcss": "^3.3.3",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@libsql/kysely-libsql": "^0.3.0",
+		"@melt-ui/svelte": "^0.22.0",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.0.0",
+		"kysely": "^0.26.1",
+		"lucide-svelte": "^0.261.0",
+		"tailwind-merge": "^1.14.0",
+		"zod": "^3.21.4"
+	}
 }
