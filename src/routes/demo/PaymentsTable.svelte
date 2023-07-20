@@ -75,9 +75,8 @@
 	const { filterValue } = viewModel.pluginStates.filter;
 </script>
 
-<div>
-	<div class="flex items-center py-4">
-		<Search class="max-w-sm" placeholder="Filter emails..." type="text" bind:value={$filterValue} />
-	</div>
-	<DataTable {viewModel} />
+<div class="flex items-center py-4">
+	<Search class="max-w-sm" placeholder="Filter emails..." type="text" bind:value={$filterValue} />
 </div>
+
+<DataTable {viewModel} class="min-h-[600px]" />

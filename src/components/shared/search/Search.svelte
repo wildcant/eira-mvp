@@ -6,6 +6,7 @@
 	let className: string | undefined | null = undefined;
 
 	export let value: HTMLInputAttributes['value'] = undefined;
+	export let placeholder: HTMLInputAttributes['placeholder'] = 'Search..';
 	export { className as class };
 	const root = createLabel();
 </script>
@@ -20,6 +21,7 @@
 		)}
 		type="text"
 		id="search"
+		{placeholder}
 		bind:value
 		on:blur
 		on:change

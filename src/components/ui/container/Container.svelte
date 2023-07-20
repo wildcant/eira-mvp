@@ -5,9 +5,6 @@
 	export { className as class };
 </script>
 
-<td
-	class={cn('p-2 align-middle [&:has([role=checkbox])]:pr-0 text-xs', className)}
-	{...$$restProps}
->
+<section class={cn('border border-solid dark:border-zinc-800 rounded-3xl py-4 px-4', className)}>
 	<slot />
-</td>
+</section>

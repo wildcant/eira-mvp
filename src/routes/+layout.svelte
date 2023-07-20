@@ -1,40 +1,45 @@
 <script lang="ts">
-	import '../app.css';
-	import Avatar from '$components/ui/avatar/Avatar.svelte';
-	import Button from '$components/ui/button/Button.svelte';
-	import Checkbox from '$components/ui/checkbox/Checkbox.svelte';
+	import Header from '$components/shared/header/Header.svelte';
+	import Navigation from '$components/shared/navigation/Navigation.svelte';
+	import Drawer from '$components/ui/drawer/Drawer.svelte';
 	import Logo from '$components/ui/logo/Logo.svelte';
-	import Navigation from '$components/ui/navigation/Navigation.svelte';
-	import Popover from '$components/ui/popover/Popover.svelte';
-	import PopoverContent from '$components/ui/popover/PopoverContent.svelte';
-	import PopoverTrigger from '$components/ui/popover/PopoverTrigger.svelte';
-	import PaymentsTable from './PaymentsTable.svelte';
+	import { cn } from '$lib/utils';
+	import { Menu } from 'lucide-svelte';
+	import '../app.css';
+	import type { LayoutData } from './$types';
+
+	export let data: LayoutData;
+	const { isMobile } = data;
+	let open = !isMobile;
+	const closeDrawer = () => (open = false);
 </script>
 
-<main class="dark:bg-gray-950 dark:text-white flex flex-col gap-10">
-	<Logo />
+<div class="min-h-[766px] h-[100vh]">
+	<Drawer bind:open class=" h-full py-8 px-10">
+		<a href="/dashboard">
+			<Logo />
+		</a>
+		<Navigation on:navigate={() => (isMobile ? closeDrawer() : {})} />
+	</Drawer>
 
-	<Navigation />
+	<section class={cn('transition-all duration-500 my-2', { 'md:ml-52': open })}>
+		<div
+			class="min-h-[766px] mx-2 md:border md:border-solid md:dark:border-zinc-800 md:rounded-3xl py-4 px-4"
+		>
+			<Header class="mb-2">
+				<button
+					class={cn('p-2 transition-all duration-500 rounded-full dark:hover:bg-zinc-700', {
+						hidden: open
+					})}
+					on:click={() => (open = true)}
+				>
+					<Menu />
+				</button>
+			</Header>
 
-	<div>
-		<Button>Label</Button>
-	</div>
-
-	<Checkbox>Label</Checkbox>
-
-	<Popover placement="bottom">
-		<PopoverTrigger>
-			<Avatar src="https://avatars.githubusercontent.com/u/48843517?v=4" fallback="WC" />
-			<span class="sr-only">Open Profile menu</span>
-		</PopoverTrigger>
-		<PopoverContent class="dark:text-black">
-			<div class="flex flex-col gap-2.5">
-				<span>Content</span>
-			</div>
-		</PopoverContent>
-	</Popover>
-
-	<PaymentsTable />
-
-	<slot />
-</main>
+			<main>
+				<slot />
+			</main>
+		</div>
+	</section>
+</div>

@@ -2,9 +2,8 @@
 	import { cn } from '$lib/utils';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
-	let className: string | undefined | null = undefined;
-
 	export let value: HTMLInputAttributes['value'] = undefined;
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

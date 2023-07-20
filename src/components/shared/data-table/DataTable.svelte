@@ -12,16 +12,19 @@
 	import type { AnyPlugins } from 'svelte-headless-table/lib/types/TablePlugin';
 
 	export let viewModel: TableViewModel<TItem, TPlugins>;
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = viewModel;
 	const { sortKeys } = pluginStates.sort;
 	const { hasNextPage, hasPreviousPage, pageIndex } = pluginStates.page;
 
 	const { selectedDataIds, allRowsSelected } = pluginStates.select;
+	// TODO: Finish row selection implementation.
 	$: console.log($selectedDataIds);
 </script>
 
-<div>
+<div class={cn('relative', className)}>
 	<div class="rounded-md border">
 		<Table {...$tableAttrs}>
 			<TableHeader>
@@ -34,12 +37,16 @@
 										{#if props.sort.disabled}
 											<Render of={cell.render()} />
 										{:else}
-											<Button variant="ghost" on:click={props.sort.toggle}>
+											<Button
+												variant="ghost"
+												on:click={props.sort.toggle}
+												class="p-2 uppercase font-bold text-xs"
+											>
 												<Render of={cell.render()} />
 												<ArrowUpDown
 													class={cn(
 														$sortKeys[0]?.id === cell.id && 'text-foreground',
-														'ml-2 h-4 w-4'
+														'ml-2  h-3 w-3'
 													)}
 												/>
 											</Button>
@@ -68,7 +75,7 @@
 			</TableBody>
 		</Table>
 	</div>
-	<div class="flex items-center justify-end space-x-2 py-4">
+	<div class="absolute flex items-center justify-end space-x-2 py-4 right-4 bottom-0">
 		<Button
 			variant="outline"
 			size="sm"

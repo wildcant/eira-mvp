@@ -72,10 +72,30 @@
 
 @layer base {
 	* {
-		@apply border-border;
+		@apply border-border box-border;
 	}
 	body {
 		@apply bg-background text-foreground;
 		font-feature-settings: 'rlig' 1, 'calt' 1;
 	}
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	@apply bg-transparent rounded-sm;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply bg-zinc-400 rounded-sm;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-zinc-200;
 }

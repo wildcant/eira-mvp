@@ -7,7 +7,7 @@
 
 <th
 	class={cn(
-		'h-12 px-4 text-left align-middle font-bold text-muted-foreground [&:has([role=checkbox])]:pr-0 uppercase text-xs',
+		'h-10 px-2 text-left align-middle font-bold text-muted-foreground [&:has([role=checkbox])]:pr-0 text-xs',
 		className
 	)}
 	{...$$restProps}

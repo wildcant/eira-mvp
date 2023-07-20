@@ -15,6 +15,7 @@
 	<img melt={$image} {alt} class={'aspect-square h-full w-full'} />
 	<span
 		melt={$meltFallback}
-		class="!flex h-full w-full items-center justify-center rounded-full bg-muted">{fallback}</span
+		class="!flex h-full w-full items-center justify-center rounded-full bg-zinc-300"
+		>{fallback}</span
 	>
 </div>
