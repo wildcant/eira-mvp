@@ -1,29 +1,32 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import Button from '$components/ui/button/Button.svelte';
+	import Separator from '$components/ui/separator/Separator.svelte';
 	import { cn } from '$lib/utils';
-	$: route = $page.url.pathname.split('/').pop();
 
 	const routes = [
-		{ href: 'departments', label: 'Departments' },
-		{ href: 'categories', label: 'Categories' },
-		{ href: 'sub-categories', label: 'Sub categories' }
+		{ href: '/inventory/product-types/departments', label: 'Departments' },
+		{ href: '/inventory/product-types/categories', label: 'Categories' },
+		{ href: '/inventory/product-types/sub-categories', label: 'Sub categories' }
 	];
 </script>
 
 <h1 class="font-bold text-2xl">Product Types</h1>
 
-<nav class="flex gap-2 mt-4">
+<nav class="flex gap-2 mt-4 relative">
 	{#each routes as { href, label } (href)}
-		<a
+		<Button
+			variant="link"
+			size="unset"
 			{href}
-			class={cn('text-neutral-400 text-xs', {
-				'text-white pb-[2px] border-b-2 border-b-zinc-500': route === href
+			class={cn('opacity-70 mr-2', {
+				'opacity-100 underline': $page.url.pathname.includes(href)
 			})}
 		>
 			{label}
-		</a>
+		</Button>
 	{/each}
 </nav>
-<hr class="mb-4" />
+<Separator class="mb-4" />
 
 <slot />

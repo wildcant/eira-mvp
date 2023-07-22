@@ -20,6 +20,7 @@ export default {
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
+				dual: 'hsl(var(--dual))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -57,6 +58,9 @@ export default {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
+			},
+			boxShadow: {
+				fab: '0px 8px 28px -6px'
 			}
 		}
 	},

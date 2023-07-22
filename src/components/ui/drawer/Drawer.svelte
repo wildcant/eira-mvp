@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import { ChevronsLeft } from 'lucide-svelte';
+	import Button from '../button/Button.svelte';
 	export let open: boolean = false;
 
 	let className: string | undefined | null = undefined;
@@ -14,15 +15,15 @@
 	)}
 >
 	<div class={cn('relative', className)}>
-		<button
+		<slot />
+
+		<Button
+			variant="ghost"
+			size="icon"
+			class="absolute right-2 top-7"
 			on:click={() => (open = !open)}
-			class={cn(
-				'inline-block p-2 duration-500 rounded-full dark:hover:bg-zinc-700 absolute right-2 top-6'
-			)}
 		>
 			<ChevronsLeft />
-		</button>
-
-		<slot />
+		</Button>
 	</div>
 </aside>

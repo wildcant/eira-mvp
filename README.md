@@ -4,9 +4,6 @@
   <br>
 </div>
 
-
-
-
 > **Warning**
 > This is a work-in-progress and not the finished product.
 >
@@ -22,3 +19,12 @@
 Typically, for drugstore staff, you'll have to work in an outdated software with the wort user experience imaginable. This is tedious to work with and can be overwhelming for some people.
 
 Eeira is a platform that aims to solve this problem by providing a single platform for pharmacies to manage everything to do with their workflow. And with the power of having all of that data in one place, we can provide pharmacy owners with powerful insights and automation to help them be more successful.
+
+### Future enhancements waiting for svelte-kit features to be merge
+
+- Navigate to open and close dialogs - [Shallow routing with pushState and replaceState](https://github.com/sveltejs/kit/pull/9847)
+- View transition api - [Add onNavigate lifecycle function, to enable view transitions](https://github.com/sveltejs/kit/pull/9605)
+
+### References
+
+- [Good read about cursor pagination](https://brunoscheufler.com/blog/2022-01-01-paginating-large-ordered-datasets-with-cursor-based-pagination)

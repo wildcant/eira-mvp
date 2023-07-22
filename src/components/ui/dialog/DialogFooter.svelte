@@ -5,6 +5,9 @@
 	export { className as class };
 </script>
 
-<table class={cn('w-full caption-bottom text-sm', className)} {...$$restProps}>
+<div
+	class={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
+	{...$$restProps}
+>
 	<slot />
-</table>
+</div>

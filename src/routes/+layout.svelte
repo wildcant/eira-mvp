@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Header from '$components/shared/header/Header.svelte';
+	import { setInitialClassState } from '$components/shared/light-switch/light-switch';
 	import Navigation from '$components/shared/navigation/Navigation.svelte';
 	import Drawer from '$components/ui/drawer/Drawer.svelte';
 	import Logo from '$components/ui/logo/Logo.svelte';
 	import { cn } from '$lib/utils';
-	import { Menu } from 'lucide-svelte';
 	import '../app.css';
 	import type { LayoutData } from './$types';
 
@@ -14,29 +14,26 @@
 	const closeDrawer = () => (open = false);
 </script>
 
+<svelte:head>
+	{@html `<\u{73}cript nonce="%sveltekit.nonce%">(${setInitialClassState.toString()})();</script>`}
+</svelte:head>
+
 <div class="min-h-[766px] h-[100vh]">
-	<Drawer bind:open class=" h-full py-8 px-10">
-		<a href="/dashboard">
+	<Drawer bind:open class="h-full py-9 px-8">
+		<a
+			class="block ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 w-fit h-fit rounded-lg"
+			href="/dashboard"
+		>
 			<Logo />
 		</a>
 		<Navigation on:navigate={() => (isMobile ? closeDrawer() : {})} />
 	</Drawer>
 
-	<section class={cn('transition-all duration-500 my-2', { 'md:ml-52': open })}>
+	<section class={cn('relative transition-all duration-500 my-2', { 'md:ml-52': open })}>
 		<div
 			class="min-h-[766px] mx-2 md:border md:border-solid md:dark:border-zinc-800 md:rounded-3xl py-4 px-4"
 		>
-			<Header class="mb-2">
-				<button
-					class={cn('p-2 transition-all duration-500 rounded-full dark:hover:bg-zinc-700', {
-						hidden: open
-					})}
-					on:click={() => (open = true)}
-				>
-					<Menu />
-				</button>
-			</Header>
-
+			<Header class="mb-2" bind:drawer={open} />
 			<main>
 				<slot />
 			</main>

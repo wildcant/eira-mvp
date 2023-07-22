@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
+	import { buttonVariants } from '../button';
 	import { getDisclosureContext } from './Disclosure.svelte';
 
 	let className: string | undefined | null = undefined;
@@ -10,7 +11,7 @@
 
 <button
 	melt={$trigger}
-	class={cn('relative data-[disabled]:cursor-not-allowed data-[disabled]:opacity-75', className)}
+	class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), '!p-0', className)}
 	aria-label="Toggle"
 >
 	{#if $open}
