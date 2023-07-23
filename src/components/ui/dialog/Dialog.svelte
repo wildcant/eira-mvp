@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import { uniqueContext } from '$components/helpers/uniqueContext';
-	import { createDialog } from '@melt-ui/svelte';
+	import { createDialog, type CreateDialogProps } from '@melt-ui/svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	type DialogContextProps = Omit<ReturnType<typeof createDialog>, 'options'>;
 	export const { getContext: getDialogContext, setContext: setDialogContext } =
@@ -8,30 +9,26 @@
 </script>
 
 <script lang="ts">
-	const {
-		trigger,
-		portal,
-		overlay,
-		content,
-		title,
-		description,
-		close,
-		open: openDialog
-	} = createDialog();
-	setDialogContext({
-		trigger,
-		portal,
-		overlay,
-		content,
-		title,
-		description,
-		close,
-		open: openDialog
-	});
+	export let closeOnEscape: CreateDialogProps['closeOnEscape'] = true;
+	export let closeOnOutsideClick: CreateDialogProps['closeOnOutsideClick'] = true;
 
-	export function open() {
-		openDialog.set(true);
-	}
+	const dialog = createDialog({ closeOnEscape, closeOnOutsideClick });
+	setDialogContext(dialog);
+
+	// Update options when props change
+	$: dialog.options.update((currentOptions) => ({
+		...currentOptions,
+		closeOnEscape: !!closeOnEscape,
+		closeOnOutsideClick: !!closeOnOutsideClick
+	}));
+
+	export const open = () => dialog?.open.set(true);
+	export const close = () => dialog?.open.set(false);
+
+	const dispatch = createEventDispatcher();
+	dialog?.open.subscribe((isOpen) => {
+		if (!isOpen) dispatch('closed');
+	});
 </script>
 
 <slot />

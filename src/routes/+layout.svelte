@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Header from '$components/shared/header/Header.svelte';
 	import { setInitialClassState } from '$components/shared/light-switch/light-switch';
+	import ModalsManager from '$components/shared/modal/ModalsManager.svelte';
 	import Navigation from '$components/shared/navigation/Navigation.svelte';
 	import Drawer from '$components/ui/drawer/Drawer.svelte';
 	import Logo from '$components/ui/logo/Logo.svelte';
+	import ToastManager from '$components/ui/toast/ToastManager.svelte';
 	import { cn } from '$lib/utils';
 	import '../app.css';
 	import type { LayoutData } from './$types';
@@ -18,7 +20,7 @@
 	{@html `<\u{73}cript nonce="%sveltekit.nonce%">(${setInitialClassState.toString()})();</script>`}
 </svelte:head>
 
-<div class="min-h-[766px] h-[100vh]">
+<div class="min-h-[766px] h-[100vh] relative">
 	<Drawer bind:open class="h-full py-9 px-8">
 		<a
 			class="block ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 w-fit h-fit rounded-lg"
@@ -40,3 +42,6 @@
 		</div>
 	</section>
 </div>
+
+<ModalsManager />
+<ToastManager />

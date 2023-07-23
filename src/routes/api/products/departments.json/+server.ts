@@ -127,7 +127,3 @@ export const GET: RequestHandler = async ({ url }) => {
 
 	return json(response);
 };
-
-export function POST({ request }) {
-	return json({});
-}

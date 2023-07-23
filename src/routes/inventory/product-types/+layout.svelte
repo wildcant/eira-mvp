@@ -19,7 +19,7 @@
 			variant="link"
 			size="unset"
 			{href}
-			class={cn('opacity-70 mr-2', {
+			class={cn('opacity-70 md:mr-2 text-xs', {
 				'opacity-100 underline': $page.url.pathname.includes(href)
 			})}
 		>

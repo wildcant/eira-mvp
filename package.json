@@ -16,7 +16,7 @@
 		"generate": "kysely-codegen"
 	},
 	"devDependencies": {
-		"@melt-ui/pp": "^0.0.5",
+		"@melt-ui/pp": "^0.0.2",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
@@ -47,7 +47,7 @@
 	"type": "module",
 	"dependencies": {
 		"@libsql/kysely-libsql": "^0.3.0",
-		"@melt-ui/svelte": "^0.22.0",
+		"@melt-ui/svelte": "^0.24.1",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"kysely": "^0.26.1",
