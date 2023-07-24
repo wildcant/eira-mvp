@@ -60,6 +60,7 @@
 
 		<Button
 			variant="outline"
+			class="min-w-fit"
 			on:click={() =>
 				openCustomModal({
 					id: NEW_DEPARTMENT_MODAL_ID,

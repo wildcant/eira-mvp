@@ -1,7 +1,7 @@
-import { locale, waitLocale } from '$lib/i18n'; // Import to initialize.
+import '$lib/i18n/init'; // Import to initialize
+import { waitLocale } from '$lib/i18n';
 
 export const load = async ({ data }) => {
-	locale.set(data.locale);
 	await waitLocale();
 	return data;
 };

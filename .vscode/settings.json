@@ -5,7 +5,7 @@
 		"i18next",
 		"vitest"
 	],
-	"i18n-ally.localesPaths": ["/Users/wilmer/projects/eira/src/lib/i18n/locales/server"],
+	"i18n-ally.localesPaths": ["src/lib/i18n/locales/client"],
 	"i18n-ally.keystyle": "nested",
 	"i18n-ally.sortKeys": true,
 	"i18n-ally.keepFulfilled": true,

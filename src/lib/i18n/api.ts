@@ -15,7 +15,7 @@ i18next.use(Backend).init(
 	},
 	(err) => {
 		if (err) return console.error(err);
-		console.log('i18next is ready...');
+		console.info('i18next is ready...');
 	}
 );
 
