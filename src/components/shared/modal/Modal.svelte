@@ -6,6 +6,7 @@
 	import DialogFooter from '$components/ui/dialog/DialogFooter.svelte';
 	import DialogHeader from '$components/ui/dialog/DialogHeader.svelte';
 	import DialogTitle from '$components/ui/dialog/DialogTitle.svelte';
+	import { t } from '$lib/i18n';
 	import { X } from 'lucide-svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type { ModalProps } from './types';
@@ -48,7 +49,7 @@
 					}}
 					disabled={loading}
 				>
-					{modal.labels?.cancel ?? 'Cancel'}
+					{modal.labels?.cancel ?? $t('component.modal.cancel.label')}
 				</Button>
 				<Button
 					size="sm"
@@ -60,7 +61,7 @@
 					}}
 					{loading}
 				>
-					{modal.labels?.confirm ?? 'Confirm'}
+					{modal.labels?.confirm ?? $t('component.modal.confirm.label')}
 				</Button>
 			</DialogFooter>
 		{/if}
@@ -69,7 +70,7 @@
 			disabled={loading}
 		>
 			<X class="h-4 w-4" />
-			<span class="sr-only">Close</span>
+			<span class="sr-only">{$t('component.modal.close.sr-only')}</span>
 		</DialogClose>
 	</DialogContent>
 </Dialog>

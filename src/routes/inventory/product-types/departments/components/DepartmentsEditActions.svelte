@@ -4,9 +4,10 @@
 	import Separator from '$components/ui/separator/Separator.svelte';
 	import { openToast } from '$components/ui/toast/ToastManager.svelte';
 	import type { DatabaseTypes } from '$lib/database/types';
+	import { t } from '$lib/i18n';
 	import { editing } from '../store';
 
-	async function deleteDepartment(department: DatabaseTypes['Department']) {
+	async function updateDepartment(department: DatabaseTypes['Department']) {
 		editing.update((currentEditing) => ({ ...currentEditing, loading: true }));
 		try {
 			const response = await fetch(`/api/products/departments.json/${department.id}`, {
@@ -41,7 +42,7 @@
 			disabled={$editing.loading}
 			on:click={() => editing.set({ state: false })}
 		>
-			Cancel
+			{$t('page.inventory.product-types.departments.table.actions.edit.cancel')}
 		</Button>
 
 		<Separator class="h-4	bg-zinc-800" orientation="vertical" />
@@ -51,9 +52,9 @@
 			variant="link"
 			class="text-background"
 			loading={$editing.loading}
-			on:click={() => deleteDepartment(department)}
+			on:click={() => updateDepartment(department)}
 		>
-			Save
+			{$t('page.inventory.product-types.departments.table.actions.edit.save')}
 		</Button>
 	</FloatingAction>
 {/if}

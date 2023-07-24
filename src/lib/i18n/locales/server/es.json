@@ -1,0 +1,31 @@
+{
+	"error": {
+		"internal-server-error": "Error interno en el servidor",
+		"already-exist": "ya existe",
+		"not-found": "no encontrado",
+		"pagination": {
+			"invalid-after-cursor": "after cursor invalido",
+			"invalid-before-cursor": "before cursor invalido",
+			"range-pagination": "Paginación con rango no esta suportado",
+			"size": "size debe ser un entero; obtuvo"
+		}
+	},
+	"route": {
+		"products": {
+			"departments": {
+				"get": {
+					"error": {}
+				}
+			}
+		}
+	},
+	"tables": {
+		"department": {
+			"name": "departamento",
+			"columns": {
+				"name": "nombre",
+				"color": "color"
+			}
+		}
+	}
+}

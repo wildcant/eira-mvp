@@ -1,5 +1,6 @@
 import { db } from '$lib/database';
 import type { DatabaseTypes } from '$lib/database/types';
+import { i18n, type WithT } from '$lib/i18n/api';
 import type { PaginatedApiResponse } from '$lib/types';
 import { error, json } from '@sveltejs/kit';
 import { z } from 'zod';
@@ -12,11 +13,13 @@ function decode(str: string) {
 	return Buffer.from(str, 'base64').toString();
 }
 
-function parseCursorPaginationParams(url: URL) {
+type ParseCursorPaginationArgs = WithT & { url: URL };
+function parseCursorPagination({ url, $t }: ParseCursorPaginationArgs) {
 	const afterParam = url.searchParams.get('after');
 	const beforeParam = url.searchParams.get('before');
 	const sizeParam = url.searchParams.get('size');
-	if (beforeParam && afterParam) throw error(400, { message: 'range pagination not supported' });
+	if (beforeParam && afterParam)
+		throw error(400, { message: $t('error.pagination.range-pagination') });
 
 	let size;
 	try {
@@ -24,7 +27,7 @@ function parseCursorPaginationParams(url: URL) {
 			.number()
 			.optional()
 			.refine((val) => (val ? Number.isInteger(val) && val > 0 : true), {
-				message: `size must be a positive integer; got ${size}`
+				message: `${$t('error.pagination.size')} ${size}`
 			})
 			.parse(sizeParam);
 	} catch (err) {
@@ -37,11 +40,9 @@ function parseCursorPaginationParams(url: URL) {
 	if (beforeParam) {
 		try {
 			before = parseInt(decode(beforeParam), 10);
-			if (Number.isNaN(before) || !Number.isInteger(before)) {
-				throw new Error('invalid after cursor');
-			}
+			if (Number.isNaN(before) || !Number.isInteger(before)) throw new Error();
 		} catch (err) {
-			throw error(400, { message: 'invalid before cursor' });
+			throw error(400, { message: $t('error.pagination.invalid-before-cursor') });
 		}
 	}
 
@@ -49,11 +50,9 @@ function parseCursorPaginationParams(url: URL) {
 	if (afterParam) {
 		try {
 			after = parseInt(decode(afterParam), 10);
-			if (Number.isNaN(after) || !Number.isInteger(after)) {
-				throw new Error('invalid after cursor');
-			}
+			if (Number.isNaN(after) || !Number.isInteger(after)) throw new Error();
 		} catch (err) {
-			throw error(400, { message: 'invalid after cursor' });
+			throw error(400, { message: $t('error.pagination.invalid-after-cursor') });
 		}
 	}
 
@@ -61,9 +60,10 @@ function parseCursorPaginationParams(url: URL) {
 }
 
 const DEFAULT_LIMIT = 20;
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url, cookies }) => {
+	const { $t } = await i18n(cookies);
 	const search = url.searchParams.get('search');
-	const { after, before, size } = parseCursorPaginationParams(url);
+	const { after, before, size } = parseCursorPagination({ $t, url });
 
 	const baseQuery = db.selectFrom('Department').orderBy('Department.id', before ? 'desc' : 'asc');
 

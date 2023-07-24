@@ -1,0 +1,32 @@
+{
+	"welcome": "hello",
+	"error": {
+		"internal-server-error": "Internal server error",
+		"already-exist": "already exists",
+		"not-found": "Not found",
+		"pagination": {
+			"invalid-after-cursor": "invalid after cursor",
+			"invalid-before-cursor": "invalid before cursor",
+			"range-pagination": "range pagination not supported",
+			"size": "size must be a positive integer; got"
+		}
+	},
+	"route": {
+		"products": {
+			"departments": {
+				"get": {
+					"error": {}
+				}
+			}
+		}
+	},
+	"tables": {
+		"department": {
+			"name": "department",
+			"columns": {
+				"name": "name",
+				"color": "color"
+			}
+		}
+	}
+}

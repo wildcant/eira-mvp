@@ -1,19 +1,31 @@
 import { db } from '$lib/database';
+import type { WithT } from '$lib/i18n/api';
 import { error } from '@sveltejs/kit';
 import { SqliteError } from 'better-sqlite3';
 import type { DB } from 'kysely-codegen';
 import { z } from 'zod';
 
-export async function exists(table: keyof DB, id: number) {
+type ExistsArgs = WithT & { table: keyof DB; id: number };
+export async function exists({ $t, table, id }: ExistsArgs) {
 	const record = await db.selectFrom(table).select('id').where('id', '=', id).execute();
-	if (!record) throw error(404, 'Department not found');
+	if (!record) throw error(404, `${$t(`tables.${table}`)} ${$t('error.not-found')}`);
 }
 
-export function sqliteCustomErrorMap(err: unknown) {
+type HandleErrorArgs = WithT & { err: unknown };
+export function sqliteCustomErrorMap({ $t, err }: HandleErrorArgs) {
 	if (err instanceof SqliteError) {
 		if (err.code === SqliteErrorCode.SQLITE_CONSTRAINT_UNIQUE) {
-			const property = err.message.split(':')[1].replace('.', ' ');
-			throw error(409, `${property} already exists`);
+			const [table, column] = err.message
+				.split(':')[1]
+				.split('.')
+				.map((s) => s.trim().toLowerCase());
+
+			throw error(
+				409,
+				`${$t(`tables.${table}.columns.${column}`)} ${$t(`tables.${table}.name`)} ${$t(
+					'error.already-exist'
+				)}`
+			);
 		}
 	}
 }

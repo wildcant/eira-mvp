@@ -12,10 +12,10 @@ export const localesLabels = {
 
 export const defaultLocale: Locales = 'en';
 
-register('en', () => import('./locales/en.json'));
-register('es', () => import('./locales/es.json'));
+register('en', () => import('./locales/client/en.json'));
+register('es', () => import('./locales/client/es.json'));
 
 init({
-	fallbackLocale: defaultLocale,
-	initialLocale: browser ? window.navigator.language : defaultLocale
+	fallbackLocale: defaultLocale
+	// initialLocale: browser ? window.document.cookie. // we are managing the initial lang by manually setting a cookie
 });

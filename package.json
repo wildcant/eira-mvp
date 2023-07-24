@@ -50,6 +50,8 @@
 		"@melt-ui/svelte": "^0.24.1",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
+		"i18next": "^23.2.11",
+		"i18next-fs-backend": "^2.1.5",
 		"kysely": "^0.26.1",
 		"lodash": "^4.17.21",
 		"lucide-svelte": "^0.261.0",

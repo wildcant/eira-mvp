@@ -66,7 +66,7 @@
 				popover.close();
 			}}
 		>
-			{$t('page.inventory.product-types.departments.table.actions.edit')}
+			{$t('page.inventory.product-types.departments.table.actions.edit.label')}
 		</Button>
 
 		<Button
@@ -78,13 +78,13 @@
 			on:click={() =>
 				openConfirmationModal({
 					id: 'delete-department',
-					title: `${$t('page.inventory.product-types.departments.delete-modal.title.first')} ${
+					title: `${$t('page.inventory.product-types.departments.modal.delete.title')} "${
 						department.name
-					} ${$t('page.inventory.product-types.departments.delete-modal.title.second')}`,
+					}"?`,
 					onConfirm: deleteDepartment
 				})}
 		>
-			Delete
+			{$t('page.inventory.product-types.departments.table.actions.delete.label')}
 		</Button>
 	</PopoverContent>
 </Popover>

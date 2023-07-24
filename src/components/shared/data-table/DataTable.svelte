@@ -6,6 +6,7 @@
 	import TableHead from '$components/ui/table/TableHead.svelte';
 	import TableHeader from '$components/ui/table/TableHeader.svelte';
 	import TableRow from '$components/ui/table/TableRow.svelte';
+	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
 	import { ArrowUpDown } from 'lucide-svelte';
 	import { Render, Subscribe, type TableViewModel } from 'svelte-headless-table';
@@ -80,13 +81,13 @@
 			variant="outline"
 			size="sm"
 			on:click={() => ($pageIndex = $pageIndex - 1)}
-			disabled={!$hasPreviousPage}>Previous</Button
+			disabled={!$hasPreviousPage}>{$t('component.table.pagination.previous')}</Button
 		>
 		<Button
 			variant="outline"
 			size="sm"
 			disabled={!$hasNextPage}
-			on:click={() => ($pageIndex = $pageIndex + 1)}>Next</Button
+			on:click={() => ($pageIndex = $pageIndex + 1)}>{$t('component.table.pagination.next')}</Button
 		>
 	</div>
 </div>

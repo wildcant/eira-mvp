@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from '$components/shared/header/Header.svelte';
+	import { setInitialLanguageCookie } from '$components/shared/header/components/language-selector/language-selector';
 	import { setInitialClassState } from '$components/shared/header/components/light-switch/light-switch';
 	import ModalsManager from '$components/shared/modal/ModalsManager.svelte';
 	import Navigation from '$components/shared/navigation/Navigation.svelte';
@@ -17,6 +18,7 @@
 
 <svelte:head>
 	{@html `<\u{73}cript nonce="%sveltekit.nonce%">(${setInitialClassState.toString()})();</script>`}
+	{@html `<\u{73}cript nonce="%sveltekit.nonce%">(${setInitialLanguageCookie.toString()})();</script>`}
 </svelte:head>
 
 <div class="min-h-[766px] h-[100vh] relative">

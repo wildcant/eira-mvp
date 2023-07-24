@@ -1,10 +1,27 @@
 {
 	"component": {
+		"header": {
+			"avatar": {
+				"sr-only": "Abrir menu de perfil"
+			}
+		},
 		"language-selector": {
 			"group-label": "Idioma"
 		},
 		"light-switch": {
 			"label": "Apariencia"
+		},
+		"modal": {
+			"cancel": {
+				"label": "Cancelar"
+			},
+			"close": {
+				"label": "Cerrar",
+				"sr-only": "Cerrar"
+			},
+			"confirm": {
+				"label": "Confirmar"
+			}
 		},
 		"navigation": {
 			"dashboard": "Panel",
@@ -14,8 +31,21 @@
 			"product-types": "Tipos de producto",
 			"products": "Productos"
 		},
+		"popover": {
+			"content": {
+				"close": {
+					"sr-only": "Cerrar"
+				}
+			}
+		},
 		"search": {
 			"placeholder": "Buscar"
+		},
+		"table": {
+			"pagination": {
+				"next": "Siguiente",
+				"previous": "Anterior"
+			}
 		}
 	},
 	"page": {
@@ -25,18 +55,35 @@
 		"inventory": {
 			"product-types": {
 				"departments": {
-					"delete-modal": {
-						"title": {
-							"first": "Estas seguro que quiere borrar el ",
-							"second": "departamento?"
+					"modal": {
+						"create": {
+							"button": {
+								"submit": "Guardar"
+							},
+							"input": {
+								"color": {
+									"label": "Color"
+								},
+								"name": {
+									"label": "Nombre"
+								}
+							},
+							"title": "Nuevo departamento"
+						},
+						"delete": {
+							"title": "Estas seguro que quieres borrar el departamento"
 						}
 					},
 					"new-department": "Nuevo departamento",
 					"subtitle": "Departamentos de producto",
 					"table": {
 						"actions": {
-							"delete": "Borrar",
-							"edit": "Editar"
+							"delete": {
+								"label": "Borrar"
+							},
+							"edit": {
+								"label": "Editar"
+							}
 						},
 						"headers": {
 							"color": "Color",
