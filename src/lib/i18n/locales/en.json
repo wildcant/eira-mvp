@@ -1,0 +1,59 @@
+{
+  "component": {
+    "language-selector": {
+      "group-label": "Language"
+    },
+    "light-switch": {
+      "label": "Appearance"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "inventory": "Inventory",
+      "orders": "Orders",
+      "point-of-sale": "Point of sale",
+      "product-types": "Product Types",
+      "products": "Products"
+    },
+    "search": {
+      "placeholder": "Search"
+    }
+  },
+  "page": {
+    "dashboard": {
+      "greeting": "Good afternoon"
+    },
+    "inventory": {
+      "product-types": {
+        "departments": {
+          "delete-modal": {
+            "title": {
+              "first": "Are you sure you want to delete the",
+              "second": "department?"
+            }
+          },
+          "new-department": "New department",
+          "subtitle": "Product departments",
+          "table": {
+            "actions": {
+              "delete": "Delete",
+              "edit": "Edit"
+            },
+            "headers": {
+              "color": "Color",
+              "name": "Name"
+            }
+          }
+        },
+        "sub-categories": {
+          "title": "Sub categories"
+        },
+        "sub-nav": {
+          "categories": "Categories",
+          "departments": "Departments",
+          "sub-categories": "Sub categories"
+        },
+        "title": "Product types"
+      }
+    }
+  }
+}

@@ -1,13 +1,7 @@
-import { addTranslations, setLocale, setRoute } from '$lib/i18n';
+import { locale, waitLocale } from '$lib/i18n'; // Import to initialize.
 
 export const load = async ({ data }) => {
-	const { i18n, translations } = data;
-	const { locale, route } = i18n;
-
-	addTranslations(translations);
-
-	await setRoute(route);
-	await setLocale(locale);
-
+	locale.set(data.locale);
+	await waitLocale();
 	return data;
 };

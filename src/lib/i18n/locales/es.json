@@ -1,0 +1,59 @@
+{
+	"component": {
+		"language-selector": {
+			"group-label": "Idioma"
+		},
+		"light-switch": {
+			"label": "Apariencia"
+		},
+		"navigation": {
+			"dashboard": "Panel",
+			"inventory": "Inventario",
+			"orders": "Ordenes",
+			"point-of-sale": "Punto de venta",
+			"product-types": "Tipos de producto",
+			"products": "Productos"
+		},
+		"search": {
+			"placeholder": "Buscar"
+		}
+	},
+	"page": {
+		"dashboard": {
+			"greeting": "Buenas tardes"
+		},
+		"inventory": {
+			"product-types": {
+				"departments": {
+					"delete-modal": {
+						"title": {
+							"first": "Estas seguro que quiere borrar el ",
+							"second": "departamento?"
+						}
+					},
+					"new-department": "Nuevo departamento",
+					"subtitle": "Departamentos de producto",
+					"table": {
+						"actions": {
+							"delete": "Borrar",
+							"edit": "Editar"
+						},
+						"headers": {
+							"color": "Color",
+							"name": "Nombre"
+						}
+					}
+				},
+				"sub-categories": {
+					"title": "Sub categorías"
+				},
+				"sub-nav": {
+					"categories": "Categorías",
+					"departments": "Departamentos",
+					"sub-categories": "Sub categorías"
+				},
+				"title": "Tipos de producto"
+			}
+		}
+	}
+}

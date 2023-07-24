@@ -56,19 +56,21 @@
 
 <div>
 	<div class="mb-4 flex justify-between items-center">
-		<h2>{data.meta.total} {$t('product-types.departments.subtitle')}</h2>
+		<h2>{data.meta.total} {$t('page.inventory.product-types.departments.subtitle')}</h2>
 
 		<Button
 			variant="outline"
 			on:click={() =>
 				openCustomModal({
 					id: NEW_DEPARTMENT_MODAL_ID,
-					title: $t('product-types.departments.new-department'),
+					title: $t('page.inventory.product-types.departments.new-department'),
 					children: NewDepartmentModal
 				})}
 		>
 			<Plus class="h-4 w-4 md:mr-2" />
-			<span class="hidden md:inline">{$t('product-types.departments.new-department')}</span>
+			<span class="hidden md:inline"
+				>{$t('page.inventory.product-types.departments.new-department')}</span
+			>
 		</Button>
 	</div>
 

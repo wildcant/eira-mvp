@@ -8,20 +8,20 @@
 	$: routes = [
 		{
 			href: '/inventory/product-types/departments',
-			label: $t('route.inventory.product-types.departments.link')
+			label: $t('page.inventory.product-types.sub-nav.departments')
 		},
 		{
 			href: '/inventory/product-types/categories',
-			label: $t('route.inventory.product-types.categories.link')
+			label: $t('page.inventory.product-types.sub-nav.categories')
 		},
 		{
 			href: '/inventory/product-types/sub-categories',
-			label: $t('route.inventory.product-types.sub-categories.link')
+			label: $t('page.inventory.product-types.sub-nav.sub-categories')
 		}
 	];
 </script>
 
-<h1 class="font-bold text-2xl">{$t('route.inventory.product-types.title')}</h1>
+<h1 class="font-bold text-2xl">{$t('page.inventory.product-types.title')}</h1>
 
 <nav class="flex gap-2 mt-4 relative">
 	{#each routes as { href, label } (href)}

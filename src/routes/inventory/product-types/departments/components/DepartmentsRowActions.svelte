@@ -6,10 +6,10 @@
 	import PopoverTrigger from '$components/ui/popover/PopoverTrigger.svelte';
 	import { openToast } from '$components/ui/toast/ToastManager.svelte';
 	import type { DatabaseTypes } from '$lib/database/types';
+	import { t } from '$lib/i18n';
 	import { MoreVertical } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { editing } from '../store';
-	import { t } from '$lib/i18n';
 
 	export let department: DatabaseTypes['Department'];
 
@@ -66,8 +66,7 @@
 				popover.close();
 			}}
 		>
-			{$t('route.inventory.product-types.departments.link')}
-			Edit
+			{$t('page.inventory.product-types.departments.table.actions.edit')}
 		</Button>
 
 		<Button
@@ -79,9 +78,9 @@
 			on:click={() =>
 				openConfirmationModal({
 					id: 'delete-department',
-					title: `${$t('route.inventory.product-types.departments.delete-modal.title')[0]} ${
+					title: `${$t('page.inventory.product-types.departments.delete-modal.title.first')} ${
 						department.name
-					} department?`,
+					} ${$t('page.inventory.product-types.departments.delete-modal.title.second')}`,
 					onConfirm: deleteDepartment
 				})}
 		>
