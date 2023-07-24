@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Header from '$components/shared/header/Header.svelte';
-	import { setInitialClassState } from '$components/shared/light-switch/light-switch';
+	import { setInitialClassState } from '$components/shared/header/components/light-switch/light-switch';
 	import ModalsManager from '$components/shared/modal/ModalsManager.svelte';
 	import Navigation from '$components/shared/navigation/Navigation.svelte';
 	import Drawer from '$components/ui/drawer/Drawer.svelte';
@@ -8,9 +8,8 @@
 	import ToastManager from '$components/ui/toast/ToastManager.svelte';
 	import { cn } from '$lib/utils';
 	import '../app.css';
-	import type { LayoutData } from './$types';
 
-	export let data: LayoutData;
+	export let data;
 	const { isMobile } = data;
 	let open = !isMobile;
 	const closeDrawer = () => (open = false);

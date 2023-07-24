@@ -9,6 +9,7 @@
 		setModeUserPrefers
 	} from './light-switch';
 	import { buttonVariants } from '$components/ui/button/index';
+	import { t } from '$lib/i18n';
 
 	type OnKeyDownEvent = KeyboardEvent & {
 		currentTarget: EventTarget & HTMLDivElement;
@@ -57,7 +58,9 @@
 	id="light-switch"
 	class={cn(buttonVariants({ variant: 'ghost' }), 'group', { block: mounted })}
 >
-	<span class="inline-block text-sm text-foreground" aria-hidden="true">Appearance</span>
+	<span class="inline-block text-sm text-foreground" aria-hidden="true"
+		>{$t('component.light-switch.label')}</span
+	>
 	<span
 		class="inline-block h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 transition-all group-disabled:cursor-not-allowed group-disabled:opacity-50 border-muted group-hover:border-border"
 	>

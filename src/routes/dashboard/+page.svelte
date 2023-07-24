@@ -1,11 +1,9 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-
-	export let data: PageData;
+	import { t } from '$lib/i18n';
 </script>
 
 <svelte:head>
 	<title>Dashboard</title>
 </svelte:head>
 
-<h1>Good Afternoon, Wilmer!</h1>
+<h1>{$t('page.dashboard.greeting')}, Wilmer!</h1>

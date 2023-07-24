@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Box, LayoutDashboard, LayoutList, Shapes, Store, Warehouse } from 'lucide-svelte';
-	import type { NavigationIconName } from './navigation-items';
+	import type { NavigationIconName } from '.';
 
 	export let name: NavigationIconName;
 </script>

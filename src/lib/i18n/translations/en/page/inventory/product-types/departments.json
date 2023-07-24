@@ -1,0 +1,29 @@
+{
+	"title": "Product types",
+	"departments": {
+		"link": "Departments",
+		"subtitle": "Product departments",
+		"new-department": "New department",
+		"table": {
+			"headers": {
+				"name": "Name",
+				"color": "Color"
+			},
+			"actions": {
+				"edit": "Edit",
+				"delete": "Delete"
+			}
+		}
+	},
+	"categories": {
+		"link": "Categories"
+	},
+	"sub-categories": {
+		"link": "Sub categories"
+	},
+	"product-types": {
+		"sub-categories": {
+			"link": "test"
+		}
+	}
+}

@@ -2,6 +2,7 @@ import { db } from '$lib/database';
 import { error } from '@sveltejs/kit';
 import { SqliteError } from 'better-sqlite3';
 import type { DB } from 'kysely-codegen';
+import { z } from 'zod';
 
 export async function exists(table: keyof DB, id: number) {
 	const record = await db.selectFrom(table).select('id').where('id', '=', id).execute();
@@ -14,6 +15,29 @@ export function sqliteCustomErrorMap(err: unknown) {
 			const property = err.message.split(':')[1].replace('.', ' ');
 			throw error(409, `${property} already exists`);
 		}
+	}
+}
+
+/*
+// @See  https://github.com/colinhacks/zod/blob/master/ERROR_HANDLING.md#customizing-errors-with-zoderrormap
+const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+  if (issue.code === z.ZodIssueCode.invalid_type) {
+    if (issue.expected === "string") {
+      return { message: "bad type!" };
+    }
+  }
+  if (issue.code === z.ZodIssueCode.custom) {
+    return { message: `less-than-${(issue.params || {}).minimum}` };
+  }
+  return { message: ctx.defaultError };
+};
+
+z.setErrorMap(customErrorMap);
+*/
+// TODO: Add error map.
+export function zodCustomErrorMap(err: unknown) {
+	if (err instanceof z.ZodError) {
+		throw error(400, err.message);
 	}
 }
 

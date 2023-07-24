@@ -5,11 +5,55 @@
 	import DisclosureContent from '$components/ui/disclosure/DisclosureContent.svelte';
 	import DisclosureLink from '$components/ui/disclosure/DisclosureLink.svelte';
 	import DisclosureTrigger from '$components/ui/disclosure/DisclosureTrigger.svelte';
+	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { Routes, type Item } from '.';
 	import NavigationIcon from './NavigationIcon.svelte';
-	import { items } from './navigation-items';
+
+	$: items = [
+		{
+			id: 'dashboard',
+			title: $t('component.navigation.dashboard'),
+			href: Routes.DASHBOARD,
+			icon: 'layout-dashboard'
+		},
+		{
+			id: 'inventory',
+			title: $t('component.navigation.inventory'),
+			icon: 'warehouse',
+			href: Routes.INVENTORY,
+			children: [
+				{
+					id: 'products',
+					title: $t('component.navigation.products'),
+					href: Routes.PRODUCTS,
+					icon: 'box'
+				},
+				{
+					id: 'product-types',
+					title: $t('component.navigation.product-types'),
+					href: Routes.PRODUCT_TYPES,
+					icon: 'shapes'
+				}
+			]
+		},
+		{
+			id: 'point-of-sale',
+			title: $t('component.navigation.point-of-sale'),
+			icon: 'store',
+			href: Routes.POS,
+			children: [
+				{
+					id: 'orders',
+					title: $t('component.navigation.orders'),
+					href: Routes.POS_ORDERS,
+					icon: 'layout-list'
+				}
+			]
+		}
+	] satisfies Item[];
 
 	const dispatch = createEventDispatcher();
 	const navigate = () => dispatch('navigate');

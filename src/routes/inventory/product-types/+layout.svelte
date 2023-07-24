@@ -2,16 +2,26 @@
 	import { page } from '$app/stores';
 	import Button from '$components/ui/button/Button.svelte';
 	import Separator from '$components/ui/separator/Separator.svelte';
+	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
 
-	const routes = [
-		{ href: '/inventory/product-types/departments', label: 'Departments' },
-		{ href: '/inventory/product-types/categories', label: 'Categories' },
-		{ href: '/inventory/product-types/sub-categories', label: 'Sub categories' }
+	$: routes = [
+		{
+			href: '/inventory/product-types/departments',
+			label: $t('route.inventory.product-types.departments.link')
+		},
+		{
+			href: '/inventory/product-types/categories',
+			label: $t('route.inventory.product-types.categories.link')
+		},
+		{
+			href: '/inventory/product-types/sub-categories',
+			label: $t('route.inventory.product-types.sub-categories.link')
+		}
 	];
 </script>
 
-<h1 class="font-bold text-2xl">Product Types</h1>
+<h1 class="font-bold text-2xl">{$t('route.inventory.product-types.title')}</h1>
 
 <nav class="flex gap-2 mt-4 relative">
 	{#each routes as { href, label } (href)}

@@ -8,6 +8,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import DepartmentsEditActions from './DepartmentsEditActions.svelte';
 	import DepartmentsRow from './DepartmentsRow.svelte';
+	import { t } from '$lib/i18n';
 
 	export let departments: DatabaseTypes['Department'][];
 
@@ -25,8 +26,8 @@
 		<Table class="border-collapse">
 			<TableHeader class="sticky top-0 bg-zin bg-white dark:bg-zinc-950">
 				<TableRow>
-					<TableHead>Name</TableHead>
-					<TableHead>Color</TableHead>
+					<TableHead>{$t('product-types.departments.table.headers.name')}</TableHead>
+					<TableHead>{$t('product-types.departments.table.headers.color')}</TableHead>
 					<TableHead class="w-2" />
 				</TableRow>
 			</TableHeader>

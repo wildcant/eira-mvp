@@ -1,18 +1,18 @@
 <script lang="ts">
+	import { openCustomModal } from '$components/shared/modal/ModalsManager.svelte';
 	import Search from '$components/shared/search/Search.svelte';
 	import Button from '$components/ui/button/Button.svelte';
 	import type { DatabaseTypes } from '$lib/database/types';
+	import { t } from '$lib/i18n';
 	import type { PaginatedApiResponse } from '$lib/types';
 	import debounce from 'lodash/debounce';
 	import { Plus } from 'lucide-svelte';
-	import type { PageData } from './$types';
 	import DepartmentsTable from './components/DepartmentsTable.svelte';
 	import NewDepartmentModal, {
 		NEW_DEPARTMENT_MODAL_ID
 	} from './components/NewDepartmentModal.svelte';
-	import { openCustomModal } from '$components/shared/modal/ModalsManager.svelte';
 
-	export let data: PageData;
+	export let data;
 
 	let departments = data.data;
 	let hasMore = data.meta.hasMore;
@@ -56,19 +56,19 @@
 
 <div>
 	<div class="mb-4 flex justify-between items-center">
-		<h2>{data.meta.total} Product departments</h2>
+		<h2>{data.meta.total} {$t('product-types.departments.subtitle')}</h2>
 
 		<Button
 			variant="outline"
 			on:click={() =>
 				openCustomModal({
 					id: NEW_DEPARTMENT_MODAL_ID,
-					title: 'New department',
+					title: $t('product-types.departments.new-department'),
 					children: NewDepartmentModal
 				})}
 		>
 			<Plus class="h-4 w-4 md:mr-2" />
-			<span class="hidden md:inline">New department</span>
+			<span class="hidden md:inline">{$t('product-types.departments.new-department')}</span>
 		</Button>
 	</div>
 

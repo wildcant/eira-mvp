@@ -1,15 +1,16 @@
 <script lang="ts">
+	import Button from '$components/ui/button/Button.svelte';
+	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
+	import { createLabel } from '@melt-ui/svelte';
 	import { Search, XCircle } from 'lucide-svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { createLabel } from '@melt-ui/svelte';
-	import Button from '$components/ui/button/Button.svelte';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	export let value: HTMLInputAttributes['value'] = undefined;
-	export let placeholder: HTMLInputAttributes['placeholder'] = 'Search..';
+	export let placeholder: HTMLInputAttributes['placeholder'] = undefined;
 
 	const root = createLabel();
 </script>
@@ -25,7 +26,7 @@
 			)}
 			type="text"
 			id="search"
-			{placeholder}
+			placeholder={placeholder ?? `${$t('component.search.placeholder')}..`}
 			bind:value
 			on:blur
 			on:change
