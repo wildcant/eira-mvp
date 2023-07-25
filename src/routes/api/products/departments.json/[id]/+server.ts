@@ -1,8 +1,8 @@
 import { db } from '$lib/database';
 import { exists, sqliteCustomErrorMap, zodCustomErrorMap } from '$lib/database/utils.js';
 import { i18n, type WithT } from '$lib/i18n/api.js';
+import { departmentSchema } from '$lib/schemas/department.js';
 import { error, json } from '@sveltejs/kit';
-import { z } from 'zod';
 
 // const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -26,12 +26,6 @@ export const DELETE = async ({ params, cookies }) => {
 		handleError({ $t, err });
 	}
 };
-
-const hexColorRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-const departmentSchema = z.object({
-	name: z.string().min(1).max(100),
-	color: z.string().refine((color) => hexColorRegex.test(color))
-});
 
 export const PUT = async ({ params, request, cookies }) => {
 	console.dir(request, { depth: null });

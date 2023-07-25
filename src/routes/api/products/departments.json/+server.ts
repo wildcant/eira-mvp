@@ -4,7 +4,6 @@ import { i18n, type WithT } from '$lib/i18n/api';
 import type { PaginatedApiResponse } from '$lib/types';
 import { error, json } from '@sveltejs/kit';
 import { z } from 'zod';
-import type { RequestHandler } from './$types';
 
 function encode(str: string) {
 	return Buffer.from(str).toString('base64');
@@ -60,7 +59,7 @@ function parseCursorPagination({ url, $t }: ParseCursorPaginationArgs) {
 }
 
 const DEFAULT_LIMIT = 20;
-export const GET: RequestHandler = async ({ url, cookies }) => {
+export const GET = async ({ url, cookies }) => {
 	const { $t } = await i18n(cookies);
 	const search = url.searchParams.get('search');
 	const { after, before, size } = parseCursorPagination({ $t, url });
@@ -126,4 +125,9 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	} satisfies PaginatedApiResponse<DatabaseTypes['Department']>;
 
 	return json(response);
+};
+
+// TODO: Complete department creation endpoint.
+export const POST = async () => {
+	return json({ succeed: true });
 };

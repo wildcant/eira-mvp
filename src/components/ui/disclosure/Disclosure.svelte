@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { uniqueContext } from '$components/helpers/uniqueContext';
+	import { uniqueContext } from '$lib/helpers/uniqueContext';
 	import { createCollapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
 
 	type DisclosureContextProps = ReturnType<typeof createCollapsible>;

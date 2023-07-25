@@ -5,28 +5,38 @@
 <script lang="ts">
 	import Button from '$components/ui/button/Button.svelte';
 	import DialogFooter from '$components/ui/dialog/DialogFooter.svelte';
-	import Input from '$components/ui/input/Input.svelte';
-	import Label from '$components/ui/label/Label.svelte';
+	import Form from '$components/ui/form/Form.svelte';
+	import FormField from '$components/ui/form/FormField.svelte';
+	import FormInput from '$components/ui/form/FormInput.svelte';
+	import FormLabel from '$components/ui/form/FormLabel.svelte';
 	import { t } from '$lib/i18n';
+	import { departmentSchema } from '$lib/schemas/department';
+	import { onDestroy } from 'svelte';
+	import { superForm } from 'sveltekit-superforms/client';
+	import { formState } from '../store';
+
+	const form = superForm($formState, { validators: departmentSchema });
+	const { errors } = form;
+	onDestroy(() => errors.clear());
 </script>
 
-<div class="grid gap-4 py-4">
-	<div class="grid grid-cols-4 items-center gap-4">
-		<Label class="col-span-3">
+<Form {form} method="post" action="?/update">
+	<FormField name="name">
+		<FormLabel>
 			{$t('page.inventory.product-types.departments.modal.create.input.name.label')}
-			<Input id="name" value="Pedro Duarte" />
-		</Label>
-	</div>
-	<div class="grid grid-cols-4 items-center gap-4">
-		<Label class="col-span-3">
+		</FormLabel>
+		<FormInput type="text" />
+	</FormField>
+	<FormField name="name">
+		<FormLabel>
 			{$t('page.inventory.product-types.departments.modal.create.input.color.label')}
-			<Input id="username" value="@peduarte" />
-		</Label>
-	</div>
-</div>
+		</FormLabel>
+		<FormInput type="color" />
+	</FormField>
 
-<DialogFooter>
-	<Button type="submit">
-		{$t('page.inventory.product-types.departments.modal.create.button.submit')}
-	</Button>
-</DialogFooter>
+	<DialogFooter>
+		<Button type="submit">
+			{$t('page.inventory.product-types.departments.modal.create.button.submit')}
+		</Button>
+	</DialogFooter>
+</Form>

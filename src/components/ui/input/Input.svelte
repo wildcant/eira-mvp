@@ -2,7 +2,14 @@
 	import { cn } from '$lib/utils';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
+	interface $$Props extends HTMLInputAttributes {
+		value?: HTMLInputAttributes['value'];
+		disabled?: HTMLInputAttributes['disabled'];
+		class?: string | undefined | null;
+	}
+
 	export let value: HTMLInputAttributes['value'] = undefined;
+	export let disabled: HTMLInputAttributes['disabled'] = undefined;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
@@ -25,5 +32,7 @@
 	on:mouseleave
 	on:paste
 	on:input
+	{disabled}
+	aria-disabled={disabled}
 	{...$$restProps}
 />

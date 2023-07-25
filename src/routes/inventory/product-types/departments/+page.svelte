@@ -11,18 +11,21 @@
 	import NewDepartmentModal, {
 		NEW_DEPARTMENT_MODAL_ID
 	} from './components/NewDepartmentModal.svelte';
+	import { formState } from './store';
 
 	export let data;
+	const { departmentsJson: initial, newDepartmentForm } = data;
+	formState.set(newDepartmentForm);
 
-	let departments = data.data;
-	let hasMore = data.meta.hasMore;
-	let after = data.meta.afterCursor;
+	let departments = initial.data;
+	let hasMore = initial.meta.hasMore;
+	let after = initial.meta.afterCursor;
 	let loading = false;
 
 	function reset() {
-		departments = data.data;
-		hasMore = data.meta.hasMore;
-		after = data.meta.afterCursor;
+		departments = initial.data;
+		hasMore = initial.meta.hasMore;
+		after = initial.meta.afterCursor;
 	}
 
 	async function searchDepartments(search: string) {
@@ -56,7 +59,7 @@
 
 <div>
 	<div class="mb-4 flex justify-between items-center">
-		<h2>{data.meta.total} {$t('page.inventory.product-types.departments.subtitle')}</h2>
+		<h2>{initial.meta.total} {$t('page.inventory.product-types.departments.subtitle')}</h2>
 
 		<Button
 			variant="outline"
@@ -69,9 +72,9 @@
 				})}
 		>
 			<Plus class="h-4 w-4 md:mr-2" />
-			<span class="hidden md:inline"
-				>{$t('page.inventory.product-types.departments.new-department')}</span
-			>
+			<span class="hidden md:inline">
+				{$t('page.inventory.product-types.departments.new-department')}
+			</span>
 		</Button>
 	</div>
 

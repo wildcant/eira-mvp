@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { uniqueContext } from '$components/helpers/uniqueContext';
+	import { uniqueContext } from '$lib/helpers/uniqueContext';
 	import { createDialog, type CreateDialogProps } from '@melt-ui/svelte';
 	import { createEventDispatcher } from 'svelte';
 

@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { uniqueContext } from '$components/helpers/uniqueContext';
+	import { uniqueContext } from '$lib/helpers/uniqueContext';
 	import { createTabs } from '@melt-ui/svelte';
 
 	type TabsContextProps = ReturnType<typeof createTabs> & {

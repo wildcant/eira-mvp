@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { uniqueContext } from '$components/helpers/uniqueContext';
+	import { uniqueContext } from '$lib/helpers/uniqueContext';
 	import { createPopover } from '@melt-ui/svelte';
 
 	type PopoverContextProps = Omit<ReturnType<typeof createPopover>, 'options'>;
