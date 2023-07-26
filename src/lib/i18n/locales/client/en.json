@@ -1,4 +1,49 @@
 {
+  "common": {
+    "phrase": {
+      "action-completed": "Action completed",
+      "confirm-delete": "Are you sure you want to delete",
+      "was-deleted": "was deleted"
+    },
+    "word": {
+      "cancel": {
+        "capitalize": "Cancel",
+        "lowercase": "cancel"
+      },
+      "close": {
+        "capitalize": "Close",
+        "lowercase": "close"
+      },
+      "color": {
+        "capitalize": "Color",
+        "lowercase": "color"
+      },
+      "confirm": {
+        "capitalize": "Confirm",
+        "lowercase": "confirm"
+      },
+      "delete": {
+        "capitalize": "Delete",
+        "lowercase": "delete"
+      },
+      "edit": {
+        "capitalize": "Edit",
+        "lowercase": "edit"
+      },
+      "name": {
+        "capitalize": "Name",
+        "lowercase": "name"
+      },
+      "new": {
+        "capitalize": "New",
+        "lowercase": "new"
+      },
+      "save": {
+        "capitalize": "Save",
+        "lowercase": "save"
+      }
+    }
+  },
   "component": {
     "header": {
       "avatar": {
@@ -11,18 +56,6 @@
     "light-switch": {
       "label": "Appearance"
     },
-    "modal": {
-      "cancel": {
-        "label": "Cancel"
-      },
-      "close": {
-        "label": "Close",
-        "sr-only": "Close"
-      },
-      "confirm": {
-        "label": "Confirm"
-      }
-    },
     "navigation": {
       "dashboard": "Dashboard",
       "inventory": "Inventory",
@@ -30,13 +63,6 @@
       "point-of-sale": "Point of sale",
       "product-types": "Product Types",
       "products": "Products"
-    },
-    "popover": {
-      "content": {
-        "close": {
-          "sr-only": "Close"
-        }
-      }
     },
     "search": {
       "placeholder": "Search"
@@ -48,67 +74,54 @@
       }
     }
   },
+  "entity": {
+    "category": {
+      "plural": {
+        "capitalize": "Categories",
+        "lowercase": "categories"
+      },
+      "singular": {
+        "capitalize": "Category",
+        "lowercase": "category"
+      }
+    },
+    "department": {
+      "plural": {
+        "capitalize": "Departments",
+        "lowercase": "departments"
+      },
+      "singular": {
+        "capitalize": "Department",
+        "lowercase": "department"
+      }
+    },
+    "product": {
+      "plural": {
+        "capitalize": "Sub categories",
+        "lowercase": "sub categories"
+      },
+      "singular": {
+        "capitalize": "Product",
+        "lowercase": "product"
+      }
+    },
+    "sub-category": {
+      "plural": {
+        "capitalize": "Sub categories",
+        "lowercase": "sub categories"
+      },
+      "singular": {
+        "capitalize": "Sub Category",
+        "lowercase": "subcategory"
+      }
+    }
+  },
   "page": {
     "dashboard": {
       "greeting": "Good afternoon"
     },
     "inventory": {
       "product-types": {
-        "categories": {
-          "new-category": "New category",
-          "subtitle": "Categories"
-        },
-        "departments": {
-          "modal": {
-            "create": {
-              "button": {
-                "submit": "Save"
-              },
-              "input": {
-                "color": {
-                  "label": "Color"
-                },
-                "name": {
-                  "label": "Name"
-                }
-              },
-              "title": "New department"
-            },
-            "delete": {
-              "title": "Are you sure you want to delete"
-            }
-          },
-          "new-department": "New department",
-          "subtitle": "Product departments",
-          "table": {
-            "actions": {
-              "delete": {
-                "label": "Delete",
-                "toast": {
-                  "description": "Department was deleted",
-                  "title": "Action completed"
-                }
-              },
-              "edit": {
-                "cancel": "Cancel",
-                "label": "Edit",
-                "save": "Save"
-              }
-            },
-            "headers": {
-              "color": "Color",
-              "name": "Name"
-            }
-          }
-        },
-        "sub-categories": {
-          "title": "Sub categories"
-        },
-        "sub-nav": {
-          "categories": "Categories",
-          "departments": "Departments",
-          "sub-categories": "Sub categories"
-        },
         "title": "Product types"
       }
     }

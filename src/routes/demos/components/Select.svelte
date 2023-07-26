@@ -20,11 +20,11 @@
 		</SelectGroup>
 		<SelectSeparator />
 		<SelectGroup label="Vegetables">
-			<SelectItem value="apple">Apple</SelectItem>
-			<SelectItem value="banana">Banana</SelectItem>
-			<SelectItem value="blueberry">Blueberry</SelectItem>
-			<SelectItem value="grapes">Grapes</SelectItem>
-			<SelectItem value="pineapple">Pineapple</SelectItem>
+			<SelectItem value="asparagus">Asparagus</SelectItem>
+			<SelectItem value="broccoli">Broccoli</SelectItem>
+			<SelectItem value="carrots">Carrots</SelectItem>
+			<SelectItem value="corn">Corn</SelectItem>
+			<SelectItem value="garlic">Garlic</SelectItem>
 		</SelectGroup>
 	</SelectContent>
 </Select>

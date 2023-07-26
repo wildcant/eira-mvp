@@ -7,10 +7,10 @@
 	import TableRow from '$components/ui/table/TableRow.svelte';
 	import type { DatabaseTypes } from '$lib/database/types';
 	import { t } from '$lib/i18n';
-	import DepartmentsEditActions from './DepartmentsEditActions.svelte';
-	import DepartmentsRow from './DepartmentsRow.svelte';
+	import CategoriesEditActions from './CategoriesEditActions.svelte';
+	import CategoriesRow from './CategoriesRow.svelte';
 
-	export let departments: DatabaseTypes['Department'][];
+	export let categories: DatabaseTypes['Category'][];
 </script>
 
 <div class="relative mt-4">
@@ -19,15 +19,17 @@
 			<TableHeader class="sticky top-0 bg-zin bg-white dark:bg-zinc-950">
 				<TableRow>
 					<TableHead>{$t('common.word.name.capitalize')}</TableHead>
-					<TableHead>{$t('common.word.color.capitalize')}</TableHead>
+					<TableHead>
+						{$t('entity.department.singular.capitalize')}
+					</TableHead>
 					<TableHead class="w-2" />
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{#each departments as department (department.id)}
-					<DepartmentsRow
-						{department}
-						on:deleted={() => (departments = departments.filter(({ id }) => id !== department.id))}
+				{#each categories as category (category.id)}
+					<CategoriesRow
+						{category}
+						on:deleted={() => (categories = categories.filter(({ id }) => id !== category.id))}
 					/>
 				{/each}
 			</TableBody>
@@ -35,4 +37,4 @@
 	</Scroller>
 </div>
 
-<DepartmentsEditActions />
+<CategoriesEditActions />

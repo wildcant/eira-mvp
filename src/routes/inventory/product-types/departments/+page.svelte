@@ -59,7 +59,11 @@
 
 <div>
 	<div class="mb-4 flex justify-between items-center">
-		<h2>{initial.meta.total} {$t('page.inventory.product-types.departments.subtitle')}</h2>
+		<h2>
+			{initial.meta.total}
+			{$t('entity.product.singular.capitalize')}
+			{$t('entity.department.plural.lowercase')}
+		</h2>
 
 		<Button
 			variant="outline"
@@ -67,13 +71,16 @@
 			on:click={() =>
 				openCustomModal({
 					id: NEW_DEPARTMENT_MODAL_ID,
-					title: $t('page.inventory.product-types.departments.new-department'),
+					title: `${$t('common.word.new.capitalize')} ${$t(
+						'entity.department.singular.lowercase'
+					)}`,
 					children: NewDepartmentModal
 				})}
 		>
 			<Plus class="h-4 w-4 md:mr-2" />
 			<span class="hidden md:inline">
-				{$t('page.inventory.product-types.departments.new-department')}
+				{$t('common.word.new.capitalize')}
+				{$t('entity.department.singular.lowercase')}
 			</span>
 		</Button>
 	</div>

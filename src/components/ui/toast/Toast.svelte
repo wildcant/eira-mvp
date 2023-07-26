@@ -38,7 +38,7 @@
 		)}
 	>
 		<X class="h-4 w-4" />
-		<span class="sr-only">{$t('component.modal.close.sr-only')}</span>
+		<span class="sr-only">{$t('common.word.close.capitalize')}</span>
 	</button>
 	<!-- <button on:click={data.action}> trigger action </button> -->
 </div>

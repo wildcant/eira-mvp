@@ -11,6 +11,7 @@
 		<Tab>Account</Tab>
 		<Tab>Password</Tab>
 	</TabList>
+
 	<TabPanel>
 		<p class="description">Make changes to your account here. Click save when you're done.</p>
 		<fieldset>

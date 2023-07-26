@@ -22,7 +22,6 @@
 	const { form } = getFormContext();
 	const { value, errors } = formFieldProxy(form, name);
 	const { submitting } = form;
-	$: hasErrors = !!$errors;
 </script>
 
 <Input
@@ -31,6 +30,6 @@
 	type="text"
 	bind:value={$value}
 	disabled={disabled || $submitting}
-	class={cn({ 'border-red-500': hasErrors }, className)}
+	class={cn({ 'border-red-500': !!$errors }, className)}
 	{...$$restProps}
 />

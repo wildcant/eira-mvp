@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const categorySchema = z.object({
 	name: z.string().min(1).max(100),
-	department: z.number().int()
+	departmentId: z.number().int().min(1)
 });
 
 export type CategoryZodSchema = typeof categorySchema;

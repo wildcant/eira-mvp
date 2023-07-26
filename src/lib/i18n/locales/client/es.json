@@ -1,116 +1,129 @@
 {
-  "component": {
-    "header": {
-      "avatar": {
-        "sr-only": "Abrir menu de perfil"
-      }
-    },
-    "language-selector": {
-      "group-label": "Idioma"
-    },
-    "light-switch": {
-      "label": "Apariencia"
-    },
-    "modal": {
-      "cancel": {
-        "label": "Cancelar"
-      },
-      "close": {
-        "label": "Cerrar",
-        "sr-only": "Cerrar"
-      },
-      "confirm": {
-        "label": "Confirmar"
-      }
-    },
-    "navigation": {
-      "dashboard": "Panel",
-      "inventory": "Inventario",
-      "orders": "Ordenes",
-      "point-of-sale": "Punto de venta",
-      "product-types": "Tipos de producto",
-      "products": "Productos"
-    },
-    "popover": {
-      "content": {
-        "close": {
-          "sr-only": "Cerrar"
-        }
-      }
-    },
-    "search": {
-      "placeholder": "Buscar"
-    },
-    "table": {
-      "pagination": {
-        "next": "Siguiente",
-        "previous": "Anterior"
-      }
-    }
-  },
-  "page": {
-    "dashboard": {
-      "greeting": "Buenas tardes"
-    },
-    "inventory": {
-      "product-types": {
-        "categories": {
-          "new-category": "Nueva categoría",
-          "subtitle": "Categorías"
-        },
-        "departments": {
-          "modal": {
-            "create": {
-              "button": {
-                "submit": "Guardar"
-              },
-              "input": {
-                "color": {
-                  "label": "Color"
-                },
-                "name": {
-                  "label": "Nombre"
-                }
-              },
-              "title": "Nuevo departamento"
-            },
-            "delete": {
-              "title": "Estas seguro que quieres borrar el departamento"
-            }
-          },
-          "new-department": "Nuevo departamento",
-          "subtitle": "Departamentos de producto",
-          "table": {
-            "actions": {
-              "delete": {
-                "label": "Borrar",
-                "toast": {
-                  "description": "El departamento fue borrado",
-                  "title": "Acción completada"
-                }
-              },
-              "edit": {
-                "cancel": "Cancelar",
-                "label": "Editar",
-                "save": "Guardar"
-              }
-            },
-            "headers": {
-              "color": "Color",
-              "name": "Nombre"
-            }
-          }
-        },
-        "sub-categories": {
-          "title": "Sub categorías"
-        },
-        "sub-nav": {
-          "categories": "Categorías",
-          "departments": "Departamentos",
-          "sub-categories": "Sub categorías"
-        },
-        "title": "Tipos de producto"
-      }
-    }
-  }
+	"common": {
+		"phrase": {
+			"action-completed": "Acción completada",
+			"confirm-delete": "Estas seguro que quieres borrar",
+			"was-deleted": "fue eliminada"
+		},
+		"word": {
+			"cancel": {
+				"capitalize": "Cancelar",
+				"lowercase": "cancelar"
+			},
+			"close": {
+				"capitalize": "Cerrar",
+				"lowercase": "cerrar"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirmar",
+				"lowercase": "confirmar"
+			},
+			"delete": {
+				"capitalize": "Borrar",
+				"lowercase": "borrar"
+			},
+			"edit": {
+				"capitalize": "Editar",
+				"lowercase": "editar"
+			},
+			"name": {
+				"capitalize": "Nombre",
+				"lowercase": "nombre"
+			},
+			"new": {
+				"capitalize": "Nuevo",
+				"lowercase": "nuevo"
+			},
+			"save": {
+				"capitalize": "Guardar",
+				"lowercase": "guardar"
+			}
+		}
+	},
+	"component": {
+		"header": {
+			"avatar": {
+				"sr-only": "Abrir menu de perfil"
+			}
+		},
+		"language-selector": {
+			"group-label": "Idioma"
+		},
+		"light-switch": {
+			"label": "Apariencia"
+		},
+		"navigation": {
+			"dashboard": "Panel",
+			"inventory": "Inventario",
+			"orders": "Ordenes",
+			"point-of-sale": "Punto de venta",
+			"product-types": "Tipos de producto",
+			"products": "Productos"
+		},
+		"search": {
+			"placeholder": "Buscar"
+		},
+		"table": {
+			"pagination": {
+				"next": "Siguiente",
+				"previous": "Anterior"
+			}
+		}
+	},
+	"entity": {
+		"category": {
+			"plural": {
+				"capitalize": "Categorías",
+				"lowercase": "categorías"
+			},
+			"singular": {
+				"capitalize": "Categoría",
+				"lowercase": "categoría"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departamentos",
+				"lowercase": "departamentos"
+			},
+			"singular": {
+				"capitalize": "Departamento",
+				"lowercase": "departamento"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Productos",
+				"lowercase": "productos"
+			},
+			"singular": {
+				"capitalize": "Producto",
+				"lowercase": "producto"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categorías",
+				"lowercase": "sub categorías"
+			},
+			"singular": {
+				"capitalize": "Sub categoría",
+				"lowercase": "sub categoría"
+			}
+		}
+	},
+	"page": {
+		"dashboard": {
+			"greeting": "Buenas tardes"
+		},
+		"inventory": {
+			"product-types": {
+				"title": "Tipos de producto"
+			}
+		}
+	}
 }

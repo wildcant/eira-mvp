@@ -49,7 +49,7 @@
 					}}
 					disabled={loading}
 				>
-					{modal.labels?.cancel ?? $t('component.modal.cancel.label')}
+					{modal.labels?.cancel ?? $t('common.word.cancel.capitalize')}
 				</Button>
 				<Button
 					size="sm"
@@ -61,7 +61,7 @@
 					}}
 					{loading}
 				>
-					{modal.labels?.confirm ?? $t('component.modal.confirm.label')}
+					{modal.labels?.confirm ?? $t('common.word.confirm.capitalize')}
 				</Button>
 			</DialogFooter>
 		{/if}
@@ -70,7 +70,7 @@
 			disabled={loading}
 		>
 			<X class="h-4 w-4" />
-			<span class="sr-only">{$t('component.modal.close.sr-only')}</span>
+			<span class="sr-only">{$t('common.word.close.capitalize')}</span>
 		</DialogClose>
 	</DialogContent>
 </Dialog>

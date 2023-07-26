@@ -11,17 +11,17 @@
 	import { createEventDispatcher } from 'svelte';
 	import { editing } from '../store';
 
-	export let department: DatabaseTypes['Department'];
+	export let category: DatabaseTypes['Category'];
 
 	const dispatch = createEventDispatcher();
 
 	let popover: Popover;
 
 	let loading = false;
-	async function deleteDepartment() {
+	async function deleteCategory() {
 		loading = true;
 		try {
-			const response = await fetch(`/api/products/departments.json/${department.id}`, {
+			const response = await fetch(`/api/products/categories.json/${category.id}`, {
 				method: 'delete'
 			});
 
@@ -35,7 +35,7 @@
 				data: {
 					variant: 'default',
 					title: $t('common.phrase.action-completed'),
-					description: `${$t('entity.department.singular.capitalize')} ${$t(
+					description: `${$t('entity.category.singular.capitalize')} ${$t(
 						'common.phrase.was-deleted'
 					)}`
 				}
@@ -64,7 +64,7 @@
 			class="px-6 rounded-none"
 			disabled={loading}
 			on:click={() => {
-				editing.set({ state: true, department });
+				editing.set({ state: true, category });
 				popover.close();
 			}}
 		>
@@ -79,9 +79,9 @@
 			disabled={loading}
 			on:click={() =>
 				openConfirmationModal({
-					id: 'delete-department',
-					title: `${$t('common.phrase.confirm-delete')} "${department.name}"?`,
-					onConfirm: deleteDepartment
+					id: 'delete-category',
+					title: `${$t('common.phrase.confirm-delete')} "${category.name}"?`,
+					onConfirm: deleteCategory
 				})}
 		>
 			{$t('common.word.delete.capitalize')}

@@ -1,6 +1,7 @@
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
 import { db } from '$lib/database/index.js';
 import type { DatabaseTypes } from '$lib/database/types.js';
+import { categorySchema } from '$lib/schemas/category.js';
 import type { PaginatedApiResponse } from '$lib/types.js';
 import { json } from '@sveltejs/kit';
 
@@ -37,4 +38,10 @@ export const GET = async ({ url }) => {
 	} satisfies GetResponse;
 
 	return json(response);
+};
+
+export const POST = async ({ request }) => {
+	const data = categorySchema.parse(await request.json());
+	const result = await db.insertInto('Category').values(data).executeTakeFirst();
+	return json({ succeed: result.insertId && result.insertId > 0 });
 };

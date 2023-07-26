@@ -8,15 +8,15 @@
 	$: routes = [
 		{
 			href: '/inventory/product-types/departments',
-			label: $t('page.inventory.product-types.sub-nav.departments')
+			label: $t('entity.department.plural.capitalize')
 		},
 		{
 			href: '/inventory/product-types/categories',
-			label: $t('page.inventory.product-types.sub-nav.categories')
+			label: $t('entity.category.plural.capitalize')
 		},
 		{
 			href: '/inventory/product-types/sub-categories',
-			label: $t('page.inventory.product-types.sub-nav.sub-categories')
+			label: $t('entity.sub-category.plural.capitalize')
 		}
 	];
 </script>
