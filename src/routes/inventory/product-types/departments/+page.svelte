@@ -11,11 +11,11 @@
 	import NewDepartmentModal, {
 		NEW_DEPARTMENT_MODAL_ID
 	} from './components/NewDepartmentModal.svelte';
-	import { formState } from './store';
+	import { newDepartmentFormState } from './store';
 
 	export let data;
 	const { departmentsJson: initial, newDepartmentForm } = data;
-	formState.set(newDepartmentForm);
+	newDepartmentFormState.set(newDepartmentForm);
 
 	let departments = initial.data;
 	let hasMore = initial.meta.hasMore;

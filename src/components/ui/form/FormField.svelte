@@ -30,7 +30,7 @@
 
 <!-- Could move this to a different component is needed. -->
 {#if $errors}
-	<span class={cn('text-sm font-medium text-destructive')}>
+	<span class={cn('block text-sm font-medium text-destructive')}>
 		{$errors}
 	</span>
 {/if}

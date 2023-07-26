@@ -1,31 +1,23 @@
 {
 	"error": {
-		"internal-server-error": "Error interno en el servidor",
 		"already-exist": "ya existe",
+		"foreign-key-constrain": "no puedes borrar este item por que hay otros que dependen de el",
+		"internal-server-error": "error interno en el servidor",
 		"not-found": "no encontrado",
 		"pagination": {
 			"invalid-after-cursor": "after cursor invalido",
 			"invalid-before-cursor": "before cursor invalido",
-			"range-pagination": "Paginación con rango no esta suportado",
+			"range-pagination": "paginación con rango no esta suportado",
 			"size": "size debe ser un entero; obtuvo"
-		}
-	},
-	"route": {
-		"products": {
-			"departments": {
-				"get": {
-					"error": {}
-				}
-			}
 		}
 	},
 	"tables": {
 		"department": {
-			"name": "departamento",
 			"columns": {
-				"name": "nombre",
-				"color": "color"
-			}
+				"color": "color",
+				"name": "nombre"
+			},
+			"name": "departamento"
 		}
 	}
 }

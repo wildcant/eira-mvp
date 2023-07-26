@@ -9,25 +9,33 @@
 	import FormField from '$components/ui/form/FormField.svelte';
 	import FormInput from '$components/ui/form/FormInput.svelte';
 	import FormLabel from '$components/ui/form/FormLabel.svelte';
+	import { openToast } from '$components/ui/toast/ToastManager.svelte';
 	import { t } from '$lib/i18n';
 	import { departmentSchema } from '$lib/schemas/department';
 	import { onDestroy } from 'svelte';
 	import { superForm } from 'sveltekit-superforms/client';
-	import { formState } from '../store';
+	import { newDepartmentFormState } from '../store';
 
-	const form = superForm($formState, { validators: departmentSchema });
+	const form = superForm($newDepartmentFormState, { validators: departmentSchema });
 	const { errors } = form;
+
+	$: if ($errors._errors?.length) {
+		openToast({
+			data: { variant: 'destructive', title: 'Error', description: $errors._errors[0] }
+		});
+	}
+
 	onDestroy(() => errors.clear());
 </script>
 
-<Form {form} method="post" action="?/update">
+<Form {form} method="post" action="?/create">
 	<FormField name="name">
 		<FormLabel>
 			{$t('page.inventory.product-types.departments.modal.create.input.name.label')}
 		</FormLabel>
 		<FormInput type="text" />
 	</FormField>
-	<FormField name="name">
+	<FormField name="color">
 		<FormLabel>
 			{$t('page.inventory.product-types.departments.modal.create.input.color.label')}
 		</FormLabel>

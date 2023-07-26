@@ -22,7 +22,7 @@
 	setToastContext({ content, title, description, close });
 </script>
 
-<div class="fixed bottom-0 right-0 z-50 m-4 flex flex-col items-end gap-2">
+<div class="fixed bottom-0 right-0 z-[60] m-4 flex flex-col items-end gap-2">
 	{#each $toasts as toast (toast.id)}
 		<div
 			animate:flip={{ duration: 500 }}

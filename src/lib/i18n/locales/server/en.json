@@ -1,9 +1,9 @@
 {
-	"welcome": "hello",
 	"error": {
-		"internal-server-error": "Internal server error",
 		"already-exist": "already exists",
-		"not-found": "Not found",
+		"foreign-key-constrain": "you can't delete this item because others depend on it",
+		"internal-server-error": "Internal server error",
+		"not-found": "not found",
 		"pagination": {
 			"invalid-after-cursor": "invalid after cursor",
 			"invalid-before-cursor": "invalid before cursor",
@@ -11,22 +11,13 @@
 			"size": "size must be a positive integer; got"
 		}
 	},
-	"route": {
-		"products": {
-			"departments": {
-				"get": {
-					"error": {}
-				}
-			}
-		}
-	},
 	"tables": {
 		"department": {
-			"name": "department",
 			"columns": {
-				"name": "name",
-				"color": "color"
-			}
+				"color": "color",
+				"name": "name"
+			},
+			"name": "department"
 		}
 	}
 }

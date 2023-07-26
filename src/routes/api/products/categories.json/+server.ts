@@ -1,21 +1,20 @@
-import { db } from '$lib/database';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
-import type { DatabaseTypes } from '$lib/database/types';
-import { departmentSchema } from '$lib/schemas/department.js';
-import type { PaginatedApiResponse } from '$lib/types';
+import { db } from '$lib/database/index.js';
+import type { DatabaseTypes } from '$lib/database/types.js';
+import type { PaginatedApiResponse } from '$lib/types.js';
 import { json } from '@sveltejs/kit';
 
-type GetResponse = PaginatedApiResponse<DatabaseTypes['Department']>;
+type GetResponse = PaginatedApiResponse<DatabaseTypes['Category']>;
 export const GET = async ({ url }) => {
 	const search = url.searchParams.get('search');
 
-	let query = db.selectFrom('Department').selectAll();
-	if (search) query = query.where('Department.name', 'like', `%${search}%`);
+	let query = db.selectFrom('Category').selectAll();
+	if (search) query = query.where('Category.name', 'like', `%${search}%`);
 
 	const { after, before, size } = extractPaginationParams(url);
 	const [[{ count }], paginated] = await Promise.all([
 		db
-			.selectFrom('Department')
+			.selectFrom('Category')
 			.select((eb) => eb.fn.countAll().as('count'))
 			.execute(),
 		paginate(query, {
@@ -38,10 +37,4 @@ export const GET = async ({ url }) => {
 	} satisfies GetResponse;
 
 	return json(response);
-};
-
-export const POST = async ({ request }) => {
-	const data = departmentSchema.parse(await request.json());
-	const result = await db.insertInto('Department').values(data).executeTakeFirst();
-	return json({ succeed: result.insertId && result.insertId > 0 });
 };

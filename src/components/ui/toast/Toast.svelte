@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
 	import type { Toast } from '@melt-ui/svelte';
-	import { AlertCircle } from 'lucide-svelte';
+	import { AlertCircle, X } from 'lucide-svelte';
 	import { toastVariants } from '.';
+	import { buttonVariants } from '../button';
 	import { getToastContext } from './ToastManager.svelte';
 	import type { ToastProps } from './types';
 
@@ -11,7 +13,7 @@
 
 	export let toast: Toast<ToastProps>;
 	const { id, data } = toast;
-	const { content, title, description /*, close */ } = getToastContext();
+	const { content, title, description, close } = getToastContext();
 </script>
 
 <div
@@ -28,14 +30,15 @@
 	<div melt={$description(id)} class={cn('text-sm [&_p]:leading-relaxed')} {...$$restProps}>
 		{data.description}
 	</div>
-	<!-- 
-		<button
-			melt={$close(id)}
-			class="inline-flex h-[35px] items-center justify-center rounded-md
-          bg-white px-4 font-medium leading-none text-magnum-900 hover:opacity-75"
-		>
-			Dismiss
-		</button>
-		<button on:click={data.action}> trigger action </button>
-	 -->
+	<button
+		melt={$close(id)}
+		class={cn(
+			buttonVariants({ variant: 'ghost', size: 'icon' }),
+			'absolute right-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'
+		)}
+	>
+		<X class="h-4 w-4" />
+		<span class="sr-only">{$t('component.modal.close.sr-only')}</span>
+	</button>
+	<!-- <button on:click={data.action}> trigger action </button> -->
 </div>

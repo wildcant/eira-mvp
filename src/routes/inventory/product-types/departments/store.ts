@@ -7,4 +7,4 @@ export const editing = writable<
 	{ state: false } | { state: true; department: DatabaseTypes['Department']; loading?: boolean }
 >({ state: false });
 
-export const formState = writable<SuperValidated<DepartmentZodSchema>>();
+export const newDepartmentFormState = writable<SuperValidated<DepartmentZodSchema>>();

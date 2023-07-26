@@ -34,8 +34,10 @@
 			openToast({
 				data: {
 					variant: 'default',
-					title: 'Action completed',
-					description: 'Department was deleted'
+					title: $t('page.inventory.product-types.departments.table.actions.delete.toast.title'),
+					description: $t(
+						'page.inventory.product-types.departments.table.actions.delete.toast.description'
+					)
 				}
 			});
 		} catch (err) {

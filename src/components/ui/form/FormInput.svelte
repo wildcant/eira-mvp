@@ -26,6 +26,8 @@
 </script>
 
 <Input
+	id={name}
+	{name}
 	type="text"
 	bind:value={$value}
 	disabled={disabled || $submitting}

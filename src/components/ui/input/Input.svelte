@@ -34,5 +34,6 @@
 	on:input
 	{disabled}
 	aria-disabled={disabled}
+	autocomplete="off"
 	{...$$restProps}
 />
