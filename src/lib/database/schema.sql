@@ -18,18 +18,6 @@ DEPARTMENT FOR EACH ROW BEGIN
 	WHERE id = NEW.id;
 END; 
 
-/*
- -- Examples
- 
- INSERT INTO
- Department (name, color)
- VALUES (
- 'Salud y medicamentos',
- '#FFF000'
- );
- UPDATE Department SET name = 'Salud y fitness' WHERE id = 2;
- */
-
 DROP TABLE IF EXISTS "Category";
 
 CREATE TABLE

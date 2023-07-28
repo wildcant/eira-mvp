@@ -1,11 +1,12 @@
 import type { WithT } from '$lib/i18n/api';
+import { ResponseError } from '@libsql/hrana-client';
 import { error } from '@sveltejs/kit';
 import { SqliteError } from 'better-sqlite3';
 import { z } from 'zod';
 
 type HandleErrorArgs = WithT & { err: unknown };
 export function sqliteCustomErrorMap({ $t, err }: HandleErrorArgs) {
-	if (err instanceof SqliteError) {
+	if (err instanceof SqliteError || err instanceof ResponseError) {
 		if (err.code === SqliteErrorCode.SQLITE_CONSTRAINT_UNIQUE) {
 			const [table, column] = err.message
 				.split(':')[1]
@@ -20,7 +21,10 @@ export function sqliteCustomErrorMap({ $t, err }: HandleErrorArgs) {
 			);
 		}
 
-		if (err.code === SqliteErrorCode.SQLITE_CONSTRAINT_FOREIGNKEY) {
+		if (
+			err.code === SqliteErrorCode.SQLITE_CONSTRAINT_FOREIGNKEY ||
+			err.code === SqliteErrorCode.SQLITE_CONSTRAINT
+		) {
 			throw error(409, $t('error.foreign-key-constrain'));
 		}
 	}
