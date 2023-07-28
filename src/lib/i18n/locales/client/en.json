@@ -1,129 +1,135 @@
 {
-  "common": {
-    "phrase": {
-      "action-completed": "Action completed",
-      "confirm-delete": "Are you sure you want to delete",
-      "was-deleted": "was deleted"
-    },
-    "word": {
-      "cancel": {
-        "capitalize": "Cancel",
-        "lowercase": "cancel"
-      },
-      "close": {
-        "capitalize": "Close",
-        "lowercase": "close"
-      },
-      "color": {
-        "capitalize": "Color",
-        "lowercase": "color"
-      },
-      "confirm": {
-        "capitalize": "Confirm",
-        "lowercase": "confirm"
-      },
-      "delete": {
-        "capitalize": "Delete",
-        "lowercase": "delete"
-      },
-      "edit": {
-        "capitalize": "Edit",
-        "lowercase": "edit"
-      },
-      "name": {
-        "capitalize": "Name",
-        "lowercase": "name"
-      },
-      "new": {
-        "capitalize": "New",
-        "lowercase": "new"
-      },
-      "save": {
-        "capitalize": "Save",
-        "lowercase": "save"
-      }
-    }
-  },
-  "component": {
-    "header": {
-      "avatar": {
-        "sr-only": "Open Profile menu"
-      }
-    },
-    "language-selector": {
-      "group-label": "Language"
-    },
-    "light-switch": {
-      "label": "Appearance"
-    },
-    "navigation": {
-      "dashboard": "Dashboard",
-      "inventory": "Inventory",
-      "orders": "Orders",
-      "point-of-sale": "Point of sale",
-      "product-types": "Product Types",
-      "products": "Products"
-    },
-    "search": {
-      "placeholder": "Search"
-    },
-    "table": {
-      "pagination": {
-        "next": "Next",
-        "previous": "Previous"
-      }
-    }
-  },
-  "entity": {
-    "category": {
-      "plural": {
-        "capitalize": "Categories",
-        "lowercase": "categories"
-      },
-      "singular": {
-        "capitalize": "Category",
-        "lowercase": "category"
-      }
-    },
-    "department": {
-      "plural": {
-        "capitalize": "Departments",
-        "lowercase": "departments"
-      },
-      "singular": {
-        "capitalize": "Department",
-        "lowercase": "department"
-      }
-    },
-    "product": {
-      "plural": {
-        "capitalize": "Sub categories",
-        "lowercase": "sub categories"
-      },
-      "singular": {
-        "capitalize": "Product",
-        "lowercase": "product"
-      }
-    },
-    "sub-category": {
-      "plural": {
-        "capitalize": "Sub categories",
-        "lowercase": "sub categories"
-      },
-      "singular": {
-        "capitalize": "Sub Category",
-        "lowercase": "subcategory"
-      }
-    }
-  },
-  "page": {
-    "dashboard": {
-      "greeting": "Good afternoon"
-    },
-    "inventory": {
-      "product-types": {
-        "title": "Product types"
-      }
-    }
-  }
+	"common": {
+		"action-completed": "Accion completada",
+		"phrase": {
+			"action-completed": "Action completed",
+			"confirm-delete": "Are you sure you want to delete",
+			"was-deleted": "was deleted",
+			"is-required": "is required"
+		},
+		"word": {
+			"cancel": {
+				"capitalize": "Cancel",
+				"lowercase": "cancel"
+			},
+			"close": {
+				"capitalize": "Close",
+				"lowercase": "close"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirm",
+				"lowercase": "confirm"
+			},
+			"delete": {
+				"capitalize": "Delete",
+				"lowercase": "delete"
+			},
+			"edit": {
+				"capitalize": "Edit",
+				"lowercase": "edit"
+			},
+			"name": {
+				"capitalize": "Name",
+				"lowercase": "name"
+			},
+			"new": {
+				"capitalize": "New",
+				"lowercase": "new"
+			},
+			"save": {
+				"capitalize": "Save",
+				"lowercase": "save"
+			},
+			"updated": {
+				"capitalize": "Updated",
+				"lowercase": "updated"
+			}
+		}
+	},
+	"component": {
+		"header": {
+			"avatar": {
+				"sr-only": "Open Profile menu"
+			}
+		},
+		"language-selector": {
+			"group-label": "Language"
+		},
+		"light-switch": {
+			"label": "Appearance"
+		},
+		"navigation": {
+			"dashboard": "Dashboard",
+			"inventory": "Inventory",
+			"orders": "Orders",
+			"point-of-sale": "Point of sale",
+			"product-types": "Product Types",
+			"products": "Products"
+		},
+		"search": {
+			"placeholder": "Search"
+		},
+		"table": {
+			"pagination": {
+				"next": "Next",
+				"previous": "Previous"
+			}
+		}
+	},
+	"entity": {
+		"category": {
+			"plural": {
+				"capitalize": "Categories",
+				"lowercase": "categories"
+			},
+			"singular": {
+				"capitalize": "Category",
+				"lowercase": "category"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departments",
+				"lowercase": "departments"
+			},
+			"singular": {
+				"capitalize": "Department",
+				"lowercase": "department"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Sub categories",
+				"lowercase": "sub categories"
+			},
+			"singular": {
+				"capitalize": "Product",
+				"lowercase": "product"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categories",
+				"lowercase": "sub categories"
+			},
+			"singular": {
+				"capitalize": "Sub Category",
+				"lowercase": "subcategory"
+			}
+		}
+	},
+	"page": {
+		"dashboard": {
+			"greeting": "Good afternoon"
+		},
+		"inventory": {
+			"product-types": {
+				"title": "Product types"
+			}
+		}
+	}
 }

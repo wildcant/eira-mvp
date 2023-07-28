@@ -23,6 +23,7 @@
 	type AutocompleteOption = Option<T, TMeta>;
 	export let options: AutocompleteOption[];
 	export let selectedItem: AutocompleteOption | undefined = undefined;
+
 	// TODO: How do we handle two way binding for value here? 🤔
 	export let value: AutocompleteOption['value'] | undefined = undefined;
 
@@ -55,22 +56,23 @@
 		open
 	});
 
-	selectedItemParam.subscribe((newItem) => {
-		if (selectedItem?.value !== newItem?.value) {
-			selectedItem = newItem;
-			value = newItem?.value as AutocompleteOption['value'];
-		}
-	});
+	// TODO: Fix controlled state.
 
-	$: {
-		if (selectedItem?.value !== $selectedItemParam?.value) {
-			selectedItemParam.set(selectedItem);
-			inputValue.set(selectedItem?.label ?? '');
-		}
+	const startValue = $selectedItemParam?.value;
+	$: if (selectedItem?.value !== startValue) {
+		selectedItemParam.set(selectedItem);
+		inputValue.set(selectedItem?.label ?? '');
 	}
 
+	// selectedItemParam.subscribe((newItem) => {
+	// 	if (selectedItem?.value !== newItem?.value) {
+	// 		selectedItem = newItem;
+	// 		value = newItem?.value as AutocompleteOption['value'];
+	// 	}
+	// });
+
 	// Temporal fix to reset the autocomplete when the input is cleared
-	$: if ($inputValue === '' && $selectedItemParam?.value) selectedItemParam.set(undefined);
+	// $: if ($inputValue === '' && $selectedItemParam?.value) selectedItemParam.set(undefined);
 </script>
 
 <div class="relative">

@@ -3,11 +3,11 @@
 	import FloatingAction from '$components/ui/floating-action/FloatingAction.svelte';
 	import Separator from '$components/ui/separator/Separator.svelte';
 	import { openToast } from '$components/ui/toast/ToastManager.svelte';
-	import type { DatabaseTypes } from '$lib/database/types';
+	import type { Department } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 	import { editing } from '../store';
 
-	async function updateDepartment(department: DatabaseTypes['Department']) {
+	async function updateDepartment(department: Department) {
 		editing.update((currentEditing) => ({ ...currentEditing, loading: true }));
 		try {
 			const response = await fetch(`/api/products/departments.json/${department.id}`, {
@@ -20,7 +20,13 @@
 			if (!response.ok) throw new Error(json.message);
 
 			openToast({
-				data: { variant: 'default', title: 'All good', description: 'Department updated' }
+				data: {
+					variant: 'default',
+					title: $t('common.action-completed'),
+					description: `${$t('entity.department.singular.capitalize')} ${$t(
+						'common.word.updated.lowercase'
+					)}`
+				}
 			});
 		} catch (err) {
 			const errorMessage = err instanceof Error ? err.message : '';

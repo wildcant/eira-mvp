@@ -2,9 +2,8 @@
 	import { openCustomModal } from '$components/shared/modal/ModalsManager.svelte';
 	import Search from '$components/shared/search/Search.svelte';
 	import Button from '$components/ui/button/Button.svelte';
-	import type { DatabaseTypes } from '$lib/database/types';
+	import type { GetDepartmentsResponse } from '$lib/api/types';
 	import { t } from '$lib/i18n';
-	import type { PaginatedApiResponse } from '$lib/types';
 	import debounce from 'lodash/debounce';
 	import { Plus } from 'lucide-svelte';
 	import DepartmentsTable from './components/DepartmentsTable.svelte';
@@ -32,7 +31,7 @@
 		if (loading) return;
 		loading = true;
 		const response = await fetch(`/api/products/departments.json?search=${search}`);
-		const result = (await response.json()) as PaginatedApiResponse<DatabaseTypes['Department']>;
+		const result = (await response.json()) as GetDepartmentsResponse;
 		departments = result.data;
 		hasMore = result.meta.hasMore;
 		after = result.meta.afterCursor;
@@ -49,7 +48,7 @@
 		if (loading || !hasMore) return;
 		loading = true;
 		const response = await fetch(`/api/products/departments.json?after=${after}&size=6`);
-		const result = (await response.json()) as PaginatedApiResponse<DatabaseTypes['Department']>;
+		const result = (await response.json()) as GetDepartmentsResponse;
 		departments = departments.concat(result.data);
 		hasMore = result.meta.hasMore;
 		after = result.meta.afterCursor;

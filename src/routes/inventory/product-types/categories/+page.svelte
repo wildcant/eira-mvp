@@ -2,9 +2,8 @@
 	import { openCustomModal } from '$components/shared/modal/ModalsManager.svelte';
 	import Search from '$components/shared/search/Search.svelte';
 	import Button from '$components/ui/button/Button.svelte';
-	import type { DatabaseTypes } from '$lib/database/types';
+	import type { GetCategoriesResponse } from '$lib/api/types';
 	import { t } from '$lib/i18n';
-	import type { PaginatedApiResponse } from '$lib/types';
 	import debounce from 'lodash/debounce';
 	import { Plus } from 'lucide-svelte';
 	import CategoriesTable from './components/CategoriesTable.svelte';
@@ -12,8 +11,8 @@
 	import { newCategoryFormState } from './store';
 
 	export let data;
-	const { categoriesJson: initial, newCategoryForm, departments } = data;
-	newCategoryFormState.set({ form: newCategoryForm, departments });
+	const { categoriesJson: initial, newCategoryForm, lazy } = data;
+	newCategoryFormState.set({ form: newCategoryForm });
 
 	let categories = initial.data;
 	let hasMore = initial.meta.hasMore;
@@ -29,8 +28,11 @@
 	async function searchCategories(search: string) {
 		if (loading) return;
 		loading = true;
-		const response = await fetch(`/api/products/categories.json?search=${search}`);
-		const result = (await response.json()) as PaginatedApiResponse<DatabaseTypes['Category']>;
+		const response = await fetch(
+			`/api/products/categories.json?include=departments&search=${search}`
+		);
+		const result = (await response.json()) as GetCategoriesResponse;
+
 		categories = result.data;
 		hasMore = result.meta.hasMore;
 		after = result.meta.afterCursor;
@@ -46,8 +48,10 @@
 	async function loadMore() {
 		if (loading || !hasMore) return;
 		loading = true;
-		const response = await fetch(`/api/products/categories.json?after=${after}&size=6`);
-		const result = (await response.json()) as PaginatedApiResponse<DatabaseTypes['Category']>;
+		const response = await fetch(
+			`/api/products/categories.json?include=departments&size=6&after=${after}`
+		);
+		const result = (await response.json()) as GetCategoriesResponse;
 		categories = categories.concat(result.data);
 		hasMore = result.meta.hasMore;
 		after = result.meta.afterCursor;
@@ -80,4 +84,4 @@
 
 <Search on:input={handleSearchChanged} on:reset={reset} />
 
-<CategoriesTable bind:categories on:more={loadMore} />
+<CategoriesTable bind:categories departmentsPromise={lazy.departments} on:more={loadMore} />

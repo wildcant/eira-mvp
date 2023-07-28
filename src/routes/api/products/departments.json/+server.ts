@@ -1,11 +1,9 @@
+import type { GetDepartmentsResponse } from '$lib/api/types.js';
 import { db } from '$lib/database';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
-import type { DatabaseTypes } from '$lib/database/types';
 import { departmentSchema } from '$lib/schemas/department.js';
-import type { PaginatedApiResponse } from '$lib/types';
 import { json } from '@sveltejs/kit';
 
-type GetResponse = PaginatedApiResponse<DatabaseTypes['Department']>;
 export const GET = async ({ url }) => {
 	const search = url.searchParams.get('search');
 
@@ -35,7 +33,7 @@ export const GET = async ({ url }) => {
 			hasMore: !!paginated.hasNextPage,
 			total: parseInt(count.toString(), 10)
 		}
-	} satisfies GetResponse;
+	} satisfies GetDepartmentsResponse;
 
 	return json(response);
 };

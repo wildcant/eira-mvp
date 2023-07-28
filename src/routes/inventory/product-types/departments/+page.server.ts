@@ -1,6 +1,5 @@
-import type { DatabaseTypes } from '$lib/database/types';
+import type { GetDepartmentsResponse } from '$lib/api/types.js';
 import { departmentSchema } from '$lib/schemas/department';
-import type { PaginatedApiResponse } from '$lib/types';
 import { error, fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
@@ -11,7 +10,7 @@ export const load = async ({ fetch }) => {
 	if (!response.ok) {
 		throw error(response.status, apiResponse as { message: string });
 	}
-	const departmentsJson = apiResponse as PaginatedApiResponse<DatabaseTypes['Department']>;
+	const departmentsJson = apiResponse as GetDepartmentsResponse;
 
 	const newDepartmentForm = await superValidate(departmentSchema);
 	return { departmentsJson, newDepartmentForm };

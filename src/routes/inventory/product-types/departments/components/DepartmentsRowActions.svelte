@@ -5,13 +5,13 @@
 	import PopoverContent from '$components/ui/popover/PopoverContent.svelte';
 	import PopoverTrigger from '$components/ui/popover/PopoverTrigger.svelte';
 	import { openToast } from '$components/ui/toast/ToastManager.svelte';
-	import type { DatabaseTypes } from '$lib/database/types';
+	import type { Department } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 	import { MoreVertical } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { editing } from '../store';
 
-	export let department: DatabaseTypes['Department'];
+	export let department: Department;
 
 	const dispatch = createEventDispatcher();
 

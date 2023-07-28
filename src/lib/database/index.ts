@@ -1,7 +1,7 @@
 // import { NODE_ENV } from '$env/static/private';
 // import { LibsqlDialect } from '@libsql/kysely-libsql';
 import SQLite from 'better-sqlite3';
-import { Kysely, SqliteDialect } from 'kysely';
+import { Kysely, ParseJSONResultsPlugin, SqliteDialect } from 'kysely';
 import type { DB } from 'kysely-codegen';
 import path from 'path';
 
@@ -20,7 +20,8 @@ if (!singleton) {
 				database: new SQLite(path.resolve('./src/lib/database/local.db'), {
 					fileMustExist: true
 				})
-			})
+			}),
+			plugins: [new ParseJSONResultsPlugin()]
 		});
 }
 

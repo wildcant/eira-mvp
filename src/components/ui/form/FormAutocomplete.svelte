@@ -23,7 +23,7 @@
 	const { submitting } = form;
 </script>
 
-<!-- TODO: Fix issue clicking on option doesn't select and closes dialog. -->
+<!-- TODO: Fix is coming on melt stable release.  (Fix issue clicking on option doesn't select and closes dialog.) -->
 <Autocomplete {options} bind:value={$value}>
 	<div class="cursor-pointer">
 		<AutocompleteInput {name} class={cn({ 'border-red-500': !!$errors })} disabled={$submitting} />

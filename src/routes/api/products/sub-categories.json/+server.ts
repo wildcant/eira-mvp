@@ -1,30 +1,29 @@
-import type { GetCategoriesResponse } from '$lib/api/types.js';
+import type { GetSubCategoriesResponse } from '$lib/api/types.js';
 import { join } from '$lib/database/helpers/joins.js';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
 import { validateRelationship } from '$lib/database/helpers/validations.js';
 import { db } from '$lib/database/index.js';
-import { generateCategorySchema } from '$lib/schemas/category.js';
 import { json } from '@sveltejs/kit';
 
 export const GET = async ({ url, locals: { $t } }) => {
-	let query = db.selectFrom('Category').selectAll();
+	let query = db.selectFrom('SubCategory').selectAll();
 
 	const search = url.searchParams.get('search');
-	if (search) query = query.where('Category.name', 'like', `%${search}%`);
+	if (search) query = query.where('SubCategory.name', 'like', `%${search}%`);
 
 	const include = url.searchParams.get('include')?.split(',');
-	const relations = validateRelationship({ $t, allowedRelationships: ['departments'], include });
+	const relations = validateRelationship({ $t, allowedRelationships: ['categories'], include });
 	if (relations?.length) {
 		relations.forEach((relation) => {
-			if (relation === 'departments')
-				query = query.select((eb) => [join.Category.with.Department(eb)]);
+			if (relation === 'categories')
+				query = query.select((eb) => [join.SubCategory.with.Category(eb)]);
 		});
 	}
 
 	const { after, before, size } = extractPaginationParams(url);
 	const [[{ count }], paginated] = await Promise.all([
 		db
-			.selectFrom('Category')
+			.selectFrom('SubCategory')
 			.select((eb) => eb.fn.countAll().as('count'))
 			.execute(),
 
@@ -45,13 +44,7 @@ export const GET = async ({ url, locals: { $t } }) => {
 			hasMore: !!paginated.hasNextPage,
 			total: parseInt(count.toString(), 10)
 		}
-	} satisfies GetCategoriesResponse;
+	} satisfies GetSubCategoriesResponse;
 
 	return json(response);
-};
-
-export const POST = async ({ request, locals: { $t } }) => {
-	const data = generateCategorySchema({ $t }).parse(await request.json());
-	const result = await db.insertInto('Category').values(data).executeTakeFirst();
-	return json({ succeed: result.insertId && result.insertId > 0 });
 };

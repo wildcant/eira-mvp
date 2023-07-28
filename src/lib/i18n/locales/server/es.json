@@ -3,7 +3,8 @@
 		"already-exist": "ya existe",
 		"foreign-key-constrain": "no puedes borrar este item por que hay otros que dependen de el",
 		"internal-server-error": "error interno en el servidor",
-		"not-found": "no encontrado",
+		"invalid-include-param": "parámetro include invalido: {{include}}; las relaciones soportadas son: {{allowed}}",
+		"not-found": "recurso no encontrado",
 		"pagination": {
 			"invalid-after-cursor": "after cursor invalido",
 			"invalid-before-cursor": "before cursor invalido",

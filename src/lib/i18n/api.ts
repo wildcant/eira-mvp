@@ -19,8 +19,8 @@ i18next.use(Backend).init(
 	}
 );
 
-export type WithT = { $t: (key: string) => string };
+export type WithT = { $t: (key: string, params?: Record<string, string>) => string };
 export const i18n = (cookies: Cookies): Promise<WithT> =>
 	i18next
 		.changeLanguage(cookies.get('lang') || 'en')
-		.then((t) => ({ $t: (key: string) => t(key) }));
+		.then((t) => ({ $t: (key: string, params?: Record<string, string>) => t(key, params) }));

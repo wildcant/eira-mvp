@@ -3,15 +3,15 @@
 	import Label from '$components/ui/label/Label.svelte';
 	import TableCell from '$components/ui/table/TableCell.svelte';
 	import TableRow from '$components/ui/table/TableRow.svelte';
-	import type { DatabaseTypes } from '$lib/database/types';
+	import type { Department } from '$lib/api/types';
 	import { editing } from '../store';
 	import DepartmentsRowActions from './DepartmentsRowActions.svelte';
 
-	export let department: DatabaseTypes['Department'];
+	export let department: Department;
 </script>
 
 <TableRow>
-	<TableCell>
+	<TableCell class="w-8/12">
 		{#if $editing.state && $editing.department.id === department.id}
 			<Label>
 				<Input
@@ -26,7 +26,7 @@
 		{/if}
 	</TableCell>
 
-	<TableCell>
+	<TableCell class="w-3/12">
 		{#if $editing.state && $editing.department.id === department.id}
 			<Label>
 				<Input
@@ -42,7 +42,7 @@
 		{/if}
 	</TableCell>
 
-	<TableCell>
+	<TableCell class="w-1/12">
 		<DepartmentsRowActions {department} on:deleted />
 	</TableCell>
 </TableRow>

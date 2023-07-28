@@ -62,7 +62,7 @@
 		>{$t('component.light-switch.label')}</span
 	>
 	<span
-		class="inline-block h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 transition-all group-disabled:cursor-not-allowed group-disabled:opacity-50 border-muted group-hover:border-border"
+		class="inline-block h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 transition-all group-disabled:cursor-not-allowed group-disabled:opacity-50 border-muted group-hover:border-border"
 	>
 		<span
 			class="pointer-events-none h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-all translate-x-0 group-aria-checked:translate-x-4 flex justify-center items-center group-aria-checked:bg-black"

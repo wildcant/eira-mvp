@@ -19,6 +19,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 export const handleError: HandleServerError = async ({ error: err, event }) => {
 	console.error(err);
 	const { $t } = event.locals;
+	if (err instanceof Error) {
+		if (err.message.includes('Not found')) {
+			throw error(404, { message: $t('error.not-found') });
+		}
+	}
+
 	zodCustomErrorMap(err);
 	sqliteCustomErrorMap({ $t, err });
 	throw error(500, { message: $t('error.internal-server-error') });
