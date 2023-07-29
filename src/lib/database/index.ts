@@ -18,7 +18,7 @@ if (!singleton) {
 			  })
 			: new Kysely<DB>({
 					dialect: new SqliteDialect({
-						database: new SQLite(path.resolve('./src/lib/database/local.db'), {
+						database: new SQLite(path.resolve(DATABASE_URL), {
 							fileMustExist: true
 						})
 					}),
