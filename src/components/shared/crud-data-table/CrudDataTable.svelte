@@ -1,6 +1,4 @@
 <script lang="ts" generics="T extends Item = Item">
-	import { invalidateAll } from '$app/navigation';
-
 	import Scroller from '$components/shared/scroller/Scroller.svelte';
 	import Button from '$components/ui/button/Button.svelte';
 	import Table from '$components/ui/table/Table.svelte';
@@ -13,7 +11,7 @@
 	import { t } from '$lib/i18n';
 	import type { PaginatedApiResponse } from '$lib/types';
 	import { cn } from '$lib/utils';
-	import { debounce } from 'lodash';
+	import debounce from 'lodash/debounce';
 	import isEqual from 'lodash/isEqual';
 	import { Plus } from 'lucide-svelte';
 	import type { SvelteComponent } from 'svelte';

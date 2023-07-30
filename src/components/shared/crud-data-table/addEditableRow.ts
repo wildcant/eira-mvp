@@ -1,4 +1,4 @@
-import { isUndefined } from 'lodash';
+import isUndefined from 'lodash/isUndefined';
 import type { BodyRow } from 'svelte-headless-table';
 import type { NewTablePropSet, TablePlugin } from 'svelte-headless-table/lib/types/TablePlugin';
 import type { Readable, Writable } from 'svelte/store';
