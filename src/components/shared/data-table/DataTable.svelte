@@ -19,10 +19,7 @@
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = viewModel;
 	const { sortKeys } = pluginStates.sort;
 	const { hasNextPage, hasPreviousPage, pageIndex } = pluginStates.page;
-
 	const { selectedDataIds, allRowsSelected } = pluginStates.select;
-	// TODO: Finish row selection implementation.
-	$: console.log($selectedDataIds);
 </script>
 
 <div class={cn('relative', className)}>

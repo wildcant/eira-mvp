@@ -52,7 +52,6 @@
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"i18next": "^23.2.11",
-		"i18next-fs-backend": "^2.1.5",
 		"i18next-resources-to-backend": "^1.1.4",
 		"kysely": "^0.26.1",
 		"lodash": "^4.17.21",
