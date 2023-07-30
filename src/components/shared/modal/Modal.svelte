@@ -10,6 +10,7 @@
 	import { X } from 'lucide-svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type { ModalProps } from './types';
+	import { Render } from 'svelte-headless-table';
 
 	export let modal: ModalProps;
 
@@ -31,12 +32,14 @@
 			<DialogTitle>{modal.title}</DialogTitle>
 		</DialogHeader>
 		{#if modal.type === 'custom'}
-			<svelte:component this={modal.children} />
+			<!-- <svelte:component this={modal.children} /> -->
+			<Render of={modal.children} />
 		{/if}
 
 		{#if modal.type === 'confirmation'}
 			{#if modal.children}
-				<svelte:component this={modal.children} />
+				<!-- <svelte:component this={modal.children} /> -->
+				<Render of={modal.children} />
 			{/if}
 			<DialogFooter class="mt-4">
 				<Button

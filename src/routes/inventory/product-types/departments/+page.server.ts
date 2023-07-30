@@ -1,24 +1,28 @@
+import type { Endpoint } from '$components/shared/crud-data-table/types';
 import type { GetDepartmentsResponse } from '$lib/api/types.js';
-import { departmentSchema } from '$lib/schemas/department';
 import { error, fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
-export const load = async ({ fetch }) => {
-	const response = await fetch(`/api/products/departments.json`);
+export const load = async ({ fetch, locals: { schemas } }) => {
+	const endpoint = {
+		url: '/api/products/departments.json'
+	} satisfies Endpoint;
+
+	const response = await fetch(endpoint.url);
 	const apiResponse = await response.json();
 
 	if (!response.ok) {
 		throw error(response.status, apiResponse as { message: string });
 	}
-	const departmentsJson = apiResponse as GetDepartmentsResponse;
+	const initialData = apiResponse as GetDepartmentsResponse;
 
-	const newDepartmentForm = await superValidate(departmentSchema);
-	return { departmentsJson, newDepartmentForm };
+	const superValidateForm = await superValidate(schemas.department);
+	return { endpoint, initialData, superValidateForm };
 };
 
 export const actions = {
-	create: async ({ request, fetch }) => {
-		const form = await superValidate(request, departmentSchema);
+	create: async ({ request, fetch, locals: { schemas } }) => {
+		const form = await superValidate(request, schemas.department);
 
 		if (!form.valid) return fail(400, { form });
 
@@ -30,5 +34,7 @@ export const actions = {
 		const json = await response.json();
 
 		if (!response.ok) return setError(form, json.message);
+
+		return { form };
 	}
 };

@@ -1,7 +1,6 @@
 import type { GetDepartmentsResponse } from '$lib/api/types.js';
 import { db } from '$lib/database';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
-import { departmentSchema } from '$lib/schemas/department.js';
 import { json } from '@sveltejs/kit';
 
 export const GET = async ({ url }) => {
@@ -38,8 +37,8 @@ export const GET = async ({ url }) => {
 	return json(response);
 };
 
-export const POST = async ({ request }) => {
-	const data = departmentSchema.parse(await request.json());
+export const POST = async ({ request, locals: { schemas } }) => {
+	const data = schemas.department.parse(await request.json());
 	const result = await db.insertInto('Department').values(data).executeTakeFirst();
 	return json({ succeed: result.insertId && result.insertId > 0 });
 };

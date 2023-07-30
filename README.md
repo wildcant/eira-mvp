@@ -29,3 +29,4 @@ Eeira is a platform that aims to solve this problem by providing a single platfo
 ### References
 
 - [Good read about cursor pagination](https://brunoscheufler.com/blog/2022-01-01-paginating-large-ordered-datasets-with-cursor-based-pagination)
+- [https://www.fda.gov/media/84201/download](Structured Product Labeling)

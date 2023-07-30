@@ -1,4 +1,6 @@
+import { t } from '$lib/i18n';
 import type { WithT } from '$lib/i18n/api';
+import { derived } from 'svelte/store';
 import { z } from 'zod';
 
 export const generateCategorySchema = ({ $t }: WithT) =>
@@ -16,6 +18,8 @@ export const generateCategorySchema = ({ $t }: WithT) =>
 				message: `${$t('entity.department.singular.capitalize')} ${$t('common.phrase.is-required')}`
 			})
 	});
+
+export const categorySchema = derived(t, ($t) => generateCategorySchema({ $t }));
 
 export type CategoryZodSchema = ReturnType<typeof generateCategorySchema>;
 export type CategorySchema = z.infer<CategoryZodSchema>;

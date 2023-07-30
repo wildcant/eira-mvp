@@ -4,7 +4,6 @@
 		"svelte-i18n",
 		"i18next",
 		"vitest",
-		"demos",
 		"tmp"
 	],
 	"i18n-ally.localesPaths": ["src/lib/i18n/locales/client"],

@@ -3,7 +3,6 @@ import { join } from '$lib/database/helpers/joins.js';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
 import { validateRelationship } from '$lib/database/helpers/validations.js';
 import { db } from '$lib/database/index.js';
-import { generateCategorySchema } from '$lib/schemas/category.js';
 import { json } from '@sveltejs/kit';
 
 export const GET = async ({ url, locals: { $t } }) => {
@@ -50,8 +49,8 @@ export const GET = async ({ url, locals: { $t } }) => {
 	return json(response);
 };
 
-export const POST = async ({ request, locals: { $t } }) => {
-	const data = generateCategorySchema({ $t }).parse(await request.json());
+export const POST = async ({ request, locals: { schemas } }) => {
+	const data = schemas.category.parse(await request.json());
 	const result = await db.insertInto('Category').values(data).executeTakeFirst();
 	return json({ succeed: result.insertId && result.insertId > 0 });
 };

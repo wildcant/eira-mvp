@@ -1,4 +1,93 @@
 {
+	"common": {
+		"phrase": {
+			"was-deleted": "fue eliminada"
+		},
+		"word": {
+			"cancel": {
+				"capitalize": "Cancelar",
+				"lowercase": "cancelar"
+			},
+			"close": {
+				"capitalize": "Cerrar",
+				"lowercase": "cerrar"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirmar",
+				"lowercase": "confirmar"
+			},
+			"delete": {
+				"capitalize": "Borrar",
+				"lowercase": "borrar"
+			},
+			"edit": {
+				"capitalize": "Editar",
+				"lowercase": "editar"
+			},
+			"name": {
+				"capitalize": "Nombre",
+				"lowercase": "nombre"
+			},
+			"new": {
+				"capitalize": "Nuevo",
+				"lowercase": "nuevo"
+			},
+			"save": {
+				"capitalize": "Guardar",
+				"lowercase": "guardar"
+			},
+			"updated": {
+				"capitalize": "Actualizada",
+				"lowercase": "actualizada"
+			}
+		}
+	},
+	"entity": {
+		"category": {
+			"plural": {
+				"capitalize": "Categorías",
+				"lowercase": "categorías"
+			},
+			"singular": {
+				"capitalize": "Categoría",
+				"lowercase": "categoría"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departamentos",
+				"lowercase": "departamentos"
+			},
+			"singular": {
+				"capitalize": "Departamento",
+				"lowercase": "departamento"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Productos",
+				"lowercase": "productos"
+			},
+			"singular": {
+				"capitalize": "Producto",
+				"lowercase": "producto"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categorías",
+				"lowercase": "sub categorías"
+			},
+			"singular": {
+				"capitalize": "Sub categoría",
+				"lowercase": "sub categoría"
+			}
+		}
+	},
 	"error": {
 		"already-exist": "ya existe",
 		"foreign-key-constrain": "no puedes borrar este item por que hay otros que dependen de el",

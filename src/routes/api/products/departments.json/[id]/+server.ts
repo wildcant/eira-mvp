@@ -1,6 +1,5 @@
 import { db } from '$lib/database';
 import { exists } from '$lib/database/helpers/validations';
-import { departmentSchema } from '$lib/schemas/department';
 import { json } from '@sveltejs/kit';
 
 export const DELETE = async ({ params, locals: { $t } }) => {
@@ -12,12 +11,18 @@ export const DELETE = async ({ params, locals: { $t } }) => {
 	return json({ suceded: r.numDeletedRows > 0 });
 };
 
-export const PUT = async ({ params, request, locals: { $t } }) => {
+export const PUT = async ({ params, request, locals: { $t, schemas } }) => {
 	const id = parseInt(params.id, 10);
 	await exists({ table: 'Department', id, $t });
 
-	const body = departmentSchema.partial().parse(await request.json());
-	const [r] = await db.updateTable('Department').set(body).where('id', '=', id).execute();
+	const body = schemas.department.partial().parse(await request.json());
+
+	const { name, color } = body;
+	const [r] = await db
+		.updateTable('Department')
+		.set({ name, color })
+		.where('id', '=', id)
+		.execute();
 
 	return json({ suceded: r.numUpdatedRows > 0 });
 };

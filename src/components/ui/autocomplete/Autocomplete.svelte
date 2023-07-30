@@ -26,6 +26,7 @@
 
 	// TODO: How do we handle two way binding for value here? 🤔
 	export let value: AutocompleteOption['value'] | undefined = undefined;
+	console.log(value);
 
 	const {
 		filteredItems,
