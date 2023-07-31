@@ -14,12 +14,10 @@
 	$: isEditingCell = $editing && $editingRow?.id === row.id;
 </script>
 
-<div>
-	{#if isEditingCell && $updatedRow}
-		<Label>
-			<Input type="color" bind:value={$updatedRow.color} name={id.toString()} />
-		</Label>
-	{:else}
-		<div class="w-4 h-4 rounded-sm" style="background-color: {value};" />
-	{/if}
-</div>
+{#if isEditingCell && $updatedRow}
+	<Label>
+		<Input type="color" bind:value={$updatedRow.color} name={id.toString()} />
+	</Label>
+{:else}
+	<div class="w-4 h-4 rounded-sm" style="background-color: {value};" />
+{/if}

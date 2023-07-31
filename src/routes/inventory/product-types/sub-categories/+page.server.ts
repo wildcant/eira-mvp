@@ -11,8 +11,6 @@ export const load = async ({ fetch, locals: { schemas } }) => {
 
 	let initialData;
 	{
-		console.log(`${endpoint.url}?include=${endpoint.params.include}`);
-
 		const response = await fetch(`${endpoint.url}?include=${endpoint.params.include}`);
 		const apiResponse = await response.json();
 		if (!response.ok) {

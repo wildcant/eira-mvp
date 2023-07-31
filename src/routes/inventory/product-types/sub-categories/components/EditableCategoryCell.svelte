@@ -17,31 +17,29 @@
 	$: isEditingCell = $editing && $editingRow?.id === row.id;
 </script>
 
-<div>
-	{#if isEditingCell && $updatedRow}
-		{#await categoriesPromise}
-			<span>Loading categories..</span>
-		{:then categories}
-			{@const options = categories?.map((d) => ({
-				label: d.name,
-				value: d.id
-			}))}
-			{@const selectedItem = options.find((option) => option.value === $updatedRow?.categoryId)}
-			<!-- TODO: Update updatedRow on autocomplete change. -->
-			<Autocomplete {options} {selectedItem}>
-				<Label class="cursor-pointer">
-					<AutocompleteInput name="categoryId" disabled={$loading} />
-					<AutocompleteButton />
-				</Label>
+{#if isEditingCell && $updatedRow}
+	{#await categoriesPromise}
+		<span>Loading categories..</span>
+	{:then categories}
+		{@const options = categories?.map((d) => ({
+			label: d.name,
+			value: d.id
+		}))}
+		{@const selectedItem = options.find((option) => option.value === $updatedRow?.categoryId)}
+		<!-- TODO: Update updatedRow on autocomplete change. -->
+		<Autocomplete {options} {selectedItem}>
+			<Label class="cursor-pointer">
+				<AutocompleteInput name="categoryId" disabled={$loading} />
+				<AutocompleteButton />
+			</Label>
 
-				<AutocompleteOptions let:filteredOptions>
-					{#each filteredOptions as option, index (index)}
-						<AutocompleteOption {index} {option}>{option.label}</AutocompleteOption>
-					{/each}
-				</AutocompleteOptions>
-			</Autocomplete>
-		{/await}
-	{:else}
-		<span>{row.original.category?.name}</span>
-	{/if}
-</div>
+			<AutocompleteOptions let:filteredOptions>
+				{#each filteredOptions as option, index (index)}
+					<AutocompleteOption {index} {option}>{option.label}</AutocompleteOption>
+				{/each}
+			</AutocompleteOptions>
+		</Autocomplete>
+	{/await}
+{:else}
+	<span>{row.original.category?.name}</span>
+{/if}

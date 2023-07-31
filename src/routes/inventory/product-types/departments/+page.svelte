@@ -9,7 +9,7 @@
 	import NewDepartmentForm from './components/NewDepartmentForm.svelte';
 
 	export let data;
-	const { initialData, endpoint, superValidateForm } = data;
+	const { initialData, endpoint, form } = data;
 
 	const title = `
 		${$t('entity.product.singular.capitalize')}
@@ -33,7 +33,7 @@
 	];
 
 	const createForm = {
-		form: superValidateForm,
+		form,
 		validators: $departmentSchema,
 		component: createRender(NewDepartmentForm)
 	};

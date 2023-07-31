@@ -4,8 +4,9 @@
 		"phrase": {
 			"action-completed": "Action completed",
 			"confirm-delete": "Are you sure you want to delete",
+			"is-required": "is required",
 			"was-deleted": "was deleted",
-			"is-required": "is required"
+			"unit-of-measure": "Unite of measure"
 		},
 		"word": {
 			"cancel": {
@@ -35,6 +36,10 @@
 			"name": {
 				"capitalize": "Name",
 				"lowercase": "name"
+			},
+			"unit": {
+				"capitalize": "Unit",
+				"lowercase": "unit"
 			},
 			"new": {
 				"capitalize": "New",
@@ -81,6 +86,16 @@
 		}
 	},
 	"entity": {
+		"attribute": {
+			"plural": {
+				"capitalize": "Attributes",
+				"lowercase": "attributes"
+			},
+			"singular": {
+				"capitalize": "Attribute",
+				"lowercase": "attribute"
+			}
+		},
 		"category": {
 			"plural": {
 				"capitalize": "Categories",
@@ -103,8 +118,8 @@
 		},
 		"product": {
 			"plural": {
-				"capitalize": "Sub categories",
-				"lowercase": "sub categories"
+				"capitalize": "Products",
+				"lowercase": "products"
 			},
 			"singular": {
 				"capitalize": "Product",
@@ -120,6 +135,16 @@
 				"capitalize": "Sub Category",
 				"lowercase": "subcategory"
 			}
+		},
+		"variant": {
+			"plural": {
+				"capitalize": "Variants",
+				"lowercase": "variants"
+			},
+			"singular": {
+				"capitalize": "Variant",
+				"lowercase": "variant"
+			}
 		}
 	},
 	"page": {
@@ -129,6 +154,12 @@
 		"inventory": {
 			"product-types": {
 				"title": "Product types"
+			},
+			"products": {
+				"nav": {
+					"product-attributes": "Products attributes",
+					"product-variants": "Products variants"
+				}
 			}
 		}
 	}

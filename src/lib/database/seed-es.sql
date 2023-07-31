@@ -55,7 +55,7 @@ VALUES
 INSERT INTO
     SubCategory (name, categoryId)
 VALUES
-    ('Dolor general', 1),
+	('Dolor general', 1),
 	('Dolor fuerte', 1),
 	('Dolor abdominal y cólico', 1),
 	('Muscular y articular', 1),
@@ -247,3 +247,14 @@ VALUES
 	('Platos', 40),
 	('Vasos', 40),
 	('Navidad', 40);
+
+INSERT INTO 
+		ProductsAttribute (name, unitOfMeasure)
+VALUES
+	('masa', 'mg'),
+	('volumen', 'ml'),
+	('unidades', '#'),
+	('restricción de edad', ''),
+	('forma farmacéutica', ''),
+	('presentación', ''),
+	('sabor', '')
