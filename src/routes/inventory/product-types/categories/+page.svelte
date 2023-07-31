@@ -20,7 +20,7 @@
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-8/12' } },
 		{
 			header: $t('entity.department.singular.capitalize'),
-			accessor: 'department',
+			accessor: 'departmentId',
 			cell: ({ row }, { pluginStates: { editableRow } }) => {
 				if (!row.isData()) throw new Error(UNEXPECTED_ROW_TYPE);
 				return createRender(EditableDepartmentCell, {

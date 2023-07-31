@@ -48,3 +48,9 @@ export const GET = async ({ url, locals: { $t } }) => {
 
 	return json(response);
 };
+
+export const POST = async ({ request, locals: { schemas } }) => {
+	const data = schemas.subCategory.parse(await request.json());
+	const result = await db.insertInto('SubCategory').values(data).executeTakeFirst();
+	return json({ succeed: result.insertId && result.insertId > 0 });
+};

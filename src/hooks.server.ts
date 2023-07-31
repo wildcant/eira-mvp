@@ -3,6 +3,7 @@ import { locale } from '$lib/i18n';
 import { i18n } from '$lib/i18n/api';
 import { generateCategorySchema } from '$lib/schemas/category';
 import { generateDepartmentSchema } from '$lib/schemas/department';
+import { generateSubCategorySchema } from '$lib/schemas/sub-category';
 import { error, type Handle, type HandleServerError } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -16,7 +17,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.$t = $t;
 	event.locals.schemas = {
 		department: generateDepartmentSchema({ $t }),
-		category: generateCategorySchema({ $t })
+		category: generateCategorySchema({ $t }),
+		subCategory: generateSubCategorySchema({ $t })
 	};
 
 	return resolve(event);

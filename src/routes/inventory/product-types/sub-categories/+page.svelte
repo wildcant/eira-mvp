@@ -1,9 +1,43 @@
 <script lang="ts">
+	import CrudDataTable from '$components/shared/crud-data-table/CrudDataTable.svelte';
+	import {
+		UNEXPECTED_ROW_TYPE,
+		type CrudTableColumns
+	} from '$components/shared/crud-data-table/types';
+	import type { SubCategory } from '$lib/api/types';
 	import { t } from '$lib/i18n';
+	import { subCategorySchema } from '$lib/schemas/sub-category';
+	import { createRender } from 'svelte-headless-table';
+	import EditableCategoryCell from './components/EditableCategoryCell.svelte';
+	import NewSubCategoryForm from './components/NewSubCategoryForm.svelte';
 
 	export let data;
+	const { initialData, endpoint, lazy, form } = data;
 
-	const { subCategoriesJson: initial } = data;
+	const title = $t('entity.sub-category.plural.capitalize');
+
+	const columns: CrudTableColumns<SubCategory> = [
+		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-8/12' } },
+		{
+			header: $t('entity.category.singular.capitalize'),
+			accessor: 'categoryId',
+			cell: ({ row }, { pluginStates: { editableRow } }) => {
+				if (!row.isData()) throw new Error(UNEXPECTED_ROW_TYPE);
+				return createRender(EditableCategoryCell, {
+					row,
+					editableRow,
+					categoriesPromise: lazy.categories
+				});
+			},
+			meta: { class: 'w-3/12' }
+		}
+	];
+
+	const createForm = {
+		form,
+		validators: $subCategorySchema,
+		component: createRender(NewSubCategoryForm)
+	};
 </script>
 
-<h1>{initial.meta.total} {$t('entity.sub-category.plural.capitalize')}</h1>
+<CrudDataTable entity="sub-category" {title} {columns} {initialData} {endpoint} {createForm} />

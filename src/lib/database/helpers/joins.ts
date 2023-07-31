@@ -44,7 +44,7 @@ export const join = {
 							'Category.updatedAt'
 						])
 						.whereRef('SubCategory.categoryId', '=', 'Category.id')
-				).as('department');
+				).as('category');
 			}
 		}
 	}

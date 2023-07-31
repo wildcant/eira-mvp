@@ -112,6 +112,7 @@
 	let totalItems = initialData.meta.total;
 
 	function resetTable() {
+		$filterValue = '';
 		$data = initialData.data;
 		hasMore = initialData.meta.hasMore;
 		after = initialData.meta.afterCursor;

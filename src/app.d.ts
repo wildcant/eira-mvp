@@ -2,6 +2,7 @@
 
 import type { CategoryZodSchema } from '$lib/schemas/category';
 import type { DepartmentZodSchema } from '$lib/schemas/department';
+import type { SubCategoryZodSchema } from '$lib/schemas/sub-category';
 
 // for information about these interfaces
 declare global {
@@ -12,6 +13,7 @@ declare global {
 			schemas: {
 				department: DepartmentZodSchema;
 				category: CategoryZodSchema;
+				subCategory: SubCategoryZodSchema;
 			};
 		}
 		// interface PageData {}
