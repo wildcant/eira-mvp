@@ -5,8 +5,8 @@
 			"action-completed": "Action completed",
 			"confirm-delete": "Are you sure you want to delete",
 			"is-required": "is required",
-			"was-deleted": "was deleted",
-			"unit-of-measure": "Unite of measure"
+			"unit-of-measure": "Unite of measure",
+			"was-deleted": "was deleted"
 		},
 		"word": {
 			"cancel": {
@@ -25,6 +25,10 @@
 				"capitalize": "Confirm",
 				"lowercase": "confirm"
 			},
+			"add": {
+				"capitalize": "Add",
+				"lowercase": "add"
+			},
 			"delete": {
 				"capitalize": "Delete",
 				"lowercase": "delete"
@@ -37,10 +41,6 @@
 				"capitalize": "Name",
 				"lowercase": "name"
 			},
-			"unit": {
-				"capitalize": "Unit",
-				"lowercase": "unit"
-			},
 			"new": {
 				"capitalize": "New",
 				"lowercase": "new"
@@ -48,6 +48,10 @@
 			"save": {
 				"capitalize": "Save",
 				"lowercase": "save"
+			},
+			"unit": {
+				"capitalize": "Unit",
+				"lowercase": "unit"
 			},
 			"updated": {
 				"capitalize": "Updated",
@@ -159,6 +163,44 @@
 				"nav": {
 					"product-attributes": "Products attributes",
 					"product-variants": "Products variants"
+				},
+				"new": {
+					"basic-information": {
+						"field": {
+							"description": {
+								"label": "Description",
+								"placeholder": "Specify the characteristics of your product"
+							},
+							"name": {
+								"label": "Product name",
+								"placeholder": "Add a name to your product"
+							}
+						},
+						"subtitle": "Describe your product.",
+						"title": "Basic information"
+					},
+					"categorization": {
+						"title": "Categorization",
+						"subtitle": "Include additional information to complete your product record."
+					},
+					"image": {
+						"field": {
+							"image": {
+								"description": "Up to 30 MB and 7680 x 4320 pixels (JPEG, JPG, PNG)",
+								"placeholder": "Select or drag your files here"
+							}
+						},
+						"subtitle": "Upload an image of your product",
+						"title": "Default product image"
+					},
+					"attributes": {
+						"subtitle": "Define the attributes for your product variants.",
+						"title": "Attributes"
+					},
+					"variants": {
+						"subtitle": "Add your product variants.",
+						"title": "Variants"
+					}
 				}
 			}
 		}

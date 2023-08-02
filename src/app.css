@@ -82,6 +82,21 @@
 		@apply bg-background text-foreground;
 		font-feature-settings: 'rlig' 1, 'calt' 1;
 	}
+	h1 {
+		@apply scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl;
+	}
+	h2 {
+		@apply scroll-m-20 pb-2 text-xl font-semibold tracking-tight first:mt-0;
+	}
+	h3 {
+		@apply scroll-m-20 text-lg font-semibold tracking-tight;
+	}
+	h4 {
+		@apply scroll-m-20 text-base font-semibold tracking-tight;
+	}
+	p {
+		@apply leading-7;
+	}
 }
 
 /* width */

@@ -19,7 +19,7 @@
 	] satisfies Route[];
 </script>
 
-<h1 class="font-bold text-2xl">{$t('entity.product.plural.capitalize')}</h1>
+<h1>{$t('entity.product.plural.capitalize')}</h1>
 
 <SubNavigation {routes} />
 

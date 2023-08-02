@@ -14,6 +14,8 @@
 	import { formFieldProxy } from 'sveltekit-superforms/client';
 
 	export let name: FieldName;
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const { form } = getFormContext();
 	const fields = Object.keys(form.fields);
@@ -42,11 +44,13 @@
 	};
 </script>
 
-<slot {field} />
+<div class={className}>
+	<slot {field} />
 
-<!-- Could move this to a different component if needed. -->
-{#if $errors}
-	<span class={cn('block text-sm font-medium text-destructive')}>
-		{$errors}
-	</span>
-{/if}
+	<!-- Could move this to a different component if needed. -->
+	{#if $errors}
+		<span class={cn('block text-sm font-medium text-destructive')}>
+			{$errors}
+		</span>
+	{/if}
+</div>

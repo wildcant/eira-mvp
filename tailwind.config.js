@@ -1,6 +1,6 @@
-import plugin from 'tailwindcss/plugin';
 import typography from '@tailwindcss/typography';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -68,7 +68,6 @@ export default {
 		typography,
 		plugin(function ({ addVariant, matchUtilities, theme }) {
 			addVariant('hocus', ['&:hover', '&:focus']);
-			// Square utility
 			matchUtilities(
 				{
 					square: (value) => ({
@@ -78,6 +77,21 @@ export default {
 				},
 				{ values: theme('spacing') }
 			);
+
+			matchUtilities({
+				'grid-area': (value) => ({ 'grid-area': `${value}` })
+			});
 		})
 	]
 };
+
+/*
+// Default breakpoints
+screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
+*/

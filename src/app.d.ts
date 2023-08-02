@@ -2,6 +2,7 @@
 
 import type { CategoryZodSchema } from '$lib/schemas/category';
 import type { DepartmentZodSchema } from '$lib/schemas/department';
+import type { ProductZodSchema } from '$lib/schemas/product';
 import type { ProductsAttributeZodSchema } from '$lib/schemas/products-attribute';
 import type { SubCategoryZodSchema } from '$lib/schemas/sub-category';
 
@@ -16,6 +17,7 @@ declare global {
 				category: CategoryZodSchema;
 				subCategory: SubCategoryZodSchema;
 				productsAttribute: ProductsAttributeZodSchema;
+				product: ProductZodSchema;
 			};
 		}
 		// interface PageData {}

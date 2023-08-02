@@ -9,6 +9,10 @@
       "was-deleted": "fue eliminada"
     },
     "word": {
+      "add": {
+        "capitalize": "Añadir",
+        "lowercase": "añadir"
+      },
       "cancel": {
         "capitalize": "Cancelar",
         "lowercase": "cancelar"
@@ -47,7 +51,7 @@
       },
       "unit": {
         "capitalize": "Unidad",
-        "lowercase": ""
+        "lowercase": "unidad"
       },
       "updated": {
         "capitalize": "Actualizada",
@@ -143,7 +147,7 @@
       },
       "singular": {
         "capitalize": "",
-        "lowercase": ""
+        "lowercase": "variante"
       }
     }
   },
@@ -159,6 +163,44 @@
         "nav": {
           "product-attributes": "Atributos de productos",
           "product-variants": "Variantes de productos"
+        },
+        "new": {
+          "attributes": {
+            "subtitle": "Define los atributes para las variantes de tu producto",
+            "title": "Atributos"
+          },
+          "basic-information": {
+            "field": {
+              "description": {
+                "label": "Descripción",
+                "placeholder": "Especifica las características del producto"
+              },
+              "name": {
+                "label": "Nombre del producto",
+                "placeholder": "Añade un nombre a tu producto"
+              }
+            },
+            "subtitle": "Describe tu producto.",
+            "title": "Información básica"
+          },
+          "categorization": {
+            "subtitle": "Incluye información adicional para completar tu ficha de producto.",
+            "title": "Categorización"
+          },
+          "image": {
+            "field": {
+              "image": {
+                "description": "Hasta 30 MB y 7680 x 4320 píxeles (JPEG, JPG, PNG)",
+                "placeholder": "Selecciona o arrastra aquí tus archivos"
+              }
+            },
+            "subtitle": "Sube una imagen de tu producto. Esta sera la image por defecto.",
+            "title": "Imagen por defecto del producto"
+          },
+          "variants": {
+            "subtitle": "",
+            "title": "Variantes"
+          }
         }
       }
     }
