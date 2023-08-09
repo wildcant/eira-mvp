@@ -6,7 +6,20 @@ import { generateDepartmentSchema } from '$lib/schemas/department';
 import { generateProductsSchema } from '$lib/schemas/product';
 import { generateProductsAttributeSchema } from '$lib/schemas/products-attribute';
 import { generateSubCategorySchema } from '$lib/schemas/sub-category';
-import { error, type Handle, type HandleServerError } from '@sveltejs/kit';
+import { error, type Handle, type HandleServerError, type LoadEvent } from '@sveltejs/kit';
+
+const createFetcher =
+	(fetch: LoadEvent['fetch']) =>
+	async <T>(url: string): Promise<T> => {
+		const response = await fetch(url);
+		const apiResponse = await response.json();
+
+		if (!response.ok) {
+			throw error(response.status, apiResponse as { message: string });
+		}
+
+		return apiResponse as T;
+	};
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// Set lang from cookies to load client translations.
@@ -24,6 +37,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		productsAttribute: generateProductsAttributeSchema({ $t }),
 		product: generateProductsSchema({ $t })
 	};
+
+	event.locals.fetcher = createFetcher(event.fetch);
 
 	return resolve(event);
 };

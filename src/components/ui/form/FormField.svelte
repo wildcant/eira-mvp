@@ -28,19 +28,36 @@
 
 	const { errors, value } = formFieldProxy(form, name);
 
-	export let field: Action<HTMLInputElement> = (node) => {
-		// Handle form reset.
-		value.subscribe((v) => {
-			if (!v && node.value) node.value = '';
-		});
+	type Field = {
+		events: Action<HTMLInputElement>;
+		setValue: (val: any) => void;
+	};
 
-		const handleChange = (event: Event) => value.set((event.target as HTMLInputElement).value);
-		node.addEventListener('input', handleChange, true);
-		return {
-			destroy() {
-				node.removeEventListener('input', handleChange, true);
-			}
-		};
+	let field: Field = {
+		events: (node) => {
+			// Handle form reset.
+			value.subscribe((v) => {
+				if (!v && node.value) node.value = '';
+			});
+
+			const handleChange = (event: Event) => {
+				const target = event.target as HTMLInputElement;
+				let newValue;
+				if (node.type === 'file') {
+					newValue = target.files?.[0];
+				} else {
+					newValue = target.value;
+				}
+				value.set(newValue);
+			};
+			node.addEventListener('input', handleChange, true);
+			return {
+				destroy() {
+					node.removeEventListener('input', handleChange, true);
+				}
+			};
+		},
+		setValue: (val: any) => value.set(val)
 	};
 </script>
 

@@ -1,20 +1,14 @@
 import type { Endpoint } from '$components/shared/crud-data-table/types';
 import type { GetDepartmentsResponse } from '$lib/api/types.js';
-import { error, fail } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
-export const load = async ({ fetch, locals: { schemas } }) => {
+export const load = async ({ locals: { schemas, fetcher } }) => {
 	const endpoint = {
 		url: '/api/products/departments.json'
 	} satisfies Endpoint;
 
-	const response = await fetch(endpoint.url);
-	const apiResponse = await response.json();
-
-	if (!response.ok) {
-		throw error(response.status, apiResponse as { message: string });
-	}
-	const initialData = apiResponse as GetDepartmentsResponse;
+	const initialData = await fetcher<GetDepartmentsResponse>(endpoint.url);
 
 	const form = await superValidate(schemas.department);
 	return { endpoint, initialData, form };

@@ -56,6 +56,10 @@
 			"updated": {
 				"capitalize": "Updated",
 				"lowercase": "updated"
+			},
+			"options": {
+				"capitalize": "Options",
+				"lowercase": "options"
 			}
 		}
 	},
@@ -148,6 +152,16 @@
 			"singular": {
 				"capitalize": "Variant",
 				"lowercase": "variant"
+			}
+		},
+		"image": {
+			"plural": {
+				"capitalize": "Images",
+				"lowercase": "images"
+			},
+			"singular": {
+				"capitalize": "Image",
+				"lowercase": "image"
 			}
 		}
 	},

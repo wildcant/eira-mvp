@@ -47,5 +47,17 @@ export const join = {
 				).as('category');
 			}
 		}
+	},
+	Product: {
+		with: {
+			Image: (eb) => {
+				return jsonObjectFrom(
+					eb
+						.selectFrom('Image')
+						.select(['Image.id', 'Image.url', 'Image.createdAt', 'Image.updatedAt'])
+						.whereRef('Product.imageId', '=', 'Image.id')
+				).as('image');
+			}
+		}
 	}
 } satisfies Join;

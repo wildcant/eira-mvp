@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import { uniqueContext } from '$lib/helpers/uniqueContext';
+	import { cn } from '$lib/utils';
 	import { createCombobox } from '@melt-ui/svelte';
 
 	type AutocompleteContextProps = Pick<
@@ -26,7 +27,8 @@
 
 	// TODO: How do we handle two way binding for value here? 🤔
 	export let value: AutocompleteOption['value'] | undefined = undefined;
-	console.log(value);
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const {
 		filteredItems,
@@ -76,6 +78,6 @@
 	// $: if ($inputValue === '' && $selectedItemParam?.value) selectedItemParam.set(undefined);
 </script>
 
-<div class="relative">
+<div class={cn('relative', className)}>
 	<slot />
 </div>

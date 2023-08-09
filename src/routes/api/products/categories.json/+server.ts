@@ -20,6 +20,22 @@ export const GET = async ({ url, locals: { $t } }) => {
 		});
 	}
 
+	const all = Boolean(url.searchParams.get('all'));
+
+	if (all) {
+		const data = await query.execute();
+
+		return json({
+			data,
+			meta: {
+				beforeCursor: undefined,
+				afterCursor: undefined,
+				hasMore: false,
+				total: data.length
+			}
+		} satisfies GetCategoriesResponse);
+	}
+
 	const { after, before, size } = extractPaginationParams(url);
 	const [[{ count }], paginated] = await Promise.all([
 		db

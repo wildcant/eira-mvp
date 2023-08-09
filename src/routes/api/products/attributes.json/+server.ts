@@ -5,9 +5,24 @@ import { json } from '@sveltejs/kit';
 
 export const GET = async ({ url }) => {
 	const search = url.searchParams.get('search');
+	const all = Boolean(url.searchParams.get('all'));
 
 	let query = db.selectFrom('ProductsAttribute').selectAll();
 	if (search) query = query.where('ProductsAttribute.name', 'like', `%${search}%`);
+
+	if (all) {
+		const data = await query.execute();
+
+		return json({
+			data,
+			meta: {
+				beforeCursor: undefined,
+				afterCursor: undefined,
+				hasMore: false,
+				total: data.length
+			}
+		} satisfies GetProductsAttributeResponse);
+	}
 
 	const { after, before, size } = extractPaginationParams(url);
 	const [[{ count }], paginated] = await Promise.all([

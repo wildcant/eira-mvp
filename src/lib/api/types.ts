@@ -13,5 +13,8 @@ export type GetSubCategoriesResponse = PaginatedApiResponse<SubCategory>;
 export type ProductsAttribute = DatabaseTypes['ProductsAttribute'];
 export type GetProductsAttributeResponse = PaginatedApiResponse<ProductsAttribute>;
 
-export type Product = DatabaseTypes['Product'];
-export type GetProductsResponse = PaginatedApiResponse<ProductsAttribute>;
+export type Product = DatabaseTypes['Product'] & { image?: DatabaseTypes['Image'] };
+export type GetProductsResponse = PaginatedApiResponse<Product>;
+
+export type ProductVariant = DatabaseTypes['ProductVariant'];
+export type GetProductVariantsResponse = PaginatedApiResponse<ProductVariant>;

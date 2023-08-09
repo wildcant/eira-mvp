@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Uploader from '$components/shared/uploader/Uploader.svelte';
 	import Button from '$components/ui/button/Button.svelte';
 	import Container from '$components/ui/container/Container.svelte';
@@ -12,12 +12,15 @@
 	import { productsSchema } from '$lib/schemas/product';
 	import { Plus } from 'lucide-svelte';
 	import { superForm } from 'sveltekit-superforms/client';
+	import AttributesTable from './components/AttributesTable.svelte';
 
 	export let data;
+	const { productsAttributes } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema });
-	const { tainted } = form;
-	// $: console.log($frm);
+	const { tainted, form: frm } = form;
+	// let src: File | undefined = undefined;
+	$: console.log($frm);
 </script>
 
 <Form {form} method="post" class="form">
@@ -97,7 +100,9 @@
 					<p>{$t('page.inventory.products.new.image.subtitle')}</p>
 				</div>
 
-				<Uploader />
+				<FormField name="imageId" let:field>
+					<Uploader on:change={(e) => field.setValue(e.detail.imageId)} />
+				</FormField>
 			</Container>
 		</div>
 
@@ -107,6 +112,8 @@
 					<h3>{$t('page.inventory.products.new.attributes.title')}</h3>
 					<p>{$t('page.inventory.products.new.attributes.subtitle')}</p>
 				</div>
+
+				<AttributesTable {productsAttributes} />
 
 				<Button type="button" variant="link">
 					<Plus class="mr-2 h-4 w-4" />
@@ -129,6 +136,7 @@
 					</div>
 					<p>{$t('page.inventory.products.new.variants.subtitle')}</p>
 				</div>
+				<!-- <VariantsTable /> -->
 			</Container>
 		</div>
 	</div>
@@ -144,8 +152,10 @@
 			'categorization'
 			'attributes'
 			'variants';
+	}
 
-		@media (min-width: 1024px) {
+	@media (min-width: 1024px) {
+		.form-grid {
 			grid-template-columns: 3fr 2fr;
 			grid-template-areas:
 				'basic-info categorization'

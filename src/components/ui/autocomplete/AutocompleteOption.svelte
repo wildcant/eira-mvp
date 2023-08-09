@@ -6,13 +6,17 @@
 
 	export let option: Option;
 	export let index: number;
+	let className: string | undefined | null = undefined;
+	export { className as class };
+
 	const { isSelected, item } = getAutocompleteContext();
 </script>
 
 <li
 	class={cn(
 		selectItemVariants(),
-		'data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground'
+		'data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground',
+		className
 	)}
 	melt={$item({
 		index,

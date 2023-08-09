@@ -1,13 +1,23 @@
 import type { GetProductsResponse } from '$lib/api/types.js';
 import { db } from '$lib/database';
+import { join } from '$lib/database/helpers/joins.js';
 import { extractPaginationParams, paginate } from '$lib/database/helpers/pagination.js';
+import { validateRelationship } from '$lib/database/helpers/validations.js';
 import { json } from '@sveltejs/kit';
 
-export const GET = async ({ url }) => {
+export const GET = async ({ url, locals: { $t } }) => {
 	const search = url.searchParams.get('search');
 
 	let query = db.selectFrom('Product').selectAll();
 	if (search) query = query.where('Product.name', 'like', `%${search}%`);
+
+	const include = url.searchParams.get('include')?.split(',');
+	const relations = validateRelationship({ $t, allowedRelationships: ['images'], include });
+	if (relations?.length) {
+		relations.forEach((relation) => {
+			if (relation === 'images') query = query.select((eb) => [join.Product.with.Image(eb)]);
+		});
+	}
 
 	const { after, before, size } = extractPaginationParams(url);
 	const [[{ count }], paginated] = await Promise.all([

@@ -1,23 +1,17 @@
 import type { Endpoint } from '$components/shared/crud-data-table/types';
 import type { GetCategoriesResponse, GetDepartmentsResponse } from '$lib/api/types.js';
-import { error, fail } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
-export const load = async ({ fetch, locals: { schemas } }) => {
+export const load = async ({ locals: { schemas, fetcher } }) => {
 	const endpoint = {
 		url: '/api/products/categories.json',
 		params: { include: 'departments' }
 	} satisfies Endpoint;
 
-	let initialData;
-	{
-		const response = await fetch(`${endpoint.url}?include=${endpoint.params.include}`);
-		const apiResponse = await response.json();
-		if (!response.ok) {
-			throw error(response.status, apiResponse as { message: string });
-		}
-		initialData = apiResponse as GetCategoriesResponse;
-	}
+	const initialData = await fetcher<GetCategoriesResponse>(
+		`${endpoint.url}?include=${endpoint.params.include}`
+	);
 
 	const form = await superValidate(schemas.category);
 	return {
@@ -25,14 +19,9 @@ export const load = async ({ fetch, locals: { schemas } }) => {
 		initialData,
 		form,
 		lazy: {
-			departments: fetch(`/api/products/departments.json`).then(async (response) => {
-				const json = await response.json();
-				if (!response.ok) {
-					throw error(response.status, json);
-				}
-
-				return (json as GetDepartmentsResponse).data;
-			})
+			departments: fetcher<GetDepartmentsResponse>(`/api/products/departments.json?all=true`).then(
+				({ data }) => data
+			)
 		}
 	};
 };

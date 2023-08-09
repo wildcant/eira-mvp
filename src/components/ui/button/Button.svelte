@@ -43,7 +43,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <svelte:element
 	this={href ? 'a' : 'button'}
-	type={href ? undefined : type}
+	type={href ? undefined : type ?? 'button'}
 	{href}
 	class={cn(buttonVariants({ variant, size }), className)}
 	disabled={loading || disabled}

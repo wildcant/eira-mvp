@@ -32,8 +32,7 @@ export const generateProductsSchema = ({ $t }: WithT) =>
         ${$t('entity.sub-category.singular.capitalize')}
         ${$t('common.phrase.is-required')}`
 			}),
-		// TODO: Double check image validations.
-		image: z.string().optional()
+		imageId: z.coerce.number().int().optional()
 	});
 
 export const productsSchema = derived(t, ($t) => generateProductsSchema({ $t }));

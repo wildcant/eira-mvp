@@ -96,7 +96,7 @@
 	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
 		const data = new FormData(e.target as HTMLFormElement);
-		console.log([...data.entries()]);
+		console.info([...data.entries()]);
 	};
 </script>
 

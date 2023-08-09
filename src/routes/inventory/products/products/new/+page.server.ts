@@ -1,9 +1,14 @@
+import type { GetProductsAttributeResponse } from '$lib/api/types.js';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
-export const load = async ({ locals: { schemas } }) => {
+export const load = async ({ locals: { schemas, fetcher } }) => {
+	const productsAttributesApiResponse = await fetcher<GetProductsAttributeResponse>(
+		'/api/products/attributes.json?all=true'
+	);
+
 	const form = await superValidate(schemas.product);
-	return { form };
+	return { form, productsAttributes: productsAttributesApiResponse.data };
 };
 
 export const actions = {

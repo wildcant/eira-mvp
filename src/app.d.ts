@@ -11,6 +11,7 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
+			/** see src/hooks.server.ts for implementation details. */
 			$t: (key: string) => string;
 			schemas: {
 				department: DepartmentZodSchema;
@@ -19,6 +20,7 @@ declare global {
 				productsAttribute: ProductsAttributeZodSchema;
 				product: ProductZodSchema;
 			};
+			fetcher: <T>(url: string) => Promise<T>;
 		}
 		// interface PageData {}
 		// interface Platform {}

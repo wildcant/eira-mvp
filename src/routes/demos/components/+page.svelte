@@ -4,10 +4,9 @@
 	import Tabs from './Tabs.svelte';
 	import Autocomplete from './Autocomplete.svelte';
 	import Uploader from '$components/shared/uploader/Uploader.svelte';
-	let src: '';
 </script>
 
-<Uploader {src} />
+<Uploader />
 
 <br />
 
@@ -24,3 +23,5 @@
 <br />
 
 <Autocomplete />
+
+<br />
