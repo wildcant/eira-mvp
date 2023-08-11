@@ -1,21 +1,12 @@
 <script lang="ts">
-	import type { Option } from '$components/ui/autocomplete/Autocomplete.svelte';
-	import Autocomplete from '$components/ui/autocomplete/Autocomplete.svelte';
-	import AutocompleteButton from '$components/ui/autocomplete/AutocompleteButton.svelte';
-	import AutocompleteInput from '$components/ui/autocomplete/AutocompleteInput.svelte';
-	import AutocompleteOption from '$components/ui/autocomplete/AutocompleteOption.svelte';
-	import AutocompleteOptions from '$components/ui/autocomplete/AutocompleteOptions.svelte';
-	import Table from '$components/ui/table/Table.svelte';
-	import TableBody from '$components/ui/table/TableBody.svelte';
-	import TableCell from '$components/ui/table/TableCell.svelte';
-	import TableHead from '$components/ui/table/TableHead.svelte';
-	import TableHeader from '$components/ui/table/TableHeader.svelte';
-	import TableRow from '$components/ui/table/TableRow.svelte';
 	import type { ProductsAttribute } from '$lib/api/types';
+	import type { Item } from '$lib/components/custom/autocomplete';
+	import * as Autocomplete from '$lib/components/custom/autocomplete';
+	import * as Table from '$lib/components/ui/table';
 	import { t } from '$lib/i18n';
 
 	export let productsAttributes: ProductsAttribute[];
-	const productAttributesOptions: Option<number>[] = productsAttributes.map((pa) => ({
+	const productAttributesOptions: Item<number>[] = productsAttributes.map((pa) => ({
 		value: pa.id,
 		label: pa.name
 	}));
@@ -23,36 +14,36 @@
 	const newProductAttributes = [];
 </script>
 
-<Table>
-	<TableHeader>
-		<TableRow>
-			<TableHead>{$t('entity.attribute.singular.lowercase')}</TableHead>
-			<TableHead>{$t('common.word.options.lowercase')}</TableHead>
-		</TableRow>
-	</TableHeader>
-	<TableBody>
+<Table.Root>
+	<Table.Header>
+		<Table.Row>
+			<Table.Head>{$t('entity.attribute.singular.lowercase')}</Table.Head>
+			<Table.Head>{$t('common.word.options.lowercase')}</Table.Head>
+		</Table.Row>
+	</Table.Header>
+	<Table.Body>
 		<!-- {#each productsAttributes as row (row.id)} -->
-		<TableRow>
-			<TableCell>
-				<Autocomplete options={productAttributesOptions} class="max-w-xs">
+		<Table.Row>
+			<Table.Cell>
+				<Autocomplete.Root items={productAttributesOptions} class="max-w-xs">
 					<div class="cursor-pointer">
-						<AutocompleteInput class="capitalize" />
-						<AutocompleteButton />
+						<Autocomplete.Input class="capitalize" />
+						<Autocomplete.Button />
 					</div>
 
-					<AutocompleteOptions let:filteredOptions>
+					<Autocomplete.Options let:filteredOptions>
 						{#each filteredOptions as option, index (index)}
-							<AutocompleteOption class="capitalize" {index} {option}>
+							<Autocomplete.Option class="capitalize" {index} item={option}>
 								{option.label}
-							</AutocompleteOption>
+							</Autocomplete.Option>
 						{/each}
-					</AutocompleteOptions>
-				</Autocomplete>
+					</Autocomplete.Options>
+				</Autocomplete.Root>
 
 				<!-- <Render of={cell.render()} /> -->
-			</TableCell>
-			<TableCell>Options</TableCell>
-		</TableRow>
+			</Table.Cell>
+			<Table.Cell>Options</Table.Cell>
+		</Table.Row>
 		<!-- {/each} -->
-	</TableBody>
-</Table>
+	</Table.Body>
+</Table.Root>

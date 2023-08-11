@@ -1,9 +1,9 @@
 <script lang="ts">
+	import Uploader from '$components/uploader/Uploader.svelte';
+	import Autocomplete from './Autocomplete.svelte';
 	import Modal from './Modal.svelte';
 	import Select from './Select.svelte';
-	import Tabs from './Tabs.svelte';
-	import Autocomplete from './Autocomplete.svelte';
-	import Uploader from '$components/shared/uploader/Uploader.svelte';
+	// import Tabs from './Tabs.svelte';
 </script>
 
 <Uploader />
@@ -18,7 +18,7 @@
 
 <br />
 
-<Tabs />
+<!-- <Tabs /> -->
 
 <br />
 

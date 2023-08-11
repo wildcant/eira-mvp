@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { getLanguageCookie } from '$components/shared/header/components/language-selector/language-selector';
+import { getLanguageCookie } from '$components/header/components/language-selector';
 import { init, register } from 'svelte-i18n';
 
 const defaultLocale = 'en';

@@ -1,13 +1,8 @@
 <script lang="ts">
-	import Uploader from '$components/shared/uploader/Uploader.svelte';
-	import Button from '$components/ui/button/Button.svelte';
-	import Container from '$components/ui/container/Container.svelte';
-	import Form from '$components/ui/form/Form.svelte';
-	import FormAutocomplete from '$components/ui/form/FormAutocomplete.svelte';
-	import FormField from '$components/ui/form/FormField.svelte';
-	import FormInput from '$components/ui/form/FormInput.svelte';
-	import FormLabel from '$components/ui/form/FormLabel.svelte';
-	import FormTextarea from '$components/ui/form/FormTextarea.svelte';
+	import { Uploader } from '$components/uploader';
+	import { Container } from '$lib/components/custom/container';
+	import * as Form from '$lib/components/custom/form';
+	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
 	import { productsSchema } from '$lib/schemas/product';
 	import { Plus } from 'lucide-svelte';
@@ -23,7 +18,7 @@
 	$: console.log($frm);
 </script>
 
-<Form {form} method="post" class="form">
+<Form.Root {form} method="post" class="form">
 	<div class="flex justify-between items-center mb-4">
 		<h2 class="p-0">
 			{$t('common.word.new.capitalize')}
@@ -40,26 +35,26 @@
 					<p>{$t('page.inventory.products.new.basic-information.subtitle')}</p>
 				</div>
 
-				<FormField name="name">
-					<FormLabel>
+				<Form.Field name="name">
+					<Form.Label>
 						{$t('page.inventory.products.new.basic-information.field.name.label')}
-					</FormLabel>
-					<FormInput
+					</Form.Label>
+					<Form.Input
 						type="text"
 						placeholder={$t('page.inventory.products.new.basic-information.field.name.placeholder')}
 					/>
-				</FormField>
+				</Form.Field>
 
-				<FormField name="description">
-					<FormLabel>
+				<Form.Field name="description">
+					<Form.Label>
 						{$t('page.inventory.products.new.basic-information.field.description.label')}
-					</FormLabel>
-					<FormTextarea
+					</Form.Label>
+					<Form.Textarea
 						placeholder={$t(
 							'page.inventory.products.new.basic-information.field.description.placeholder'
 						)}
 					/>
-				</FormField>
+				</Form.Field>
 			</Container>
 		</div>
 
@@ -70,26 +65,26 @@
 					<p>{$t('page.inventory.products.new.categorization.subtitle')}</p>
 				</div>
 
-				<FormField name="departmentId">
-					<FormLabel>
+				<Form.Field name="departmentId">
+					<Form.Label>
 						{$t('entity.department.singular.capitalize')}
-					</FormLabel>
-					<FormAutocomplete options={[]} />
-				</FormField>
+					</Form.Label>
+					<Form.Autocomplete options={[]} />
+				</Form.Field>
 
-				<FormField name="categoryId">
-					<FormLabel>
+				<Form.Field name="categoryId">
+					<Form.Label>
 						{$t('entity.category.singular.capitalize')}
-					</FormLabel>
-					<FormAutocomplete options={[]} />
-				</FormField>
+					</Form.Label>
+					<Form.Autocomplete options={[]} />
+				</Form.Field>
 
-				<FormField name="subCategoryId">
-					<FormLabel>
+				<Form.Field name="subCategoryId">
+					<Form.Label>
 						{$t('entity.sub-category.singular.capitalize')}
-					</FormLabel>
-					<FormAutocomplete options={[]} />
-				</FormField>
+					</Form.Label>
+					<Form.Autocomplete options={[]} />
+				</Form.Field>
 			</Container>
 		</div>
 
@@ -100,9 +95,9 @@
 					<p>{$t('page.inventory.products.new.image.subtitle')}</p>
 				</div>
 
-				<FormField name="imageId" let:field>
+				<Form.Field name="imageId" let:field>
 					<Uploader on:change={(e) => field.setValue(e.detail.imageId)} />
-				</FormField>
+				</Form.Field>
 			</Container>
 		</div>
 
@@ -140,7 +135,7 @@
 			</Container>
 		</div>
 	</div>
-</Form>
+</Form.Root>
 
 <style>
 	.form-grid {

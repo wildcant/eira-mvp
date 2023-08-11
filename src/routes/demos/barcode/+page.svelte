@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '$components/ui/button/Button.svelte';
+	import { Button } from '$lib/components/ui/button';
 	import JsBarcode from 'jsbarcode';
 	import BarcodeScanner from './BarcodeScanner.svelte';
 

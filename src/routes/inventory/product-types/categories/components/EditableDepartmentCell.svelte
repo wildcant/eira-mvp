@@ -1,11 +1,7 @@
 <script lang="ts">
-	import type { EditableRowState } from '$components/shared/crud-data-table/addEditableRow';
-	import Autocomplete from '$components/ui/autocomplete/Autocomplete.svelte';
-	import AutocompleteButton from '$components/ui/autocomplete/AutocompleteButton.svelte';
-	import AutocompleteInput from '$components/ui/autocomplete/AutocompleteInput.svelte';
-	import AutocompleteOption from '$components/ui/autocomplete/AutocompleteOption.svelte';
-	import AutocompleteOptions from '$components/ui/autocomplete/AutocompleteOptions.svelte';
-	import Label from '$components/ui/label/Label.svelte';
+	import type { EditableRowState } from '$components/crud-data-table/addEditableRow';
+	import * as Autocomplete from '$lib/components/custom/autocomplete';
+
 	import type { Category, Department } from '$lib/api/types';
 	import type { DataBodyRow } from 'svelte-headless-table';
 
@@ -27,18 +23,18 @@
 		}))}
 		{@const selectedItem = options.find((option) => option.value === $updatedRow?.departmentId)}
 		<!-- TODO: Update updatedRow on autocomplete change. -->
-		<Autocomplete {options} {selectedItem}>
-			<Label class="cursor-pointer">
-				<AutocompleteInput name="departmentId" disabled={$loading} />
-				<AutocompleteButton />
-			</Label>
+		<Autocomplete.Root items={options} value={selectedItem}>
+			<Autocomplete.Label class="cursor-pointer">
+				<Autocomplete.Input name="departmentId" disabled={$loading} />
+				<Autocomplete.Button />
+			</Autocomplete.Label>
 
-			<AutocompleteOptions let:filteredOptions>
+			<Autocomplete.Options let:filteredOptions>
 				{#each filteredOptions as option, index (index)}
-					<AutocompleteOption {index} {option}>{option.label}</AutocompleteOption>
+					<Autocomplete.Option {index} item={option}>{option.label}</Autocomplete.Option>
 				{/each}
-			</AutocompleteOptions>
-		</Autocomplete>
+			</Autocomplete.Options>
+		</Autocomplete.Root>
 	{/await}
 {:else}
 	<span>{row.original.department?.name}</span>

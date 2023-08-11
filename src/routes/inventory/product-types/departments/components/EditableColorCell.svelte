@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { EditableRowState } from '$components/shared/crud-data-table/addEditableRow';
-	import Input from '$components/ui/input/Input.svelte';
-	import Label from '$components/ui/label/Label.svelte';
+	import type { EditableRowState } from '$components/crud-data-table/addEditableRow';
 	import type { Department } from '$lib/api/types';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
 	import type { BodyRow } from 'svelte-headless-table';
 
 	export let id: string;

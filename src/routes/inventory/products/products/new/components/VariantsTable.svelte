@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CrudDataTable from '$components/shared/crud-data-table/CrudDataTable.svelte';
-	import type { CrudTableColumns } from '$components/shared/crud-data-table/types';
+	import { CrudDataTable } from '$components/crud-data-table';
+	import type { CrudTableColumns } from '$components/crud-data-table/types';
 	import type { ProductVariant } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 

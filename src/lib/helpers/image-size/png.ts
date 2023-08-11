@@ -7,7 +7,7 @@ export function png(data: ArrayBuffer): Size {
 
 	if (decoder.decode(bytes.slice(1, 8)) === 'PNG\r\n\x1a\n') {
 		const view = new DataView(data);
-		let str = decoder.decode(bytes.slice(12, 16));
+		const str = decoder.decode(bytes.slice(12, 16));
 
 		// handle 'fried' PNGs https://github.com/esjeon/pngdefry
 		if (str === 'CgBI') {

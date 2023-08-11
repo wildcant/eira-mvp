@@ -1,30 +1,29 @@
 <script lang="ts">
-	import Select from '$components/ui/select/Select.svelte';
-	import SelectContent from '$components/ui/select/SelectContent.svelte';
-	import SelectGroup from '$components/ui/select/SelectGroup.svelte';
-	import SelectItem from '$components/ui/select/SelectItem.svelte';
-	import SelectSeparator from '$components/ui/select/SelectSeparator.svelte';
-	import SelectTrigger from '$components/ui/select/SelectTrigger.svelte';
+	import * as Select from '$lib/components/ui/select';
 </script>
 
 <h1>Select</h1>
-<Select>
-	<SelectTrigger class="w-[180px]">Select a fruit</SelectTrigger>
-	<SelectContent>
-		<SelectGroup label="Fruits">
-			<SelectItem value="apple">Apple</SelectItem>
-			<SelectItem value="banana">Banana</SelectItem>
-			<SelectItem value="blueberry">Blueberry</SelectItem>
-			<SelectItem value="grapes">Grapes</SelectItem>
-			<SelectItem value="pineapple">Pineapple</SelectItem>
-		</SelectGroup>
-		<SelectSeparator />
-		<SelectGroup label="Vegetables">
-			<SelectItem value="asparagus">Asparagus</SelectItem>
-			<SelectItem value="broccoli">Broccoli</SelectItem>
-			<SelectItem value="carrots">Carrots</SelectItem>
-			<SelectItem value="corn">Corn</SelectItem>
-			<SelectItem value="garlic">Garlic</SelectItem>
-		</SelectGroup>
-	</SelectContent>
-</Select>
+<Select.Root>
+	<Select.Trigger class="w-[180px]">Select a fruit</Select.Trigger>
+	<Select.Content>
+		<Select.Group>
+			<Select.Label>Fruits</Select.Label>
+			<Select.Item value="apple">Apple</Select.Item>
+			<Select.Item value="banana">Banana</Select.Item>
+			<Select.Item value="blueberry">Blueberry</Select.Item>
+			<Select.Item value="grapes">Grapes</Select.Item>
+			<Select.Item value="pineapple">Pineapple</Select.Item>
+		</Select.Group>
+
+		<Select.Separator />
+
+		<Select.Group>
+			<Select.Label>Vegetables</Select.Label>
+			<Select.Item value="asparagus">Asparagus</Select.Item>
+			<Select.Item value="broccoli">Broccoli</Select.Item>
+			<Select.Item value="carrots">Carrots</Select.Item>
+			<Select.Item value="corn">Corn</Select.Item>
+			<Select.Item value="garlic">Garlic</Select.Item>
+		</Select.Group>
+	</Select.Content>
+</Select.Root>

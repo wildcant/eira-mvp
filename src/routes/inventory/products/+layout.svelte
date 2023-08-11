@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SubNavigation, { type Route } from '$components/shared/sub-nav/SubNavigation.svelte';
-	import Separator from '$components/ui/separator/Separator.svelte';
+	import { SubNavigation, type Route } from '$components/navigation';
+	import { Separator } from '$lib/components/ui/separator';
 	import { t } from '$lib/i18n';
 
 	$: routes = [

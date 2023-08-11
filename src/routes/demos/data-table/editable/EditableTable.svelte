@@ -3,8 +3,8 @@
 </script>
 
 <script lang="ts" generics="T extends Item = Item">
+	import { openConfirmationModal } from '$lib/components/custom/modal/actions';
 	import isEqual from 'lodash/isEqual';
-	import { openConfirmationModal } from '$components/shared/modal/ModalsManager.svelte';
 	import { BodyRow, Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { writable } from 'svelte/store';
 	import ActionsCell from './ActionsCell.svelte';

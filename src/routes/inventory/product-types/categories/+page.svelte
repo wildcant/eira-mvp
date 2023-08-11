@@ -1,9 +1,9 @@
 <script lang="ts">
-	import CrudDataTable from '$components/shared/crud-data-table/CrudDataTable.svelte';
 	import {
+		CrudDataTable,
 		UNEXPECTED_ROW_TYPE,
 		type CrudTableColumns
-	} from '$components/shared/crud-data-table/types';
+	} from '$components/crud-data-table';
 	import type { Category } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 	import { categorySchema } from '$lib/schemas/category';

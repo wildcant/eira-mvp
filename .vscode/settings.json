@@ -4,7 +4,8 @@
 		"svelte-i18n",
 		"i18next",
 		"vitest",
-		"tmp"
+		"tmp",
+		"primitives"
 	],
 	"i18n-ally.localesPaths": ["src/lib/i18n/locales/client"],
 	"i18n-ally.keystyle": "nested",
@@ -16,6 +17,7 @@
 		"**/bower_components": true,
 		"**/*.code-search": true,
 		"**/tmp": true,
-		"**/demos": true
+		"**/demos": true,
+		"**/primitives": true
 	}
 }

@@ -1,15 +1,11 @@
 <script lang="ts">
-	import Button from '$components/ui/button/Button.svelte';
-	import Form from '$components/ui/form/Form.svelte';
-	import FormDescription from '$components/ui/form/FormDescription.svelte';
-	import FormField from '$components/ui/form/FormField.svelte';
-	import FormInput from '$components/ui/form/FormInput.svelte';
-	import FormLabel from '$components/ui/form/FormLabel.svelte';
-	import ComplexCustomInput, { inputVariants } from '$components/ui/input/Input.svelte';
+	import Uploader from '$components/uploader/Uploader.svelte';
+	import * as Form from '$lib/components/custom/form';
+	import { Button } from '$lib/components/ui/button';
+	import { Input as ComplexCustomInput, inputVariants } from '$lib/components/ui/input';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import { schema } from './schema';
-	import Uploader from '$components/shared/uploader/Uploader.svelte';
 
 	export let data;
 
@@ -18,41 +14,41 @@
 	const { form: superFrm, errors } = form;
 </script>
 
-<Form {form} method="post">
+<Form.Root {form} method="post">
 	<!-- Implicit binding using context and component wrappers. -->
 
-	<FormField name="name">
-		<FormLabel>Name</FormLabel>
-		<FormInput type="text" />
-	</FormField>
+	<Form.Field name="name">
+		<Form.Label>Name</Form.Label>
+		<Form.Input type="text" />
+	</Form.Field>
 
-	<FormField name="email">
-		<FormLabel>Email</FormLabel>
-		<FormInput type="email" />
-		<FormDescription>Please add your email.</FormDescription>
-	</FormField>
+	<Form.Field name="email">
+		<Form.Label>Email</Form.Label>
+		<Form.Input type="email" />
+		<Form.Description>Please add your email.</Form.Description>
+	</Form.Field>
 
 	<!-- Explicit binding use actions and custom events. -->
 
-	<FormField name="simple" let:field>
-		<FormLabel>Simple</FormLabel>
+	<Form.Field name="simple" let:field>
+		<Form.Label>Simple</Form.Label>
 		<input class={inputVariants()} type="string" use:field.events />
-	</FormField>
+	</Form.Field>
 
-	<FormField name="complex" let:field>
-		<FormLabel>Complex</FormLabel>
+	<Form.Field name="complex" let:field>
+		<Form.Label>Complex</Form.Label>
 		<ComplexCustomInput type="string" use={field.events} />
-	</FormField>
+	</Form.Field>
 
-	<FormField name="image" let:field>
+	<Form.Field name="image" let:field>
 		<Uploader on:change={(e) => field.setValue(e.detail.imageId)} />
-	</FormField>
+	</Form.Field>
 
 	<div class="flex flex-row gap-4 my-4">
 		<Button on:click={() => form.reset()} type="button" variant="outline">reset</Button>
 
 		<Button type="submit">Submit</Button>
 	</div>
-</Form>
+</Form.Root>
 
 <SuperDebug data={{ $superFrm, $errors }} />

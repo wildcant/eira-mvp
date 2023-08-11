@@ -1,4 +1,4 @@
-import type { Endpoint } from '$components/shared/crud-data-table/types';
+import type { Endpoint } from '$components/crud-data-table/types';
 import type { GetCategoriesResponse, GetSubCategoriesResponse } from '$lib/api/types.js';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';

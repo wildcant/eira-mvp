@@ -1,14 +1,9 @@
 <script lang="ts">
-	import type { Option } from '$components/ui/autocomplete/Autocomplete.svelte';
-	import Autocomplete from '$components/ui/autocomplete/Autocomplete.svelte';
-	import AutocompleteButton from '$components/ui/autocomplete/AutocompleteButton.svelte';
-	import AutocompleteInput from '$components/ui/autocomplete/AutocompleteInput.svelte';
-	import AutocompleteLabel from '$components/ui/autocomplete/AutocompleteLabel.svelte';
-	import AutocompleteOption from '$components/ui/autocomplete/AutocompleteOption.svelte';
-	import AutocompleteOptions from '$components/ui/autocomplete/AutocompleteOptions.svelte';
+	import * as Autocomplete from '$lib/components/custom/autocomplete';
+	import type { Item } from '$lib/components/custom/autocomplete';
 
-	type Opt = Option<string, { author: string; disabled: boolean }>;
-	const options: Opt[] = [
+	type Option = Item<string, { author: string; disabled: boolean }>;
+	const items: Option[] = [
 		{
 			label: 'To Kill a Mockingbird',
 			value: 'to-kill-a-mockingbird',
@@ -91,7 +86,7 @@
 		}
 	];
 
-	let selectedItem: Opt | undefined = undefined;
+	let value: Option | undefined = undefined;
 
 	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
@@ -102,21 +97,20 @@
 
 <h1>Autocomplete</h1>
 <form on:submit={handleSubmit}>
-	<Autocomplete {options} bind:selectedItem>
-		<AutocompleteLabel>
-			<AutocompleteInput name="sample" />
-			<AutocompleteButton />
-		</AutocompleteLabel>
+	<Autocomplete.Root {items} bind:value>
+		<Autocomplete.Label>
+			<Autocomplete.Input name="sample" />
+			<Autocomplete.Button />
+		</Autocomplete.Label>
 
-		<AutocompleteOptions let:filteredOptions>
+		<Autocomplete.Options let:filteredOptions>
 			{#each filteredOptions as option, index (index)}
-				<AutocompleteOption {index} {option}>{option.label}</AutocompleteOption>
+				<Autocomplete.Option {index} item={option}>{option.label}</Autocomplete.Option>
 			{/each}
-		</AutocompleteOptions>
-	</Autocomplete>
+		</Autocomplete.Options>
+	</Autocomplete.Root>
 	<button>Submit</button>
 </form>
 <br />
 
-<button on:click={() => (selectedItem = options[0])}>select option</button>
-<button on:click={() => (selectedItem = undefined)}>clear</button>
+<button on:click={() => (value = items[0])}>select option</button>

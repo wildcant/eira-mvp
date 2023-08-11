@@ -1,208 +1,208 @@
 {
-  "common": {
-    "action-completed": "",
-    "phrase": {
-      "action-completed": "Acción completada",
-      "confirm-delete": "Estas seguro que quieres borrar",
-      "is-required": "es requerido",
-      "unit-of-measure": "Unidad de medida",
-      "was-deleted": "fue eliminada"
-    },
-    "word": {
-      "add": {
-        "capitalize": "Añadir",
-        "lowercase": "añadir"
-      },
-      "cancel": {
-        "capitalize": "Cancelar",
-        "lowercase": "cancelar"
-      },
-      "close": {
-        "capitalize": "Cerrar",
-        "lowercase": "cerrar"
-      },
-      "color": {
-        "capitalize": "Color",
-        "lowercase": "color"
-      },
-      "confirm": {
-        "capitalize": "Confirmar",
-        "lowercase": "confirmar"
-      },
-      "delete": {
-        "capitalize": "Borrar",
-        "lowercase": "borrar"
-      },
-      "edit": {
-        "capitalize": "Editar",
-        "lowercase": "editar"
-      },
-      "name": {
-        "capitalize": "Nombre",
-        "lowercase": "nombre"
-      },
-      "new": {
-        "capitalize": "Nuevo",
-        "lowercase": "nuevo"
-      },
-      "save": {
-        "capitalize": "Guardar",
-        "lowercase": "guardar"
-      },
-      "unit": {
-        "capitalize": "Unidad",
-        "lowercase": "unidad"
-      },
-      "updated": {
-        "capitalize": "Actualizada",
-        "lowercase": "actualizada"
-      }
-    }
-  },
-  "component": {
-    "header": {
-      "avatar": {
-        "sr-only": "Abrir menu de perfil"
-      }
-    },
-    "language-selector": {
-      "group-label": "Idioma"
-    },
-    "light-switch": {
-      "label": "Apariencia"
-    },
-    "navigation": {
-      "dashboard": "Panel",
-      "inventory": "Inventario",
-      "orders": "Ordenes",
-      "point-of-sale": "Punto de venta",
-      "product-types": "Tipos de producto",
-      "products": "Productos"
-    },
-    "search": {
-      "placeholder": "Buscar"
-    },
-    "table": {
-      "pagination": {
-        "next": "Siguiente",
-        "previous": "Anterior"
-      }
-    }
-  },
-  "entity": {
-    "attribute": {
-      "plural": {
-        "capitalize": "Atributos",
-        "lowercase": "atributos"
-      },
-      "singular": {
-        "capitalize": "Atributo",
-        "lowercase": "atributo"
-      }
-    },
-    "category": {
-      "plural": {
-        "capitalize": "Categorías",
-        "lowercase": "categorías"
-      },
-      "singular": {
-        "capitalize": "Categoría",
-        "lowercase": "categoría"
-      }
-    },
-    "department": {
-      "plural": {
-        "capitalize": "Departamentos",
-        "lowercase": "departamentos"
-      },
-      "singular": {
-        "capitalize": "Departamento",
-        "lowercase": "departamento"
-      }
-    },
-    "product": {
-      "plural": {
-        "capitalize": "Productos",
-        "lowercase": "productos"
-      },
-      "singular": {
-        "capitalize": "Producto",
-        "lowercase": "producto"
-      }
-    },
-    "sub-category": {
-      "plural": {
-        "capitalize": "Sub categorías",
-        "lowercase": "sub categorías"
-      },
-      "singular": {
-        "capitalize": "Sub categoría",
-        "lowercase": "sub categoría"
-      }
-    },
-    "variant": {
-      "plural": {
-        "capitalize": "",
-        "lowercase": ""
-      },
-      "singular": {
-        "capitalize": "",
-        "lowercase": "variante"
-      }
-    }
-  },
-  "page": {
-    "dashboard": {
-      "greeting": "Buenas tardes"
-    },
-    "inventory": {
-      "product-types": {
-        "title": "Tipos de producto"
-      },
-      "products": {
-        "nav": {
-          "product-attributes": "Atributos de productos",
-          "product-variants": "Variantes de productos"
-        },
-        "new": {
-          "attributes": {
-            "subtitle": "Define los atributes para las variantes de tu producto",
-            "title": "Atributos"
-          },
-          "basic-information": {
-            "field": {
-              "description": {
-                "label": "Descripción",
-                "placeholder": "Especifica las características del producto"
-              },
-              "name": {
-                "label": "Nombre del producto",
-                "placeholder": "Añade un nombre a tu producto"
-              }
-            },
-            "subtitle": "Describe tu producto.",
-            "title": "Información básica"
-          },
-          "categorization": {
-            "subtitle": "Incluye información adicional para completar tu ficha de producto.",
-            "title": "Categorización"
-          },
-          "image": {
-            "field": {
-              "image": {
-                "description": "Hasta 30 MB y 7680 x 4320 píxeles (JPEG, JPG, PNG)",
-                "placeholder": "Selecciona o arrastra aquí tus archivos"
-              }
-            },
-            "subtitle": "Sube una imagen de tu producto. Esta sera la image por defecto.",
-            "title": "Imagen por defecto del producto"
-          },
-          "variants": {
-            "subtitle": "",
-            "title": "Variantes"
-          }
-        }
-      }
-    }
-  }
+	"common": {
+		"action-completed": "",
+		"phrase": {
+			"action-completed": "Acción completada",
+			"confirm-delete": "Estas seguro que quieres borrar",
+			"is-required": "es requerido",
+			"unit-of-measure": "Unidad de medida",
+			"was-deleted": "fue eliminada"
+		},
+		"word": {
+			"add": {
+				"capitalize": "Añadir",
+				"lowercase": "añadir"
+			},
+			"cancel": {
+				"capitalize": "Cancelar",
+				"lowercase": "cancelar"
+			},
+			"close": {
+				"capitalize": "Cerrar",
+				"lowercase": "cerrar"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirmar",
+				"lowercase": "confirmar"
+			},
+			"delete": {
+				"capitalize": "Borrar",
+				"lowercase": "borrar"
+			},
+			"edit": {
+				"capitalize": "Editar",
+				"lowercase": "editar"
+			},
+			"name": {
+				"capitalize": "Nombre",
+				"lowercase": "nombre"
+			},
+			"new": {
+				"capitalize": "Nuevo",
+				"lowercase": "nuevo"
+			},
+			"save": {
+				"capitalize": "Guardar",
+				"lowercase": "guardar"
+			},
+			"unit": {
+				"capitalize": "Unidad",
+				"lowercase": "unidad"
+			},
+			"updated": {
+				"capitalize": "Actualizada",
+				"lowercase": "actualizada"
+			}
+		}
+	},
+	"component": {
+		"header": {
+			"avatar": {
+				"sr-only": "Abrir menu de perfil"
+			}
+		},
+		"language-selector": {
+			"group-label": "Idioma"
+		},
+		"light-switch": {
+			"label": "Apariencia"
+		},
+		"navigation": {
+			"dashboard": "Panel",
+			"inventory": "Inventario",
+			"orders": "Ordenes",
+			"point-of-sale": "Punto de venta",
+			"product-types": "Tipos de producto",
+			"products": "Productos"
+		},
+		"search": {
+			"placeholder": "Buscar"
+		},
+		"table": {
+			"pagination": {
+				"next": "Siguiente",
+				"previous": "Anterior"
+			}
+		}
+	},
+	"entity": {
+		"attribute": {
+			"plural": {
+				"capitalize": "Atributos",
+				"lowercase": "atributos"
+			},
+			"singular": {
+				"capitalize": "Atributo",
+				"lowercase": "atributo"
+			}
+		},
+		"category": {
+			"plural": {
+				"capitalize": "Categorías",
+				"lowercase": "categorías"
+			},
+			"singular": {
+				"capitalize": "Categoría",
+				"lowercase": "categoría"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departamentos",
+				"lowercase": "departamentos"
+			},
+			"singular": {
+				"capitalize": "Departamento",
+				"lowercase": "departamento"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Productos",
+				"lowercase": "productos"
+			},
+			"singular": {
+				"capitalize": "Producto",
+				"lowercase": "producto"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categorías",
+				"lowercase": "sub categorías"
+			},
+			"singular": {
+				"capitalize": "Sub categoría",
+				"lowercase": "sub categoría"
+			}
+		},
+		"variant": {
+			"plural": {
+				"capitalize": "",
+				"lowercase": ""
+			},
+			"singular": {
+				"capitalize": "",
+				"lowercase": "variante"
+			}
+		}
+	},
+	"page": {
+		"dashboard": {
+			"greeting": "Buenas tardes"
+		},
+		"inventory": {
+			"product-types": {
+				"title": "Tipos de producto"
+			},
+			"products": {
+				"nav": {
+					"product-attributes": "Atributos de productos",
+					"product-variants": "Variantes de productos"
+				},
+				"new": {
+					"attributes": {
+						"subtitle": "Define los atributes para las variantes de tu producto",
+						"title": "Atributos"
+					},
+					"basic-information": {
+						"field": {
+							"description": {
+								"label": "Descripción",
+								"placeholder": "Especifica las características del producto"
+							},
+							"name": {
+								"label": "Nombre del producto",
+								"placeholder": "Añade un nombre a tu producto"
+							}
+						},
+						"subtitle": "Describe tu producto.",
+						"title": "Información básica"
+					},
+					"categorization": {
+						"subtitle": "Incluye información adicional para completar tu ficha de producto.",
+						"title": "Categorización"
+					},
+					"image": {
+						"field": {
+							"image": {
+								"description": "Hasta 30 MB y 7680 x 4320 píxeles (JPEG, JPG, PNG)",
+								"placeholder": "Selecciona o arrastra aquí tus archivos"
+							}
+						},
+						"subtitle": "Sube una imagen de tu producto. Esta sera la image por defecto.",
+						"title": "Imagen por defecto del producto"
+					},
+					"variants": {
+						"subtitle": "",
+						"title": "Variantes"
+					}
+				}
+			}
+		}
+	}
 }

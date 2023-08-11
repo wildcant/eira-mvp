@@ -1,7 +1,6 @@
 <script lang="ts">
-	import DataTable from '$components/shared/data-table/DataTable.svelte';
-	import DataTableCheckbox from '$components/shared/data-table/DataTableCheckbox.svelte';
-	import Search from '$components/shared/search/Search.svelte';
+	import { DataTable, DataTableCheckbox } from '$lib/components/custom/data-table';
+	import { Search } from '$lib/components/custom/search';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import {
 		addPagination,
