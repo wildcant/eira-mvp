@@ -3,21 +3,19 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { t } from '$lib/i18n';
-	import { createEventDispatcher, onMount } from 'svelte';
 	import { Render } from 'svelte-headless-table';
 	import type { ModalProps } from '../types';
+	import { closeModal } from './modals-manager.svelte';
 
 	export let modal: ModalProps;
-
-	const dispatch = createEventDispatcher();
 
 	let loading = false;
 	let open = true;
 
 	const close = () => (open = false);
-	onMount(() => {
-		console.log('mounted');
-	});
+
+	// Remove modal from list after closing.
+	$: if (!open) closeModal(modal.id);
 </script>
 
 {#if modal.type === 'confirmation'}

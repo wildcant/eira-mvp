@@ -313,7 +313,7 @@
 	<div class="relative mt-4">
 		<Scroller on:more={loadMore}>
 			<Table.Root {...$tableAttrs} class="border-collapse">
-				<Table.Header class="sticky top-0 bg-zin bg-white dark:bg-zinc-950 z-10">
+				<Table.Header class="sticky top-0 bg-background z-10">
 					{#each $headerRows as headerRow (headerRow.id)}
 						<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
 							<Table.Row {...rowAttrs}>

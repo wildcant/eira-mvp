@@ -15,7 +15,7 @@
 	const form = superForm(data.form, { validators: $productsSchema });
 	const { tainted, form: frm } = form;
 	// let src: File | undefined = undefined;
-	$: console.log($frm);
+	// $: console.log($frm);
 </script>
 
 <Form.Root {form} method="post" class="form">

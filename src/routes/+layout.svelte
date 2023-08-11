@@ -23,7 +23,7 @@
 <div class="min-h-[766px] h-[100vh] relative">
 	<Drawer.Root bind:open>
 		<Drawer.Portal>
-			<Drawer.Content class="py-9 pl-10 pr-6">
+			<Drawer.Content class="py-9 pl-10 pr-6 bg-background">
 				<a
 					class="block ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 w-fit h-fit rounded-lg"
 					href="/dashboard"

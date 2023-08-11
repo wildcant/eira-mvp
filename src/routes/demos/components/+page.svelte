@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { Uploader } from '$components/uploader';
+	import { TagsInput } from '$lib/components/custom/tags-input';
 	import Autocomplete from './Autocomplete.svelte';
 	import Modal from './Modal.svelte';
 	import Select from './Select.svelte';
-	// import Tabs from './Tabs.svelte';
 </script>
+
+<TagsInput />
+
+<br />
 
 <Uploader />
 
@@ -17,8 +21,6 @@
 <Select />
 
 <br />
-
-<!-- <Tabs /> -->
 
 <br />
 
