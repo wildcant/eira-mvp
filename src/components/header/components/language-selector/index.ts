@@ -9,4 +9,4 @@ export const setLanguageCookie = (lang: string) => {
 	document.cookie = `lang=${lang};path=/`;
 };
 
-export { default as LanguageSelector } from './LanguageSelector.svelte';
+export { default as LanguageSelector } from './language-selector.svelte';

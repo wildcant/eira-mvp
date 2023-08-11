@@ -2,8 +2,8 @@
 	import { Label } from '$lib/components/ui/label';
 	import { cn } from '$lib/utils';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './Form.svelte';
-	import { getFieldContext } from './FormField.svelte';
+	import { getFormContext } from './form.svelte';
+	import { getFieldContext } from './form-field.svelte';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

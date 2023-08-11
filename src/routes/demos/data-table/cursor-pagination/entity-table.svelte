@@ -1,5 +1,5 @@
 <script lang="ts" generics="T">
-	import Scroller from '$lib/components/custom/scroller/Scroller.svelte';
+	import Scroller from '$lib/components/custom/scroller/scroller.svelte';
 	import type { PaginatedApiResponse } from '$lib/types';
 	import { debounce } from 'lodash';
 	import { Render, Subscribe, createTable } from 'svelte-headless-table';

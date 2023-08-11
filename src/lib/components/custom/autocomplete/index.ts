@@ -1,9 +1,9 @@
-import Root from './components/Autocomplete.svelte';
-import Button from './components/AutocompleteButton.svelte';
-import Input from './components/AutocompleteInput.svelte';
-import Label from './components/AutocompleteLabel.svelte';
-import Option from './components/AutocompleteOption.svelte';
-import Options from './components/AutocompleteOptions.svelte';
+import Root from './components/autocomplete.svelte';
+import Button from './components/autocomplete-button.svelte';
+import Input from './components/autocomplete-input.svelte';
+import Label from './components/autocomplete-label.svelte';
+import Option from './components/autocomplete-option.svelte';
+import Options from './components/autocomplete-options.svelte';
 
 export {
 	Root,

@@ -1,9 +1,9 @@
-import Root from './components/Drawer.svelte';
-import Close from './components/DrawerClose.svelte';
-import Portal from './components/DrawerPortal.svelte';
-import Content from './components/DrawerContent.svelte';
-import Overlay from './components/DrawerOverlay.svelte';
-import Trigger from './components/DrawerTrigger.svelte';
+import Root from './components/drawer.svelte';
+import Close from './components/drawer-close.svelte';
+import Portal from './components/drawer-portal.svelte';
+import Content from './components/drawer-content.svelte';
+import Overlay from './components/drawer-overlay.svelte';
+import Trigger from './components/drawer-trigger.svelte';
 
 export {
 	Root,

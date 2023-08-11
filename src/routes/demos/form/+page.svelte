@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Uploader from '$components/uploader/Uploader.svelte';
+	import { Uploader } from '$components/uploader';
 	import * as Form from '$lib/components/custom/form';
 	import { Button } from '$lib/components/ui/button';
 	import { Input as ComplexCustomInput, inputVariants } from '$lib/components/ui/input';

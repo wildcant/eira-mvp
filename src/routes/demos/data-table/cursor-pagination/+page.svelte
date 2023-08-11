@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Person } from '$lib/demos/samples';
-	import EntityTable from './EntityTable.svelte';
+	import EntityTable from './entity-table.svelte';
 
 	export let data;
 	const { apiResponse } = data;

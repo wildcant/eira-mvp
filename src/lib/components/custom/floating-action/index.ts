@@ -1,1 +1,1 @@
-export { default as FloatingAction } from './FloatingAction.svelte';
+export { default as FloatingAction } from './floating-action.svelte';

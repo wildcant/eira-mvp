@@ -1,6 +1,6 @@
-import Modal from './components/Modal.svelte';
-import ModalsManager from './components/ModalsManager.svelte';
+import Modal from './components/modal.svelte';
+import ModalsManager from './components/modals-manager.svelte';
 
 export { Modal, ModalsManager };
 
-export * from './types.js';
+export * from './types';

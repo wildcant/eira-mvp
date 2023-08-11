@@ -2,6 +2,6 @@ import {
 	closeModal,
 	openConfirmationModal,
 	openCustomModal
-} from './components/ModalsManager.svelte';
+} from './components/modals-manager.svelte';
 
 export { closeModal, openConfirmationModal, openCustomModal };

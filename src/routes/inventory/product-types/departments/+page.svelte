@@ -4,8 +4,8 @@
 	import { t } from '$lib/i18n';
 	import { departmentSchema } from '$lib/schemas/department';
 	import { createRender } from 'svelte-headless-table';
-	import EditableColorCell from './components/EditableColorCell.svelte';
-	import NewDepartmentForm from './components/NewDepartmentForm.svelte';
+	import EditableColorCell from './components/editable-color-cell.svelte';
+	import NewDepartmentForm from './components/new-department-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, form } = data;

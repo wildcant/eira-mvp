@@ -3,8 +3,8 @@
 	import * as Autocomplete from '$lib/components/custom/autocomplete';
 	import { cn } from '$lib/utils';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './Form.svelte';
-	import { getFieldContext } from './FormField.svelte';
+	import { getFormContext } from './form.svelte';
+	import { getFieldContext } from './form-field.svelte';
 
 	type AutocompleteOption = Item<T, TMeta>;
 	export let options: AutocompleteOption[];

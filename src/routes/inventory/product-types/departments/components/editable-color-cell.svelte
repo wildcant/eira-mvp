@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { EditableRowState } from '$components/crud-data-table/addEditableRow';
+	import type { EditableRowState } from '$components/crud-data-table';
 	import type { Department } from '$lib/api/types';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';

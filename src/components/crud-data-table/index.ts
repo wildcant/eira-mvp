@@ -39,10 +39,13 @@ export const addEditableRow =
 		return { pluginState };
 	};
 
-export { default as CrudDataTable } from './components/CrudDataTable.svelte';
-export { default as EditActions } from './components/EditActions.svelte';
-export { default as EditableCell } from './components/EditableCell.svelte';
-export { default as NewEntityModal, NEW_ENTITY_MODAL_ID } from './components/NewEntityModal.svelte';
+export { default as CrudDataTable } from './components/crud-data-table.svelte';
+export { default as EditActions } from './components/edit-actions.svelte';
+export { default as EditableCell } from './components/editable-cell.svelte';
+export {
+	default as NewEntityModal,
+	NEW_ENTITY_MODAL_ID
+} from './components/new-entity-modal.svelte';
 export { default as ActionsCell } from './components/actions-cell.svelte';
 export const UNEXPECTED_ROW_TYPE = 'Unexpected CRUD column definition - row is not of type data.';
 export * from './types';

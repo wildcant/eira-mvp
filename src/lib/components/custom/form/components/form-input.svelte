@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { Textarea } from '$lib/components/ui/textarea';
+	import { Input } from '$lib/components/ui/input';
 	import { cn } from '$lib/utils';
-	import type { HTMLTextareaAttributes } from 'svelte/elements';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './Form.svelte';
-	import { getFieldContext } from './FormField.svelte';
+	import { getFormContext } from './form.svelte';
+	import { getFieldContext } from './form-field.svelte';
 
-	interface $$Props extends HTMLTextareaAttributes {
-		disabled?: HTMLTextareaAttributes['disabled'];
+	interface $$Props extends HTMLInputAttributes {
+		disabled?: HTMLInputAttributes['disabled'];
 		class?: string | undefined | null;
 	}
 
-	export let disabled: HTMLTextareaAttributes['disabled'] = undefined;
+	export let disabled: HTMLInputAttributes['disabled'] = undefined;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -24,9 +24,10 @@
 	const { submitting } = form;
 </script>
 
-<Textarea
+<Input
 	id={name}
 	{name}
+	type="text"
 	bind:value={$value}
 	disabled={disabled || $submitting}
 	class={cn({ 'border-red-500': !!$errors }, className)}

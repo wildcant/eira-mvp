@@ -7,7 +7,7 @@
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { Routes, type Item } from './types';
-	import NavigationIcon from './NavigationIcon.svelte';
+	import NavigationIcon from './navigation-icon.svelte';
 
 	$: items = [
 		{

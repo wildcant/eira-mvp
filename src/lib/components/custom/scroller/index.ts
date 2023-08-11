@@ -1,1 +1,1 @@
-export { default as Scroller } from './Scroller.svelte';
+export { default as Scroller } from './scroller.svelte';

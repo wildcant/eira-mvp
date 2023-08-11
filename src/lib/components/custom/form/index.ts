@@ -1,10 +1,10 @@
-import Form from './components/Form.svelte';
-import FormAutocomplete from './components/FormAutocomplete.svelte';
-import FormDescription from './components/FormDescription.svelte';
-import FormField from './components/FormField.svelte';
-import FormInput from './components/FormInput.svelte';
-import FormLabel from './components/FormLabel.svelte';
-import FormTextarea from './components/FormTextarea.svelte';
+import Form from './components/form.svelte';
+import FormAutocomplete from './components/form-autocomplete.svelte';
+import FormDescription from './components/form-description.svelte';
+import FormField from './components/form-field.svelte';
+import FormInput from './components/form-input.svelte';
+import FormLabel from './components/form-label.svelte';
+import FormTextarea from './components/form-textarea.svelte';
 
 export {
 	Form as Root,

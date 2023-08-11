@@ -4,7 +4,7 @@
 	import { t } from '$lib/i18n';
 	import { productsAttributeSchema } from '$lib/schemas/products-attribute';
 	import { createRender } from 'svelte-headless-table';
-	import NewProductsAttributeForm from './components/NewProductsAttributeForm.svelte';
+	import NewProductsAttributeForm from './components/new-products-attribute-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, form } = data;

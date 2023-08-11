@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-	import Modal from './Modal.svelte';
+	import Modal from './modal.svelte';
 </script>
 
 {#each $modals as modal (modal.id)}

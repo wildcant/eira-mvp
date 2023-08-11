@@ -7,7 +7,7 @@
 	import { productsSchema } from '$lib/schemas/product';
 	import { Plus } from 'lucide-svelte';
 	import { superForm } from 'sveltekit-superforms/client';
-	import AttributesTable from './components/AttributesTable.svelte';
+	import AttributesTable from './components/attributes-table.svelte';
 
 	export let data;
 	const { productsAttributes } = data;

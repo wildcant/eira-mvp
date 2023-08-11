@@ -1,7 +1,7 @@
-import Root from './components/Disclosure.svelte';
-import Link from './components/DisclosureLink.svelte';
-import Content from './components/DisclosureContent.svelte';
-import Trigger from './components/DisclosureTrigger.svelte';
+import Root from './components/disclosure.svelte';
+import Link from './components/disclosure-link.svelte';
+import Content from './components/disclosure-content.svelte';
+import Trigger from './components/disclosure-trigger.svelte';
 
 export {
 	Root,

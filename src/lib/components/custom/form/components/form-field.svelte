@@ -11,7 +11,7 @@
 	import type { Action } from 'svelte/action';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './Form.svelte';
+	import { getFormContext } from './form.svelte';
 
 	export let name: FieldName;
 	let className: string | undefined | null = undefined;
