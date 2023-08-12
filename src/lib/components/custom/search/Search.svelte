@@ -45,10 +45,10 @@
 		<Button
 			variant="ghost"
 			size="icon"
-			class="!p-0 peer-placeholder-shown:hidden absolute right-2"
+			class="!p-0 peer-placeholder-shown:hidden absolute right-2 w-6 h-6 focus-visible:ring-offset-0 focus-visible:ring-4"
 			type="reset"
 		>
-			<XCircle class="w-4 h-4" />
+			<XCircle class="w-5 h-5" />
 		</Button>
 	</LabelPrimitive.Root>
 </form>

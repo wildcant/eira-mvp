@@ -10,6 +10,7 @@
 	import { cn } from '$lib/utils';
 	import type { Action } from 'svelte/action';
 	import type { HTMLInputAttributes } from 'svelte/elements';
+	import { derived } from 'svelte/store';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
 	import { getFormContext } from './form.svelte';
 
@@ -59,15 +60,22 @@
 		},
 		setValue: (val: any) => value.set(val)
 	};
+
+	const hasErrors = derived([errors], ([$errors]) =>
+		Boolean($errors && (('_errors' in $errors && $errors._errors) || $errors.length))
+	);
 </script>
 
 <div class={className}>
-	<slot {field} />
+	<slot {field} hasErrors={$hasErrors} />
 
-	<!-- Could move this to a different component if needed. -->
 	{#if $errors}
 		<span class={cn('block text-sm font-medium text-destructive')}>
-			{$errors}
+			{#if $errors?.length}
+				{$errors}
+			{:else if '_errors' in $errors && $errors._errors}
+				{$errors._errors}
+			{/if}
 		</span>
 	{/if}
 </div>

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Label } from '$lib/components/ui/label';
 	import { cn } from '$lib/utils';
+	import { derived } from 'svelte/store';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './form.svelte';
 	import { getFieldContext } from './form-field.svelte';
+	import { getFormContext } from './form.svelte';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -15,8 +16,13 @@
 	const { form } = getFormContext();
 
 	const { errors } = formFieldProxy(form, name);
+
+	// For arrays the errors are returned within the _errors array.
+	const hasErrors = derived([errors], ([$errors]) =>
+		Boolean($errors && (('_errors' in $errors && $errors._errors) || $errors.length))
+	);
 </script>
 
-<Label for={name} class={cn($errors ? 'text-destructive' : '', className)} {...$$restProps}>
+<Label for={name} class={cn($hasErrors ? 'text-destructive' : '', className)} {...$$restProps}>
 	<slot />
 </Label>

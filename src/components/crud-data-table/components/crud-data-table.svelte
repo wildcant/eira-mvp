@@ -15,18 +15,9 @@
 	import debounce from 'lodash/debounce';
 	import isEqual from 'lodash/isEqual';
 	import { Plus } from 'lucide-svelte';
-	import type { SvelteComponent } from 'svelte';
-	import {
-		ComponentRenderConfig,
-		DataBodyRow,
-		Render,
-		Subscribe,
-		createRender,
-		createTable
-	} from 'svelte-headless-table';
+	import { DataBodyRow, Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { addTableFilter } from 'svelte-headless-table/plugins';
 	import { writable } from 'svelte/store';
-	import type { AnyZodObject } from 'zod';
 	import {
 		ActionsCell,
 		EditActions,
@@ -35,10 +26,11 @@
 		NewEntityModal,
 		UNEXPECTED_ROW_TYPE,
 		addEditableRow,
+		type Create,
 		type CrudTableColumns,
 		type Endpoint,
 		type Item,
-		type NewEntityForm
+		type Update
 	} from '..';
 
 	export let entity: string;
@@ -47,11 +39,10 @@
 	let columnsParam: CrudTableColumns<T>;
 	export { columnsParam as columns };
 	export let endpoint: Endpoint;
-	export let createForm: {
-		form: NewEntityForm;
-		validators: AnyZodObject;
-		component: ComponentRenderConfig<SvelteComponent>;
-	};
+	export let create: Create;
+
+	export let update: Update<T, Record<string, string | string[] | number | null>> | undefined =
+		undefined;
 
 	const data = writable(initialData.data);
 
@@ -193,7 +184,7 @@
 		try {
 			const response = await fetch(`${endpoint.url}/${$updatedRow.id}`, {
 				method: 'put',
-				body: JSON.stringify($updatedRow)
+				body: JSON.stringify(update?.dto ? update.dto($updatedRow) : $updatedRow)
 			});
 
 			const json = await response.json();
@@ -290,10 +281,10 @@
 					id: NEW_ENTITY_MODAL_ID,
 					title: `${$t('common.word.new.capitalize')} ${$t(`entity.${entity}.singular.lowercase`)}`,
 					children: createRender(NewEntityModal, {
-						form: createForm.form,
-						validators: createForm.validators
+						form: create.form,
+						validators: create.validators
 					})
-						.slot(createForm.component)
+						.slot(create.component)
 						.on('success', () => {
 							closeModal(NEW_ENTITY_MODAL_ID);
 							reload();

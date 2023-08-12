@@ -253,8 +253,36 @@ INSERT INTO
 VALUES
 	('masa', 'mg'),
 	('volumen', 'ml'),
-	('unidades', '#'),
-	('restricción de edad', ''),
+	('unidades', 'x'),
+	('restricción de edad', 'años'),
 	('forma farmacéutica', ''),
 	('presentación', ''),
-	('sabor', '')
+	('sabor', '');
+
+
+INSERT INTO 
+		ProductsAttributeValue (productsAttributeId, name)
+VALUES
+	(1, '500'),
+	(2, '60'),
+	(2, '120'),
+	(3, '4'),
+	(3, '8'),
+	(3, '10'),
+	(3, '12'),
+	(3, '14'),
+	(3, '16'),
+	(3, '20'),
+	(3, '24'),
+	(3, '28'),
+	(3, '48'),
+	(3, '200'),
+	(4, '2'),
+	(5, 'Tabletas'),
+	(5, 'Cápsulas'),
+	(6, 'Frasco'),
+	(6, 'Caja'),
+	(6, 'Fracción'),
+	(7, 'Frambuesa'),
+	(7, 'Naranja');
+

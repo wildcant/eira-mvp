@@ -169,6 +169,29 @@ ON PRODUCTSATTRIBUTE FOR EACH ROW BEGIN
 	WHERE id = NEW.id;
 END; 
 
+DROP TABLE IF EXISTS ProductsAttributeValue;
+
+CREATE TABLE
+    IF NOT EXISTS ProductsAttributeValue (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        productsAttributeId INTEGER NOT NULL,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP,
+        FOREIGN KEY (productsAttributeId) REFERENCES ProductsAttribute(id) ON DELETE CASCADE
+    );
+
+CREATE UNIQUE INDEX ProductsAttributeValueUniqueValuePerAttribute ON ProductsAttributeValue(name, productsAttributeId);
+
+CREATE TRIGGER PRODUCT_ATTRIBUTE_VALUE_UPDATED_AT AFTER 
+UPDATE ON PRODUCTSATTRIBUTEVALUE FOR EACH ROW BEGIN 
+	UPDATE
+	    ProductsAttributeValue
+	SET
+	    updatedAt = CURRENT_TIMESTAMP
+	WHERE id = NEW.id;
+END; 
+
 DROP TABLE IF EXISTS Image;
 
 CREATE TABLE

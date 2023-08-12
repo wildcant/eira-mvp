@@ -31,11 +31,11 @@
 		}
 	];
 
-	const createForm = {
+	const create = {
 		form,
 		validators: $departmentSchema,
 		component: createRender(NewDepartmentForm)
 	};
 </script>
 
-<CrudDataTable entity="department" {initialData} {columns} {title} {endpoint} {createForm} />
+<CrudDataTable entity="department" {initialData} {columns} {title} {endpoint} {create} />

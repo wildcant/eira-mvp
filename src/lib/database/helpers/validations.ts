@@ -16,7 +16,9 @@ const ALLOWED_RELATIONSHIPS = [
 	'companies',
 	'subcategories',
 	'users',
-	'images'
+	'images',
+	'attributes',
+	'values'
 ] as const;
 const relationships = z.enum(ALLOWED_RELATIONSHIPS);
 export type Relationship = z.infer<typeof relationships>;

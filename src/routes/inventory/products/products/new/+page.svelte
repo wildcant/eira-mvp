@@ -10,12 +10,10 @@
 	import AttributesTable from './components/attributes-table.svelte';
 
 	export let data;
-	const { productsAttributes } = data;
+	const { attributes, categories, departments, subCategories } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema });
-	const { tainted, form: frm } = form;
-	// let src: File | undefined = undefined;
-	// $: console.log($frm);
+	const { tainted } = form;
 </script>
 
 <Form.Root {form} method="post" class="form">
@@ -69,21 +67,33 @@
 					<Form.Label>
 						{$t('entity.department.singular.capitalize')}
 					</Form.Label>
-					<Form.Autocomplete options={[]} />
+					{@const options = departments?.map((dep) => ({
+						value: dep.id,
+						label: dep.name
+					}))}
+					<Form.Autocomplete {options} />
 				</Form.Field>
 
 				<Form.Field name="categoryId">
 					<Form.Label>
 						{$t('entity.category.singular.capitalize')}
 					</Form.Label>
-					<Form.Autocomplete options={[]} />
+					{@const options = categories?.map((cat) => ({
+						value: cat.id,
+						label: cat.name
+					}))}
+					<Form.Autocomplete {options} />
 				</Form.Field>
 
 				<Form.Field name="subCategoryId">
 					<Form.Label>
 						{$t('entity.sub-category.singular.capitalize')}
 					</Form.Label>
-					<Form.Autocomplete options={[]} />
+					{@const options = subCategories?.map((scat) => ({
+						value: scat.id,
+						label: scat.name
+					}))}
+					<Form.Autocomplete {options} />
 				</Form.Field>
 			</Container>
 		</div>
@@ -108,12 +118,7 @@
 					<p>{$t('page.inventory.products.new.attributes.subtitle')}</p>
 				</div>
 
-				<AttributesTable {productsAttributes} />
-
-				<Button type="button" variant="link">
-					<Plus class="mr-2 h-4 w-4" />
-					{$t('common.word.add.capitalize')}
-				</Button>
+				<AttributesTable {attributes} />
 			</Container>
 		</div>
 

@@ -33,11 +33,11 @@
 		}
 	];
 
-	const createForm = {
+	const create = {
 		form,
 		validators: $subCategorySchema,
 		component: createRender(NewSubCategoryForm)
 	};
 </script>
 
-<CrudDataTable entity="sub-category" {title} {columns} {initialData} {endpoint} {createForm} />
+<CrudDataTable entity="sub-category" {title} {columns} {initialData} {endpoint} {create} />

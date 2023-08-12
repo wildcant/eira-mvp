@@ -1,6 +1,6 @@
 import type { ExpressionBuilder } from 'kysely';
 import type { DB } from 'kysely-codegen';
-import { jsonObjectFrom } from './sqlite';
+import { jsonArrayFrom, jsonObjectFrom } from './sqlite';
 
 type Join = {
 	[table in keyof DB]?: {
@@ -57,6 +57,23 @@ export const join = {
 						.select(['Image.id', 'Image.url', 'Image.createdAt', 'Image.updatedAt'])
 						.whereRef('Product.imageId', '=', 'Image.id')
 				).as('image');
+			}
+		}
+	},
+	ProductsAttribute: {
+		with: {
+			ProductsAttributeValue: (eb) => {
+				return jsonArrayFrom(
+					eb
+						.selectFrom('ProductsAttributeValue')
+						.select([
+							'ProductsAttributeValue.id',
+							'ProductsAttributeValue.name',
+							'ProductsAttributeValue.createdAt',
+							'ProductsAttributeValue.updatedAt'
+						])
+						.whereRef('ProductsAttribute.id', '=', 'ProductsAttributeValue.productsAttributeId')
+				).as('values');
 			}
 		}
 	}

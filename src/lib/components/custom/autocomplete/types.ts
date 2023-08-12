@@ -28,7 +28,8 @@ export type {
 	LabelProps as DialogLabelProps
 };
 
-export type Meta = Record<string, string | number | boolean> & { disabled?: boolean };
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type Meta = Record<string, string | number | boolean | unknown> & { disabled?: boolean };
 export type MetaDefault = { disabled?: boolean };
 export type Item<T extends string | number = string, TMeta extends Meta = MetaDefault> = {
 	value: T;

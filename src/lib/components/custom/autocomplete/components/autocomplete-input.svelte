@@ -18,6 +18,6 @@
 <input
 	use:melt={$input}
 	value={$inputValue}
-	class={cn(selectTriggerVariants(), className)}
+	class={cn(selectTriggerVariants(), 'min-w-[3rem]', className)}
 	{...$$restProps}
 />

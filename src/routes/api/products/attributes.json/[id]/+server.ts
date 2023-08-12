@@ -15,14 +15,37 @@ export const PUT = async ({ params, request, locals: { $t, schemas } }) => {
 	const id = parseInt(params.id, 10);
 	await exists({ table: 'ProductsAttribute', id, $t });
 
-	const body = schemas.productsAttribute.partial().parse(await request.json());
+	const { name, unitOfMeasure, values } = schemas.productsAttribute
+		.partial()
+		.parse(await request.json());
 
-	const { name, unitOfMeasure } = body;
-	const [r] = await db
-		.updateTable('ProductsAttribute')
-		.set({ name, unitOfMeasure })
-		.where('id', '=', id)
-		.execute();
+	const [r] = await db.transaction().execute(async (trx) => {
+		// compare existing values with provided values and define deleted and added values
+		const currentValues = await trx
+			.selectFrom('ProductsAttributeValue')
+			.select(['id', 'name'])
+			.where('ProductsAttributeValue.productsAttributeId', '=', id)
+			.execute();
+
+		const deletedValuesIds = currentValues
+			?.filter(({ name }) => !values?.map((v) => v).includes(name))
+			.map(({ id }) => id);
+		const addedValues = values
+			?.filter((v) => !currentValues.map((v) => v.name).includes(v))
+			.map((v) => ({ name: v, productsAttributeId: id }));
+
+		if (deletedValuesIds.length)
+			await trx.deleteFrom('ProductsAttributeValue').where('id', 'in', deletedValuesIds).execute();
+
+		if (addedValues?.length)
+			await trx.insertInto('ProductsAttributeValue').values(addedValues).execute();
+
+		return trx
+			.updateTable('ProductsAttribute')
+			.set({ name, unitOfMeasure })
+			.where('id', '=', id)
+			.execute();
+	});
 
 	return json({ suceded: r.numUpdatedRows > 0 });
 };

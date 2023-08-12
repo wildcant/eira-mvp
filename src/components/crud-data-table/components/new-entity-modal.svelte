@@ -13,6 +13,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { AnyZodObject } from 'zod';
 	import type { NewEntityForm } from '../types';
+	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let form: NewEntityForm;
 	export let validators: AnyZodObject;
@@ -21,6 +22,7 @@
 	const dispatch = createEventDispatcher();
 
 	const newEntityForm = superForm($sprForm, {
+		dataType: 'json',
 		validators,
 		onResult: ({ result }) => {
 			if (result.type === 'success') {
@@ -30,6 +32,7 @@
 		resetForm: true
 	});
 	const { errors } = newEntityForm;
+	// const { form: frm } = newEntityForm;
 
 	$: if ($errors._errors?.length) {
 		openToast({
@@ -47,3 +50,5 @@
 		</Button>
 	</Dialog.Footer>
 </Form.Root>
+
+<!-- <SuperDebug data={{ $errors, $frm }} /> -->

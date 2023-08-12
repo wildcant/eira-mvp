@@ -10,6 +10,7 @@
 
 <AlertDialogPrimitive.Cancel
 	class={cn(buttonVariants({ variant: 'outline' }), 'mt-2 sm:mt-0', className)}
+	on:m-click
 	{...$$restProps}
 >
 	<slot />

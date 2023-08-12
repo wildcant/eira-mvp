@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { EditableRowState } from '$components/crud-data-table/addEditableRow';
+	import type { EditableRowState } from '$components/crud-data-table';
 	import * as Autocomplete from '$lib/components/custom/autocomplete';
 
 	import type { Category, Department } from '$lib/api/types';

@@ -20,8 +20,8 @@ function set<T extends string | number = string, TMeta extends Meta = MetaDefaul
 	};
 }
 
-function get<T extends string | number = string, TMeta extends Meta = MetaDefault>() {
-	return getContext<ComboboxReturn<Item<T, TMeta>>>(NAME);
+function get() {
+	return getContext<ComboboxReturn>(NAME);
 }
 
 export const ctx = {

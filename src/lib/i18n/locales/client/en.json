@@ -60,6 +60,10 @@
 			"options": {
 				"capitalize": "Options",
 				"lowercase": "options"
+			},
+			"values": {
+				"capitalize": "Values",
+				"lowercase": "values"
 			}
 		}
 	},

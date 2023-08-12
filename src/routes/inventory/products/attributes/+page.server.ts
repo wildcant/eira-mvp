@@ -5,10 +5,13 @@ import { setError, superValidate } from 'sveltekit-superforms/server';
 
 export const load = async ({ locals: { schemas, fetcher } }) => {
 	const endpoint = {
-		url: '/api/products/attributes.json'
+		url: '/api/products/attributes.json',
+		params: { include: 'values' }
 	} satisfies Endpoint;
 
-	const initialData = await fetcher<GetProductsAttributeResponse>(endpoint.url);
+	const initialData = await fetcher<GetProductsAttributeResponse>(
+		`${endpoint.url}?include=${endpoint.params.include}`
+	);
 
 	const form = await superValidate(schemas.productsAttribute);
 

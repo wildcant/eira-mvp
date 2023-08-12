@@ -17,7 +17,7 @@
 		<input
 			type="text"
 			bind:value={$updatedRow[id]}
-			name={id}
+			name={id.toString()}
 			class={cn('w-10 border border-primary')}
 		/>
 	{:else}

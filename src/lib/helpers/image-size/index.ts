@@ -25,7 +25,7 @@ const types = {
 	jpeg: jpg
 };
 
-export function getDimensions(buffer: ArrayBuffer, type: keyof typeof types): Size {
+export function getDimensions(buffer: ArrayBuffer, type: keyof typeof types): Size | undefined {
 	const fn = types[type];
 
 	if (!fn) {

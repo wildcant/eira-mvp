@@ -11,12 +11,13 @@ export const generateProductsAttributeSchema = ({ $t }: WithT) =>
 				message: `${$t('common.word.name.capitalize')} ${$t('common.phrase.is-required')}`
 			})
 			.max(100),
-		unitOfMeasure: z
+		unitOfMeasure: z.string().default(''),
+		values: z
 			.string()
+			.array()
 			.min(1, {
-				message: `${$t('common.word.unit.capitalize')} ${$t('common.phrase.is-required')}`
+				message: `${$t('common.word.values.capitalize')} ${$t('common.phrase.is-required')}`
 			})
-			.max(100)
 	});
 
 export const productsAttributeSchema = derived(t, ($t) => generateProductsAttributeSchema({ $t }));

@@ -9,13 +9,16 @@
 	import { cn } from '$lib/utils';
 	import { melt } from '@melt-ui/svelte';
 	import { ctx } from '../ctx';
+	import type { Item } from '../types';
 
 	const {
 		states: { filteredItems },
 		elements: { menu }
 	} = ctx.get();
+
+	$: filteredOptions = $filteredItems as Item[];
 </script>
 
-<ul use:melt={$menu} class={cn(selectContentVariants(), 'z-[190]')}>
-	<slot filteredOptions={$filteredItems} />
+<ul use:melt={$menu} class={cn(selectContentVariants(), 'z-[190] max-h-44 overflow-y-auto')}>
+	<slot {filteredOptions} />
 </ul>

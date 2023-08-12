@@ -1,6 +1,5 @@
 <script lang="ts">
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
-	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { t } from '$lib/i18n';
 	import { Render } from 'svelte-headless-table';
@@ -20,9 +19,6 @@
 
 {#if modal.type === 'confirmation'}
 	<AlertDialog.Root bind:open>
-		<AlertDialog.Trigger asChild let:trigger>
-			<Button builders={[trigger]} variant="outline">Show Dialog</Button>
-		</AlertDialog.Trigger>
 		<AlertDialog.Content>
 			<AlertDialog.Header>
 				<AlertDialog.Title>{modal.title}</AlertDialog.Title>
@@ -40,7 +36,7 @@
 			<AlertDialog.Footer>
 				<AlertDialog.Cancel
 					disabled={loading}
-					on:click={async () => {
+					on:m-click={async () => {
 						if (modal.type === 'confirmation') await modal.onCancel?.();
 						close();
 					}}
@@ -49,7 +45,7 @@
 				</AlertDialog.Cancel>
 				<AlertDialog.Action
 					disabled={loading}
-					on:click={async () => {
+					on:m-click={async () => {
 						loading = true;
 						if (modal.type === 'confirmation') await modal.onConfirm?.();
 						loading = false;

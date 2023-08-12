@@ -85,7 +85,7 @@ function validate_exif_block(view: DataView, p: number, index: number) {
 	}
 }
 
-export function jpg(data: ArrayBuffer): Size {
+export function jpg(data: ArrayBuffer): Size | undefined {
 	const bytes = new Uint8Array(data);
 
 	if (bytes[0] === 0xff && bytes[1] === 0xd8) {

@@ -15,7 +15,7 @@ export const POST = async ({ request }) => {
 	const ext = file.name.split('.').at(1) as 'jpg' | 'png';
 	const name = `${Date.now()}.${ext}`;
 	const data = await file.arrayBuffer();
-	const { width, height } = getDimensions(data, ext);
+	const { width, height } = getDimensions(data, ext) ?? { width: 100, height: 100 };
 
 	const { url } = await upload(name, file);
 
