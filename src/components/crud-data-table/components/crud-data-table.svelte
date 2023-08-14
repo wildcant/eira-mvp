@@ -77,7 +77,7 @@
 					.on('delete', (event) =>
 						openConfirmationModal({
 							id: 'delete-row',
-							title: `Are you sure you want to delete this row?`,
+							title: $t('common.phrase.confirm-remove'),
 							onConfirm: () => deleteRecord(event.detail)
 						})
 					);
@@ -194,7 +194,7 @@
 			openToast({
 				data: {
 					variant: 'default',
-					title: $t('common.action-completed'),
+					title: $t('common.phrase.action-completed'),
 					description: `${$t('entity.department.singular.capitalize')} ${$t(
 						'common.word.updated.lowercase'
 					)}`
@@ -268,10 +268,10 @@
 
 <div>
 	<div class="mb-4 flex justify-between items-center">
-		<h2>
+		<h4>
 			{totalItems}
 			{title}
-		</h2>
+		</h4>
 
 		<Button
 			variant="outline"

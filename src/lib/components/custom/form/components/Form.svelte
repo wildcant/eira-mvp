@@ -18,11 +18,14 @@
 		form: SuperForm<ZodValidation<T>, unknown>;
 	}
 
+	let className: $$Props['class'] = undefined;
+	export { className as class };
+
 	export let form: SuperForm<ZodValidation<T>, unknown>;
 
 	setContext({ form: form as any });
 </script>
 
-<form use:form.enhance {...$$restProps}>
+<form use:form.enhance class={className} {...$$restProps}>
 	<slot />
 </form>

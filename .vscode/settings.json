@@ -18,6 +18,7 @@
 		"**/*.code-search": true,
 		"**/tmp": true,
 		"**/demos": true,
-		"**/primitives": true
+		"**/primitives": true,
+		"**/.svelte-kit": true
 	}
 }

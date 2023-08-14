@@ -12,7 +12,7 @@
 	import NewSubCategoryForm from './components/new-sub-category-form.svelte';
 
 	export let data;
-	const { initialData, endpoint, lazy, form } = data;
+	const { initialData, endpoint, categories, form } = data;
 
 	const title = $t('entity.sub-category.plural.capitalize');
 
@@ -26,7 +26,7 @@
 				return createRender(EditableCategoryCell, {
 					row,
 					editableRow,
-					categoriesPromise: lazy.categories
+					categories
 				});
 			},
 			meta: { class: 'w-3/12' }
@@ -36,7 +36,7 @@
 	const create = {
 		form,
 		validators: $subCategorySchema,
-		component: createRender(NewSubCategoryForm)
+		component: createRender(NewSubCategoryForm, { categories })
 	};
 </script>
 

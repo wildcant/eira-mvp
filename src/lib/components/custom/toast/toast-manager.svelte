@@ -33,7 +33,13 @@
 			in:fly={{ duration: 150, x: '100%' }}
 			out:fly={{ duration: 150, x: '100%' }}
 		>
-			<div class={cn(alertVariants({ variant: data.variant }), 'min-w-[12rem]', className)}>
+			<div
+				class={cn(
+					alertVariants({ variant: data.variant }),
+					'min-w-[16rem] bg-background',
+					className
+				)}
+			>
 				{#if data.variant === 'destructive'}
 					<AlertCircle class="h-4 w-4" />
 				{/if}
@@ -49,7 +55,7 @@
 					use:melt={$close(id)}
 					class={cn(
 						buttonVariants({ variant: 'ghost', size: 'icon' }),
-						'absolute right-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'
+						'absolute right-1 top-1 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'
 					)}
 				>
 					<X class="h-4 w-4" />

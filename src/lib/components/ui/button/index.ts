@@ -17,7 +17,7 @@ export const buttonVariants = cva(
 				default: 'h-10 px-4 py-2',
 				sm: 'h-9 rounded-md px-3',
 				lg: 'h-11 rounded-md px-8',
-				icon: 'h-10 w-10 p-2 rounded-full opacity-50 hover:opacity-100',
+				icon: 'h-10 w-10 p-2 rounded-full opacity-80 hover:opacity-100',
 				unset: ''
 			}
 		},

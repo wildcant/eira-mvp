@@ -9,20 +9,19 @@ export const load = async ({ locals: { schemas, fetcher } }) => {
 		params: { include: 'categories' }
 	} satisfies Endpoint;
 
-	const initialData = await fetcher<GetSubCategoriesResponse>(
-		`${endpoint.url}?include=${endpoint.params.include}`
-	);
+	const [initialData, categories] = await Promise.all([
+		fetcher<GetSubCategoriesResponse>(`${endpoint.url}?include=${endpoint.params.include}`),
+		fetcher<GetCategoriesResponse>(`/api/products/categories.json?all=true`).then(
+			({ data }) => data
+		)
+	]);
 
 	const form = await superValidate(schemas.subCategory);
 	return {
 		endpoint,
 		initialData,
 		form,
-		lazy: {
-			categories: fetcher<GetCategoriesResponse>(`/api/products/categories.json?all=true`).then(
-				({ data }) => data
-			)
-		}
+		categories
 	};
 };
 

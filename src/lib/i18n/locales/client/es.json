@@ -1,12 +1,12 @@
 {
 	"common": {
-		"action-completed": "",
 		"phrase": {
 			"action-completed": "Acción completada",
 			"confirm-delete": "Estas seguro que quieres borrar",
 			"is-required": "es requerido",
 			"unit-of-measure": "Unidad de medida",
-			"was-deleted": "fue eliminada"
+			"was-deleted": "fue eliminada",
+			"confirm-remove": "¿Estas seguro que quieres borrar este registro?"
 		},
 		"word": {
 			"add": {
@@ -45,6 +45,10 @@
 				"capitalize": "Nuevo",
 				"lowercase": "nuevo"
 			},
+			"options": {
+				"capitalize": "Opciones",
+				"lowercase": "opciones"
+			},
 			"save": {
 				"capitalize": "Guardar",
 				"lowercase": "guardar"
@@ -56,6 +60,10 @@
 			"updated": {
 				"capitalize": "Actualizada",
 				"lowercase": "actualizada"
+			},
+			"values": {
+				"capitalize": "Valores",
+				"lowercase": "valores"
 			}
 		}
 	},
@@ -120,6 +128,16 @@
 				"lowercase": "departamento"
 			}
 		},
+		"image": {
+			"plural": {
+				"capitalize": "Imágenes",
+				"lowercase": "imágenes"
+			},
+			"singular": {
+				"capitalize": "Imagen",
+				"lowercase": "imagen"
+			}
+		},
 		"product": {
 			"plural": {
 				"capitalize": "Productos",
@@ -142,11 +160,11 @@
 		},
 		"variant": {
 			"plural": {
-				"capitalize": "",
-				"lowercase": ""
+				"capitalize": "Variantes",
+				"lowercase": "variantes"
 			},
 			"singular": {
-				"capitalize": "",
+				"capitalize": "Variante",
 				"lowercase": "variante"
 			}
 		}
@@ -166,7 +184,7 @@
 				},
 				"new": {
 					"attributes": {
-						"subtitle": "Define los atributes para las variantes de tu producto",
+						"subtitle": "Define los atributos para las variantes de tu producto",
 						"title": "Atributos"
 					},
 					"basic-information": {
@@ -198,7 +216,7 @@
 						"title": "Imagen por defecto del producto"
 					},
 					"variants": {
-						"subtitle": "",
+						"subtitle": "Añade las variantes de tu producto.",
 						"title": "Variantes"
 					}
 				}

@@ -15,8 +15,13 @@ export const PUT = async ({ params, request, locals: { $t, schemas } }) => {
 	const id = parseInt(params.id, 10);
 	await exists({ table: 'SubCategory', id, $t });
 
-	const body = schemas.department.partial().parse(await request.json());
-	const [r] = await db.updateTable('SubCategory').set(body).where('id', '=', id).execute();
+	const { name, categoryId } = schemas.subCategory.partial().parse(await request.json());
+
+	const [r] = await db
+		.updateTable('SubCategory')
+		.set({ name, categoryId })
+		.where('id', '=', id)
+		.execute();
 
 	return json({ suceded: r.numUpdatedRows > 0 });
 };

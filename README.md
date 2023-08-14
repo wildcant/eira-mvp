@@ -16,7 +16,7 @@
 
 ## Purpose
 
-Typically, for drugstore staff, you'll have to work in an outdated software with the wort user experience imaginable. This is tedious to work with and can be overwhelming for some people.
+Typically, for drugstore staff, you'll have to work in an outdated software with the worst user experience imaginable. This is tedious to work with and can be overwhelming for some people.
 
 Eeira is a platform that aims to solve this problem by providing a single platform for pharmacies to manage everything to do with their workflow. And with the power of having all of that data in one place, we can provide pharmacy owners with powerful insights and automation to help them be more successful.
 

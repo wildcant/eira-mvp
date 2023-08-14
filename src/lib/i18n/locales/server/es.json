@@ -1,6 +1,7 @@
 {
 	"common": {
 		"phrase": {
+			"is-required": "es requerido",
 			"was-deleted": "fue eliminada"
 		},
 		"word": {
@@ -36,6 +37,10 @@
 				"capitalize": "Nuevo",
 				"lowercase": "nuevo"
 			},
+			"options": {
+				"capitalize": "Opciones",
+				"lowercase": "opciones"
+			},
 			"save": {
 				"capitalize": "Guardar",
 				"lowercase": "guardar"
@@ -43,6 +48,10 @@
 			"updated": {
 				"capitalize": "Actualizada",
 				"lowercase": "actualizada"
+			},
+			"values": {
+				"capitalize": "Valores",
+				"lowercase": "valores"
 			}
 		}
 	},

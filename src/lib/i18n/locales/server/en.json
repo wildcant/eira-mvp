@@ -1,7 +1,8 @@
 {
 	"common": {
 		"phrase": {
-			"is-required": "is required"
+			"is-required": "is required",
+			"was-deleted": "was deleted"
 		},
 		"word": {
 			"cancel": {

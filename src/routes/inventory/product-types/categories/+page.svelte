@@ -12,7 +12,7 @@
 	import NewCategoryForm from './components/new-category-form.svelte';
 
 	export let data;
-	const { initialData, endpoint, lazy, form } = data;
+	const { initialData, endpoint, departments, form } = data;
 
 	const title = $t('entity.category.plural.capitalize');
 
@@ -23,11 +23,7 @@
 			accessor: 'departmentId',
 			cell: ({ row }, { pluginStates: { editableRow } }) => {
 				if (!row.isData()) throw new Error(UNEXPECTED_ROW_TYPE);
-				return createRender(EditableDepartmentCell, {
-					row,
-					editableRow,
-					departmentsPromise: lazy.departments
-				});
+				return createRender(EditableDepartmentCell, { row, editableRow, departments });
 			},
 			meta: { class: 'w-3/12' }
 		}
@@ -36,7 +32,7 @@
 	const create = {
 		form,
 		validators: $categorySchema,
-		component: createRender(NewCategoryForm)
+		component: createRender(NewCategoryForm, { departments })
 	};
 </script>
 

@@ -1,6 +1,8 @@
 <script lang="ts" generics="T">
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Popover from '$lib/components/ui/popover';
+	import { t } from '$lib/i18n';
+	import { cn } from '$lib/utils';
 	import { MoreVertical } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import type { BodyRow } from 'svelte-headless-table';
@@ -16,10 +18,10 @@
 </script>
 
 <Popover.Root positioning={{ placement: 'bottom-start' }} bind:open>
-	<Popover.Trigger class={buttonVariants({ variant: 'ghost' })}>
+	<Popover.Trigger class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), '!p-0')}>
 		<MoreVertical class="w-4" />
 	</Popover.Trigger>
-	<Popover.Content class="flex flex-col w-32">
+	<Popover.Content class="flex flex-col w-32 !p-0">
 		<Button
 			size="sm"
 			variant="ghost"
@@ -30,7 +32,7 @@
 			}}
 			{disabled}
 		>
-			Edit
+			{$t('common.word.edit.capitalize')}
 		</Button>
 
 		<Button
@@ -43,7 +45,7 @@
 			}}
 			{disabled}
 		>
-			Delete
+			{$t('common.word.delete.capitalize')}
 		</Button>
 	</Popover.Content>
 </Popover.Root>

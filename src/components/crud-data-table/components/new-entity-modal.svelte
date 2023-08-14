@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export const NEW_ENTITY_MODAL_ID = 'new-entity';
+	export const NEW_ENTITY_MODAL_ID = 'new-entity-record';
 </script>
 
 <script lang="ts">
@@ -41,10 +41,10 @@
 	}
 </script>
 
-<Form.Root form={newEntityForm} method="post" action="?/create">
+<Form.Root form={newEntityForm} method="post" action="?/create" class="flex flex-col gap-4">
 	<slot />
 
-	<Dialog.Footer>
+	<Dialog.Footer class="mt-2">
 		<Button type="submit">
 			{$t('common.word.save.capitalize')}
 		</Button>
