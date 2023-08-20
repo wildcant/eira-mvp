@@ -21,18 +21,37 @@ export const generateProductsSchema = ({ $t }: WithT) =>
 		categoryId: z.coerce
 			.number()
 			.int()
-			.min(1, {
+			.optional()
+			.refine((v) => !!v, {
 				message: `${$t('entity.category.singular.capitalize')} ${$t('common.phrase.is-required')}`
 			}),
-		subCategoryId: z.coerce
-			.number()
-			.int()
-			.min(1, {
-				message: `
-        ${$t('entity.sub-category.singular.capitalize')}
-        ${$t('common.phrase.is-required')}`
-			}),
-		imageId: z.coerce.number().int().optional()
+		subCategoryId: z.coerce.number().int().optional(),
+		imageId: z.coerce.number().int().optional(),
+		attributes: z
+			.object({
+				key: z.string(),
+				id: z
+					.number()
+					.int()
+					.optional()
+					.refine((v) => !!v, {
+						message: `${$t('entity.attribute.singular.capitalize')} ${$t(
+							'common.phrase.is-required'
+						)}`
+					}),
+				values: z
+					.number()
+					.int()
+					.array()
+					.min(1, { message: 'At least one value is required.' })
+					.optional()
+					.default([])
+			})
+			.array()
+			.refine((items) => new Set(items.map((item) => item.id)).size === items.length, {
+				message: 'Attributes must be unique'
+			})
+			.default([])
 	});
 
 export const productsSchema = derived(t, ($t) => generateProductsSchema({ $t }));

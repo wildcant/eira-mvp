@@ -10,13 +10,13 @@ export type GetCategoriesResponse = PaginatedApiResponse<Category>;
 export type SubCategory = DatabaseTypes['SubCategory'] & { category?: DatabaseTypes['Category'] };
 export type GetSubCategoriesResponse = PaginatedApiResponse<SubCategory>;
 
-export type ProductsAttribute = DatabaseTypes['ProductsAttribute'] & {
-	values?: ProductsAttributeValue[];
+export type ProductAttribute = DatabaseTypes['ProductAttribute'] & {
+	values?: ProductAttributeValue[];
 };
-export type GetProductsAttributeResponse = PaginatedApiResponse<ProductsAttribute>;
+export type GetProductAttributeResponse = PaginatedApiResponse<ProductAttribute>;
 
-export type ProductsAttributeValue = DatabaseTypes['ProductsAttributeValue'];
-export type GetProductsAttributeValueResponse = PaginatedApiResponse<ProductsAttributeValue>;
+export type ProductAttributeValue = DatabaseTypes['ProductAttributeValue'];
+export type GetProductAttributeValueResponse = PaginatedApiResponse<ProductAttributeValue>;
 
 export type Product = DatabaseTypes['Product'] & { image?: DatabaseTypes['Image'] };
 export type GetProductsResponse = PaginatedApiResponse<Product>;

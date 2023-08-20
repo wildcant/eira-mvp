@@ -4,7 +4,7 @@
 
 	type $$Props = Props;
 	export let href: $$Props['href'] = undefined;
-	export let type: $$Props['type'] = undefined;
+	export let type: $$Props['type'] = 'button';
 	export let builders: $$Props['builders'] = [];
 </script>
 

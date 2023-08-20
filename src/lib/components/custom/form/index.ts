@@ -5,6 +5,7 @@ import FormField from './components/form-field.svelte';
 import FormInput from './components/form-input.svelte';
 import FormLabel from './components/form-label.svelte';
 import FormTextarea from './components/form-textarea.svelte';
+import FormError from './components/form-error.svelte';
 
 export {
 	Form as Root,
@@ -13,6 +14,7 @@ export {
 	FormField as Field,
 	FormInput as Input,
 	FormLabel as Label,
-	FormTextarea as Textarea
+	FormTextarea as Textarea,
+	FormError as Error
 };
 export default Form;

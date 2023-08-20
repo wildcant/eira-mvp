@@ -6,22 +6,22 @@
 		type CrudTableColumns,
 		type Update
 	} from '$components/crud-data-table';
-	import type { ProductsAttribute } from '$lib/api/types';
+	import type { ProductAttribute } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 	import {
-		productsAttributeSchema,
-		type ProductsAttributeSchema
+		productAttributeSchema,
+		type ProductAttributeSchema
 	} from '$lib/schemas/products-attribute';
 	import { createRender } from 'svelte-headless-table';
 	import EditableAttributesValuesCell from './components/editable-attributes-values-cell.svelte';
-	import NewProductsAttributeForm from './components/new-products-attribute-form.svelte';
+	import NewProductAttributeForm from './components/new-products-attribute-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, form } = data;
 
 	const title = $t('entity.attribute.plural.capitalize');
 
-	const columns: CrudTableColumns<ProductsAttribute> = [
+	const columns: CrudTableColumns<ProductAttribute> = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-4/12' } },
 		{
 			header: $t('common.phrase.unit-of-measure'),
@@ -45,11 +45,11 @@
 
 	const create: Create = {
 		form,
-		validators: $productsAttributeSchema,
-		component: createRender(NewProductsAttributeForm)
+		validators: $productAttributeSchema,
+		component: createRender(NewProductAttributeForm)
 	};
 
-	const update: Update<ProductsAttribute, ProductsAttributeSchema> = {
+	const update: Update<ProductAttribute, ProductAttributeSchema> = {
 		dto: (row) => ({
 			name: row.name,
 			unitOfMeasure: row.unitOfMeasure ?? '',

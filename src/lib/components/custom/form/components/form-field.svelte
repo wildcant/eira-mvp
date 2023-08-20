@@ -7,11 +7,11 @@
 </script>
 
 <script lang="ts">
-	import { cn } from '$lib/utils';
 	import type { Action } from 'svelte/action';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { derived } from 'svelte/store';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
+	import FormError from './form-error.svelte';
 	import { getFormContext } from './form.svelte';
 
 	export let name: FieldName;
@@ -70,12 +70,12 @@
 	<slot {field} hasErrors={$hasErrors} />
 
 	{#if $errors}
-		<span class={cn('block text-sm font-medium text-destructive')}>
+		<FormError>
 			{#if $errors?.length}
 				{$errors}
 			{:else if '_errors' in $errors && $errors._errors}
 				{$errors._errors}
 			{/if}
-		</span>
+		</FormError>
 	{/if}
 </div>

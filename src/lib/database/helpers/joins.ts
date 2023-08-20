@@ -57,22 +57,55 @@ export const join = {
 						.select(['Image.id', 'Image.url', 'Image.createdAt', 'Image.updatedAt'])
 						.whereRef('Product.imageId', '=', 'Image.id')
 				).as('image');
+			},
+			ProductAttributeList: (eb) => {
+				return jsonArrayFrom(
+					eb
+						.selectFrom('ProductAttributeList')
+						.innerJoin(
+							'ProductAttribute',
+							'ProductAttribute.id',
+							'ProductAttributeList.productAttributeId'
+						)
+						.select((eb2) => [
+							'ProductAttribute.id',
+							'ProductAttribute.name',
+							jsonArrayFrom(
+								eb2
+									.selectFrom('ProductAttributeValueList')
+									.innerJoin(
+										'ProductAttributeValue',
+										'ProductAttributeValue.id',
+										'ProductAttributeValueList.productAttributeValueId'
+									)
+									.select(['ProductAttributeValue.id', 'ProductAttributeValue.name'])
+									.whereRef(
+										'ProductAttributeList.id',
+										'=',
+										'ProductAttributeValueList.productAttributeListId'
+									)
+							).as('values'),
+							'ProductAttributeList.createdAt',
+							'ProductAttributeList.updatedAt'
+						])
+						.whereRef('Product.id', '=', 'ProductAttributeList.productId')
+				).as('attributes');
 			}
 		}
 	},
-	ProductsAttribute: {
+	ProductAttribute: {
 		with: {
-			ProductsAttributeValue: (eb) => {
+			ProductAttributeValue: (eb) => {
 				return jsonArrayFrom(
 					eb
-						.selectFrom('ProductsAttributeValue')
+						.selectFrom('ProductAttributeValue')
 						.select([
-							'ProductsAttributeValue.id',
-							'ProductsAttributeValue.name',
-							'ProductsAttributeValue.createdAt',
-							'ProductsAttributeValue.updatedAt'
+							'ProductAttributeValue.id',
+							'ProductAttributeValue.name',
+							'ProductAttributeValue.createdAt',
+							'ProductAttributeValue.updatedAt'
 						])
-						.whereRef('ProductsAttribute.id', '=', 'ProductsAttributeValue.productsAttributeId')
+						.whereRef('ProductAttribute.id', '=', 'ProductAttributeValue.productAttributeId')
 				).as('values');
 			}
 		}

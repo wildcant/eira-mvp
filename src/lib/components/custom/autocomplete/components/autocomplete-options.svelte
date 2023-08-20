@@ -6,19 +6,21 @@
 </script>
 
 <script lang="ts">
+	import { selectItemVariants } from '$lib/components/ui/select/components/select-item.svelte';
 	import { cn } from '$lib/utils';
 	import { melt } from '@melt-ui/svelte';
 	import { ctx } from '../ctx';
-	import type { Item } from '../types';
+	import { t } from '$lib/i18n';
 
 	const {
-		states: { filteredItems },
-		elements: { menu }
+		elements: { menu },
+		states: { isEmpty }
 	} = ctx.get();
-
-	$: filteredOptions = $filteredItems as Item[];
 </script>
 
 <ul use:melt={$menu} class={cn(selectContentVariants(), 'z-[190] max-h-44 overflow-y-auto')}>
-	<slot {filteredOptions} />
+	<slot />
+	{#if $isEmpty}
+		<li class={cn(selectItemVariants())}>{$t('common.phrase.no-results')}</li>
+	{/if}
 </ul>

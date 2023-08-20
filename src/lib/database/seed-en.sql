@@ -10,4 +10,4 @@ VALUES
  ('Department 7', '#FFFFFF'),
  ('Department 8', '#000000'),
  ('Department 9', '#C0C0C0'),
- ('Department 10', '#808080'),
+ ('Department 10', '#808080');

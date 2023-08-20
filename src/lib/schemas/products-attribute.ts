@@ -3,7 +3,7 @@ import type { WithT } from '$lib/i18n/api';
 import { derived } from 'svelte/store';
 import { z } from 'zod';
 
-export const generateProductsAttributeSchema = ({ $t }: WithT) =>
+export const generateProductAttributeSchema = ({ $t }: WithT) =>
 	z.object({
 		name: z
 			.string()
@@ -20,7 +20,7 @@ export const generateProductsAttributeSchema = ({ $t }: WithT) =>
 			})
 	});
 
-export const productsAttributeSchema = derived(t, ($t) => generateProductsAttributeSchema({ $t }));
+export const productAttributeSchema = derived(t, ($t) => generateProductAttributeSchema({ $t }));
 
-export type ProductsAttributeZodSchema = ReturnType<typeof generateProductsAttributeSchema>;
-export type ProductsAttributeSchema = z.infer<ProductsAttributeZodSchema>;
+export type ProductAttributeZodSchema = ReturnType<typeof generateProductAttributeSchema>;
+export type ProductAttributeSchema = z.infer<ProductAttributeZodSchema>;

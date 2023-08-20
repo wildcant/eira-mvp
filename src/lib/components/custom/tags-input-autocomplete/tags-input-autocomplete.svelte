@@ -35,7 +35,7 @@
 		MouseEventHandler,
 		PointerEventHandler
 	} from 'svelte/elements';
-	import { writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 	import { selectContentVariants } from '../autocomplete/components/autocomplete-options.svelte';
 	import { getOptionUpdater } from '$lib/components/internal';
@@ -45,12 +45,16 @@
 	type $$Props = Pick<HTMLInputAttributes, 'placeholder' | 'class'> &
 		Pick<CreateTagsInputProps, 'defaultTags' | 'disabled'> & {
 			allowedTags: Tag[];
+			tags?: Writable<Tag[]>;
 		};
 
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let defaultTags: $$Props['defaultTags'] = [];
 	export let allowedTags: $$Props['allowedTags'];
 	export let disabled: $$Props['disabled'] = false;
+	export let tags: $$Props['tags'] = undefined;
+
+	const localTags = tags ?? writable<Tag[]>([]);
 
 	let className: $$Props['class'] = undefined;
 	export { className as class };
@@ -58,8 +62,6 @@
 	let menuEl: HTMLUListElement;
 	let inputEl: HTMLInputElement;
 	let containerEl: HTMLDivElement;
-
-	const tags = writable<Tag[]>([]);
 
 	const dispatch = createEventDispatcher();
 
@@ -69,19 +71,9 @@
 		options
 	} = createTagsInput({
 		defaultTags,
-		tags,
+		tags: localTags,
 		allowed: allowedTags.map((t) => t.value),
 		unique: true,
-		add: (v) =>
-			new Promise((res) =>
-				res({
-					id: allowedTags
-						.map((t) => t.value)
-						.indexOf(v.toLowerCase())
-						.toString(),
-					value: v.toLowerCase()
-				} satisfies Tag)
-			),
 		onTagsChange: ({ next }) => {
 			dispatch('change', next);
 			return next;
@@ -117,7 +109,7 @@
 			const index = parseInt(element.dataset.index, 10);
 			const item = $filteredItems[index];
 
-			tags.update((currentTags) => {
+			localTags.update((currentTags) => {
 				const idx = currentTags.findIndex((t) => t.value === item.value);
 				if (idx !== -1) {
 					const updatedTags = [...currentTags];
@@ -186,7 +178,7 @@
 			return;
 		}
 
-		// Pressing enter with a highlighted item should add or remove it from tags.
+		// Pressing enter with a highlighted item should add or remove it from localTags.
 		if (e.key === kbd.ENTER) {
 			if ($highlightedItem) {
 				toggleItem($highlightedItem);
@@ -304,7 +296,7 @@
 				className
 			)}
 		>
-			{#each $tags as t}
+			{#each $localTags as t}
 				<div
 					use:melt={$tag(t)}
 					class={cn(
@@ -316,6 +308,7 @@
 					<button
 						use:melt={$deleteTrigger(t)}
 						class="flex h-full items-center px-1 enabled:hover:bg-accent enabled:hover:text-accent-foreground rounded-full"
+						type="button"
 					>
 						<X class="square-3" />
 					</button>
@@ -331,7 +324,7 @@
 				bind:this={inputEl}
 				type="text"
 				{placeholder}
-				class="shrink grow basis-0 min-w-[3rem] border-0 outline-none focus:!ring-0 bg-transparent placeholder:text-muted-foreground text-sm data-[invalid]:text-red-500"
+				class="shrink grow basis-0 border-0 outline-none focus:!ring-0 bg-transparent placeholder:text-muted-foreground text-sm data-[invalid]:text-red-500"
 				on:keydown={handleInputKeyDown}
 			/>
 		</div>
@@ -347,7 +340,7 @@
 			on:pointerleave={() => highlightedItem.set(null)}
 		>
 			{#each $filteredItems as item, index}
-				{@const isSelected = $tags.map((t) => t.value).includes(item.value)}
+				{@const isSelected = $localTags.map((t) => t.value).includes(item.value)}
 				<li
 					role="option"
 					class={cn(

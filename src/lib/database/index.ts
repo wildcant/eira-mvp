@@ -1,9 +1,10 @@
 import { DATABASE_AUTH_TOKEN, DATABASE_URL, NODE_ENV } from '$env/static/private';
 import { LibsqlDialect } from '@libsql/kysely-libsql';
 import SQLite from 'better-sqlite3';
-import { Kysely, ParseJSONResultsPlugin, SqliteDialect } from 'kysely';
+import { Kysely, SqliteDialect } from 'kysely';
 import type { DB } from 'kysely-codegen';
 import path from 'path';
+import { ParseJSONResultsPlugin } from './helpers/parse-json-resursively';
 
 let singleton: Kysely<DB> | undefined;
 if (!singleton) {

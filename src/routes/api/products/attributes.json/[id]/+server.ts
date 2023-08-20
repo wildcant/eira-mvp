@@ -4,27 +4,27 @@ import { json } from '@sveltejs/kit';
 
 export const DELETE = async ({ params, locals: { $t } }) => {
 	const id = parseInt(params.id, 10);
-	await exists({ table: 'ProductsAttribute', id, $t });
+	await exists({ table: 'ProductAttribute', id, $t });
 
-	const [r] = await db.deleteFrom('ProductsAttribute').where('id', '=', id).execute();
+	const [r] = await db.deleteFrom('ProductAttribute').where('id', '=', id).execute();
 
 	return json({ suceded: r.numDeletedRows > 0 });
 };
 
 export const PUT = async ({ params, request, locals: { $t, schemas } }) => {
 	const id = parseInt(params.id, 10);
-	await exists({ table: 'ProductsAttribute', id, $t });
+	await exists({ table: 'ProductAttribute', id, $t });
 
-	const { name, unitOfMeasure, values } = schemas.productsAttribute
+	const { name, unitOfMeasure, values } = schemas.productAttribute
 		.partial()
 		.parse(await request.json());
 
 	const [r] = await db.transaction().execute(async (trx) => {
 		// compare existing values with provided values and define deleted and added values
 		const currentValues = await trx
-			.selectFrom('ProductsAttributeValue')
+			.selectFrom('ProductAttributeValue')
 			.select(['id', 'name'])
-			.where('ProductsAttributeValue.productsAttributeId', '=', id)
+			.where('ProductAttributeValue.productAttributeId', '=', id)
 			.execute();
 
 		const deletedValuesIds = currentValues
@@ -32,16 +32,16 @@ export const PUT = async ({ params, request, locals: { $t, schemas } }) => {
 			.map(({ id }) => id);
 		const addedValues = values
 			?.filter((v) => !currentValues.map((v) => v.name).includes(v))
-			.map((v) => ({ name: v, productsAttributeId: id }));
+			.map((v) => ({ name: v, productAttributeId: id }));
 
 		if (deletedValuesIds.length)
-			await trx.deleteFrom('ProductsAttributeValue').where('id', 'in', deletedValuesIds).execute();
+			await trx.deleteFrom('ProductAttributeValue').where('id', 'in', deletedValuesIds).execute();
 
 		if (addedValues?.length)
-			await trx.insertInto('ProductsAttributeValue').values(addedValues).execute();
+			await trx.insertInto('ProductAttributeValue').values(addedValues).execute();
 
 		return trx
-			.updateTable('ProductsAttribute')
+			.updateTable('ProductAttribute')
 			.set({ name, unitOfMeasure })
 			.where('id', '=', id)
 			.execute();

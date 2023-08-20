@@ -10,14 +10,12 @@
 	export { className as class };
 
 	const {
-		elements: { input },
-		states: { inputValue }
+		elements: { input }
 	} = ctx.get();
 </script>
 
 <input
 	use:melt={$input}
-	value={$inputValue}
 	class={cn(selectTriggerVariants(), 'min-w-[3rem]', className)}
 	{...$$restProps}
 />

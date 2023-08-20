@@ -1,7 +1,7 @@
 import type {
 	GetCategoriesResponse,
 	GetDepartmentsResponse,
-	GetProductsAttributeResponse,
+	GetProductAttributeResponse,
 	GetSubCategoriesResponse
 } from '$lib/api/types.js';
 import { fail } from '@sveltejs/kit';
@@ -9,7 +9,7 @@ import { setError, superValidate } from 'sveltekit-superforms/server';
 
 export const load = async ({ locals: { schemas, fetcher } }) => {
 	const [attributes, categories, subCategories, departments] = await Promise.all([
-		fetcher<GetProductsAttributeResponse>(
+		fetcher<GetProductAttributeResponse>(
 			'/api/products/attributes.json?all=true&include=values'
 		).then((res) => res.data),
 		fetcher<GetCategoriesResponse>('/api/products/categories.json?all=true').then(

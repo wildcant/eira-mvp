@@ -1,20 +1,58 @@
 <script lang="ts">
-	import { Uploader } from '$components/uploader';
 	import { Container } from '$lib/components/custom/container';
 	import * as Form from '$lib/components/custom/form';
 	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
 	import { productsSchema } from '$lib/schemas/product';
+	import { effect } from '@melt-ui/svelte/internal/helpers';
 	import { Plus } from 'lucide-svelte';
+	import { derived } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import AttributesTable from './components/attributes-table.svelte';
+	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data;
 	const { attributes, categories, departments, subCategories } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema });
-	const { tainted } = form;
+	const { tainted, fields /*, form: frm, errors*/ } = form;
+	const {
+		departmentId: { value: departmentId },
+		categoryId: { value: categoryId },
+		subCategoryId: { value: subCategoryId },
+		attributes: { value: attributesField, errors: attributesErrors }
+	} = fields;
+
+	const allowedDepartments = departments?.map((dep) => ({
+		value: dep.id,
+		label: dep.name
+	}));
+
+	const allowedCategories = derived(departmentId, (dId) =>
+		categories
+			?.filter((category) => category.departmentId === dId)
+			.map(({ id, name }) => ({
+				value: id,
+				label: name
+			}))
+	);
+
+	const allowedSubCategories = derived(categoryId, (cId) =>
+		subCategories
+			?.filter((subCategory) => subCategory.categoryId === cId)
+			.map(({ id, name }) => ({
+				value: id,
+				label: name
+			}))
+	);
+
+	// Reset category field when department changes.
+	effect([departmentId], () => categoryId.set(undefined));
+	// Reset subcategory field when category changes.
+	effect([categoryId], () => subCategoryId.set(undefined));
 </script>
+
+<!-- <SuperDebug data={{ $frm, $errors }} /> -->
 
 <Form.Root {form} method="post" class="form">
 	<div class="flex justify-between items-center mb-4">
@@ -22,7 +60,7 @@
 			{$t('common.word.new.capitalize')}
 			{$t('entity.product.singular.lowercase')}
 		</h2>
-		<Button disabled={!$tainted}>Guardar</Button>
+		<Button disabled={!$tainted} type="submit">Guardar</Button>
 	</div>
 
 	<div class="form-grid">
@@ -67,37 +105,35 @@
 					<Form.Label>
 						{$t('entity.department.singular.capitalize')}
 					</Form.Label>
-					{@const options = departments?.map((dep) => ({
-						value: dep.id,
-						label: dep.name
-					}))}
-					<Form.Autocomplete {options} />
+
+					<Form.Autocomplete options={allowedDepartments} />
 				</Form.Field>
 
 				<Form.Field name="categoryId">
 					<Form.Label>
 						{$t('entity.category.singular.capitalize')}
 					</Form.Label>
-					{@const options = categories?.map((cat) => ({
-						value: cat.id,
-						label: cat.name
-					}))}
-					<Form.Autocomplete {options} />
+
+					<Form.Autocomplete
+						options={$allowedCategories}
+						disabled={$allowedCategories.length === 0}
+					/>
 				</Form.Field>
 
 				<Form.Field name="subCategoryId">
 					<Form.Label>
 						{$t('entity.sub-category.singular.capitalize')}
 					</Form.Label>
-					{@const options = subCategories?.map((scat) => ({
-						value: scat.id,
-						label: scat.name
-					}))}
-					<Form.Autocomplete {options} />
+
+					<Form.Autocomplete
+						options={$allowedSubCategories}
+						disabled={$allowedSubCategories.length === 0}
+					/>
 				</Form.Field>
 			</Container>
 		</div>
 
+		<!-- 
 		<div class="grid-area-[image]">
 			<Container class="grid gap-4 rounded-md">
 				<div>
@@ -110,6 +146,7 @@
 				</Form.Field>
 			</Container>
 		</div>
+ 		-->
 
 		<div class="grid-area-[attributes]">
 			<Container class="grid gap-4 rounded-md">
@@ -118,7 +155,7 @@
 					<p>{$t('page.inventory.products.new.attributes.subtitle')}</p>
 				</div>
 
-				<AttributesTable {attributes} />
+				<AttributesTable {attributes} {attributesField} attributesErrors={$attributesErrors} />
 			</Container>
 		</div>
 

@@ -13,7 +13,6 @@ export const load = async () => {
 export const actions = {
 	default: async ({ request }) => {
 		const form = await superValidate(request, schema);
-		console.info('POST', form);
 
 		// Convenient validation check:
 		if (!form.valid) {

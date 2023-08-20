@@ -50,7 +50,7 @@
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.383.0",
 		"@aws-sdk/s3-request-presigner": "^3.383.0",
-		"@melt-ui/svelte": "^0.34.2",
+		"@melt-ui/svelte": "^0.35.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"i18next": "^23.2.11",

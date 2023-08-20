@@ -29,15 +29,15 @@
 </script>
 
 {#if isEditingCell && $updatedRow}
-	<Autocomplete.Root {items} bind:value={selectedItem} on:change={updateRow}>
+	<Autocomplete.Root bind:value={selectedItem} on:change={updateRow}>
 		<Autocomplete.Label class="cursor-pointer">
 			<Autocomplete.Input name="categoryId" disabled={$loading} />
 			<Autocomplete.Button />
 		</Autocomplete.Label>
 
-		<Autocomplete.Options let:filteredOptions>
-			{#each filteredOptions as option, index (index)}
-				<Autocomplete.Option {index} item={option}>{option.label}</Autocomplete.Option>
+		<Autocomplete.Options>
+			{#each items as option, index (index)}
+				<Autocomplete.Option item={option}>{option.label}</Autocomplete.Option>
 			{/each}
 		</Autocomplete.Options>
 	</Autocomplete.Root>

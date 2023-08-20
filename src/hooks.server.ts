@@ -4,7 +4,7 @@ import { i18n } from '$lib/i18n/api';
 import { generateCategorySchema } from '$lib/schemas/category';
 import { generateDepartmentSchema } from '$lib/schemas/department';
 import { generateProductsSchema } from '$lib/schemas/product';
-import { generateProductsAttributeSchema } from '$lib/schemas/products-attribute';
+import { generateProductAttributeSchema } from '$lib/schemas/products-attribute';
 import { generateSubCategorySchema } from '$lib/schemas/sub-category';
 import { error, type Handle, type HandleServerError, type LoadEvent } from '@sveltejs/kit';
 
@@ -34,7 +34,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		department: generateDepartmentSchema({ $t }),
 		category: generateCategorySchema({ $t }),
 		subCategory: generateSubCategorySchema({ $t }),
-		productsAttribute: generateProductsAttributeSchema({ $t }),
+		productAttribute: generateProductAttributeSchema({ $t }),
 		product: generateProductsSchema({ $t })
 	};
 

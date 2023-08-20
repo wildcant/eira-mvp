@@ -1,5 +1,5 @@
 import type { Endpoint } from '$components/crud-data-table/types.js';
-import type { GetProductsAttributeResponse } from '$lib/api/types.js';
+import type { GetProductAttributeResponse } from '$lib/api/types.js';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
@@ -9,18 +9,18 @@ export const load = async ({ locals: { schemas, fetcher } }) => {
 		params: { include: 'values' }
 	} satisfies Endpoint;
 
-	const initialData = await fetcher<GetProductsAttributeResponse>(
+	const initialData = await fetcher<GetProductAttributeResponse>(
 		`${endpoint.url}?include=${endpoint.params.include}`
 	);
 
-	const form = await superValidate(schemas.productsAttribute);
+	const form = await superValidate(schemas.productAttribute);
 
 	return { endpoint, initialData, form };
 };
 
 export const actions = {
 	create: async ({ request, fetch, locals: { schemas } }) => {
-		const form = await superValidate(request, schemas.productsAttribute);
+		const form = await superValidate(request, schemas.productAttribute);
 
 		if (!form.valid) return fail(400, { form });
 

@@ -3,10 +3,11 @@
 		"phrase": {
 			"action-completed": "Acción completada",
 			"confirm-delete": "Estas seguro que quieres borrar",
+			"confirm-remove": "¿Estas seguro que quieres borrar este registro?",
 			"is-required": "es requerido",
+			"no-results": "No hay resultados",
 			"unit-of-measure": "Unidad de medida",
-			"was-deleted": "fue eliminada",
-			"confirm-remove": "¿Estas seguro que quieres borrar este registro?"
+			"was-deleted": "fue eliminada"
 		},
 		"word": {
 			"add": {

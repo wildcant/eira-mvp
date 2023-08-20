@@ -7,7 +7,7 @@
 	} = ctx.get();
 </script>
 
-<div class="absolute right-1 top-1/2 z-10 -translate-y-1/2">
+<div class="absolute right-1 top-1/2 z-10 -translate-y-1/2 peer-disabled:opacity-40">
 	{#if $$slots.default}
 		<slot />
 	{:else if $open}

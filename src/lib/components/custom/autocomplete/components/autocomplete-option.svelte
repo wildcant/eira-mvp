@@ -1,13 +1,12 @@
-<script lang="ts">
+<script lang="ts" generics="T extends string | number = string, TMeta extends Meta = MetaDefault">
 	import { selectItemVariants } from '$lib/components/ui/select/components/select-item.svelte';
 	import { cn } from '$lib/utils';
 	import { melt } from '@melt-ui/svelte';
 	import { Check } from 'lucide-svelte';
 	import { ctx } from '../ctx';
-	import type { Item } from '../types';
+	import type { Item, Meta, MetaDefault } from '../types';
 
-	export let item: Item;
-	export let index: number;
+	export let item: Item<T, TMeta>;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -24,8 +23,8 @@
 		className
 	)}
 	use:melt={$localItem({
-		index,
-		item,
+		value: item,
+		label: item.label,
 		disabled: item?.meta?.disabled
 	})}
 	{...$$restProps}

@@ -1,9 +1,11 @@
 <script lang="ts">
-	import * as Autocomplete from '$lib/components/custom/autocomplete';
 	import type { Item } from '$lib/components/custom/autocomplete';
+	import * as Autocomplete from '$lib/components/custom/autocomplete';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { writable } from 'svelte/store';
 
 	type Option = Item<string, { author: string; disabled: boolean }>;
-	const items: Option[] = [
+	const defaultItems = [
 		{
 			label: 'To Kill a Mockingbird',
 			value: 'to-kill-a-mockingbird',
@@ -85,6 +87,7 @@
 			}
 		}
 	];
+	const items = writable<Option[]>(defaultItems);
 
 	let value: Option | undefined = undefined;
 
@@ -96,21 +99,27 @@
 </script>
 
 <h1>Autocomplete</h1>
+<div class="flex gap-2">
+	<Button on:click={() => (value = $items[0])}>select option</Button>
+	<Button on:click={() => ($items = defaultItems.slice(1, 4))}>change options</Button>
+	<Button on:click={() => ($items = defaultItems)}>reset options</Button>
+</div>
+
+<br />
+
 <form on:submit={handleSubmit}>
-	<Autocomplete.Root {items} bind:value>
+	<Autocomplete.Root bind:value>
 		<Autocomplete.Label>
 			<Autocomplete.Input name="sample" />
 			<Autocomplete.Button />
 		</Autocomplete.Label>
 
-		<Autocomplete.Options let:filteredOptions>
-			{#each filteredOptions as option, index (index)}
-				<Autocomplete.Option {index} item={option}>{option.label}</Autocomplete.Option>
+		<Autocomplete.Options>
+			{#each $items as option, index (index)}
+				<Autocomplete.Option item={option}>{option.label}</Autocomplete.Option>
 			{/each}
 		</Autocomplete.Options>
 	</Autocomplete.Root>
-	<button>Submit</button>
+	<Button class="mt-4">Submit</Button>
 </form>
 <br />
-
-<button on:click={() => (value = items[0])}>select option</button>

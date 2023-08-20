@@ -249,7 +249,7 @@ VALUES
 	('Navidad', 40);
 
 INSERT INTO 
-		ProductsAttribute (name, unitOfMeasure)
+		ProductAttribute (name, unitOfMeasure)
 VALUES
 	('masa', 'mg'),
 	('volumen', 'ml'),
@@ -261,7 +261,7 @@ VALUES
 
 
 INSERT INTO 
-		ProductsAttributeValue (productsAttributeId, name)
+		ProductAttributeValue (productAttributeId, name)
 VALUES
 	(1, '500'),
 	(2, '60'),
@@ -286,3 +286,19 @@ VALUES
 	(7, 'Frambuesa'),
 	(7, 'Naranja');
 
+
+insert into
+    Product (name, departmentId, categoryId, subCategoryId)
+values
+	("Dolex Forte", 1, 1, 1);
+
+
+insert into
+    ProductAttributeList ("productId", "productAttributeId")
+values
+	(1, 1);
+
+INSERT INTO 
+		ProductAttributeValueList (productAttributeListId, productAttributeValueId)
+VALUES
+	(1, 1);

@@ -150,10 +150,10 @@ FOR EACH ROW BEGIN
 	WHERE id = NEW.id;
 END; 
 
-DROP TABLE IF EXISTS ProductsAttribute;
+DROP TABLE IF EXISTS ProductAttribute;
 
 CREATE TABLE
-    IF NOT EXISTS ProductsAttribute (
+    IF NOT EXISTS ProductAttribute (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         unitOfMeasure TEXT,
@@ -162,35 +162,61 @@ CREATE TABLE
     );
 
 CREATE TRIGGER PRODUCT_ATTRIBUTE_UPDATED_AT AFTER UPDATE 
-ON PRODUCTSATTRIBUTE FOR EACH ROW BEGIN 
-	UPDATE ProductsAttribute
+ON PRODUCTATTRIBUTE FOR EACH ROW BEGIN 
+	UPDATE ProductAttribute
 	SET
 	    updatedAt = CURRENT_TIMESTAMP
 	WHERE id = NEW.id;
 END; 
 
-DROP TABLE IF EXISTS ProductsAttributeValue;
+DROP TABLE IF EXISTS ProductAttributeValue;
 
 CREATE TABLE
-    IF NOT EXISTS ProductsAttributeValue (
+    IF NOT EXISTS ProductAttributeValue (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        productsAttributeId INTEGER NOT NULL,
+        productAttributeId INTEGER NOT NULL,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP,
-        FOREIGN KEY (productsAttributeId) REFERENCES ProductsAttribute(id) ON DELETE CASCADE
+        FOREIGN KEY (productAttributeId) REFERENCES ProductAttribute(id) ON DELETE CASCADE
     );
 
-CREATE UNIQUE INDEX ProductsAttributeValueUniqueValuePerAttribute ON ProductsAttributeValue(name, productsAttributeId);
+CREATE UNIQUE INDEX ProductAttributeValueUniqueValuePerAttribute ON ProductAttributeValue(name, productAttributeId);
 
 CREATE TRIGGER PRODUCT_ATTRIBUTE_VALUE_UPDATED_AT AFTER 
-UPDATE ON PRODUCTSATTRIBUTEVALUE FOR EACH ROW BEGIN 
+UPDATE ON PRODUCTATTRIBUTEVALUE FOR EACH ROW BEGIN 
 	UPDATE
-	    ProductsAttributeValue
+	    ProductAttributeValue
 	SET
 	    updatedAt = CURRENT_TIMESTAMP
 	WHERE id = NEW.id;
 END; 
+
+DROP TABLE IF EXISTS ProductAttributeList;
+
+CREATE TABLE
+    IF NOT EXISTS ProductAttributeList (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        productId INTEGER NOT NULL,
+        productAttributeId INTEGER NOT NULL,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP,
+        FOREIGN KEY (productId) REFERENCES Product(id),
+        FOREIGN KEY (productAttributeId) REFERENCES ProductAttribute(id)
+    );
+
+DROP TABLE IF EXISTS ProductAttributeValueList;
+
+CREATE TABLE
+    IF NOT EXISTS ProductAttributeValueList (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        productAttributeListId INTEGER NOT NULL,
+        productAttributeValueId INTEGER NOT NULL,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP,
+        FOREIGN KEY (productAttributeListId) REFERENCES ProductAttributeList(id),
+        FOREIGN KEY (productAttributeValueId) REFERENCES ProductAttributeValue(id)
+    );
 
 DROP TABLE IF EXISTS Image;
 

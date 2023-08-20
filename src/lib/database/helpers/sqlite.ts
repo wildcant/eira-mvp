@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Source: https://github.com/jlarmstrongiv/kysely/blob/dff26eefe4923b4a14fa4d48f409bd438b2de6ee/src/helpers/sqlite.ts
 // Temporal while waiting for next kysely release.
 import {
@@ -190,6 +191,7 @@ export function jsonBuildObject<O extends Record<string, Expression<unknown>>>(
 }
 
 function getJsonObjectArgs(node: SelectQueryNode, table: string): RawBuilder<unknown>[] {
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	return node.selections!.flatMap(({ selection: s }) => {
 		if (ReferenceNode.is(s) && ColumnNode.is(s.column)) {
 			return [sql.lit(s.column.column.name), sql.id(table, s.column.column.name)];
