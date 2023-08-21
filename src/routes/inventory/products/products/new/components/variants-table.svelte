@@ -1,19 +1,27 @@
 <script lang="ts">
-	// import { CrudDataTable } from '$components/crud-data-table';
-	import type { CrudTableColumns } from '$components/crud-data-table/types';
-	import type { ProductVariant } from '$lib/api/types';
-	import { t } from '$lib/i18n';
+	import DataTable from '$lib/components/custom/data-table/data-table.svelte';
+	import { createTable } from 'svelte-headless-table';
+	import { addSortBy } from 'svelte-headless-table/plugins';
+	import { writable } from 'svelte/store';
 
-	// export let data;
+	const data = writable([]);
 
-	const columns: CrudTableColumns<ProductVariant> = [
-		{ header: 'SLU', accessor: 'sku', meta: { class: 'w-8/12' } },
-		{
-			header: $t('common.phrase.unit-of-measure'),
-			accessor: 'sku',
-			meta: { class: 'w-3/12' }
-		}
-	];
+	export const table = createTable(data, {
+		sort: addSortBy({ disableMultiSort: true })
+	});
+
+	export const columns = table.createColumns([
+		table.column({
+			header: 'SKU',
+			accessor: 'sku'
+		})
+		// table.column({
+		// 	header: $t('common.phrase.unit-of-measure'),
+		// 	accessor: ''
+		// })
+	]);
+
+	const viewModel = table.createViewModel(columns);
 </script>
 
-<!-- <CrudDataTable title="Variants" columns={} /> -->
+<DataTable {viewModel} class="min-h-[600px]" />

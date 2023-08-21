@@ -7,7 +7,8 @@
 			"is-required": "is required",
 			"no-results": "No results found",
 			"unit-of-measure": "Unite of measure",
-			"was-deleted": "was deleted"
+			"was-deleted": "was deleted",
+			"no-records": "You don't have any"
 		},
 		"word": {
 			"add": {
@@ -30,6 +31,10 @@
 				"capitalize": "Confirm",
 				"lowercase": "confirm"
 			},
+			"continue": {
+				"capitalize": "Continue",
+				"lowercase": "continue"
+			},
 			"delete": {
 				"capitalize": "Delete",
 				"lowercase": "delete"
@@ -37,6 +42,10 @@
 			"edit": {
 				"capitalize": "Edit",
 				"lowercase": "edit"
+			},
+			"fixed": {
+				"capitalize": "Fixed",
+				"lowercase": "fixed"
 			},
 			"name": {
 				"capitalize": "Name",
@@ -50,9 +59,29 @@
 				"capitalize": "Options",
 				"lowercase": "options"
 			},
+			"percentage": {
+				"capitalize": "Percentage",
+				"lowercase": "percentage"
+			},
+			"purchases": {
+				"capitalize": "Purchases",
+				"lowercase": "purchases"
+			},
+			"sales": {
+				"capitalize": "Sales",
+				"lowercase": "sales"
+			},
 			"save": {
 				"capitalize": "Save",
 				"lowercase": "save"
+			},
+			"scope": {
+				"capitalize": "Scope",
+				"lowercase": "scope"
+			},
+			"type": {
+				"capitalize": "Type",
+				"lowercase": "type"
 			},
 			"unit": {
 				"capitalize": "Unit",
@@ -61,6 +90,10 @@
 			"updated": {
 				"capitalize": "Updated",
 				"lowercase": "updated"
+			},
+			"value": {
+				"capitalize": "Value",
+				"lowercase": "value"
 			},
 			"values": {
 				"capitalize": "Values",
@@ -159,6 +192,16 @@
 				"lowercase": "subcategory"
 			}
 		},
+		"tax": {
+			"plural": {
+				"capitalize": "Taxes",
+				"lowercase": "taxes"
+			},
+			"singular": {
+				"capitalize": "Tax",
+				"lowercase": "tax"
+			}
+		},
 		"variant": {
 			"plural": {
 				"capitalize": "Variants",
@@ -181,7 +224,8 @@
 			"products": {
 				"nav": {
 					"product-attributes": "Products attributes",
-					"product-variants": "Products variants"
+					"product-variants": "Products variants",
+					"settings": "Settings"
 				},
 				"new": {
 					"attributes": {
@@ -206,6 +250,10 @@
 						"subtitle": "Include additional information to complete your product record.",
 						"title": "Categorization"
 					},
+					"characteristics": {
+						"subtitle": "Define the attributes of your variant.",
+						"title": "Characteristics"
+					},
 					"image": {
 						"field": {
 							"image": {
@@ -215,6 +263,79 @@
 						},
 						"subtitle": "Upload an image of your product",
 						"title": "Default product image"
+					},
+					"purchase": {
+						"field": {
+							"average-cost": {
+								"label": "Average cost",
+								"placeholder": "0"
+							},
+							"provider": {
+								"label": "Provider",
+								"placeholder": "Search and select providers"
+							},
+							"subtotal": {
+								"label": "Subtotal",
+								"placeholder": "0"
+							},
+							"tax": {
+								"label": "Tax",
+								"placeholder": "0"
+							},
+							"total": {
+								"label": "Total",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Denote the average cost for reports and the purchase price for purchase documents.",
+						"subtitle-two": "Purchase price",
+						"title": "Purchase"
+					},
+					"sales": {
+						"field": {
+							"subtotal": {
+								"label": "Subtotal",
+								"placeholder": "0"
+							},
+							"tax": {
+								"label": "Tax",
+								"placeholder": "0%"
+							},
+							"total": {
+								"label": "Total",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Denote the subtotal and the applicable tax. The total amount will be calculated automatically.",
+						"title": "Sales"
+					},
+					"stock-management": {
+						"field": {
+							"qty": {
+								"label": "Quantity",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Introduce the information to identify the product.",
+						"title": "Stock management"
+					},
+					"tracking": {
+						"field": {
+							"barcode": {
+								"label": "Barcode",
+								"placeholder": " "
+							},
+							"sku": {
+								"label": "SKU",
+								"placeholder": " "
+							}
+						},
+						"subtitle": "Introduce some information to identify the product.",
+						"title": "Tracking"
+					},
+					"variant-image": {
+						"subtitle": "Upload an image of your product.",
+						"title": "Product variant image"
 					},
 					"variants": {
 						"subtitle": "Add your product variants.",

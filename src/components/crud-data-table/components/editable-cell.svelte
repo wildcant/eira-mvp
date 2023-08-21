@@ -9,6 +9,7 @@
 	export let row: BodyRow<T>;
 	export let value: unknown;
 	export let editableRow: EditableRowState<T>;
+	export let accessorFn: ((item: T) => string) | undefined = undefined;
 
 	const { editingRow, editing, updatedRow, loading } = editableRow;
 	$: isEditingCell = $editing && $editingRow?.id === row.id;
@@ -22,7 +23,11 @@
 		</Label>
 	{:else}
 		<span>
-			{value}
+			{#if accessorFn && row.isData()}
+				{accessorFn(row.original)}
+			{:else}
+				{value}
+			{/if}
 		</span>
 	{/if}
 </div>

@@ -238,3 +238,16 @@ FOR EACH ROW BEGIN
 	    updatedAt = CURRENT_TIMESTAMP
 	WHERE id = NEW.id;
 END; 
+
+DROP TABLE IF EXISTS Tax;
+
+CREATE TABLE
+    IF NOT EXISTS Tax (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        scope TEXT CHECK(scope IN ('sales', 'purchases')) NOT NULL DEFAULT 'sales',
+        type TEXT CHECK(type IN ('percentage', 'fixed')) NOT NULL DEFAULT 'percentage',
+        amount REAL,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP
+    );

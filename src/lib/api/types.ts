@@ -18,6 +18,9 @@ export type GetProductAttributeResponse = PaginatedApiResponse<ProductAttribute>
 export type ProductAttributeValue = DatabaseTypes['ProductAttributeValue'];
 export type GetProductAttributeValueResponse = PaginatedApiResponse<ProductAttributeValue>;
 
+export type Tax = DatabaseTypes['Tax'];
+export type GetTaxesResponse = PaginatedApiResponse<Tax>;
+
 export type Product = DatabaseTypes['Product'] & { image?: DatabaseTypes['Image'] };
 export type GetProductsResponse = PaginatedApiResponse<Product>;
 

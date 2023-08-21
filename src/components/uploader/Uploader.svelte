@@ -49,14 +49,7 @@
 		<label
 			class="border-4 border-dotted rounded-md w-full px-4 py-6 flex flex-col justify-center items-center gap-2"
 		>
-			<input
-				class="hidden"
-				type="file"
-				name="file"
-				accept=".jpg,.jpeg,.png"
-				required
-				on:change={uploadImage}
-			/>
+			<input class="hidden" type="file" accept=".jpg,.jpeg,.png" on:change={uploadImage} />
 			<ArrowUpFromLine />
 			<span class="scroll-m-20 text-base font-semibold tracking-tight">
 				Selecciona o arrastra aquí tus archivos

@@ -44,7 +44,7 @@
 
 	<div class={cn('relative transition-all duration-300 my-2', { 'md:ml-52': open })}>
 		<div
-			class="min-h-[766px] mx-2 md:border md:border-solid md:dark:border-zinc-800 md:rounded-3xl py-4 px-4"
+			class="min-h-[766px] mx-2 md:border md:border-solid md:border-border md:rounded-3xl py-4 px-4"
 		>
 			<Header bind:drawer={open} />
 			<main class="mt-2">

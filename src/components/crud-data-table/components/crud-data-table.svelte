@@ -63,7 +63,8 @@
 								row: row as any,
 								id: id as never,
 								value,
-								editableRow
+								editableRow,
+								accessorFn: column.accessorFn as any
 							});
 					  }
 			})
@@ -245,9 +246,10 @@
 				data: {
 					variant: 'default',
 					title: $t('common.phrase.action-completed'),
-					description: `${$t('entity.category.singular.capitalize')} ${$t(
-						'common.phrase.was-deleted'
-					)}`
+					description: `
+					${$t('entity.category.singular.capitalize')} 
+					${$t('common.phrase.was-deleted')}
+					`
 				}
 			});
 
@@ -299,7 +301,9 @@
 		</Button>
 	</div>
 
-	<Search bind:value={$filterValue} on:input={handleSearchChanged} on:reset={resetTable} />
+	{#if totalItems > 0}
+		<Search bind:value={$filterValue} on:input={handleSearchChanged} on:reset={resetTable} />
+	{/if}
 
 	<div class="relative mt-4">
 		<Scroller on:more={loadMore}>
@@ -321,19 +325,36 @@
 					{/each}
 				</Table.Header>
 				<Table.Body {...$tableBodyAttrs}>
-					{#each $rows as row (row.id)}
-						<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-							<Table.Row {...rowAttrs}>
-								{#each row.cells as cell (cell.id)}
-									<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
-										<Table.Cell {...attrs} class={cn({ 'bg-accent': props.tableFilter.matches })}>
-											<Render of={cell.render()} />
-										</Table.Cell>
-									</Subscribe>
-								{/each}
-							</Table.Row>
-						</Subscribe>
-					{/each}
+					{#if $rows.length}
+						{#each $rows as row (row.id)}
+							<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+								<Table.Row {...rowAttrs}>
+									{#each row.cells as cell (cell.id)}
+										<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
+											{@const col = columnsParam.find((c) => c.accessor === cell.id)}
+											<Table.Cell
+												{...attrs}
+												class={cn({ 'bg-accent': props.tableFilter.matches }, col?.meta?.class)}
+											>
+												<Render of={cell.render()} />
+											</Table.Cell>
+										</Subscribe>
+									{/each}
+								</Table.Row>
+							</Subscribe>
+						{/each}
+					{:else}
+						<Table.Row>
+							<Table.Cell colspan={columnsParam.length} class="h-24 text-center">
+								{#if totalItems === 0}
+									{$t('common.phrase.no-records')}
+									{$t(`entity.${entity}.singular.lowercase`)}.
+								{:else}
+									{$t('common.phrase.no-results')}
+								{/if}
+							</Table.Cell>
+						</Table.Row>
+					{/if}
 				</Table.Body>
 			</Table.Root>
 		</Scroller>

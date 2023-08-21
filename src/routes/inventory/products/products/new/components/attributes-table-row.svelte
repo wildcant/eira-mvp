@@ -70,7 +70,6 @@
 			{allowedTags}
 			{tags}
 			disabled={!selectedAttribute || !allowedTags.length}
-			on:change={console.log}
 		/>
 
 		{#if errors?.length}

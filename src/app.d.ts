@@ -1,10 +1,13 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { CategoryZodSchema } from '$lib/schemas/category';
-import type { DepartmentZodSchema } from '$lib/schemas/department';
-import type { ProductZodSchema } from '$lib/schemas/product';
-import type { ProductAttributeZodSchema } from '$lib/schemas/products-attribute';
-import type { SubCategoryZodSchema } from '$lib/schemas/sub-category';
+import type {
+	CategoryZodSchema,
+	DepartmentZodSchema,
+	ProductZodSchema,
+	ProductAttributeZodSchema,
+	SubCategoryZodSchema,
+	TaxZodSchema
+} from '$lib/schemas';
 
 // for information about these interfaces
 declare global {
@@ -18,6 +21,7 @@ declare global {
 				category: CategoryZodSchema;
 				subCategory: SubCategoryZodSchema;
 				productAttribute: ProductAttributeZodSchema;
+				tax: TaxZodSchema;
 				product: ProductZodSchema;
 			};
 			fetcher: <T>(url: string) => Promise<T>;

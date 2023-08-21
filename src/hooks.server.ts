@@ -1,11 +1,15 @@
 import { sqliteCustomErrorMap, zodCustomErrorMap } from '$lib/database/helpers/error-handler';
 import { locale } from '$lib/i18n';
 import { i18n } from '$lib/i18n/api';
-import { generateCategorySchema } from '$lib/schemas/category';
-import { generateDepartmentSchema } from '$lib/schemas/department';
-import { generateProductsSchema } from '$lib/schemas/product';
-import { generateProductAttributeSchema } from '$lib/schemas/products-attribute';
-import { generateSubCategorySchema } from '$lib/schemas/sub-category';
+import {
+	generateCategorySchema,
+	generateDepartmentSchema,
+	generateProductAttributeSchema,
+	generateProductsSchema,
+	generateSubCategorySchema,
+	generateTaxSchema
+} from '$lib/schemas';
+
 import { error, type Handle, type HandleServerError, type LoadEvent } from '@sveltejs/kit';
 
 const createFetcher =
@@ -35,7 +39,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		category: generateCategorySchema({ $t }),
 		subCategory: generateSubCategorySchema({ $t }),
 		productAttribute: generateProductAttributeSchema({ $t }),
-		product: generateProductsSchema({ $t })
+		product: generateProductsSchema({ $t }),
+		tax: generateTaxSchema({ $t })
 	};
 
 	event.locals.fetcher = createFetcher(event.fetch);

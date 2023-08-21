@@ -5,6 +5,8 @@
 	import { Render } from 'svelte-headless-table';
 	import type { ModalProps } from '../types';
 	import { closeModal } from './modals-manager.svelte';
+	import { cn } from '$lib/utils';
+	import { createEventDispatcher } from 'svelte';
 
 	export let modal: ModalProps;
 
@@ -13,8 +15,13 @@
 
 	const close = () => (open = false);
 
+	const dispatch = createEventDispatcher();
+
 	// Remove modal from list after closing.
-	$: if (!open) closeModal(modal.id);
+	$: if (!open) {
+		closeModal(modal.id);
+		dispatch('close', modal.id);
+	}
 </script>
 
 {#if modal.type === 'confirmation'}
@@ -59,8 +66,18 @@
 	</AlertDialog.Root>
 {:else if modal.type === 'custom'}
 	<!-- on:closed={() => dispatch('closed', modal.id)} -->
-	<Dialog.Root closeOnEscape={!loading} closeOnOutsideClick={!loading} bind:open>
-		<Dialog.Content class="md:min-w-[425px]">
+	<Dialog.Root
+		closeOnEscape={!loading && modal.closeOnEscape}
+		closeOnOutsideClick={!loading && modal.closeOnOutsideClick}
+		bind:open
+		portal={modal.portal}
+	>
+		<Dialog.Content
+			class={cn(
+				'md:min-w-[425px] max-h-[100svh] overflow-y-auto lg:max-h-[calc(100svh-2rem)]',
+				modal.content?.class
+			)}
+		>
 			<Dialog.Header>
 				<Dialog.Title>{modal.title}</Dialog.Title>
 			</Dialog.Header>

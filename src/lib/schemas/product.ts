@@ -3,6 +3,8 @@ import type { WithT } from '$lib/i18n/api';
 import { derived } from 'svelte/store';
 import { z } from 'zod';
 
+export const generateProductVariantsSchema = ({ $t }: WithT) => z.object({});
+
 export const generateProductsSchema = ({ $t }: WithT) =>
 	z.object({
 		name: z
@@ -35,9 +37,10 @@ export const generateProductsSchema = ({ $t }: WithT) =>
 					.int()
 					.optional()
 					.refine((v) => !!v, {
-						message: `${$t('entity.attribute.singular.capitalize')} ${$t(
-							'common.phrase.is-required'
-						)}`
+						message: `
+						${$t('entity.attribute.singular.capitalize')} 
+						${$t('common.phrase.is-required')}
+						`
 					}),
 				values: z
 					.number()

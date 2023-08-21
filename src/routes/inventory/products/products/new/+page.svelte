@@ -1,21 +1,26 @@
 <script lang="ts">
 	import { Container } from '$lib/components/custom/container';
 	import * as Form from '$lib/components/custom/form';
+	import Modal from '$lib/components/custom/modal/components/modal.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
 	import { productsSchema } from '$lib/schemas/product';
 	import { effect } from '@melt-ui/svelte/internal/helpers';
 	import { Plus } from 'lucide-svelte';
+	import { createRender } from 'svelte-headless-table';
 	import { derived } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import AttributesTable from './components/attributes-table.svelte';
+	import NewVariantModal, { NEW_VARIANT_MODAL_ID } from './components/new-variant-modal.svelte';
+	import VariantsTable from './components/variants-table.svelte';
+	import Uploader from '$components/uploader/uploader.svelte';
 	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data;
 	const { attributes, categories, departments, subCategories } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema });
-	const { tainted, fields /*, form: frm, errors*/ } = form;
+	const { tainted, fields, validate /*, form: frm, errors*/ } = form;
 	const {
 		departmentId: { value: departmentId },
 		categoryId: { value: categoryId },
@@ -50,11 +55,14 @@
 	effect([departmentId], () => categoryId.set(undefined));
 	// Reset subcategory field when category changes.
 	effect([categoryId], () => subCategoryId.set(undefined));
+
+	let modalOpen = false;
+	const openNewVariantModal = () => (modalOpen = true);
 </script>
 
 <!-- <SuperDebug data={{ $frm, $errors }} /> -->
 
-<Form.Root {form} method="post" class="form">
+<Form.Root {form} method="post" class="form" id="new-product-form">
 	<div class="flex justify-between items-center mb-4">
 		<h2 class="p-0">
 			{$t('common.word.new.capitalize')}
@@ -133,7 +141,6 @@
 			</Container>
 		</div>
 
-		<!-- 
 		<div class="grid-area-[image]">
 			<Container class="grid gap-4 rounded-md">
 				<div>
@@ -146,7 +153,6 @@
 				</Form.Field>
 			</Container>
 		</div>
- 		-->
 
 		<div class="grid-area-[attributes]">
 			<Container class="grid gap-4 rounded-md">
@@ -165,7 +171,7 @@
 					<div class="flex justify-between">
 						<h3>{$t('page.inventory.products.new.variants.title')}</h3>
 
-						<Button type="button" variant="outline">
+						<Button variant="outline" on:click={openNewVariantModal}>
 							<Plus class="mr-2 h-4 w-4" />
 							{$t('common.word.add.capitalize')}
 							{$t('entity.variant.singular.lowercase')}
@@ -173,10 +179,35 @@
 					</div>
 					<p>{$t('page.inventory.products.new.variants.subtitle')}</p>
 				</div>
-				<!-- <VariantsTable /> -->
+
+				<VariantsTable />
 			</Container>
 		</div>
 	</div>
+
+	{#if modalOpen}
+		<Modal
+			modal={{
+				type: 'custom',
+				closeOnEscape: false,
+				closeOnOutsideClick: false,
+				id: NEW_VARIANT_MODAL_ID,
+				title: `${$t('common.word.new.capitalize')} ${$t(`entity.variant.singular.capitalize`)}`,
+				children: createRender(NewVariantModal)
+					.on('cancel', () => {
+						// TODO: Undo changes in form for new variant.
+						modalOpen = false;
+					})
+					.on('continue', async () => {
+						const errors = await validate('name');
+						// Close modal if there are no validation errors in the new variant form.
+						if (!errors?.length) modalOpen = false;
+					}),
+				content: { class: 'md:min-w-full lg:min-w-[1024px]' }
+			}}
+			on:close={() => (modalOpen = false)}
+		/>
+	{/if}
 </Form.Root>
 
 <style>

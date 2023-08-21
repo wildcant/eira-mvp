@@ -5,16 +5,16 @@
 
 	$: routes = [
 		{
-			href: '/inventory/products/attributes',
-			label: $t('page.inventory.products.nav.product-attributes')
-		},
-		{
 			href: '/inventory/products/products',
 			label: $t('entity.product.plural.capitalize')
 		},
 		{
 			href: '/inventory/products/variants',
 			label: $t('page.inventory.products.nav.product-variants')
+		},
+		{
+			href: '/inventory/products/settings',
+			label: $t('page.inventory.products.nav.settings')
 		}
 	] satisfies Route[];
 </script>

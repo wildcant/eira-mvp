@@ -288,13 +288,18 @@ VALUES
 
 
 insert into
+    Tax (name, scope, type, amount)
+values
+	('Impuesto de venta 19%', 'sales', 'percentage', 19);
+
+insert into
     Product (name, departmentId, categoryId, subCategoryId)
 values
-	("Dolex Forte", 1, 1, 1);
+	('Dolex Forte', 1, 1, 1);
 
 
 insert into
-    ProductAttributeList ("productId", "productAttributeId")
+    ProductAttributeList (productId, productAttributeId)
 values
 	(1, 1);
 

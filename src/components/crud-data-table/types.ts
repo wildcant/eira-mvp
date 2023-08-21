@@ -30,15 +30,12 @@ type Plugins<T> = {
 	editableRow: TablePlugin<T, EditableRowState<T>, Record<string, never>, NewTablePropSet<never>>;
 };
 
-export type CrudTableColumn<T /*, Value = unknown */> = /* Omit< */ DataColumnInit<
-	T,
-	Plugins<T>
-> /*, 'cell'> */ & {
-	// accessorFn?: (item: T) => Value;
+export type CrudTableColumn<T> = DataColumnInit<T, Plugins<T>> & {
+	accessorFn?: (item: T) => string;
 	meta?: Record<string, string>;
 };
 
-export type CrudTableColumns<T /* , Value = unknown */> = Array<CrudTableColumn<T /* , Value */>>;
+export type CrudTableColumns<T> = Array<CrudTableColumn<T>>;
 
 export type Endpoint = { url: string; params?: { include?: Relationship } };
 
