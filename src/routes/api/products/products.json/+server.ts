@@ -94,7 +94,7 @@ export const POST = async ({ request, locals: { schemas } }) => {
 				const productAttributeListId = Number(productAttributeListItem.insertId);
 
 				return Promise.all(
-					attribute.values.map((productAttributeValueId) =>
+					attribute.values.map(({ id: productAttributeValueId }) =>
 						trx
 							.insertInto('ProductAttributeValueList')
 							.values({ productAttributeListId, productAttributeValueId })

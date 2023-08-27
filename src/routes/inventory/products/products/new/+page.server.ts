@@ -2,13 +2,14 @@ import type {
 	GetCategoriesResponse,
 	GetDepartmentsResponse,
 	GetProductAttributeResponse,
-	GetSubCategoriesResponse
+	GetSubCategoriesResponse,
+	GetTaxesResponse
 } from '$lib/api/types.js';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
 export const load = async ({ locals: { schemas, fetcher } }) => {
-	const [attributes, categories, subCategories, departments] = await Promise.all([
+	const [attributes, categories, subCategories, departments, taxes] = await Promise.all([
 		fetcher<GetProductAttributeResponse>(
 			'/api/products/attributes.json?all=true&include=values'
 		).then((res) => res.data),
@@ -20,11 +21,12 @@ export const load = async ({ locals: { schemas, fetcher } }) => {
 		),
 		fetcher<GetDepartmentsResponse>('/api/products/departments.json?all=true').then(
 			(res) => res.data
-		)
+		),
+		fetcher<GetTaxesResponse>('/api/products/taxes.json?all=true').then((res) => res.data)
 	]);
 
 	const form = await superValidate(schemas.product);
-	return { form, attributes, categories, departments, subCategories };
+	return { form, attributes, categories, departments, subCategories, taxes };
 };
 
 export const actions = {

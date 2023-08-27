@@ -3,6 +3,11 @@ import type { WithT } from '$lib/i18n/api';
 import { derived } from 'svelte/store';
 import { z } from 'zod';
 
+export const taxAmountSuffix = ({ $t }: WithT): { [key in TaxSchema['type']]: string } => ({
+	fixed: ` / ${$t('common.word.unit.lowercase')}`,
+	percentage: '%'
+});
+
 export const generateTaxSchema = ({ $t }: WithT) =>
 	z.object({
 		name: z

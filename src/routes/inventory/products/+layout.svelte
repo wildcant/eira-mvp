@@ -11,15 +11,11 @@
 		{
 			href: '/inventory/products/variants',
 			label: $t('page.inventory.products.nav.product-variants')
-		},
-		{
-			href: '/inventory/products/settings',
-			label: $t('page.inventory.products.nav.settings')
 		}
 	] satisfies Route[];
 </script>
 
-<h1>{$t('entity.product.plural.capitalize')}</h1>
+<h2>{$t('entity.product.plural.capitalize')}</h2>
 
 <SubNavigation {routes} />
 

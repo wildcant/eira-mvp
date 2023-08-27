@@ -4,7 +4,8 @@
 	const { setContext, getContext } = uniqueContext<{
 		form: SuperForm<ZodValidation<any>, unknown>;
 	}>();
-	export const getFormContext = getContext;
+	export const getFormContext = <T = SuperForm<ZodValidation<any>, unknown>>() =>
+		getContext() as { form: T };
 </script>
 
 <script lang="ts" generics="T extends AnyZodObject">

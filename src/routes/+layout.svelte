@@ -20,7 +20,7 @@
 	{@html `<\u{73}cript nonce="%sveltekit.nonce%">(${setInitialClassState.toString()})();</script>`}
 </svelte:head>
 
-<div class="min-h-[766px] h-[100vh] relative">
+<div class="relative">
 	<Drawer.Root bind:open>
 		<Drawer.Portal>
 			<Drawer.Content class="py-9 pl-10 pr-6 bg-background">
@@ -44,7 +44,7 @@
 
 	<div class={cn('relative transition-all duration-300 my-2', { 'md:ml-52': open })}>
 		<div
-			class="min-h-[766px] mx-2 md:border md:border-solid md:border-border md:rounded-3xl py-4 px-4"
+			class="min-h-[calc(100svh-2rem)] mx-2 md:border md:border-solid md:border-border md:rounded-3xl py-4 px-4"
 		>
 			<Header bind:drawer={open} />
 			<main class="mt-2">

@@ -16,7 +16,7 @@ type InputProps = HTMLInputAttributes;
 type LabelProps = HTMLDivAttributes;
 type ItemProps = Expand<SelectOptionProps> & HTMLDivAttributes;
 type SeparatorProps = HTMLDivAttributes;
-type TriggerProps = HTMLButtonAttributes;
+type TriggerProps = HTMLButtonAttributes & { invalid?: boolean };
 type ValueProps = {
 	placeholder?: string;
 } & HTMLAttributes<HTMLSpanElement>;

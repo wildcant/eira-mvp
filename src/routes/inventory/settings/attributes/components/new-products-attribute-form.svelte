@@ -22,13 +22,10 @@
 	<Form.Input type="text" />
 </Form.Field>
 
-<Form.Field name="values" let:field let:hasErrors>
+<Form.Field name="values" let:field let:invalid>
 	<Form.Label>
 		{$t('common.word.values.capitalize')}
 	</Form.Label>
 
-	<TagsInput
-		class={cn({ 'border-red-500': hasErrors })}
-		on:change={(e) => field.setValue(extractValues(e))}
-	/>
+	<TagsInput {invalid} on:change={(e) => field.setValue(extractValues(e))} />
 </Form.Field>

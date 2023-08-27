@@ -1,36 +1,70 @@
-import type { CreateTooltipProps } from '@melt-ui/svelte';
 import type {
 	Expand,
 	HTMLDivAttributes,
 	OmitOpen,
-	OmitForceVisible,
 	Transition,
-	TransitionParams
-} from '$lib/components/internal/index.js';
+	OnChangeFn,
+	AsChild,
+	TransitionProps,
+	CustomEventHandler
+} from '$lib/components/internal';
+import type { CreateTooltipProps } from '@melt-ui/svelte';
 import type { HTMLButtonAttributes } from 'svelte/elements';
 
 type Props = Expand<
-	OmitOpen<OmitForceVisible<CreateTooltipProps>> & {
+	OmitOpen<CreateTooltipProps> & {
 		open?: CreateTooltipProps['defaultOpen'] & {};
+		onOpenChange?: OnChangeFn<CreateTooltipProps['defaultOpen']>;
 	}
 >;
 
-type ContentProps<T extends Transition = Transition> = {
-	transition?: T;
-	transitionConfig?: TransitionParams<T>;
-	sideOffset?: number;
-} & HTMLDivAttributes;
+type ContentProps<
+	T extends Transition = Transition,
+	In extends Transition = Transition,
+	Out extends Transition = Transition
+> = Expand<
+	{
+		sideOffset?: number;
+	} & TransitionProps<T, In, Out> &
+		AsChild
+> &
+	HTMLDivAttributes;
 
-type TriggerProps = {
-	asChild?: boolean;
-} & HTMLButtonAttributes;
+type TriggerProps = AsChild & HTMLButtonAttributes;
+type ArrowProps = Expand<
+	{
+		size?: number;
+	} & AsChild
+> &
+	HTMLDivAttributes;
+
+type TriggerEvents<T extends Element = HTMLButtonElement> = {
+	blur: CustomEventHandler<FocusEvent, T>;
+	focus: CustomEventHandler<FocusEvent, T>;
+	keydown: CustomEventHandler<KeyboardEvent, T>;
+	pointerdown: CustomEventHandler<PointerEvent, T>;
+	pointerenter: CustomEventHandler<PointerEvent, T>;
+	pointerleave: CustomEventHandler<PointerEvent, T>;
+};
+type ContentEvents<T extends Element = HTMLDivElement> = {
+	pointerdown: CustomEventHandler<PointerEvent, T>;
+	pointerenter: CustomEventHandler<PointerEvent, T>;
+};
 
 export type {
 	Props,
+	ArrowProps,
 	TriggerProps,
 	ContentProps,
 	//
 	Props as TooltipProps,
+	ArrowProps as TooltipArrowProps,
 	ContentProps as TooltipContentProps,
-	TriggerProps as TooltipTriggerProps
+	TriggerProps as TooltipTriggerProps,
+	//
+	TriggerEvents,
+	ContentEvents,
+	//
+	TriggerEvents as TooltipTriggerEvents,
+	ContentEvents as TooltipContentEvents
 };

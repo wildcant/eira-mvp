@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import { getOptionUpdater } from '$lib/components/internal';
 	import { badgeVariants } from '$lib/components/ui/badge';
 	import { selectItemVariants } from '$lib/components/ui/select/components/select-item.svelte';
 	import { cn } from '$lib/utils';
@@ -8,8 +9,7 @@
 		createPopover,
 		createTagsInput,
 		melt,
-		type CreateTagsInputProps,
-		type Tag
+		type CreateTagsInputProps
 	} from '@melt-ui/svelte';
 	import {
 		FIRST_LAST_KEYS,
@@ -38,14 +38,15 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 	import { selectContentVariants } from '../autocomplete/components/autocomplete-options.svelte';
-	import { getOptionUpdater } from '$lib/components/internal';
+	import type { CustomTag } from './types';
 
 	export { defaultItems as items };
 
 	type $$Props = Pick<HTMLInputAttributes, 'placeholder' | 'class'> &
 		Pick<CreateTagsInputProps, 'defaultTags' | 'disabled'> & {
-			allowedTags: Tag[];
-			tags?: Writable<Tag[]>;
+			allowedTags: CustomTag[];
+			tags?: Writable<CustomTag[]>;
+			invalid?: boolean;
 		};
 
 	export let placeholder: $$Props['placeholder'] = undefined;
@@ -53,8 +54,9 @@
 	export let allowedTags: $$Props['allowedTags'];
 	export let disabled: $$Props['disabled'] = false;
 	export let tags: $$Props['tags'] = undefined;
+	export let invalid: $$Props['invalid'] = false;
 
-	const localTags = tags ?? writable<Tag[]>([]);
+	const localTags = tags ?? writable<CustomTag[]>([]);
 
 	let className: $$Props['class'] = undefined;
 	export { className as class };
@@ -74,10 +76,6 @@
 		tags: localTags,
 		allowed: allowedTags.map((t) => t.value),
 		unique: true,
-		onTagsChange: ({ next }) => {
-			dispatch('change', next);
-			return next;
-		},
 		disabled
 	});
 
@@ -93,7 +91,7 @@
 		positioning: { placement: 'bottom', strategy: 'absolute' }
 	});
 
-	const items = writable<Tag[]>(allowedTags);
+	const items = writable<CustomTag[]>(allowedTags);
 	// The currently highlighted menu item.
 	const highlightedItem = writable<HTMLElement | null>(null);
 	const filteredItems = writable(allowedTags);
@@ -285,6 +283,10 @@
 			sleep(1).then(() => $highlightedItem.scrollIntoView({ block: 'nearest' }));
 		}
 	});
+
+	effect([localTags], ([$localTags]) => {
+		dispatch('change', $localTags);
+	});
 </script>
 
 <div id="container" class="relative" bind:this={containerEl}>
@@ -293,6 +295,7 @@
 			use:melt={$root}
 			class={cn(
 				'flex flex-row flex-wrap gap-2.5 rounded-md bg-transparent px-3 py-2 border border-input ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+				{ 'border-red-500': invalid },
 				className
 			)}
 		>

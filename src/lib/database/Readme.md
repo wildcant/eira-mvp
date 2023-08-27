@@ -37,3 +37,5 @@ turso db tokens create eira --expiration none
 ### References
 
 - [About migrations](https://blog.turso.tech/database-migrations-made-easy-with-atlas-df2b259862db
+- [Good read about cursor pagination](https://brunoscheufler.com/blog/2022-01-01-paginating-large-ordered-datasets-with-cursor-based-pagination)
+- [https://www.fda.gov/media/84201/download](Structured Product Labeling)

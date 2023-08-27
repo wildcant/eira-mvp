@@ -1,31 +1,35 @@
 <script lang="ts">
+	import Uploader from '$components/uploader/uploader.svelte';
 	import { Container } from '$lib/components/custom/container';
 	import * as Form from '$lib/components/custom/form';
 	import Modal from '$lib/components/custom/modal/components/modal.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { t } from '$lib/i18n';
-	import { productsSchema } from '$lib/schemas/product';
+	import { productVariantsSchema, productsSchema } from '$lib/schemas/product';
+	import { melt } from '@melt-ui/svelte';
 	import { effect } from '@melt-ui/svelte/internal/helpers';
-	import { Plus } from 'lucide-svelte';
+	import { Info, Plus } from 'lucide-svelte';
 	import { createRender } from 'svelte-headless-table';
 	import { derived } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
+	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import AttributesTable from './components/attributes-table.svelte';
-	import NewVariantModal, { NEW_VARIANT_MODAL_ID } from './components/new-variant-modal.svelte';
+	import NewVariantForm, { NEW_VARIANT_MODAL_ID } from './components/new-variant-form.svelte';
 	import VariantsTable from './components/variants-table.svelte';
-	import Uploader from '$components/uploader/uploader.svelte';
-	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { isUndefined } from 'lodash';
 
 	export let data;
-	const { attributes, categories, departments, subCategories } = data;
+	const { attributes, categories, departments, subCategories, taxes } = data;
 
-	const form = superForm(data.form, { validators: $productsSchema });
-	const { tainted, fields, validate /*, form: frm, errors*/ } = form;
+	const form = superForm(data.form, { validators: $productsSchema, dataType: 'json' });
+	const { tainted, fields, validate, form: frm, errors } = form;
 	const {
 		departmentId: { value: departmentId },
 		categoryId: { value: categoryId },
 		subCategoryId: { value: subCategoryId },
-		attributes: { value: attributesField, errors: attributesErrors }
+		attributes: { value: attributesField, errors: attributesErrors },
+		variants: { value: variantsField }
 	} = fields;
 
 	const allowedDepartments = departments?.map((dep) => ({
@@ -56,11 +60,65 @@
 	// Reset subcategory field when category changes.
 	effect([categoryId], () => subCategoryId.set(undefined));
 
-	let modalOpen = false;
-	const openNewVariantModal = () => (modalOpen = true);
-</script>
+	$: hasAttributeErrors =
+		$attributesErrors &&
+		Object.values($attributesErrors as Record<number, { values?: { _errors?: string[] } }>).some(
+			(attributeItemError) => (attributeItemError.values?._errors?.length ?? 0) > 0
+		);
 
-<!-- <SuperDebug data={{ $frm, $errors }} /> -->
+	let modalOpen = false;
+	const openNewVariantForm = () => {
+		// Initialize attributes fields.
+		const variantAttributes = $attributesField.reduce(
+			(obj, attr) => ({ ...obj, [attr.id as number]: { optional: attr.optional } }),
+			{}
+		);
+
+		$variantsField = [...$variantsField, { attributes: variantAttributes } as any];
+		modalOpen = true;
+	};
+
+	const handleNewVariant = async (e: CustomEvent<number>) => {
+		const index = e.detail;
+		if (isUndefined(e.detail)) {
+			console.error('TODO: Handle unexpected error, variant index to be added was not found.');
+			return;
+		}
+
+		const currentVariant = $variantsField[index];
+		console.log(Object.keys(currentVariant.attributes));
+
+		// Validate variant fields
+		const errors = await Promise.all([
+			...Object.keys($productVariantsSchema.shape).map((key) =>
+				validate(`variants[${index}].${key}` as any)
+			),
+			...Object.keys(currentVariant.attributes).map((key) =>
+				validate(`variants[${index}].attributes[${key}]` as any)
+			)
+		]);
+
+		const invalid = errors.some((error) => {
+			if (error && '_errors' in error) {
+				return (error._errors as string[] | undefined)?.length;
+			}
+			return error?.length;
+		});
+		if (invalid) return;
+
+		$variantsField[index] = $productVariantsSchema.parse(currentVariant);
+		setTimeout(() => (modalOpen = false), 50);
+	};
+
+	const handleCancelNewVariant = async () => {
+		modalOpen = false;
+		setTimeout(() => {
+			const currentVariants = [...$variantsField];
+			currentVariants.pop();
+			$variantsField = currentVariants;
+		}, 50);
+	};
+</script>
 
 <Form.Root {form} method="post" class="form" id="new-product-form">
 	<div class="flex justify-between items-center mb-4">
@@ -169,9 +227,31 @@
 			<Container class="grid gap-4 rounded-md">
 				<div>
 					<div class="flex justify-between">
-						<h3>{$t('page.inventory.products.new.variants.title')}</h3>
+						<div class="flex gap-2 items-center">
+							<h3>{$t('page.inventory.products.new.variants.title')}</h3>
+							<Tooltip.Root positioning={{ placement: 'bottom' }}>
+								<Tooltip.Trigger asChild let:builder>
+									<div use:melt={builder}>
+										<Info class="w-4 h-4" />
+									</div>
+								</Tooltip.Trigger>
+								<Tooltip.Content
+									sideOffset={4}
+									transitionConfig={{ duration: 50 }}
+									class="max-w-xs"
+								>
+									<p class="leading-0">
+										{$t('page.inventory.products.new.variants.tooltip')}
+									</p>
+								</Tooltip.Content>
+							</Tooltip.Root>
+						</div>
 
-						<Button variant="outline" on:click={openNewVariantModal}>
+						<Button
+							variant="outline"
+							on:click={openNewVariantForm}
+							disabled={$attributesField.length === 0 || hasAttributeErrors}
+						>
 							<Plus class="mr-2 h-4 w-4" />
 							{$t('common.word.add.capitalize')}
 							{$t('entity.variant.singular.lowercase')}
@@ -180,7 +260,7 @@
 					<p>{$t('page.inventory.products.new.variants.subtitle')}</p>
 				</div>
 
-				<VariantsTable />
+				<VariantsTable data={variantsField} {attributes} variantAttributes={$attributesField} />
 			</Container>
 		</div>
 	</div>
@@ -193,22 +273,17 @@
 				closeOnOutsideClick: false,
 				id: NEW_VARIANT_MODAL_ID,
 				title: `${$t('common.word.new.capitalize')} ${$t(`entity.variant.singular.capitalize`)}`,
-				children: createRender(NewVariantModal)
-					.on('cancel', () => {
-						// TODO: Undo changes in form for new variant.
-						modalOpen = false;
-					})
-					.on('continue', async () => {
-						const errors = await validate('name');
-						// Close modal if there are no validation errors in the new variant form.
-						if (!errors?.length) modalOpen = false;
-					}),
+				children: createRender(NewVariantForm, { taxes, index: $variantsField.length - 1 })
+					.on('cancel', handleCancelNewVariant)
+					.on('continue', handleNewVariant),
 				content: { class: 'md:min-w-full lg:min-w-[1024px]' }
 			}}
 			on:close={() => (modalOpen = false)}
 		/>
 	{/if}
 </Form.Root>
+
+<SuperDebug data={{ $frm, $errors }} />
 
 <style>
 	.form-grid {

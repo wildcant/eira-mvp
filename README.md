@@ -25,8 +25,3 @@ Eeira is a platform that aims to solve this problem by providing a single platfo
 - Navigate to open and close dialogs - [Shallow routing with pushState and replaceState](https://github.com/sveltejs/kit/pull/9847)
 - View transition api - [Add onNavigate lifecycle function, to enable view transitions](https://github.com/sveltejs/kit/pull/9605)
 - Better pattern to reuse form field im complex forms - [Cannot bind to a variable declared with the let: directive](https://github.com/sveltejs/svelte/issues/3617)
-
-### References
-
-- [Good read about cursor pagination](https://brunoscheufler.com/blog/2022-01-01-paginating-large-ordered-datasets-with-cursor-based-pagination)
-- [https://www.fda.gov/media/84201/download](Structured Product Labeling)

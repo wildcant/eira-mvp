@@ -59,6 +59,10 @@
 				"capitalize": "Options",
 				"lowercase": "options"
 			},
+			"optional": {
+				"capitalize": "Optional",
+				"lowercase": "optional"
+			},
 			"percentage": {
 				"capitalize": "Percentage",
 				"lowercase": "percentage"
@@ -98,6 +102,14 @@
 			"values": {
 				"capitalize": "Values",
 				"lowercase": "values"
+			},
+			"inventory": {
+				"capitalize": "Inventory",
+				"lowercase": "inventory"
+			},
+			"settings": {
+				"capitalize": "Settings",
+				"lowercase": "settings"
 			}
 		}
 	},
@@ -119,7 +131,8 @@
 			"orders": "Orders",
 			"point-of-sale": "Point of sale",
 			"product-types": "Product Types",
-			"products": "Products"
+			"products": "Products",
+			"settings": "Settings"
 		},
 		"search": {
 			"placeholder": "Search"
@@ -224,8 +237,7 @@
 			"products": {
 				"nav": {
 					"product-attributes": "Products attributes",
-					"product-variants": "Products variants",
-					"settings": "Settings"
+					"product-variants": "Products variants"
 				},
 				"new": {
 					"attributes": {
@@ -339,7 +351,8 @@
 					},
 					"variants": {
 						"subtitle": "Add your product variants.",
-						"title": "Variants"
+						"title": "Variants",
+						"tooltip": "Combine the product attributes to crate new variants. You'll need to at at least one attribute in order to add a new variant."
 					}
 				}
 			}

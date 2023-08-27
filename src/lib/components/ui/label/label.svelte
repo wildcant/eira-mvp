@@ -10,11 +10,17 @@
 	import { Label as LabelPrimitive } from '$lib/components/primitives';
 	import { cn } from '$lib/utils';
 
-	type $$Props = LabelPrimitive.Props;
+	type $$Props = LabelPrimitive.Props & {
+		invalid?: boolean;
+	};
 	let className: string | undefined | null = undefined;
+	export let invalid: $$Props['invalid'] = false;
 	export { className as class };
 </script>
 
-<LabelPrimitive.Root class={cn(labelVariants(), className)} {...$$restProps}>
+<LabelPrimitive.Root
+	class={cn(labelVariants(), { 'text-destructive': invalid }, className)}
+	{...$$restProps}
+>
 	<slot />
 </LabelPrimitive.Root>

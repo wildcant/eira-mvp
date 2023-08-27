@@ -16,7 +16,7 @@
 	export let attributesErrors: ValidationErrors<ProductZodSchema>['attributes'];
 
 	const addNewProductAttribute = () => {
-		$attributesField = [...$attributesField, { values: [], key: uniqueId() }];
+		$attributesField = [...$attributesField, { values: [], key: uniqueId() } as any];
 	};
 
 	const updateProductAttribute = (e: CustomEvent<{ data: LocalProductAttribute }>) => {
@@ -51,8 +51,9 @@
 <Table.Root>
 	<Table.Header>
 		<Table.Row>
-			<Table.Head class="w-5/12">{$t('entity.attribute.singular.lowercase')}</Table.Head>
-			<Table.Head class="w-6/12">{$t('common.word.options.lowercase')}</Table.Head>
+			<Table.Head class="w-4/12">{$t('entity.attribute.singular.lowercase')}</Table.Head>
+			<Table.Head class="w-5/12">{$t('common.word.options.lowercase')}</Table.Head>
+			<Table.Head class="w-1/12">{$t('common.word.optional.lowercase')}</Table.Head>
 			<Table.Head class="w-1/12" />
 		</Table.Row>
 	</Table.Header>

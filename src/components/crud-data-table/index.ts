@@ -46,6 +46,5 @@ export {
 	default as NewEntityModal,
 	NEW_ENTITY_MODAL_ID
 } from './components/new-entity-modal.svelte';
-export { default as ActionsCell } from './components/actions-cell.svelte';
 export const UNEXPECTED_ROW_TYPE = 'Unexpected CRUD column definition - row is not of type data.';
 export * from './types';

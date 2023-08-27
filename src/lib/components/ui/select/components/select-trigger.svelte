@@ -12,10 +12,14 @@
 
 	type $$Props = SelectPrimitive.TriggerProps;
 	let className: string | undefined | null = undefined;
+	export let invalid: $$Props['invalid'] = false;
 	export { className as class };
 </script>
 
-<SelectPrimitive.Trigger class={cn(selectTriggerVariants(), className)} {...$$restProps}>
+<SelectPrimitive.Trigger
+	class={cn(selectTriggerVariants(), { 'border-red-500': invalid }, className)}
+	{...$$restProps}
+>
 	<slot />
 	<div>
 		<ChevronDown class="h-4 w-4 opacity-50" />

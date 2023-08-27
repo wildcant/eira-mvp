@@ -29,6 +29,6 @@
 	{name}
 	bind:value={$value}
 	disabled={disabled || $submitting}
-	class={cn({ 'border-red-500': !!$errors }, className)}
+	invalid={!!$errors}
 	{...$$restProps}
 />

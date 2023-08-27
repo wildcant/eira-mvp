@@ -7,10 +7,13 @@
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	type $$Props = Pick<HTMLInputAttributes, 'placeholder' | 'class'> &
-		Pick<CreateTagsInputProps, 'defaultTags'>;
+		Pick<CreateTagsInputProps, 'defaultTags'> & {
+			invalid?: boolean;
+		};
 
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let defaultTags: $$Props['defaultTags'] = [];
+	export let invalid: $$Props['invalid'] = false;
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 
@@ -33,6 +36,7 @@
 	use:melt={$root}
 	class={cn(
 		'flex flex-row flex-wrap gap-2.5 rounded-md bg-transparent px-3 py-2 border border-input ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+		{ 'border-red-500': invalid },
 		className
 	)}
 >

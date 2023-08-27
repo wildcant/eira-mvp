@@ -1,17 +1,20 @@
+import { getOptionUpdater, removeUndefined } from '$lib/components/internal';
 import {
 	createTooltip,
 	type Tooltip as TooltipReturn,
 	type CreateTooltipProps
 } from '@melt-ui/svelte';
-import { getOptionUpdater, removeUndefined } from '$lib/components/internal/index.js';
 import { getContext, setContext } from 'svelte';
 
 const NAME = 'Tooltip';
 
 export const ctx = {
 	set,
-	get
+	get,
+	setArrow
 };
+
+type GetReturn = TooltipReturn;
 
 function set(props: CreateTooltipProps) {
 	const tooltip = createTooltip({
@@ -19,8 +22,7 @@ function set(props: CreateTooltipProps) {
 			placement: 'top'
 		},
 		openDelay: 700,
-		...removeUndefined(props),
-		forceVisible: true
+		...removeUndefined(props)
 	});
 	setContext(NAME, tooltip);
 	return {
@@ -30,12 +32,18 @@ function set(props: CreateTooltipProps) {
 }
 
 function get(sideOffset = 0) {
-	const tooltip = getContext<TooltipReturn>(NAME);
+	const tooltip = getContext<GetReturn>(NAME);
 
 	const {
 		options: { positioning }
 	} = tooltip;
 	positioning.update((prev) => ({ ...prev, gutter: sideOffset }));
 
+	return tooltip;
+}
+
+function setArrow(size = 8) {
+	const tooltip = get();
+	tooltip.options.arrowSize.set(size);
 	return tooltip;
 }

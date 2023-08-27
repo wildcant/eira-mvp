@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { Input } from '$lib/components/ui/input';
-	import { cn } from '$lib/utils';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import { getFormContext } from './form.svelte';
 	import { getFieldContext } from './form-field.svelte';
+	import { getFormContext } from './form.svelte';
 
-	interface $$Props extends HTMLInputAttributes {
+	type $$Props = HTMLInputAttributes & {
 		disabled?: HTMLInputAttributes['disabled'];
 		class?: string | undefined | null;
-	}
+	};
 
 	export let disabled: HTMLInputAttributes['disabled'] = undefined;
 	let className: string | undefined | null = undefined;
@@ -30,6 +29,7 @@
 	type="text"
 	bind:value={$value}
 	disabled={disabled || $submitting}
-	class={cn({ 'border-red-500': !!$errors }, className)}
+	invalid={!!$errors}
+	class={className}
 	{...$$restProps}
 />

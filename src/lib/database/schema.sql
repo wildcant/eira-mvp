@@ -91,12 +91,12 @@ CREATE TABLE
     IF NOT EXISTS ProductVariant (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         imageId INTEGER,
+        price REAL NOT NULL,
+        averageCost REAL NOT NULL,
+        cost REAL NOT NULL,
+        -- providerId INTEGER,
         sku TEXT NOT NULL,
         barcode TEXT NOT NULL,
-        price REAL NOT NULL,
-        purchasePrice REAL NOT NULL,
-        cost REAL NOT NULL,
-        -- taxes REAL NOT NULL,
         stock INTEGER NOT NULL,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP,
@@ -110,6 +110,17 @@ ON PRODUCTVARIANT FOR EACH ROW BEGIN
 	    updatedAt = CURRENT_TIMESTAMP
 	WHERE id = NEW.id;
 END; 
+
+DROP TABLE IF EXISTS ProductVariantTax;
+
+CREATE TABLE
+    IF NOT EXISTS ProductVariantTax (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        productVariantId INTEGER NOT NULL,
+        taxId INTEGER NOT NULL,
+        FOREIGN KEY (productVariantId) REFERENCES ProductVariant(id),
+        FOREIGN KEY (taxId) REFERENCES Tax(id)
+    );
 
 DROP TABLE IF EXISTS Company;
 
@@ -247,7 +258,7 @@ CREATE TABLE
         name TEXT NOT NULL,
         scope TEXT CHECK(scope IN ('sales', 'purchases')) NOT NULL DEFAULT 'sales',
         type TEXT CHECK(type IN ('percentage', 'fixed')) NOT NULL DEFAULT 'percentage',
-        amount REAL,
+        amount REAL NOT NULL,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP
     );

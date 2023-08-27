@@ -6,6 +6,7 @@ import Footer from './components/table-footer.svelte';
 import Head from './components/table-head.svelte';
 import Header from './components/table-header.svelte';
 import Row from './components/table-row.svelte';
+import ActionsCell from './components/table-actions-cell.svelte';
 
 export {
 	Root,
@@ -16,6 +17,7 @@ export {
 	Head,
 	Header,
 	Row,
+	ActionsCell,
 	//
 	Root as Table,
 	Body as TableBody,
@@ -24,5 +26,6 @@ export {
 	Footer as TableFooter,
 	Head as TableHead,
 	Header as TableHeader,
-	Row as TableRow
+	Row as TableRow,
+	ActionsCell as TableActionsCell
 };

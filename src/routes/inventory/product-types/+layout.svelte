@@ -19,7 +19,7 @@
 	] satisfies Route[];
 </script>
 
-<h1 class="font-bold text-2xl">{$t('page.inventory.product-types.title')}</h1>
+<h2>{$t('page.inventory.product-types.title')}</h2>
 
 <SubNavigation {routes} />
 

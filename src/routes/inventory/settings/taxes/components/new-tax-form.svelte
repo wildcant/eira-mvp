@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Form from '$lib/components/custom/form';
 	import { t } from '$lib/i18n';
-	import { taxScopeOptions, taxTypeOptions } from '../helpers';
+	import { taxScopeOptions, taxTypeOptions } from '../options';
 </script>
 
 <Form.Field name="name">

@@ -4,49 +4,64 @@
 	import { buttonVariants } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
 	import { cn } from '$lib/utils';
-	import { ChevronDown, ChevronRight } from 'lucide-svelte';
+	import {
+		Box,
+		ChevronDown,
+		ChevronRight,
+		LayoutDashboard,
+		LayoutList,
+		Settings,
+		Shapes,
+		Store,
+		Warehouse
+	} from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { Routes, type Item } from './types';
-	import NavigationIcon from './navigation-icon.svelte';
 
 	$: items = [
 		{
 			id: 'dashboard',
 			title: $t('component.navigation.dashboard'),
 			href: Routes.DASHBOARD,
-			icon: 'layout-dashboard'
+			icon: LayoutDashboard
 		},
 		{
 			id: 'inventory',
 			title: $t('component.navigation.inventory'),
-			icon: 'warehouse',
+			icon: Warehouse,
 			href: Routes.INVENTORY,
 			children: [
 				{
 					id: 'products',
 					title: $t('component.navigation.products'),
 					href: Routes.PRODUCTS,
-					icon: 'box'
+					icon: Box
 				},
 				{
 					id: 'product-types',
 					title: $t('component.navigation.product-types'),
 					href: Routes.PRODUCT_TYPES,
-					icon: 'shapes'
+					icon: Shapes
+				},
+				{
+					id: 'inventory-settings',
+					title: $t('component.navigation.settings'),
+					href: Routes.INVENTORY_SETTINGS,
+					icon: Settings
 				}
 			]
 		},
 		{
 			id: 'point-of-sale',
 			title: $t('component.navigation.point-of-sale'),
-			icon: 'store',
+			icon: Store,
 			href: Routes.POS,
 			children: [
 				{
 					id: 'orders',
 					title: $t('component.navigation.orders'),
 					href: Routes.POS_ORDERS,
-					icon: 'layout-list'
+					icon: LayoutList
 				}
 			]
 		}
@@ -77,7 +92,7 @@
 				class={cn('flex gap-2 opacity-70', { 'opacity-100 font-bold': activeParentItem })}
 				on:click={navigate}
 			>
-				<NavigationIcon name={parentItem.icon} />
+				<svelte:component this={parentItem.icon} />
 				<span>
 					{parentItem.title}
 				</span>
@@ -96,7 +111,7 @@
 						)}
 						on:click={navigate}
 					>
-						<NavigationIcon name={item.icon} />
+						<svelte:component this={item.icon} />
 						<span>
 							{item.title}
 						</span>

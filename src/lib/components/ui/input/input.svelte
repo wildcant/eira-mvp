@@ -14,6 +14,7 @@
 	type $$Props = HTMLInputAttributes & {
 		use?: Action;
 		disabled?: HTMLInputAttributes['disabled'];
+		invalid?: boolean;
 	};
 
 	let className: string | undefined | null = undefined;
@@ -22,6 +23,7 @@
 	export { action as use };
 	export let value: $$Props['value'] = undefined;
 	export let disabled: $$Props['disabled'] = undefined;
+	export let invalid: $$Props['invalid'] = false;
 
 	const useAction = (node: HTMLElement, action: Action | undefined) => {
 		const actionReturn = action?.(node);
@@ -30,7 +32,7 @@
 </script>
 
 <input
-	class={cn(inputVariants(), className)}
+	class={cn(inputVariants(), { 'border-red-500': invalid }, className)}
 	bind:value
 	use:useAction={action}
 	on:blur

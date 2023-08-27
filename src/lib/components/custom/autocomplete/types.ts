@@ -30,7 +30,7 @@ export type {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Meta = Record<string, string | number | boolean | unknown> & { disabled?: boolean };
-export type MetaDefault = { disabled?: boolean };
+export type MetaDefault = Record<string, string | number | boolean | unknown>;
 export type Item<T extends string | number = string, TMeta extends Meta = MetaDefault> = {
 	value: T;
 	label: string;

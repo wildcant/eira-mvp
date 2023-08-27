@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ProductAttribute } from '$lib/api/types';
 	import * as Autocomplete from '$lib/components/custom/autocomplete';
-	import * as Form from '$lib/components/custom/form';
+	import FormError from '$lib/components/custom/form/components/form-error.svelte';
 	import { TagsInputAutocomplete } from '$lib/components/custom/tags-input-autocomplete';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Table from '$lib/components/ui/table';
@@ -9,9 +9,10 @@
 	import { effect } from '@melt-ui/svelte/internal/helpers';
 	import { Trash } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
+	import type { Readable } from 'svelte/motion';
 	import { writable, type Writable } from 'svelte/store';
 	import type { AttributeItem, LocalProductAttribute } from '../types';
-	import type { Readable } from 'svelte/motion';
+	import Switch from '$lib/components/ui/switch/switch.svelte';
 
 	export let key: string;
 	export let selectableAttributes: Readable<ProductAttribute[]>;
@@ -26,7 +27,8 @@
 		meta: { values: attr.values }
 	})) satisfies AttributeItem[];
 
-	let selectedAttribute: Writable<AttributeItem | undefined> = writable();
+	let selectedAttribute: Writable<AttributeItem> = writable();
+	let optional = writable(false);
 	$: allowedTags =
 		$selectedAttribute?.meta?.values?.map((v) => ({
 			id: v.id.toString(),
@@ -36,14 +38,18 @@
 	// Reset tags when the attribute changes.
 	effect(selectedAttribute, () => tags.set([]));
 
-	effect([selectedAttribute, tags], ([$selectedAttribute, $tags]) => {
-		dispatch('change', {
-			data: {
-				key,
-				id: $selectedAttribute?.value,
-				values: $tags.map((tag) => +tag.id)
-			} satisfies LocalProductAttribute
-		});
+	effect([selectedAttribute, tags, optional], ([$selectedAttribute, $tags, $optional]) => {
+		if ($selectedAttribute) {
+			dispatch('change', {
+				data: {
+					key,
+					id: $selectedAttribute.value,
+					name: $selectedAttribute.label,
+					optional: $optional,
+					values: $tags.map((tag) => ({ id: +tag.id, name: tag.value }))
+				} satisfies LocalProductAttribute
+			});
+		}
 	});
 </script>
 
@@ -65,7 +71,7 @@
 		</Autocomplete.Root>
 	</Table.Cell>
 
-	<Table.Cell class="w-6/12">
+	<Table.Cell class="w-5/12">
 		<TagsInputAutocomplete
 			{allowedTags}
 			{tags}
@@ -73,8 +79,12 @@
 		/>
 
 		{#if errors?.length}
-			<Form.Error>{errors?.join(', ')}</Form.Error>
+			<FormError>{errors?.join(', ')}</FormError>
 		{/if}
+	</Table.Cell>
+
+	<Table.Cell class="w-1/12">
+		<Switch bind:checked={$optional} />
 	</Table.Cell>
 
 	<Table.Cell class="w-2/12">

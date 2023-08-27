@@ -17,9 +17,8 @@
 	import { Plus } from 'lucide-svelte';
 	import { DataBodyRow, Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { addTableFilter } from 'svelte-headless-table/plugins';
-	import { writable } from 'svelte/store';
+	import { get, writable } from 'svelte/store';
 	import {
-		ActionsCell,
 		EditActions,
 		EditableCell,
 		NEW_ENTITY_MODAL_ID,
@@ -73,7 +72,10 @@
 			id: 'actions',
 			header: '',
 			cell: ({ row }, { pluginStates }) => {
-				return createRender(ActionsCell, { row, editing: pluginStates.editableRow.editing })
+				return createRender(Table.ActionsCell, {
+					row,
+					disabled: get(pluginStates.editableRow.editing)
+				})
 					.on('edit', (event) => pluginStates.editableRow.editingRow.set(event.detail))
 					.on('delete', (event) =>
 						openConfirmationModal({
@@ -196,9 +198,10 @@
 				data: {
 					variant: 'default',
 					title: $t('common.phrase.action-completed'),
-					description: `${$t('entity.department.singular.capitalize')} ${$t(
-						'common.word.updated.lowercase'
-					)}`
+					description: `
+					${$t('entity.department.singular.capitalize')} 
+					${$t('common.word.updated.lowercase')}
+					`
 				}
 			});
 

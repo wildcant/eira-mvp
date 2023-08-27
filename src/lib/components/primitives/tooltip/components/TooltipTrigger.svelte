@@ -1,19 +1,31 @@
 <script lang="ts">
 	import { melt } from '@melt-ui/svelte';
+	import { createDispatcher } from '$lib/components/internal';
 	import { ctx } from '../ctx.js';
-	import type { TriggerProps } from '../types.js';
+	import type { TriggerEvents, TriggerProps } from '../types.js';
 
 	type $$Props = TriggerProps;
+	type $$Events = TriggerEvents;
 	export let asChild = false;
-	const {
-		elements: { trigger }
-	} = ctx.get();
+	const trigger = ctx.get().elements.trigger;
+	const dispatch = createDispatcher();
 </script>
 
 {#if asChild}
-	<slot trigger={$trigger} />
+	<slot builder={$trigger} />
 {:else}
-	<button use:melt={$trigger} {...$$restProps}>
-		<slot trigger={$trigger} />
+	{@const builder = $trigger}
+	<button
+		type="button"
+		use:melt={builder}
+		{...$$restProps}
+		on:m-blur={dispatch}
+		on:m-focus={dispatch}
+		on:m-keydown={dispatch}
+		on:m-pointerdown={dispatch}
+		on:m-pointerenter={dispatch}
+		on:m-pointerleave={dispatch}
+	>
+		<slot {builder} />
 	</button>
 {/if}

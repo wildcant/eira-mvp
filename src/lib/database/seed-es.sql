@@ -290,7 +290,8 @@ VALUES
 insert into
     Tax (name, scope, type, amount)
 values
-	('Impuesto de venta 19%', 'sales', 'percentage', 19);
+	('Impuesto de venta 19%', 'sales', 'percentage', 19),
+	('Impuesto de compra 6%', 'purchases', 'percentage', 6);
 
 insert into
     Product (name, departmentId, categoryId, subCategoryId)

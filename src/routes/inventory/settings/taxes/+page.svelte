@@ -7,7 +7,7 @@
 	} from '$components/crud-data-table';
 	import type { Tax } from '$lib/api/types';
 	import { t } from '$lib/i18n';
-	import { taxSchema, type TaxSchema } from '$lib/schemas/tax';
+	import { taxAmountSuffix, taxSchema, type TaxSchema } from '$lib/schemas/tax';
 	import { createRender } from 'svelte-headless-table';
 	import EditableTaxScopeCell from './components/editable-tax-scope-cell.svelte';
 	import EditableTaxTypeCell from './components/editable-tax-type-cell.svelte';
@@ -18,17 +18,13 @@
 
 	const title = $t('entity.tax.plural.capitalize');
 
-	const amountSuffix: { [key in TaxSchema['type']]: string } = {
-		fixed: ` / ${$t('common.word.unit.lowercase')}`,
-		percentage: '%'
-	};
-
 	const columns: CrudTableColumns<Tax> = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-4/12' } },
 		{
 			header: $t('common.word.value.capitalize'),
 			accessor: 'amount',
-			accessorFn: ({ type, amount }) => `${amount}${amountSuffix[type as TaxSchema['type']] ?? ''}`,
+			accessorFn: ({ type, amount }) =>
+				`${amount}${taxAmountSuffix({ $t })[type as TaxSchema['type']] ?? ''}`,
 			meta: { class: 'w-2/12' }
 		},
 		{

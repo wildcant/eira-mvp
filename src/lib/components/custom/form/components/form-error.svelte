@@ -3,8 +3,12 @@
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
+
+	console.log($$slots.default.valueOf());
 </script>
 
-<span class={cn('block text-sm font-medium text-destructive', className)}>
-	<slot />
-</span>
+{#if $$slots.default}
+	<span class={cn('block text-sm font-medium text-destructive', className)}>
+		<slot />
+	</span>
+{/if}

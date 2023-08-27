@@ -4,7 +4,7 @@
 	import * as Autocomplete from '$lib/components/custom/autocomplete';
 	import { t } from '$lib/i18n';
 	import type { DataBodyRow } from 'svelte-headless-table';
-	import { taxTypeOptions } from '../helpers';
+	import { taxTypeOptions } from '../options';
 
 	export let row: DataBodyRow<Tax>;
 	export let editableRow: EditableRowState<Tax>;

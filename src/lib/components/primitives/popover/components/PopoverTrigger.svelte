@@ -11,7 +11,7 @@
 {#if asChild}
 	<slot trigger={$trigger} />
 {:else}
-	<button use:melt={$trigger} {...$$restProps}>
+	<button use:melt={$trigger} type="button" {...$$restProps}>
 		<slot trigger={$trigger} />
 	</button>
 {/if}
