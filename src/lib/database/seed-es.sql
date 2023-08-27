@@ -296,15 +296,66 @@ values
 insert into
     Product (name, departmentId, categoryId, subCategoryId)
 values
-	('Dolex Forte', 1, 1, 1);
+	('Dolex Forte', 1, 12, 52),
+	('Drops Vick', 1, 12, 52),
+	('Mieltertos', 1, 12, 52),
+	('Strepsils Intensive', 1, 12, 52),
+	('Vick Mentol', 1, 12, 52),
+	('Mebucaína Forte', 1, 12, 52),
+	('Noraver Garganta', 1, 12, 52),
+	('Bucoxol Garganta', 1, 12, 52),
+	('Benzirin', 1, 12, 52),
+	('Isodine Bucofaríngeo', 1, 12, 52),
+	('Bucoxol Tri', 1, 12, 52),
+	('Cetirizina', 1, 12, 52);
+
+insert into
+    Product (name, departmentId, categoryId)
+values
+	('Nimesulida Colmed', 1, 6),
+	('Tranexam', 1, 6),
+	('Tranexam', 1, 6),
+	('Cefalexina Genfar', 1, 6),
+	('Neurobion', 1, 6),
+	('Sildenafil', 1, 6),
+	('Pyralvex', 1, 6),
+	('Desloratadina Genfar', 1, 6),
+	('Sildenafil Genfar', 1, 6),
+	('Fluconazol MK', 1, 6),
+	('Diclofenaco MK', 1, 6);
 
 
 insert into
     ProductAttributeList (productId, productAttributeId)
 values
-	(1, 1);
+	(1, 1),
+	(1, 6),
+	(1, 5),
+	(1, 3);
 
 INSERT INTO 
 		ProductAttributeValueList (productAttributeListId, productAttributeValueId)
 VALUES
-	(1, 1);
+	(1, 1),
+	(2, 19),
+	(2, 20),
+	(3, 16),
+	(3, 17),
+	(4, 5),
+	(4, 8),
+	(4, 12),
+	(4, 13);
+
+insert into 
+  ProductVariant (productId, price, averageCost, cost, sku, barcode, stock)
+values
+  (1, 200, 50, 100, "MED-G123-GUC", "72345678999992", 20);
+
+
+insert into 
+  ProductVariantAttribute (variantId, attributeId, attributeValueId)
+values
+  (1, 12, 52),
+  (1, 6, 19),
+  (1, 5, 16),
+  (1, 3, 12);

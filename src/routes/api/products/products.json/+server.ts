@@ -55,6 +55,7 @@ export const GET = async ({ url, locals: { $t } }) => {
 };
 
 const POST_PRODUCTS_TAG = '[Post][Products]';
+// TODO: [TRANSLATIONS].
 export const POST = async ({ request, locals: { schemas } }) => {
 	const data = schemas.product.parse(await request.json());
 
@@ -69,14 +70,13 @@ export const POST = async ({ request, locals: { schemas } }) => {
 			console.error(
 				`${POST_PRODUCTS_TAG} There was a problem trying to insert the product attributes.`
 			);
-			// TODO: [TRANSLATIONS].
 			throw new Error('There was a problem trying to add the new product.');
 		}
 
 		const productId = Number(result.insertId);
 
-		await Promise.all(
-			data.attributes.map(async (attribute) => {
+		await Promise.all([
+			...data.attributes.map(async (attribute) => {
 				const productAttributeListItem = await trx
 					.insertInto('ProductAttributeList')
 					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -87,7 +87,6 @@ export const POST = async ({ request, locals: { schemas } }) => {
 					console.error(
 						`${POST_PRODUCTS_TAG} There was a problem trying to insert the product attributes.`
 					);
-					// TODO: [TRANSLATIONS].
 					throw new Error('There was a problem trying to add the new product.');
 				}
 
@@ -101,8 +100,43 @@ export const POST = async ({ request, locals: { schemas } }) => {
 							.executeTakeFirst()
 					)
 				);
+			}),
+			...data.variants.map(async (variant) => {
+				const { price, averageCost, cost, sku, barcode, stock } = variant;
+				const productVariant = await trx
+					.insertInto('ProductVariant')
+					.values({
+						productId,
+						price: price ?? 0,
+						averageCost: averageCost ?? 0,
+						cost: cost ?? 0,
+						sku: sku ?? '',
+						barcode: barcode ?? '',
+						stock: stock ?? 0
+					})
+					.executeTakeFirst();
+
+				if (!productVariant.insertId) {
+					console.error(
+						`${POST_PRODUCTS_TAG} There was a problem trying to insert a product variant.`
+					);
+					throw new Error('There was a problem trying to add the new product.');
+				}
+
+				const variantId = Number(productVariant.insertId);
+
+				return Promise.all(
+					Object.keys(variant.attributes).map((attributeKey) => {
+						const attributeId = Number(attributeKey);
+						const attributeValueId = variant.attributes[attributeId].value;
+						trx
+							.insertInto('ProductVariantAttribute')
+							.values({ variantId, attributeId, attributeValueId })
+							.executeTakeFirst();
+					})
+				);
 			})
-		);
+		]);
 
 		return result;
 	});

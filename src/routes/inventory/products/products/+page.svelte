@@ -1,8 +1,11 @@
 <script lang="ts">
+	import type { GetProductsResponse } from '$lib/api/types.js';
 	import { DataTable, DataTableCheckbox } from '$lib/components/custom/data-table';
+	import Scroller from '$lib/components/custom/scroller/scroller.svelte';
 	import { Search } from '$lib/components/custom/search';
 	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
+	import type { PaginatedApiResponse } from '$lib/types.js';
 	import { Plus } from 'lucide-svelte';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import {
@@ -14,8 +17,8 @@
 	import { writable } from 'svelte/store';
 
 	export let data;
-
-	const tableData = writable(data.initialData.data);
+	const { endpoint, initialData } = data;
+	const tableData = writable(initialData.data);
 
 	export const table = createTable(tableData, {
 		sort: addSortBy({ disableMultiSort: true }),
@@ -61,6 +64,31 @@
 	const viewModel = table.createViewModel(columns);
 
 	const { filterValue } = viewModel.pluginStates.filter;
+
+	let loadingData = false;
+	let hasMore = initialData.meta.hasMore;
+	let after = initialData.meta.afterCursor;
+	let totalItems = initialData.meta.total;
+
+	const getQueryParams = () => {
+		const q = new URLSearchParams();
+		q.set('size', '10');
+		if (after) q.set('after', after.toString());
+		if ($filterValue) q.set('search', $filterValue);
+		// Add params defined by parent component.
+		return q.toString();
+	};
+
+	async function loadMore() {
+		if (loadingData || !hasMore) return;
+		loadingData = true;
+		const response = await fetch(`${endpoint.url}?${getQueryParams()}`);
+		const result = (await response.json()) as GetProductsResponse;
+		$tableData = $tableData.concat(result.data);
+		hasMore = result.meta.hasMore;
+		after = result.meta.afterCursor;
+		loadingData = false;
+	}
 </script>
 
 <div class="flex items-center justify-between py-4">
@@ -74,4 +102,4 @@
 	</Button>
 </div>
 
-<DataTable {viewModel} class="min-h-[600px]" />
+<DataTable {viewModel} on:more={loadMore} />

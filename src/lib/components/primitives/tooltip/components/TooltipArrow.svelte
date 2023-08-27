@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { melt } from "@melt-ui/svelte";
-	import { ctx } from "../ctx.js";
-	import type { ArrowProps } from "../types.js";
+	import { melt } from '@melt-ui/svelte';
+	import { ctx } from '../ctx.js';
+	import type { ArrowProps } from '../types.js';
 
 	type $$Props = ArrowProps;
 	export let size = 8;

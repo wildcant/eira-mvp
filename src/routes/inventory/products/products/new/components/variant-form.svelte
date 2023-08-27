@@ -2,7 +2,6 @@
 	import type { Tax } from '$lib/api/types';
 	import Container from '$lib/components/custom/container/container.svelte';
 	import * as Form from '$lib/components/custom/form';
-	import TagsInputAutocomplete from '$lib/components/custom/tags-input-autocomplete/tags-input-autocomplete.svelte';
 	import type { CustomTag } from '$lib/components/custom/tags-input-autocomplete/types';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Select from '$lib/components/ui/select';
@@ -12,13 +11,12 @@
 		productVariantsSchema,
 		taxSchema,
 		type ProductSchema,
+		type ProductVariantSchema,
 		type ProductVariantTax,
-		type TaxSchema,
-		type ProductVariantSchema
+		type TaxSchema
 	} from '$lib/schemas';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { superForm, superValidateSync } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	type $$Props = {
 		taxes: Tax[];
@@ -43,7 +41,7 @@
 			}
 		}
 	});
-	const { form: variant, errors } = form;
+	const { form: variant } = form;
 
 	// Initialize form with defaults
 	let initialized = false;
@@ -87,8 +85,6 @@
 	};
 	$: $variant.totalCost = computeTotal($variant.cost, $variant.purchasesTaxes);
 </script>
-
-<SuperDebug data={{ $variant, $errors }} />
 
 <Form.Root {form} method="post" class="form" id="variant-form">
 	<section>
@@ -161,6 +157,7 @@
 						<Form.Label>
 							{$t('page.inventory.products.new.sales.field.tax.label')}
 						</Form.Label>
+
 						<Form.TagsInputAutocomplete
 							allowedTags={salesTaxesTags}
 							on:change={handleSalesTaxesChange}
@@ -171,6 +168,7 @@
 						<Form.Label>
 							{$t('page.inventory.products.new.sales.field.total.label')}
 						</Form.Label>
+
 						<Form.Input
 							type="text"
 							placeholder={$t('page.inventory.products.new.sales.field.subtotal.placeholder')}
@@ -231,7 +229,7 @@
 						<Form.Label>
 							{$t('page.inventory.products.new.purchase.field.tax.label')}
 						</Form.Label>
-						<TagsInputAutocomplete
+						<Form.TagsInputAutocomplete
 							allowedTags={purchasesTaxes}
 							on:change={handlePurchasesTaxesChange}
 						/>
@@ -312,7 +310,7 @@
 			</Button>
 
 			<Button type="submit">
-				{$t('common.word.continue.capitalize')}
+				{$t('common.word.save.capitalize')}
 			</Button>
 		</div>
 	</section>

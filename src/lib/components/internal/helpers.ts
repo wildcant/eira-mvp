@@ -1,7 +1,6 @@
-import type { StoreValue } from '@melt-ui/svelte';
 import { nanoid } from 'nanoid/non-secure';
-import type { Writable } from 'svelte/store';
 import type { ActionReturn } from 'svelte/action';
+import type { StoresValues, Writable } from 'svelte/store';
 import type { Builder } from './types.js';
 
 export function noop() {
@@ -28,7 +27,7 @@ type Options = Record<string, Writable<unknown>>;
 export function getOptionUpdater(options: Options) {
 	return function <
 		K extends keyof typeof options,
-		V extends StoreValue<(typeof options)[keyof typeof options]>
+		V extends StoresValues<(typeof options)[keyof typeof options]>
 	>(key: K, value: V | undefined) {
 		if (value === undefined) return;
 		const store = options[key];
@@ -52,12 +51,12 @@ export function builderActions(
 	params.builders.forEach((builder) => {
 		const act = builder.action(node);
 		if (act) {
-			unsubs?.push(act);
+			unsubs.push(act);
 		}
 	});
 	return {
 		destroy: () => {
-			unsubs?.forEach((unsub) => {
+			unsubs.forEach((unsub) => {
 				if (unsub.destroy) {
 					unsub.destroy();
 				}

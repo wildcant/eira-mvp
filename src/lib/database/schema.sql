@@ -4,7 +4,9 @@ CREATE TABLE
     IF NOT EXISTS Department (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL UNIQUE,
-        slug TEXT GENERATED ALWAYS AS (REPLACE (LOWER(name), ' ', '-')) STORED,
+        slug TEXT GENERATED ALWAYS AS (
+            REPLACE (LOWER(name), ' ', '-')
+        ) STORED,
         color TEXT NOT NULL UNIQUE CHECK(length(color) = 7),
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP
@@ -91,6 +93,7 @@ CREATE TABLE
     IF NOT EXISTS ProductVariant (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         imageId INTEGER,
+        productId INTEGER NOT NULL,
         price REAL NOT NULL,
         averageCost REAL NOT NULL,
         cost REAL NOT NULL,
@@ -100,7 +103,8 @@ CREATE TABLE
         stock INTEGER NOT NULL,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP,
-        FOREIGN KEY (imageId) REFERENCES Image(id)
+        FOREIGN KEY (imageId) REFERENCES Image(id),
+        FOREIGN KEY (productId) REFERENCES Product(id)
     );
 
 CREATE TRIGGER PRODUCTVARIANT_UPDATED_AT AFTER UPDATE 
@@ -261,4 +265,19 @@ CREATE TABLE
         amount REAL NOT NULL,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP
+    );
+
+DROP TABLE IF EXISTS ProductVariantAttribute;
+
+CREATE TABLE
+    IF NOT EXISTS ProductVariantAttribute (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        variantId INTEGER NOT NULL,
+        attributeId INTEGER NOT NULL,
+        attributeValueId INTEGER,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP,
+        FOREIGN KEY (variantId) REFERENCES ProductVariant(id),
+        FOREIGN KEY (attributeId) REFERENCES ProductAttribute(id),
+        FOREIGN KEY (attributeValueId) REFERENCES ProductAttributeValue(id)
     );

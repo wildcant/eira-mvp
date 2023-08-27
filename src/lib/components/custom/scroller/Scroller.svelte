@@ -1,7 +1,11 @@
 <script lang="ts">
+	import { cn } from '$lib/utils';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
+
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	function handleScroll(event: Event) {
 		const target = event.target as HTMLInputElement;
@@ -10,6 +14,9 @@
 	}
 </script>
 
-<div class="rounded-md border h-[448px] overflow-auto" on:scroll={handleScroll}>
+<div
+	class={cn('rounded-md border h-[480px] 2xl:h-[800px] overflow-auto', className)}
+	on:scroll={handleScroll}
+>
 	<slot />
 </div>

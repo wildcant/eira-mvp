@@ -17,7 +17,6 @@
 	import { createRender } from 'svelte-headless-table';
 	import { derived } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import AttributesTable from './components/attributes-table.svelte';
 	import VariantForm from './components/variant-form.svelte';
 	import VariantsTable from './components/variants-table.svelte';
@@ -26,7 +25,7 @@
 	const { attributes, categories, departments, subCategories, taxes } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema, dataType: 'json' });
-	const { tainted, fields, form: frm, errors } = form;
+	const { tainted, fields } = form;
 	const {
 		departmentId: { value: departmentId },
 		categoryId: { value: categoryId },
@@ -245,8 +244,6 @@
 		</div>
 	</div>
 </Form.Root>
-
-<SuperDebug data={{ $frm, $errors }} />
 
 <style>
 	.form-grid {

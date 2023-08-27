@@ -5,7 +5,7 @@ import type {
 	GetSubCategoriesResponse,
 	GetTaxesResponse
 } from '$lib/api/types.js';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 
 export const load = async ({ locals: { schemas, fetcher } }) => {
@@ -30,7 +30,7 @@ export const load = async ({ locals: { schemas, fetcher } }) => {
 };
 
 export const actions = {
-	create: async ({ request, fetch, locals: { schemas } }) => {
+	default: async ({ request, fetch, locals: { schemas } }) => {
 		const form = await superValidate(request, schemas.product);
 
 		if (!form.valid) return fail(400, { form });
@@ -43,6 +43,8 @@ export const actions = {
 		const json = await response.json();
 
 		if (!response.ok) return setError(form, json.message);
+
+		if (json?.succeed) throw redirect(303, '/inventory/products/products');
 
 		return { form };
 	}

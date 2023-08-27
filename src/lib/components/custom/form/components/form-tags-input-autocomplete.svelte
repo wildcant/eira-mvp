@@ -1,6 +1,8 @@
 <script lang="ts" generics="T extends string | number = string, TMeta extends Meta = MetaDefault">
 	import type { Meta, MetaDefault } from '$lib/components/custom/autocomplete';
 	import type { Tag } from '@melt-ui/svelte';
+	import isArray from 'lodash/isArray';
+	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
 	import TagsInputAutocomplete from '../../tags-input-autocomplete/tags-input-autocomplete.svelte';
@@ -20,11 +22,20 @@
 		throw new Error('Missing name name. Make sure you wrap your form input with a form name');
 
 	const { form } = getFormContext();
-	// TODO: simplified controlled state. allow default values.
 	const { value, errors } = formFieldProxy(form, name);
 	const { submitting } = form;
 
 	const tags = writable<Tag[]>([]);
+
+	// Update tags with default value on mount
+	onMount(() => {
+		if ($value && isArray($value)) {
+			const defaultTags = $value
+				.map((v) => allowedTags.find((tag) => tag.id.toString() === v.id?.toString()))
+				.filter(Boolean) as Tag[];
+			if (defaultTags.length) $tags = defaultTags;
+		}
+	});
 
 	$: error = parseFormFieldError($errors);
 </script>
@@ -34,4 +45,5 @@
 	{tags}
 	invalid={Boolean(error)}
 	disabled={disabled || $submitting || !allowedTags.length}
+	on:change
 />

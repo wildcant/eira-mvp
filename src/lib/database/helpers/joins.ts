@@ -68,7 +68,8 @@ export const join = {
 							'ProductAttributeList.productAttributeId'
 						)
 						.select((eb2) => [
-							'ProductAttribute.id',
+							'ProductAttributeList.id',
+							'ProductAttributeList.productAttributeId',
 							'ProductAttribute.name',
 							jsonArrayFrom(
 								eb2
@@ -89,6 +90,42 @@ export const join = {
 							'ProductAttributeList.updatedAt'
 						])
 						.whereRef('Product.id', '=', 'ProductAttributeList.productId')
+				).as('attributes');
+			}
+		}
+	},
+	ProductVariant: {
+		with: {
+			Image: (eb) => {
+				return jsonObjectFrom(
+					eb
+						.selectFrom('Image')
+						.select(['Image.id', 'Image.url', 'Image.createdAt', 'Image.updatedAt'])
+						.whereRef('ProductVariant.imageId', '=', 'Image.id')
+				).as('image');
+			},
+			ProductVariantAttribute: (eb) => {
+				return jsonArrayFrom(
+					eb
+						.selectFrom('ProductVariantAttribute')
+						.innerJoin(
+							'ProductAttribute',
+							'ProductAttribute.id',
+							'ProductVariantAttribute.attributeId'
+						)
+						.innerJoin(
+							'ProductAttributeValue',
+							'ProductAttributeValue.id',
+							'ProductVariantAttribute.attributeValueId'
+						)
+						.select([
+							'ProductVariantAttribute.id',
+							'ProductVariantAttribute.attributeId',
+							'ProductVariantAttribute.attributeValueId',
+							'ProductAttribute.name as name',
+							'ProductAttributeValue.name as value'
+						])
+						.whereRef('ProductVariant.id', '=', 'ProductVariantAttribute.variantId')
 				).as('attributes');
 			}
 		}

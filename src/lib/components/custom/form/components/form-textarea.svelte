@@ -30,5 +30,6 @@
 	bind:value={$value}
 	disabled={disabled || $submitting}
 	invalid={!!$errors}
+	class={className}
 	{...$$restProps}
 />
