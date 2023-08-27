@@ -4,13 +4,7 @@
 	import { badgeVariants } from '$lib/components/ui/badge';
 	import { selectItemVariants } from '$lib/components/ui/select/components/select-item.svelte';
 	import { cn } from '$lib/utils';
-	import {
-		INTERACTION_KEYS,
-		createPopover,
-		createTagsInput,
-		melt,
-		type CreateTagsInputProps
-	} from '@melt-ui/svelte';
+	import { INTERACTION_KEYS, createPopover, createTagsInput, melt } from '@melt-ui/svelte';
 	import {
 		FIRST_LAST_KEYS,
 		addHighlight,
@@ -30,24 +24,18 @@
 	import { Check, X } from 'lucide-svelte';
 	import { createEventDispatcher, tick } from 'svelte';
 	import type {
-		HTMLInputAttributes,
 		KeyboardEventHandler,
 		MouseEventHandler,
 		PointerEventHandler
 	} from 'svelte/elements';
-	import { writable, type Writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 	import { selectContentVariants } from '../autocomplete/components/autocomplete-options.svelte';
-	import type { CustomTag } from './types';
+	import type { CustomTag, TagsInputAutocompleteProps } from './types';
 
 	export { defaultItems as items };
 
-	type $$Props = Pick<HTMLInputAttributes, 'placeholder' | 'class'> &
-		Pick<CreateTagsInputProps, 'defaultTags' | 'disabled'> & {
-			allowedTags: CustomTag[];
-			tags?: Writable<CustomTag[]>;
-			invalid?: boolean;
-		};
+	type $$Props = TagsInputAutocompleteProps;
 
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let defaultTags: $$Props['defaultTags'] = [];

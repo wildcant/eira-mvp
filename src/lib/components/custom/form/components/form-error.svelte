@@ -3,8 +3,6 @@
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
-
-	console.log($$slots.default.valueOf());
 </script>
 
 {#if $$slots.default}

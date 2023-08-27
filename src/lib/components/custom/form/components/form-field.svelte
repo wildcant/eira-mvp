@@ -9,12 +9,15 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { derived } from 'svelte/store';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
+	import { parseFormFieldError } from '../helpers';
 	import FormError from './form-error.svelte';
 	import { getFormContext } from './form.svelte';
 
 	export let name: FieldName;
+
+	/** Provide the index of the property in case the field is an object or array. */
+	export let index: number | undefined = undefined;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -61,21 +64,15 @@
 		setValue: (val: any) => value.set(val)
 	};
 
-	const hasErrors = derived([errors], ([$errors]) =>
-		Boolean($errors && (('_errors' in $errors && $errors._errors) || $errors.length))
-	);
+	$: error = parseFormFieldError($errors, index);
 </script>
 
 <div class={className}>
-	<slot {field} hasErrors={$hasErrors} />
+	<slot {field} invalid={Boolean(error)} />
 
-	{#if $errors}
+	{#if error}
 		<FormError>
-			{#if $errors?.length}
-				{$errors}
-			{:else if '_errors' in $errors && $errors._errors}
-				{$errors._errors}
-			{/if}
+			{error}
 		</FormError>
 	{/if}
 </div>

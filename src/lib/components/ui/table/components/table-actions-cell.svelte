@@ -1,4 +1,5 @@
 <script lang="ts" generics="T">
+	import { UNEXPECTED_ROW_TYPE } from '$components/crud-data-table';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Popover from '$lib/components/ui/popover';
 	import { t } from '$lib/i18n';
@@ -38,7 +39,8 @@
 				variant="ghost"
 				class="px-6 rounded-none"
 				on:click={() => {
-					dispatch('edit', row);
+					if (!row.isData()) throw new Error(UNEXPECTED_ROW_TYPE);
+					dispatch('edit', row.original);
 					close();
 				}}
 				{disabled}

@@ -17,9 +17,11 @@
 
 	interface $$Props extends HTMLFormAttributes {
 		form: SuperForm<ZodValidation<T>, unknown>;
+		method?: string | undefined | null;
 	}
 
 	let className: $$Props['class'] = undefined;
+	let method: $$Props['method'] = 'post';
 	export { className as class };
 
 	export let form: SuperForm<ZodValidation<T>, unknown>;
@@ -27,6 +29,6 @@
 	setContext({ form: form as any });
 </script>
 
-<form use:form.enhance class={className} {...$$restProps}>
+<form use:form.enhance {method} on:submit|preventDefault class={className} {...$$restProps}>
 	<slot />
 </form>

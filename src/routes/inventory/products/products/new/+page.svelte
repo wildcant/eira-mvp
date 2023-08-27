@@ -2,11 +2,15 @@
 	import Uploader from '$components/uploader/uploader.svelte';
 	import { Container } from '$lib/components/custom/container';
 	import * as Form from '$lib/components/custom/form';
-	import Modal from '$lib/components/custom/modal/components/modal.svelte';
+	import { closeModal, openCustomModal } from '$lib/components/custom/modal/actions';
 	import { Button } from '$lib/components/ui/button';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { t } from '$lib/i18n';
-	import { productVariantsSchema, productsSchema } from '$lib/schemas/product';
+	import {
+		productVariantsSchema,
+		productsSchema,
+		type ProductVariantSchema
+	} from '$lib/schemas/product';
 	import { melt } from '@melt-ui/svelte';
 	import { effect } from '@melt-ui/svelte/internal/helpers';
 	import { Info, Plus } from 'lucide-svelte';
@@ -15,15 +19,14 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import AttributesTable from './components/attributes-table.svelte';
-	import NewVariantForm, { NEW_VARIANT_MODAL_ID } from './components/new-variant-form.svelte';
+	import VariantForm from './components/variant-form.svelte';
 	import VariantsTable from './components/variants-table.svelte';
-	import { isUndefined } from 'lodash';
 
 	export let data;
 	const { attributes, categories, departments, subCategories, taxes } = data;
 
 	const form = superForm(data.form, { validators: $productsSchema, dataType: 'json' });
-	const { tainted, fields, validate, form: frm, errors } = form;
+	const { tainted, fields, form: frm, errors } = form;
 	const {
 		departmentId: { value: departmentId },
 		categoryId: { value: categoryId },
@@ -66,58 +69,30 @@
 			(attributeItemError) => (attributeItemError.values?._errors?.length ?? 0) > 0
 		);
 
-	let modalOpen = false;
+	const NEW_VARIANT_MODAL_ID = 'new-variant-modal';
 	const openNewVariantForm = () => {
-		// Initialize attributes fields.
-		const variantAttributes = $attributesField.reduce(
-			(obj, attr) => ({ ...obj, [attr.id as number]: { optional: attr.optional } }),
-			{}
-		);
-
-		$variantsField = [...$variantsField, { attributes: variantAttributes } as any];
-		modalOpen = true;
-	};
-
-	const handleNewVariant = async (e: CustomEvent<number>) => {
-		const index = e.detail;
-		if (isUndefined(e.detail)) {
-			console.error('TODO: Handle unexpected error, variant index to be added was not found.');
-			return;
-		}
-
-		const currentVariant = $variantsField[index];
-		console.log(Object.keys(currentVariant.attributes));
-
-		// Validate variant fields
-		const errors = await Promise.all([
-			...Object.keys($productVariantsSchema.shape).map((key) =>
-				validate(`variants[${index}].${key}` as any)
-			),
-			...Object.keys(currentVariant.attributes).map((key) =>
-				validate(`variants[${index}].attributes[${key}]` as any)
-			)
-		]);
-
-		const invalid = errors.some((error) => {
-			if (error && '_errors' in error) {
-				return (error._errors as string[] | undefined)?.length;
-			}
-			return error?.length;
+		openCustomModal({
+			closeOnEscape: false,
+			closeOnOutsideClick: false,
+			id: 'new-variant-modal',
+			title: `${$t('common.word.new.capitalize')} ${$t(`entity.variant.singular.capitalize`)}`,
+			children: createRender(VariantForm, {
+				mode: 'new',
+				taxes,
+				productAttributes: $attributesField
+			})
+				.on('cancel', handleCancelNewVariant)
+				.on('continue', handleNewVariant),
+			content: { class: 'md:min-w-full lg:min-w-[1024px]' }
 		});
-		if (invalid) return;
-
-		$variantsField[index] = $productVariantsSchema.parse(currentVariant);
-		setTimeout(() => (modalOpen = false), 50);
 	};
 
-	const handleCancelNewVariant = async () => {
-		modalOpen = false;
-		setTimeout(() => {
-			const currentVariants = [...$variantsField];
-			currentVariants.pop();
-			$variantsField = currentVariants;
-		}, 50);
+	const handleNewVariant = async (e: CustomEvent<ProductVariantSchema>) => {
+		$variantsField = [...$variantsField, $productVariantsSchema.parse(e.detail)];
+		closeModal(NEW_VARIANT_MODAL_ID);
 	};
+
+	const handleCancelNewVariant = async () => closeModal(NEW_VARIANT_MODAL_ID);
 </script>
 
 <Form.Root {form} method="post" class="form" id="new-product-form">
@@ -260,27 +235,15 @@
 					<p>{$t('page.inventory.products.new.variants.subtitle')}</p>
 				</div>
 
-				<VariantsTable data={variantsField} {attributes} variantAttributes={$attributesField} />
+				<VariantsTable
+					{attributes}
+					{taxes}
+					data={variantsField}
+					productAttributes={$attributesField}
+				/>
 			</Container>
 		</div>
 	</div>
-
-	{#if modalOpen}
-		<Modal
-			modal={{
-				type: 'custom',
-				closeOnEscape: false,
-				closeOnOutsideClick: false,
-				id: NEW_VARIANT_MODAL_ID,
-				title: `${$t('common.word.new.capitalize')} ${$t(`entity.variant.singular.capitalize`)}`,
-				children: createRender(NewVariantForm, { taxes, index: $variantsField.length - 1 })
-					.on('cancel', handleCancelNewVariant)
-					.on('continue', handleNewVariant),
-				content: { class: 'md:min-w-full lg:min-w-[1024px]' }
-			}}
-			on:close={() => (modalOpen = false)}
-		/>
-	{/if}
 </Form.Root>
 
 <SuperDebug data={{ $frm, $errors }} />

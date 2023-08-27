@@ -4,7 +4,7 @@ import sum from 'lodash/sum';
 import { derived } from 'svelte/store';
 import { z } from 'zod';
 import { generateTaxSchema } from './tax';
-import { isUndefined } from 'lodash';
+import { isUndefined, uniqueId } from 'lodash';
 
 const generateProductVariantTaxSchema = ({ $t }: WithT) =>
 	generateTaxSchema({ $t }).pick({ amount: true, type: true }).extend({ id: z.number().int() });
@@ -12,36 +12,33 @@ const generateProductVariantTaxSchema = ({ $t }: WithT) =>
 type ProductVariantTaxZodSchema = ReturnType<typeof generateProductVariantTaxSchema>;
 export type ProductVariantTax = z.infer<ProductVariantTaxZodSchema>;
 
-export const computeTotal = (subtotal: number, taxes: ProductVariantTax[]): number => {
+export const computeTotal = (subtotal = 0, taxes: ProductVariantTax[] = []): number => {
 	const total =
-		(subtotal ?? 0) -
-		sum(
-			taxes?.map((tax) =>
-				tax.type === 'fixed' ? tax.amount : (tax.amount / 100) * (subtotal ?? 0)
-			)
-		);
+		subtotal -
+		sum(taxes?.map((tax) => (tax.type === 'fixed' ? tax.amount : (tax.amount / 100) * subtotal)));
 
 	return parseFloat(total.toFixed(2));
 };
 
 export const generateProductVariantsSchema = ({ $t }: WithT) =>
 	z.object({
+		key: z.string().default(uniqueId()).optional(),
 		image: z
 			.object({
 				id: z.coerce.number().int(),
 				url: z.string()
 			})
 			.optional(),
-		price: z.coerce.number().default(0),
-		totalPrice: z.coerce.number().default(0),
-		salesTaxes: generateProductVariantTaxSchema({ $t }).array().default([]),
-		averageCost: z.coerce.number().default(0),
-		cost: z.coerce.number().default(0),
-		totalCost: z.coerce.number().default(0),
-		purchasesTaxes: generateProductVariantTaxSchema({ $t }).array().default([]),
-		sku: z.string().default(''),
-		barcode: z.string().default(''),
-		stock: z.coerce.number().int().default(0),
+		price: z.coerce.number().default(0).optional(),
+		totalPrice: z.coerce.number().default(0).optional(),
+		salesTaxes: generateProductVariantTaxSchema({ $t }).array().default([]).optional(),
+		averageCost: z.coerce.number().default(0).optional(),
+		cost: z.coerce.number().default(0).optional(),
+		totalCost: z.coerce.number().default(0).optional(),
+		purchasesTaxes: generateProductVariantTaxSchema({ $t }).array().default([]).optional(),
+		sku: z.string().default('').optional(),
+		barcode: z.string().default('').optional(),
+		stock: z.coerce.number().int().default(0).optional(),
 
 		// TODO: Validate unique attributes combinations.
 		// could dynamically filter attributes options so that user doesn't choose an existing combo. (help user so that they don't end up in wrong state)
@@ -82,7 +79,6 @@ const generateVariantAttributeSchema = ({ $t }: WithT) =>
 				name: z.string()
 			})
 			.array()
-			.min(1, { message: 'At least one value is required.' })
 			.optional()
 			.default([]),
 		optional: z.boolean().default(false)
@@ -121,42 +117,6 @@ export const generateProductsSchema = ({ $t }: WithT) =>
 				message: 'Attributes must be unique'
 			})
 			.default([]),
-		/*
-			[
-				{
-					key: '8',
-					id: 5,
-					name: 'forma farmacéutica',
-					optional: false,
-					values: [
-						{
-							id: 16,
-							name: 'Tabletas'
-						},
-						{
-							id: 17,
-							name: 'Cápsulas'
-						}
-					]
-				},
-				{
-					key: '9',
-					id: 3,
-					name: 'unidades',
-					optional: false,
-					values: [
-						{
-							id: 14,
-							name: '200'
-						},
-						{
-							id: 12,
-							name: '28'
-						}
-					]
-				}
-			]
-			*/
 		variants: generateProductVariantsSchema({ $t }).array().default([])
 	});
 
