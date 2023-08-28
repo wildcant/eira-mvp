@@ -9,9 +9,9 @@
 	import { t } from '$lib/i18n';
 	import { taxAmountSuffix, taxSchema, type TaxSchema } from '$lib/schemas/tax';
 	import { createRender } from 'svelte-headless-table';
-	import EditableTaxScopeCell from './components/editable-tax-scope-cell.svelte';
-	import EditableTaxTypeCell from './components/editable-tax-type-cell.svelte';
-	import NewTaxForm from './components/new-tax-form.svelte';
+	import EditableTaxScopeCell from './_components/editable-tax-scope-cell.svelte';
+	import EditableTaxTypeCell from './_components/editable-tax-type-cell.svelte';
+	import NewTaxForm from './_components/new-tax-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, form } = data;

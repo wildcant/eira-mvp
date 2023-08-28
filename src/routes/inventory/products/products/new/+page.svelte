@@ -17,9 +17,9 @@
 	import { createRender } from 'svelte-headless-table';
 	import { derived } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
-	import AttributesTable from './components/attributes-table.svelte';
-	import VariantForm from './components/variant-form.svelte';
-	import VariantsTable from './components/variants-table.svelte';
+	import AttributesTable from './_components/attributes-table.svelte';
+	import VariantForm from './_components/variant-form.svelte';
+	import VariantsTable from './_components/variants-table.svelte';
 
 	export let data;
 	const { attributes, categories, departments, subCategories, taxes } = data;

@@ -1,11 +1,10 @@
 <script lang="ts">
+	import { UNEXPECTED_ROW_TYPE } from '$components/crud-data-table/index.js';
 	import type { GetProductsResponse } from '$lib/api/types.js';
 	import { DataTable, DataTableCheckbox } from '$lib/components/custom/data-table';
-	import Scroller from '$lib/components/custom/scroller/scroller.svelte';
 	import { Search } from '$lib/components/custom/search';
 	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
-	import type { PaginatedApiResponse } from '$lib/types.js';
 	import { Plus } from 'lucide-svelte';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import {
@@ -15,6 +14,7 @@
 		addTableFilter
 	} from 'svelte-headless-table/plugins';
 	import { writable } from 'svelte/store';
+	import ProductNameImageCell from './_components/product-name-image-cell.svelte';
 
 	export let data;
 	const { endpoint, initialData } = data;
@@ -49,16 +49,29 @@
 				filter: { exclude: true }
 			}
 		}),
-
 		table.column({
-			header: 'ID',
-			accessor: 'id',
-			plugins: {
-				filter: { exclude: true }
+			header: $t('entity.product.singular.capitalize'),
+			accessor: 'name',
+			cell: ({ row }) => {
+				if (!row.isData()) throw new Error(UNEXPECTED_ROW_TYPE);
+				return createRender(ProductNameImageCell, { row });
 			}
 		}),
-
-		table.column({ header: 'Name', accessor: 'name' })
+		table.column({
+			header: $t('entity.department.singular.capitalize'),
+			accessor: 'department',
+			cell: ({ value }) => value?.name ?? ''
+		}),
+		table.column({
+			header: $t('entity.category.singular.capitalize'),
+			accessor: 'category',
+			cell: ({ value }) => value?.name ?? ''
+		}),
+		table.column({
+			header: $t('entity.sub-category.singular.capitalize'),
+			accessor: 'subCategory',
+			cell: ({ value }) => value?.name ?? ''
+		})
 	]);
 
 	const viewModel = table.createViewModel(columns);
@@ -76,6 +89,7 @@
 		if (after) q.set('after', after.toString());
 		if ($filterValue) q.set('search', $filterValue);
 		// Add params defined by parent component.
+		if (endpoint.params?.include?.length) q.set('include', endpoint.params?.include?.join(','));
 		return q.toString();
 	};
 
@@ -90,6 +104,11 @@
 		loadingData = false;
 	}
 </script>
+
+<h4>
+	{totalItems}
+	{$t('entity.product.plural.capitalize')}
+</h4>
 
 <div class="flex items-center justify-between py-4">
 	<Search class="max-w-sm" placeholder="Filter products..." type="text" bind:value={$filterValue} />

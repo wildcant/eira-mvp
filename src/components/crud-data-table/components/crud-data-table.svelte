@@ -114,7 +114,7 @@
 		if (after) q.set('after', after.toString());
 		if ($filterValue) q.set('search', $filterValue);
 		// Add params defined by parent component.
-		if (endpoint.params?.include) q.set('include', endpoint.params?.include);
+		if (endpoint.params?.include?.length) q.set('include', endpoint.params?.include?.join(','));
 		return q.toString();
 	};
 

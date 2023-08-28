@@ -6,11 +6,11 @@ import { setError, superValidate } from 'sveltekit-superforms/server';
 export const load = async ({ locals: { schemas, fetcher } }) => {
 	const endpoint = {
 		url: '/api/products/categories.json',
-		params: { include: 'departments' }
+		params: { include: ['departments'] }
 	} satisfies Endpoint;
 
 	const [initialData, departments] = await Promise.all([
-		fetcher<GetCategoriesResponse>(`${endpoint.url}?include=${endpoint.params.include}`),
+		fetcher<GetCategoriesResponse>(`${endpoint.url}?include=${endpoint.params.include.join(',')}`),
 		fetcher<GetDepartmentsResponse>(`/api/products/departments.json?all=true`).then(
 			({ data }) => data
 		)

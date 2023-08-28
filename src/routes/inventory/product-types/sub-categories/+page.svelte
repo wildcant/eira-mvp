@@ -8,8 +8,8 @@
 	import { t } from '$lib/i18n';
 	import { subCategorySchema } from '$lib/schemas/sub-category';
 	import { createRender } from 'svelte-headless-table';
-	import EditableCategoryCell from './components/editable-category-cell.svelte';
-	import NewSubCategoryForm from './components/new-sub-category-form.svelte';
+	import EditableCategoryCell from './_components/editable-category-cell.svelte';
+	import NewSubCategoryForm from './_components/new-sub-category-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, categories, form } = data;

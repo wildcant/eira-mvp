@@ -15,12 +15,22 @@ export const GET = async ({ url, locals: { $t } }) => {
 	const include = url.searchParams.get('include')?.split(',');
 	const relations = validateRelationship({
 		$t,
-		allowedRelationships: ['images', 'attributes'],
+		allowedRelationships: ['images', 'attributes', 'departments', 'categories', 'subcategories'],
 		include
 	});
+
 	if (relations?.length) {
 		relations.forEach((relation) => {
+			if (relation === 'departments')
+				query = query.select((eb) => [join.Product.with.Department(eb)]);
+
+			if (relation === 'categories') query = query.select((eb) => [join.Product.with.Category(eb)]);
+
+			if (relation === 'subcategories')
+				query = query.select((eb) => [join.Product.with.SubCategory(eb)]);
+
 			if (relation === 'images') query = query.select((eb) => [join.Product.with.Image(eb)]);
+
 			if (relation === 'attributes')
 				query = query.select((eb) => [join.Product.with.ProductAttributeList(eb)]);
 		});

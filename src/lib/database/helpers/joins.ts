@@ -50,6 +50,30 @@ export const join = {
 	},
 	Product: {
 		with: {
+			Department: (eb) => {
+				return jsonObjectFrom(
+					eb
+						.selectFrom('Department')
+						.select(['Department.id', 'Department.name', 'Department.color'])
+						.whereRef('Product.departmentId', '=', 'Department.id')
+				).as('department');
+			},
+			Category: (eb) => {
+				return jsonObjectFrom(
+					eb
+						.selectFrom('Category')
+						.select(['Category.id', 'Category.name'])
+						.whereRef('Product.categoryId', '=', 'Category.id')
+				).as('category');
+			},
+			SubCategory: (eb) => {
+				return jsonObjectFrom(
+					eb
+						.selectFrom('SubCategory')
+						.select(['SubCategory.id', 'SubCategory.name'])
+						.whereRef('Product.subCategoryId', '=', 'SubCategory.id')
+				).as('subCategory');
+			},
 			Image: (eb) => {
 				return jsonObjectFrom(
 					eb

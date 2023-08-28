@@ -8,8 +8,8 @@
 	import { t } from '$lib/i18n';
 	import { categorySchema } from '$lib/schemas/category';
 	import { createRender } from 'svelte-headless-table';
-	import EditableDepartmentCell from './components/editable-department-cell.svelte';
-	import NewCategoryForm from './components/new-category-form.svelte';
+	import EditableDepartmentCell from './_components/editable-department-cell.svelte';
+	import NewCategoryForm from './_components/new-category-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, departments, form } = data;

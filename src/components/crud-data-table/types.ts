@@ -37,7 +37,7 @@ export type CrudTableColumn<T> = DataColumnInit<T, Plugins<T>> & {
 
 export type CrudTableColumns<T> = Array<CrudTableColumn<T>>;
 
-export type Endpoint = { url: string; params?: { include?: Relationship } };
+export type Endpoint = { url: string; params?: { include?: Relationship[] } };
 
 export type NewEntityForm = SuperValidated<AnyZodObject>;
 

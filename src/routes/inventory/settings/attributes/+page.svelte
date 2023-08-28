@@ -13,8 +13,8 @@
 		type ProductAttributeSchema
 	} from '$lib/schemas/products-attribute';
 	import { createRender } from 'svelte-headless-table';
-	import EditableAttributesValuesCell from './components/editable-attributes-values-cell.svelte';
-	import NewProductAttributeForm from './components/new-products-attribute-form.svelte';
+	import EditableAttributesValuesCell from './_components/editable-attributes-values-cell.svelte';
+	import NewProductAttributeForm from './_components/new-products-attribute-form.svelte';
 
 	export let data;
 	const { initialData, endpoint, form } = data;

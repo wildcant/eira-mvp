@@ -1,19 +1,15 @@
 import type { Endpoint } from '$components/crud-data-table/types';
 import type { GetProductsResponse } from '$lib/api/types.js';
-import { error } from '@sveltejs/kit';
 
-export const load = async ({ fetch }) => {
+export const load = async ({ locals: { fetcher } }) => {
 	const endpoint = {
-		url: '/api/products/products.json'
+		url: '/api/products/products.json',
+		params: { include: ['images', 'departments', 'categories', 'subcategories'] }
 	} satisfies Endpoint;
 
-	const response = await fetch(endpoint.url);
-	const apiResponse = await response.json();
-
-	if (!response.ok) {
-		throw error(response.status, apiResponse as { message: string });
-	}
-	const initialData = apiResponse as GetProductsResponse;
+	const initialData = await fetcher<GetProductsResponse>(
+		`${endpoint.url}?include=${endpoint.params.include.join(',')}`
+	);
 
 	return { endpoint, initialData };
 };

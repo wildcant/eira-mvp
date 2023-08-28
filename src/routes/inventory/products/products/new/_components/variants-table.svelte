@@ -15,7 +15,6 @@
 	import { addHiddenColumns, addSortBy } from 'svelte-headless-table/plugins';
 	import type { Readable } from 'svelte/motion';
 	import VariantForm from './variant-form.svelte';
-	import VariantImage from './variant-image.svelte';
 
 	export let data: Readable<ProductVariantSchema[]>;
 
@@ -51,7 +50,7 @@
 		table.column({
 			header: '',
 			accessor: 'image',
-			cell: ({ value }) => createRender(VariantImage, { src: value?.url }),
+			cell: ({ value }) => createRender(Table.ImageCell, { src: value?.url }),
 			plugins: { sort: { disable: true } }
 		}),
 		table.column({
