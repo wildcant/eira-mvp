@@ -8,7 +8,7 @@ import { json } from '@sveltejs/kit';
 export const GET = async ({ url, locals: { $t } }) => {
 	let query = db.selectFrom('ProductVariant').selectAll();
 
-	const include = url.searchParams.get('include')?.split(',');
+	const include = url.searchParams.get('include');
 	const relations = validateRelationship({
 		$t,
 		allowedRelationships: ['images', 'attributes'],

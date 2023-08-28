@@ -12,8 +12,8 @@
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	const { headerRows, rows, tableAttrs, tableBodyAttrs, pluginStates } = viewModel;
-	const { sortKeys } = pluginStates.sort;
+	const { headerRows, rows, tableAttrs, tableBodyAttrs /*, pluginStates */ } = viewModel;
+	// const { sortKeys } = pluginStates.sort;
 	// const { selectedDataIds, allRowsSelected } = pluginStates.select;
 </script>
 
@@ -26,9 +26,11 @@
 						<Table.Row {...rowAttrs}>
 							{#each headerRow.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
-									<Table.Head {...attrs} class={cn(!props.sort.disabled && 'pl-1')}>
-										{#if props.sort.disabled}
-											<Render of={cell.render()} />
+									<!-- class={cn(!props.sort.disabled && 'pl-1')} -->
+									<Table.Head {...attrs}>
+										<!-- {#if props.sort.disabled} -->
+										<Render of={cell.render()} />
+										<!-- 
 										{:else}
 											<Button
 												variant="ghost"
@@ -36,14 +38,15 @@
 												class="p-2 uppercase font-bold text-xs"
 											>
 												<Render of={cell.render()} />
-												<ArrowUpDown
+											<ArrowUpDown
 													class={cn(
 														$sortKeys[0]?.id === cell.id && 'text-foreground',
 														'ml-2  h-3 w-3'
 													)}
-												/>
+												/> 
 											</Button>
-										{/if}
+											{/if}
+										-->
 									</Table.Head>
 								</Subscribe>
 							{/each}

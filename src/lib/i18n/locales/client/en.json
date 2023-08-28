@@ -354,6 +354,11 @@
 						"title": "Variants",
 						"tooltip": "Combine the product attributes to crate new variants. You'll need to at at least one attribute in order to add a new variant."
 					}
+				},
+				"details": {
+					"nav": {
+						"general-info": "General information"
+					}
 				}
 			}
 		}

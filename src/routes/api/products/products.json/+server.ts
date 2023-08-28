@@ -12,7 +12,7 @@ export const GET = async ({ url, locals: { $t } }) => {
 	let query = db.selectFrom('Product').selectAll();
 	if (search) query = query.where('Product.name', 'like', `%${search}%`);
 
-	const include = url.searchParams.get('include')?.split(',');
+	const include = url.searchParams.get('include');
 	const relations = validateRelationship({
 		$t,
 		allowedRelationships: ['images', 'attributes', 'departments', 'categories', 'subcategories'],

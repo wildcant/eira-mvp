@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Relationship } from '$lib/database/helpers/validations';
+import type { SelectType } from 'kysely';
+import type { DB } from 'kysely-codegen';
+import type { SvelteComponent } from 'svelte';
+import type { ComponentRenderConfig } from 'svelte-headless-table';
 import type { DataColumnInit } from 'svelte-headless-table/lib/columns';
 import type {
 	TableFilterColumnOptions,
@@ -14,8 +18,6 @@ import type {
 import type { SuperValidated } from 'sveltekit-superforms';
 import type { AnyZodObject } from 'zod';
 import type { EditableRowState } from '.';
-import type { ComponentRenderConfig } from 'svelte-headless-table';
-import type { SvelteComponent } from 'svelte';
 
 export type Item = { id: string | number };
 
@@ -37,7 +39,11 @@ export type CrudTableColumn<T> = DataColumnInit<T, Plugins<T>> & {
 
 export type CrudTableColumns<T> = Array<CrudTableColumn<T>>;
 
-export type Endpoint = { url: string; params?: { include?: Relationship[] } };
+export type Endpoint = {
+	url: string;
+	// TODO: Make fields type generic.
+	params?: { include?: Relationship[]; fields?: Readonly<Array<keyof SelectType<DB['Product']>>> };
+};
 
 export type NewEntityForm = SuperValidated<AnyZodObject>;
 

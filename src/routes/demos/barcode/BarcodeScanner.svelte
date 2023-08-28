@@ -29,7 +29,7 @@
 			}, 1000);
 		}
 		if (!('BarcodeDetector' in window)) {
-			console.log('Barcode Detector is not supported by this browser.');
+			console.info('Barcode Detector is not supported by this browser.');
 		} else {
 			record();
 		}

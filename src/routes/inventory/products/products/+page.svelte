@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { UNEXPECTED_ROW_TYPE } from '$components/crud-data-table/index.js';
 	import type { GetProductsResponse } from '$lib/api/types.js';
-	import { DataTable, DataTableCheckbox } from '$lib/components/custom/data-table';
+	import { DataTable /*, DataTableCheckbox*/ } from '$lib/components/custom/data-table';
 	import { Search } from '$lib/components/custom/search';
 	import { Button } from '$lib/components/ui/button';
 	import { t } from '$lib/i18n';
@@ -30,6 +30,7 @@
 	});
 
 	export const columns = table.createColumns([
+		/*
 		table.column({
 			header: (_, { pluginStates }) => {
 				const { allRowsSelected } = pluginStates.select;
@@ -49,6 +50,7 @@
 				filter: { exclude: true }
 			}
 		}),
+		*/
 		table.column({
 			header: $t('entity.product.singular.capitalize'),
 			accessor: 'name',
@@ -105,13 +107,12 @@
 	}
 </script>
 
-<h4>
-	{totalItems}
-	{$t('entity.product.plural.capitalize')}
-</h4>
+<div class="mb-4 flex justify-between items-center">
+	<h4>
+		{totalItems}
+		{$t('entity.product.plural.capitalize')}
+	</h4>
 
-<div class="flex items-center justify-between py-4">
-	<Search class="max-w-sm" placeholder="Filter products..." type="text" bind:value={$filterValue} />
 	<Button variant="outline" class="min-w-fit" href="/inventory/products/products/new">
 		<Plus class="h-4 w-4 md:mr-2" />
 		<span class="hidden md:inline">
@@ -120,5 +121,7 @@
 		</span>
 	</Button>
 </div>
+
+<Search class="max-w-sm" placeholder="Filter products..." type="text" bind:value={$filterValue} />
 
 <DataTable {viewModel} on:more={loadMore} />

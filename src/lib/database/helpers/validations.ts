@@ -18,13 +18,15 @@ const ALLOWED_RELATIONSHIPS = [
 	'users',
 	'images',
 	'attributes',
-	'values'
+	'values',
+	'products'
 ] as const;
-const relationships = z.enum(ALLOWED_RELATIONSHIPS);
+export const relationships = z.enum(ALLOWED_RELATIONSHIPS);
+
 export type Relationship = z.infer<typeof relationships>;
 type ValidateRelationShipArgs = WithT & {
 	allowedRelationships: Relationship[];
-	include: string[] | undefined;
+	include: string | null;
 };
 const INVALID_INCLUDE = 'INVALID_INCLUDE';
 export function validateRelationship({
@@ -33,20 +35,24 @@ export function validateRelationship({
 	allowedRelationships
 }: ValidateRelationShipArgs): Relationship[] | undefined {
 	if (!include) return;
+	const includeList = include.split(',');
 	let relations: Relationship[] | undefined = undefined;
 	try {
 		allowedRelationships.forEach((r) => relationships.parse(r));
 
-		if (!include.every((i) => allowedRelationships.includes(i as Relationship))) {
+		if (!includeList.every((i) => allowedRelationships.includes(i as Relationship))) {
 			throw new Error(INVALID_INCLUDE);
 		}
 
-		relations = include.map((i) => relationships.parse(i));
+		relations = includeList.map((i) => relationships.parse(i));
 	} catch (err) {
 		console.error(err);
 		if (err instanceof Error && err.message === INVALID_INCLUDE) {
 			const allowed = allowedRelationships.map((v) => `"${v}"`).join(', ');
-			throw error(400, $t('error.invalid-include-param', { include: include.join(', '), allowed }));
+			throw error(
+				400,
+				$t('error.invalid-include-param', { include: includeList.join(', '), allowed })
+			);
 		}
 		throw error(500, $t('error.internal-server-error'));
 	}

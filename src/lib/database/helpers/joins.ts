@@ -95,6 +95,7 @@ export const join = {
 							'ProductAttributeList.id',
 							'ProductAttributeList.productAttributeId',
 							'ProductAttribute.name',
+							'ProductAttribute.unitOfMeasure',
 							jsonArrayFrom(
 								eb2
 									.selectFrom('ProductAttributeValueList')

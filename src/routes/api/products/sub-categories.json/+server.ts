@@ -11,7 +11,7 @@ export const GET = async ({ url, locals: { $t } }) => {
 	const search = url.searchParams.get('search');
 	if (search) query = query.where('SubCategory.name', 'like', `%${search}%`);
 
-	const include = url.searchParams.get('include')?.split(',');
+	const include = url.searchParams.get('include');
 	const relations = validateRelationship({ $t, allowedRelationships: ['categories'], include });
 	if (relations?.length) {
 		relations.forEach((relation) => {

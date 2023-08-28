@@ -39,6 +39,8 @@
 	export { columnsParam as columns };
 	export let endpoint: Endpoint;
 	export let create: Create;
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	export let update: Update<T, Record<string, string | string[] | number | null>> | undefined =
 		undefined;
@@ -309,7 +311,7 @@
 	{/if}
 
 	<div class="relative mt-4">
-		<Scroller on:more={loadMore}>
+		<Scroller class={className} on:more={loadMore}>
 			<Table.Root {...$tableAttrs} class="border-collapse">
 				<Table.Header class="sticky top-0 bg-background z-10">
 					{#each $headerRows as headerRow (headerRow.id)}
@@ -348,7 +350,7 @@
 						{/each}
 					{:else}
 						<Table.Row>
-							<Table.Cell colspan={columnsParam.length} class="h-24 text-center">
+							<Table.Cell colspan={columnsParam.length + 1} class="h-24 text-center">
 								{#if totalItems === 0}
 									{$t('common.phrase.no-records')}
 									{$t(`entity.${entity}.singular.lowercase`)}.

@@ -103,6 +103,7 @@
 		"internal-server-error": "Internal server error",
 		"not-found": "resource not found",
 		"invalid-include-param": "invalid include parameter: {{include}}; supported relationships are: {{allowed}}",
+		"invalid-fields-param": "invalid fields parameters: {{fields}}; supported fields for {{entity}} are: {{allowed}}",
 		"pagination": {
 			"invalid-after-cursor": "invalid after cursor",
 			"invalid-before-cursor": "invalid before cursor",
