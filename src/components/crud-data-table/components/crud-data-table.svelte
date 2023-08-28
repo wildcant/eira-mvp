@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends Item = Item">
+<script lang="ts" generics="T extends RowData = RowData">
 	import {
 		closeModal,
 		openConfirmationModal,
@@ -25,25 +25,23 @@
 		NewEntityModal,
 		UNEXPECTED_ROW_TYPE,
 		addEditableRow,
-		type Create,
-		type CrudTableColumns,
-		type Endpoint,
-		type Item,
-		type Update
+		type RowData,
+		type CrudDataTableProps
 	} from '..';
 
-	export let entity: string;
-	export let title: string;
-	export let initialData: PaginatedApiResponse<T>;
-	let columnsParam: CrudTableColumns<T>;
-	export { columnsParam as columns };
-	export let endpoint: Endpoint;
-	export let create: Create;
-	let className: string | undefined | null = undefined;
-	export { className as class };
+	type $$Props = CrudDataTableProps<T>;
 
-	export let update: Update<T, Record<string, string | string[] | number | null>> | undefined =
-		undefined;
+	export let create: $$Props['create'];
+	export let endpoint: $$Props['endpoint'];
+	export let entity: $$Props['entity'];
+	export let hideSearch: $$Props['hideSearch'] = false;
+	export let initialData: $$Props['initialData'];
+	export let title: $$Props['title'];
+	export let update: $$Props['update'] = undefined;
+	let className: $$Props['class'] = undefined;
+	let columnsParam: $$Props['columns'];
+	export { className as class };
+	export { columnsParam as columns };
 
 	const data = writable(initialData.data);
 
@@ -306,7 +304,7 @@
 		</Button>
 	</div>
 
-	{#if totalItems > 0}
+	{#if !hideSearch && totalItems > 0}
 		<Search bind:value={$filterValue} on:input={handleSearchChanged} on:reset={resetTable} />
 	{/if}
 

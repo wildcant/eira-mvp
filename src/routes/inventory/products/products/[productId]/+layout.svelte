@@ -75,11 +75,11 @@
 
 	$: routes = [
 		{
-			href: `/inventory/products/products/${data.params.productId}/general-info`,
+			href: `/inventory/products/products/${$page.params.productId}/general-info`,
 			label: $t('page.inventory.products.details.nav.general-info')
 		},
 		{
-			href: `/inventory/products/products/${data.params.productId}/attributes`,
+			href: `/inventory/products/products/${$page.params.productId}/attributes`,
 			label: $t('entity.attribute.plural.capitalize')
 		}
 	] satisfies Route[];

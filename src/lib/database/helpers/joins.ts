@@ -86,16 +86,18 @@ export const join = {
 				return jsonArrayFrom(
 					eb
 						.selectFrom('ProductAttributeList')
-						.innerJoin(
-							'ProductAttribute',
-							'ProductAttribute.id',
-							'ProductAttributeList.productAttributeId'
-						)
 						.select((eb2) => [
 							'ProductAttributeList.id',
-							'ProductAttributeList.productAttributeId',
-							'ProductAttribute.name',
-							'ProductAttribute.unitOfMeasure',
+							jsonObjectFrom(
+								eb2
+									.selectFrom('ProductAttribute')
+									.select([
+										'ProductAttribute.id',
+										'ProductAttribute.name',
+										'ProductAttribute.unitOfMeasure'
+									])
+									.whereRef('ProductAttributeList.productAttributeId', '=', 'ProductAttribute.id')
+							).as('attribute'),
 							jsonArrayFrom(
 								eb2
 									.selectFrom('ProductAttributeValueList')

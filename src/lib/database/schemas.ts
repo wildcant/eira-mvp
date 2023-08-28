@@ -51,7 +51,7 @@ type ValidateFieldsForEntityArgs = WithT & {
 	fields: string | null;
 	entity: keyof typeof dbFields;
 };
-// TODO: Fine alternatives to type return.
+
 export function selectFromFields<T extends keyof DB>({
 	$t,
 	fields,

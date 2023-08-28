@@ -22,11 +22,6 @@ function extract_orientation(
 	exif_end: number,
 	is_little_endian: boolean
 ) {
-	// TODO: assert that this contains 0x002A
-	// let STATIC_MOTOROLA_TIFF_HEADER_BYTES = 2
-	// let TIFF_IMAGE_FILE_DIRECTORY_BYTES = 4
-
-	// TODO: derive from TIFF_IMAGE_FILE_DIRECTORY_BYTES
 	const idf_offset = 8;
 
 	// IDF osset works from right after the header bytes
@@ -129,7 +124,6 @@ export function jpg(data: ArrayBuffer): Size | undefined {
 					[size.width, size.height] = [size.height, size.width];
 				}
 
-				// TODO do we need to swap width and height if orientation is 1?
 				return size;
 			}
 

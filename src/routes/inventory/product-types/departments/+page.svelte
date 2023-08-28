@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CrudDataTable, type CrudTableColumns } from '$components/crud-data-table';
+	import { CrudDataTable, type CrudDataTableProps } from '$components/crud-data-table';
 	import type { Department } from '$lib/api/types';
 	import { t } from '$lib/i18n';
 	import { departmentSchema } from '$lib/schemas/department';
@@ -15,7 +15,9 @@
 		${$t('entity.department.plural.lowercase')}
 	`;
 
-	const columns: CrudTableColumns<Department> = [
+	type CrudDepartmentTableProps = CrudDataTableProps<Department>;
+
+	const columns: CrudDepartmentTableProps['columns'] = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-8/12' } },
 		{
 			header: $t('common.word.color.capitalize'),
@@ -31,7 +33,7 @@
 		}
 	];
 
-	const create = {
+	const create: CrudDepartmentTableProps['create'] = {
 		form,
 		validators: $departmentSchema,
 		component: createRender(NewDepartmentForm)

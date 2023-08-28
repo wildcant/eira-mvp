@@ -6,8 +6,8 @@ import { z } from 'zod';
 
 type ExistsArgs = WithT & { table: keyof DB; id: number };
 export async function exists({ $t, table, id }: ExistsArgs) {
-	const record = await db.selectFrom(table).select('id').where('id', '=', id).execute();
-	if (!record) throw error(404, `${$t(`tables.${table}`)} ${$t('error.not-found')}`);
+	const [record] = await db.selectFrom(table).select('id').where('id', '=', id).execute();
+	if (!record) throw error(404, $t('error.not-found'));
 }
 
 const ALLOWED_RELATIONSHIPS = [

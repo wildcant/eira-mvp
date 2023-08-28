@@ -10,15 +10,9 @@ export type GetCategoriesResponse = PaginatedApiResponse<Category>;
 export type SubCategory = DatabaseTypes['SubCategory'] & { category?: DatabaseTypes['Category'] };
 export type GetSubCategoriesResponse = PaginatedApiResponse<SubCategory>;
 
-// TODO: There should be a distinction between product attributes (attributes linked to products) and general attributes (attributes from product attributes table).
-// TODO: Fix type error in src/routes/api/products/attributes.json/+server.ts.
-export type ProductAttribute = Pick<
-	DatabaseTypes['ProductAttributeList'],
-	'id' | 'productAttributeId' | 'createdAt' | 'updatedAt'
-> &
-	Pick<DatabaseTypes['ProductAttribute'], 'name' | 'unitOfMeasure'> & {
-		values?: Pick<DatabaseTypes['ProductAttributeValue'], 'id' | 'name'>[] | [];
-	};
+export type ProductAttribute = DatabaseTypes['ProductAttribute'] & {
+	values?: ProductAttributeValue[];
+};
 export type GetProductAttributeResponse = PaginatedApiResponse<ProductAttribute>;
 
 export type ProductAttributeValue = DatabaseTypes['ProductAttributeValue'];
@@ -30,10 +24,16 @@ export type GetTaxesResponse = PaginatedApiResponse<Tax>;
 export type Image = DatabaseTypes['Image'];
 
 export type Product = DatabaseTypes['Product'] & {
-	image?: DatabaseTypes['Image'];
+	image?: Image;
 	department?: Department;
 	category?: Category;
 	subCategory?: SubCategory;
+	attributes?: Array<
+		DatabaseTypes['ProductAttributeList'] &
+			ProductAttribute & {
+				values?: ProductAttributeValue[];
+			}
+	>;
 };
 export type GetProductsResponse = PaginatedApiResponse<Product>;
 

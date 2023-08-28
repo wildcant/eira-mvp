@@ -1,5 +1,5 @@
 import type { Endpoint } from '$components/crud-data-table/index.js';
-import type { GetProductAttributeResponse, Product, ProductAttribute } from '$lib/api/types.js';
+import type { GetProductAttributeResponse, Product } from '$lib/api/types.js';
 import { relationships } from '$lib/database/helpers/validations.js';
 import { superValidate } from 'sveltekit-superforms/client';
 
@@ -7,13 +7,13 @@ const endpoint = {
 	url: '/api/products/products.json',
 	params: {
 		include: ['attributes'],
-		fields: ['id'] as const
+		fields: ['id', 'name'] as const
 	}
-} satisfies Endpoint;
+} satisfies Endpoint<'Product'>;
 
 type GetPartialProductResponse = {
 	data: Pick<Product, (typeof endpoint)['params']['fields'][number]> & {
-		attributes: ProductAttribute[];
+		attributes: NonNullable<Product['attributes']>;
 	};
 };
 

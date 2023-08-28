@@ -2,23 +2,25 @@
 	import CrudDataTable from '$components/crud-data-table/components/crud-data-table.svelte';
 	import {
 		UNEXPECTED_ROW_TYPE,
-		type Create,
-		type CrudTableColumns,
-		type Update
+		type CrudDataTableProps
 	} from '$components/crud-data-table/index.js';
-	import type { ProductAttribute } from '$lib/api/types';
+	import type { Product } from '$lib/api/types';
 	import { t } from '$lib/i18n/index.js';
 	import { productAttributeSchema, type ProductAttributeSchema } from '$lib/schemas';
-	import { createRender, createTable } from 'svelte-headless-table';
-	import { readable } from 'svelte/store';
+	import { createRender } from 'svelte-headless-table';
 	import AttributeValueCell from './_components/attribute-values-cell.svelte';
 	import NewProductAttributeForm from './_components/new-product-attribute-form.svelte';
 
 	export let data;
 
+	type CrudProductAttributeTableProps = CrudDataTableProps<
+		NonNullable<Product['attributes']>[number],
+		ProductAttributeSchema
+	>;
+
 	const title = $t('entity.attribute.plural.capitalize');
 
-	const columns: CrudTableColumns<ProductAttribute> = [
+	const columns: CrudProductAttributeTableProps['columns'] = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-4/12' } },
 		{
 			header: $t('common.word.values.capitalize'),
@@ -31,17 +33,17 @@
 					editableRow
 				});
 			},
-			meta: { class: 'w-6/12' }
+			meta: { class: 'w-8/12' }
 		}
 	];
 
-	const create: Create = {
+	const create: CrudProductAttributeTableProps['create'] = {
 		form: data.form,
 		validators: $productAttributeSchema,
 		component: createRender(NewProductAttributeForm, { attributes: data.allAttributes })
 	};
 
-	const update: Update<ProductAttribute, ProductAttributeSchema> = {
+	const update: CrudProductAttributeTableProps['update'] = {
 		dto: (row) => ({
 			name: row.name,
 			unitOfMeasure: row.unitOfMeasure ?? '',
@@ -50,7 +52,6 @@
 	};
 </script>
 
-<!-- TODO: Fix search is broken due to improper endpoint call. -->
 <CrudDataTable
 	entity="attribute"
 	initialData={{
@@ -67,5 +68,6 @@
 	endpoint={data.endpoint}
 	{create}
 	{update}
-	class="h-[380px] 2xl:h-[700px]"
+	class="h-[424px] 2xl:h-[700px]"
+	hideSearch
 />

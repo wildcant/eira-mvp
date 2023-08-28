@@ -2,8 +2,7 @@
 	import {
 		CrudDataTable,
 		UNEXPECTED_ROW_TYPE,
-		type Create,
-		type CrudTableColumns
+		type CrudDataTableProps
 	} from '$components/crud-data-table';
 	import type { Tax } from '$lib/api/types';
 	import { t } from '$lib/i18n';
@@ -18,7 +17,9 @@
 
 	const title = $t('entity.tax.plural.capitalize');
 
-	const columns: CrudTableColumns<Tax> = [
+	type CrudProductAttributeTableProps = CrudDataTableProps<Tax>;
+
+	const columns: CrudProductAttributeTableProps['columns'] = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-4/12' } },
 		{
 			header: $t('common.word.value.capitalize'),
@@ -47,7 +48,7 @@
 		}
 	];
 
-	const create: Create = {
+	const create: CrudProductAttributeTableProps['create'] = {
 		form,
 		validators: $taxSchema,
 		component: createRender(NewTaxForm)

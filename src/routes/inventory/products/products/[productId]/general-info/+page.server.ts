@@ -8,7 +8,7 @@ const endpoint = {
 		include: ['departments', 'categories', 'subcategories', 'images'],
 		fields: ['id', 'name', 'description'] as const
 	}
-} satisfies Endpoint;
+} satisfies Endpoint<'Product'>;
 
 type GetPartialProductResponse = {
 	data: Pick<Product, (typeof endpoint)['params']['fields'][number]> & {

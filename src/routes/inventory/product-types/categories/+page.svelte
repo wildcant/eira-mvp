@@ -2,7 +2,7 @@
 	import {
 		CrudDataTable,
 		UNEXPECTED_ROW_TYPE,
-		type CrudTableColumns
+		type CrudDataTableProps
 	} from '$components/crud-data-table';
 	import type { Category } from '$lib/api/types';
 	import { t } from '$lib/i18n';
@@ -16,7 +16,9 @@
 
 	const title = $t('entity.category.plural.capitalize');
 
-	const columns: CrudTableColumns<Category> = [
+	type CrudCategoryTableProps = CrudDataTableProps<Category>;
+
+	const columns: CrudCategoryTableProps['columns'] = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-8/12' } },
 		{
 			header: $t('entity.department.singular.capitalize'),
@@ -29,7 +31,7 @@
 		}
 	];
 
-	const create = {
+	const create: CrudCategoryTableProps['create'] = {
 		form,
 		validators: $categorySchema,
 		component: createRender(NewCategoryForm, { departments })

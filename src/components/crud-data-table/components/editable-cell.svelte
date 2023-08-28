@@ -1,9 +1,9 @@
-<script lang="ts" generics="T extends Item">
+<script lang="ts" generics="T extends RowData">
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import type { BodyRow } from 'svelte-headless-table';
 	import type { EditableRowState } from '..';
-	import type { Item } from '../types';
+	import type { RowData } from '../types';
 
 	export let id: keyof T;
 	export let row: BodyRow<T>;

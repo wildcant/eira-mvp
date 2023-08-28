@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Relationship } from '$lib/database/helpers/validations';
+import type { DatabaseTypes } from '$lib/database/types';
+import type { PaginatedApiResponse } from '$lib/types';
 import type { SelectType } from 'kysely';
 import type { DB } from 'kysely-codegen';
 import type { SvelteComponent } from 'svelte';
@@ -19,7 +21,7 @@ import type { SuperValidated } from 'sveltekit-superforms';
 import type { AnyZodObject } from 'zod';
 import type { EditableRowState } from '.';
 
-export type Item = { id: string | number };
+export type RowData = { id: string | number };
 
 type Plugins<T> = {
 	tableFilter: TablePlugin<
@@ -32,31 +34,47 @@ type Plugins<T> = {
 	editableRow: TablePlugin<T, EditableRowState<T>, Record<string, never>, NewTablePropSet<never>>;
 };
 
-export type CrudTableColumn<T> = DataColumnInit<T, Plugins<T>> & {
+type CrudTableColumn<T> = DataColumnInit<T, Plugins<T>> & {
 	accessorFn?: (item: T) => string;
 	meta?: Record<string, string>;
 };
 
-export type CrudTableColumns<T> = Array<CrudTableColumn<T>>;
+type CrudTableColumns<T> = Array<CrudTableColumn<T>>;
 
-export type Endpoint = {
+export type Endpoint<T extends keyof DatabaseTypes | void = void> = {
 	url: string;
-	// TODO: Make fields type generic.
-	params?: { include?: Relationship[]; fields?: Readonly<Array<keyof SelectType<DB['Product']>>> };
+	params?: {
+		include?: Relationship[];
+		fields?: T extends keyof DB ? Readonly<Array<keyof SelectType<DB[T]>>> : never;
+	};
 };
 
 export type NewEntityForm = SuperValidated<AnyZodObject>;
 
-export type Create = {
+type Create = {
 	form: NewEntityForm;
 	validators: AnyZodObject;
 	component: ComponentRenderConfig<SvelteComponent>;
 };
 
-export type Update<
-	TRowData extends Item,
-	TEntitySchema extends Record<string, string | string[] | number | null>
-> = {
+type CustomRecord = Record<string, string | string[] | number | null>;
+
+type Update<TRowData extends RowData, TEntitySchema extends CustomRecord> = {
 	// Maps a row data to the shape of the update endpoint, useful when the shape of the row object doesn't match the api endpoint shape.
 	dto: (row: TRowData) => TEntitySchema;
+};
+
+export type CrudDataTableProps<
+	T extends RowData = RowData,
+	TEntitySchema extends CustomRecord = CustomRecord
+> = {
+	class?: string | undefined | null;
+	columns: CrudTableColumns<T>;
+	create: Create;
+	endpoint: Endpoint<any>;
+	entity: string;
+	hideSearch?: boolean | undefined;
+	initialData: PaginatedApiResponse<T>;
+	title: string;
+	update?: Update<T, TEntitySchema> | undefined;
 };

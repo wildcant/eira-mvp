@@ -1,10 +1,10 @@
 <script lang="ts" generics="T">
 	import { cn } from '$lib/utils';
-	import type { BodyRow } from 'svelte-headless-table';
+	import type { DataBodyRow } from 'svelte-headless-table';
 	import type { EditableRowState } from './addEditableRow';
 
 	export let id: keyof T;
-	export let row: BodyRow<T>;
+	export let row: DataBodyRow<T>;
 	export let editableRow: EditableRowState<T>;
 
 	const { editingRow, editing, updatedRow } = editableRow;
@@ -22,11 +22,7 @@
 		/>
 	{:else}
 		<span>
-			{#if row.isData()}
-				{row.original[id]}
-			{:else}
-				TODO: Add render method to display row
-			{/if}
+			{row.original[id]}
 		</span>
 	{/if}
 </div>

@@ -2,9 +2,7 @@
 	import {
 		CrudDataTable,
 		UNEXPECTED_ROW_TYPE,
-		type Create,
-		type CrudTableColumns,
-		type Update
+		type CrudDataTableProps
 	} from '$components/crud-data-table';
 	import type { ProductAttribute } from '$lib/api/types';
 	import { t } from '$lib/i18n';
@@ -21,7 +19,12 @@
 
 	const title = $t('entity.attribute.plural.capitalize');
 
-	const columns: CrudTableColumns<ProductAttribute> = [
+	type CrudProductAttributeTableProps = CrudDataTableProps<
+		ProductAttribute,
+		ProductAttributeSchema
+	>;
+
+	const columns: CrudProductAttributeTableProps['columns'] = [
 		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-4/12' } },
 		{
 			header: $t('common.phrase.unit-of-measure'),
@@ -43,13 +46,13 @@
 		}
 	];
 
-	const create: Create = {
+	const create: CrudProductAttributeTableProps['create'] = {
 		form,
 		validators: $productAttributeSchema,
 		component: createRender(NewProductAttributeForm)
 	};
 
-	const update: Update<ProductAttribute, ProductAttributeSchema> = {
+	const update: CrudProductAttributeTableProps['update'] = {
 		dto: (row) => ({
 			name: row.name,
 			unitOfMeasure: row.unitOfMeasure ?? '',
