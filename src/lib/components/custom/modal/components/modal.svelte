@@ -1,0 +1,97 @@
+<script lang="ts">
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { t } from '$lib/i18n';
+	import { Render } from 'svelte-headless-table';
+	import type { ModalProps } from '../types';
+	import { closeModal } from './modals-manager.svelte';
+	import { cn } from '$lib/utils';
+	import { createEventDispatcher } from 'svelte';
+
+	export let modal: ModalProps;
+
+	let loading = false;
+	let open = true;
+
+	const close = () => (open = false);
+
+	const dispatch = createEventDispatcher();
+
+	// Remove modal from list after closing.
+	$: if (!open) {
+		closeModal(modal.id);
+		dispatch('close', modal.id);
+	}
+</script>
+
+{#if modal.type === 'confirmation'}
+	<AlertDialog.Root bind:open>
+		<AlertDialog.Content>
+			<AlertDialog.Header>
+				<AlertDialog.Title>{modal.title}</AlertDialog.Title>
+				{#if modal.description}
+					<AlertDialog.Description>
+						{modal.description}
+					</AlertDialog.Description>
+				{/if}
+
+				{#if modal.children}
+					<!-- <svelte:component this={modal.children} /> -->
+					<!-- <Render of={modal.children} /> -->
+				{/if}
+			</AlertDialog.Header>
+			<AlertDialog.Footer>
+				<AlertDialog.Cancel
+					disabled={loading}
+					on:m-click={async () => {
+						if (modal.type === 'confirmation') await modal.onCancel?.();
+						close();
+					}}
+				>
+					{modal.labels?.cancel ?? $t('common.word.cancel.capitalize')}
+				</AlertDialog.Cancel>
+				<AlertDialog.Action
+					disabled={loading}
+					on:m-click={async () => {
+						loading = true;
+						if (modal.type === 'confirmation') await modal.onConfirm?.();
+						loading = false;
+						close();
+					}}
+				>
+					{modal.labels?.confirm ?? $t('common.word.confirm.capitalize')}
+				</AlertDialog.Action>
+			</AlertDialog.Footer>
+		</AlertDialog.Content>
+	</AlertDialog.Root>
+{:else if modal.type === 'custom'}
+	<!-- on:closed={() => dispatch('closed', modal.id)} -->
+	<Dialog.Root
+		closeOnEscape={!loading && modal.closeOnEscape}
+		closeOnOutsideClick={!loading && modal.closeOnOutsideClick}
+		bind:open
+		portal={modal.portal}
+	>
+		<Dialog.Content
+			class={cn(
+				'md:min-w-[425px] max-h-[100svh] overflow-y-auto lg:max-h-[calc(100svh-2rem)]',
+				modal.content?.class
+			)}
+		>
+			<Dialog.Header>
+				<Dialog.Title>{modal.title}</Dialog.Title>
+			</Dialog.Header>
+
+			<!-- <svelte:component this={modal.children} /> -->
+			<Render of={modal.children} />
+
+			<!-- <Dialog.Close
+			class="absolute right-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+			disabled={loading}
+		>
+			<X class="h-4 w-4" />
+			<span class="sr-only">{$t('common.word.close.capitalize')}</span>
+		</Dialog.Close> -->
+		</Dialog.Content>
+	</Dialog.Root>
+{/if}

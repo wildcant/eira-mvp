@@ -1,0 +1,34 @@
+<script lang="ts" context="module">
+	import { uniqueContext } from '$lib/helpers/uniqueContext';
+
+	const { setContext, getContext } = uniqueContext<{
+		form: SuperForm<ZodValidation<any>, unknown>;
+	}>();
+	export const getFormContext = <T extends AnyZodObject = any>() =>
+		getContext() as unknown as { form: SuperForm<ZodValidation<T>, unknown> };
+</script>
+
+<script lang="ts" generics="T extends AnyZodObject">
+	import type { HTMLFormAttributes } from 'svelte/elements';
+
+	import type { ZodValidation } from 'sveltekit-superforms';
+	import type { SuperForm } from 'sveltekit-superforms/client';
+	import type { AnyZodObject } from 'zod';
+
+	interface $$Props extends HTMLFormAttributes {
+		form: SuperForm<ZodValidation<T>, unknown>;
+		method?: string | undefined | null;
+	}
+
+	let className: $$Props['class'] = undefined;
+	let method: $$Props['method'] = 'post';
+	export { className as class };
+
+	export let form: SuperForm<ZodValidation<T>, unknown>;
+
+	setContext({ form: form as any });
+</script>
+
+<form use:form.enhance {method} on:submit|preventDefault class={className} {...$$restProps}>
+	<slot />
+</form>

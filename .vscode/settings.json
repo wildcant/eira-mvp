@@ -1,0 +1,23 @@
+{
+	"typescript.preferences.autoImportFileExcludePatterns": [
+		"kysely-codegen",
+		"svelte-i18n",
+		"i18next",
+		"vitest",
+		"tmp",
+		"primitives"
+	],
+	"i18n-ally.localesPaths": ["src/lib/i18n/locales/client"],
+	"i18n-ally.keystyle": "nested",
+	"i18n-ally.sortKeys": true,
+	"i18n-ally.keepFulfilled": true,
+	"i18n-ally.enabledFrameworks": ["svelte", "i18next"],
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/*.code-search": true,
+		"**/tmp": true,
+		"**/primitives": true,
+		"**/.svelte-kit": true
+	}
+}

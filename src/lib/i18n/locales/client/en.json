@@ -1,0 +1,376 @@
+{
+	"common": {
+		"phrase": {
+			"action-completed": "Action completed",
+			"confirm-delete": "Are you sure you want to delete",
+			"confirm-remove": "Are you sure you want to delete this record?",
+			"is-required": "is required",
+			"no-results": "No results found",
+			"unit-of-measure": "Unite of measure",
+			"was-deleted": "was deleted",
+			"no-records": "You don't have any"
+		},
+		"word": {
+			"add": {
+				"capitalize": "Add",
+				"lowercase": "add"
+			},
+			"cancel": {
+				"capitalize": "Cancel",
+				"lowercase": "cancel"
+			},
+			"close": {
+				"capitalize": "Close",
+				"lowercase": "close"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirm",
+				"lowercase": "confirm"
+			},
+			"continue": {
+				"capitalize": "Continue",
+				"lowercase": "continue"
+			},
+			"delete": {
+				"capitalize": "Delete",
+				"lowercase": "delete"
+			},
+			"edit": {
+				"capitalize": "Edit",
+				"lowercase": "edit"
+			},
+			"fixed": {
+				"capitalize": "Fixed",
+				"lowercase": "fixed"
+			},
+			"name": {
+				"capitalize": "Name",
+				"lowercase": "name"
+			},
+			"new": {
+				"capitalize": "New",
+				"lowercase": "new"
+			},
+			"options": {
+				"capitalize": "Options",
+				"lowercase": "options"
+			},
+			"optional": {
+				"capitalize": "Optional",
+				"lowercase": "optional"
+			},
+			"percentage": {
+				"capitalize": "Percentage",
+				"lowercase": "percentage"
+			},
+			"purchases": {
+				"capitalize": "Purchases",
+				"lowercase": "purchases"
+			},
+			"sales": {
+				"capitalize": "Sales",
+				"lowercase": "sales"
+			},
+			"save": {
+				"capitalize": "Save",
+				"lowercase": "save"
+			},
+			"scope": {
+				"capitalize": "Scope",
+				"lowercase": "scope"
+			},
+			"type": {
+				"capitalize": "Type",
+				"lowercase": "type"
+			},
+			"unit": {
+				"capitalize": "Unit",
+				"lowercase": "unit"
+			},
+			"updated": {
+				"capitalize": "Updated",
+				"lowercase": "updated"
+			},
+			"value": {
+				"capitalize": "Value",
+				"lowercase": "value"
+			},
+			"values": {
+				"capitalize": "Values",
+				"lowercase": "values"
+			},
+			"inventory": {
+				"capitalize": "Inventory",
+				"lowercase": "inventory"
+			},
+			"settings": {
+				"capitalize": "Settings",
+				"lowercase": "settings"
+			}
+		}
+	},
+	"component": {
+		"header": {
+			"avatar": {
+				"sr-only": "Open Profile menu"
+			}
+		},
+		"language-selector": {
+			"group-label": "Language"
+		},
+		"light-switch": {
+			"label": "Appearance"
+		},
+		"navigation": {
+			"dashboard": "Dashboard",
+			"inventory": "Inventory",
+			"orders": "Orders",
+			"point-of-sale": "Point of sale",
+			"product-types": "Product Types",
+			"products": "Products",
+			"settings": "Settings"
+		},
+		"search": {
+			"placeholder": "Search"
+		},
+		"table": {
+			"pagination": {
+				"next": "Next",
+				"previous": "Previous"
+			}
+		}
+	},
+	"entity": {
+		"attribute": {
+			"plural": {
+				"capitalize": "Attributes",
+				"lowercase": "attributes"
+			},
+			"singular": {
+				"capitalize": "Attribute",
+				"lowercase": "attribute"
+			}
+		},
+		"product-attribute": {
+			"plural": {
+				"capitalize": "Product Attributes",
+				"lowercase": "product attributes"
+			},
+			"singular": {
+				"capitalize": "product attributes",
+				"lowercase": "product attribute"
+			}
+		},
+		"category": {
+			"plural": {
+				"capitalize": "Categories",
+				"lowercase": "categories"
+			},
+			"singular": {
+				"capitalize": "Category",
+				"lowercase": "category"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departments",
+				"lowercase": "departments"
+			},
+			"singular": {
+				"capitalize": "Department",
+				"lowercase": "department"
+			}
+		},
+		"image": {
+			"plural": {
+				"capitalize": "Images",
+				"lowercase": "images"
+			},
+			"singular": {
+				"capitalize": "Image",
+				"lowercase": "image"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Products",
+				"lowercase": "products"
+			},
+			"singular": {
+				"capitalize": "Product",
+				"lowercase": "product"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categories",
+				"lowercase": "sub categories"
+			},
+			"singular": {
+				"capitalize": "Sub Category",
+				"lowercase": "subcategory"
+			}
+		},
+		"tax": {
+			"plural": {
+				"capitalize": "Taxes",
+				"lowercase": "taxes"
+			},
+			"singular": {
+				"capitalize": "Tax",
+				"lowercase": "tax"
+			}
+		},
+		"variant": {
+			"plural": {
+				"capitalize": "Variants",
+				"lowercase": "variants"
+			},
+			"singular": {
+				"capitalize": "Variant",
+				"lowercase": "variant"
+			}
+		}
+	},
+	"page": {
+		"dashboard": {
+			"greeting": "Good afternoon"
+		},
+		"inventory": {
+			"product-types": {
+				"title": "Product types"
+			},
+			"products": {
+				"nav": {
+					"product-attributes": "Products attributes",
+					"product-variants": "Products variants"
+				},
+				"new": {
+					"attributes": {
+						"subtitle": "Define the attributes for your product variants.",
+						"title": "Attributes"
+					},
+					"basic-information": {
+						"field": {
+							"description": {
+								"label": "Description",
+								"placeholder": "Specify the characteristics of your product"
+							},
+							"name": {
+								"label": "Product name",
+								"placeholder": "Add a name to your product"
+							}
+						},
+						"subtitle": "Describe your product.",
+						"title": "Basic information"
+					},
+					"categorization": {
+						"subtitle": "Include additional information to complete your product record.",
+						"title": "Categorization"
+					},
+					"characteristics": {
+						"subtitle": "Define the attributes of your variant.",
+						"title": "Characteristics"
+					},
+					"image": {
+						"field": {
+							"image": {
+								"description": "Up to 30 MB and 7680 x 4320 pixels (JPEG, JPG, PNG)",
+								"placeholder": "Select or drag your files here"
+							}
+						},
+						"subtitle": "Upload an image of your product",
+						"title": "Default product image"
+					},
+					"purchase": {
+						"field": {
+							"average-cost": {
+								"label": "Average cost",
+								"placeholder": "0"
+							},
+							"provider": {
+								"label": "Provider",
+								"placeholder": "Search and select providers"
+							},
+							"subtotal": {
+								"label": "Subtotal",
+								"placeholder": "0"
+							},
+							"tax": {
+								"label": "Tax",
+								"placeholder": "0"
+							},
+							"total": {
+								"label": "Total",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Denote the average cost for reports and the purchase price for purchase documents.",
+						"subtitle-two": "Purchase price",
+						"title": "Purchase"
+					},
+					"sales": {
+						"field": {
+							"subtotal": {
+								"label": "Subtotal",
+								"placeholder": "0"
+							},
+							"tax": {
+								"label": "Tax",
+								"placeholder": "0%"
+							},
+							"total": {
+								"label": "Total",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Denote the subtotal and the applicable tax. The total amount will be calculated automatically.",
+						"title": "Sales"
+					},
+					"stock-management": {
+						"field": {
+							"qty": {
+								"label": "Quantity",
+								"placeholder": "0"
+							}
+						},
+						"subtitle": "Introduce the information to identify the product.",
+						"title": "Stock management"
+					},
+					"tracking": {
+						"field": {
+							"barcode": {
+								"label": "Barcode",
+								"placeholder": " "
+							},
+							"sku": {
+								"label": "SKU",
+								"placeholder": " "
+							}
+						},
+						"subtitle": "Introduce some information to identify the product.",
+						"title": "Tracking"
+					},
+					"variant-image": {
+						"subtitle": "Upload an image of your product.",
+						"title": "Product variant image"
+					},
+					"variants": {
+						"subtitle": "Add your product variants.",
+						"title": "Variants",
+						"tooltip": "Combine the product attributes to crate new variants. You'll need to at at least one attribute in order to add a new variant."
+					}
+				},
+				"details": {
+					"nav": {
+						"general-info": "General information"
+					}
+				}
+			}
+		}
+	}
+}

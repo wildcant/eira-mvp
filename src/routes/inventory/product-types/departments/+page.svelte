@@ -1,0 +1,43 @@
+<script lang="ts">
+	import { CrudDataTable, type CrudDataTableProps } from '$components/crud-data-table';
+	import type { Department } from '$lib/api/types';
+	import { t } from '$lib/i18n';
+	import { departmentSchema } from '$lib/schemas/department';
+	import { createRender } from 'svelte-headless-table';
+	import EditableColorCell from './_components/editable-color-cell.svelte';
+	import NewDepartmentForm from './_components/new-department-form.svelte';
+
+	export let data;
+	const { initialData, endpoint, form } = data;
+
+	const title = `
+		${$t('entity.product.singular.capitalize')}
+		${$t('entity.department.plural.lowercase')}
+	`;
+
+	type CrudDepartmentTableProps = CrudDataTableProps<Department>;
+
+	const columns: CrudDepartmentTableProps['columns'] = [
+		{ header: $t('common.word.name.capitalize'), accessor: 'name', meta: { class: 'w-8/12' } },
+		{
+			header: $t('common.word.color.capitalize'),
+			accessor: 'color',
+			cell: ({ row, id, value }, { pluginStates: { editableRow } }) =>
+				createRender(EditableColorCell, {
+					row,
+					id,
+					value,
+					editableRow
+				}),
+			meta: { class: 'w-3/12' }
+		}
+	];
+
+	const create: CrudDepartmentTableProps['create'] = {
+		form,
+		validators: $departmentSchema,
+		component: createRender(NewDepartmentForm)
+	};
+</script>
+
+<CrudDataTable entity="department" {initialData} {columns} {title} {endpoint} {create} />

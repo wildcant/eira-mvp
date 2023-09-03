@@ -1,0 +1,122 @@
+{
+	"common": {
+		"phrase": {
+			"is-required": "es requerido",
+			"was-deleted": "fue eliminada"
+		},
+		"word": {
+			"cancel": {
+				"capitalize": "Cancelar",
+				"lowercase": "cancelar"
+			},
+			"close": {
+				"capitalize": "Cerrar",
+				"lowercase": "cerrar"
+			},
+			"color": {
+				"capitalize": "Color",
+				"lowercase": "color"
+			},
+			"confirm": {
+				"capitalize": "Confirmar",
+				"lowercase": "confirmar"
+			},
+			"delete": {
+				"capitalize": "Borrar",
+				"lowercase": "borrar"
+			},
+			"edit": {
+				"capitalize": "Editar",
+				"lowercase": "editar"
+			},
+			"name": {
+				"capitalize": "Nombre",
+				"lowercase": "nombre"
+			},
+			"new": {
+				"capitalize": "Nuevo",
+				"lowercase": "nuevo"
+			},
+			"options": {
+				"capitalize": "Opciones",
+				"lowercase": "opciones"
+			},
+			"save": {
+				"capitalize": "Guardar",
+				"lowercase": "guardar"
+			},
+			"updated": {
+				"capitalize": "Actualizada",
+				"lowercase": "actualizada"
+			},
+			"values": {
+				"capitalize": "Valores",
+				"lowercase": "valores"
+			}
+		}
+	},
+	"entity": {
+		"category": {
+			"plural": {
+				"capitalize": "Categorías",
+				"lowercase": "categorías"
+			},
+			"singular": {
+				"capitalize": "Categoría",
+				"lowercase": "categoría"
+			}
+		},
+		"department": {
+			"plural": {
+				"capitalize": "Departamentos",
+				"lowercase": "departamentos"
+			},
+			"singular": {
+				"capitalize": "Departamento",
+				"lowercase": "departamento"
+			}
+		},
+		"product": {
+			"plural": {
+				"capitalize": "Productos",
+				"lowercase": "productos"
+			},
+			"singular": {
+				"capitalize": "Producto",
+				"lowercase": "producto"
+			}
+		},
+		"sub-category": {
+			"plural": {
+				"capitalize": "Sub categorías",
+				"lowercase": "sub categorías"
+			},
+			"singular": {
+				"capitalize": "Sub categoría",
+				"lowercase": "sub categoría"
+			}
+		}
+	},
+	"error": {
+		"already-exist": "ya existe",
+		"foreign-key-constrain": "no puedes borrar este item por que hay otros que dependen de el",
+		"internal-server-error": "error interno en el servidor",
+		"invalid-include-param": "parámetro include invalido: {{include}}; las relaciones soportadas son: {{allowed}}",
+		"not-found": "recurso no encontrado",
+		"pagination": {
+			"invalid-after-cursor": "after cursor invalido",
+			"invalid-before-cursor": "before cursor invalido",
+			"range-pagination": "paginación con rango no esta suportado",
+			"size": "size debe ser un entero; obtuvo"
+		}
+	},
+	"tables": {
+		"department": {
+			"columns": {
+				"color": "color",
+				"name": "nombre"
+			},
+			"name": "departamento"
+		}
+	}
+}
